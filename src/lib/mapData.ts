@@ -1,16 +1,16 @@
 export type RoomData = {
-  label: string;
+  id: string;
   origin: [number, number];
-  shape: Array<number[]>;
+  path: Array<number[]>;
   type: "residence" | "shop" | "world";
 };
 
 export type MapData = {
   /**
    * Array of rooms, each with a label, origin, shape, and type.
-   * - label: The name or description of the room.
+   * - id: HTML id used to create path that represents this room.
    * - origin: The coordinates [x, y] of the room.
-   * - shape: An array of coordinates representing the room's shape.
+   * - path: An array of coordinates representing the room's shape.
    * - type: The type of room, which can be "residence", "shop", or "world".
    */
   rooms: RoomData[];
@@ -28,23 +28,24 @@ export type MapData = {
 const mapData: MapData = {
   rooms: [
     {
-      label: "Captain Degreene's Office",
+      id: "captainDegreenesOffice",
       origin: [0, 0],
-      shape: [
-        [1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1],
-        [0, 0, 0, 1, 1, 0],
+      path: [
+        [0, 0],
+        [5, 0],
+        [5, 5],
+        [4, 5],
+        [4, 6],
+        [2, 6],
+        [2, 5],
+        [0, 5],
       ],
       type: "residence",
     },
   ],
   transitions: [
-    [3, -7],
-    [4, -7],
+    [3, 7],
+    [4, 7],
   ],
 };
 

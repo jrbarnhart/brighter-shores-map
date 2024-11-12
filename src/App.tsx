@@ -1,12 +1,21 @@
-import { Button } from "./components/ui/button";
+import { useEffect, useRef } from "react";
+import drawRooms from "./lib/canvas/drawRooms";
+import initMap from "./lib/canvas/initMap";
 
 function App() {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    // Draw the map from the map data
+    initMap(svgRef.current);
+    drawRooms(svgRef.current);
+  }, []);
+
   return (
-    <div className="bg-blue-500">
-      <p>Hello Map!</p>
-      <Button className="bg-blue-50 text-black hover:bg-blue-200">
-        Click Me!
-      </Button>
+    <div className="h-screen w-screen">
+      <svg ref={svgRef}></svg>
     </div>
   );
 }
