@@ -18,8 +18,11 @@ export default function MapSVG() {
     if (!svgRef.current) return;
 
     // Draw the map from the map data
-    initMap(svgRef.current);
-    drawRooms(svgRef.current);
+    if (!svgRef.current.hasAttribute("data-drawn")) {
+      initMap(svgRef.current);
+      drawRooms(svgRef.current);
+      svgRef.current.setAttribute("data-drawn", "true");
+    }
   }, []);
 
   return (
