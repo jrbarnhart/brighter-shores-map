@@ -5,22 +5,27 @@ export default function drawRooms(
   svg: SVGSVGElement,
   originOffset: [number, number]
 ) {
-  for (const room of mapData.rooms) {
-    // Create the path that represents the room in the map svg
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const pathData = generateRoomPathData(room, originOffset);
-    path.setAttribute("d", pathData);
+  for (const region of Object.values(mapData.regions)) {
+    for (const room of region.rooms) {
+      // Create the path that represents the room in the map svg
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      const pathData = generateRoomPathData(room, originOffset);
+      path.setAttribute("d", pathData);
 
-    // Add id and other attributes
-    path.setAttribute("id", room.id);
-    path.setAttribute("fill", "#eee");
-    path.setAttribute("stroke", "#333");
-    path.setAttribute("stroke-width", "2");
+      // Add id and other attributes
+      path.setAttribute("id", room.id);
+      path.setAttribute("fill", "#eee");
+      path.setAttribute("stroke", "#333");
+      path.setAttribute("stroke-width", "2");
 
-    // Add event listeners here
+      // Add event listeners here
 
-    // Add path to svg
-    svg.appendChild(path);
+      // Add path to svg
+      svg.appendChild(path);
+    }
   }
 }
 

@@ -7,17 +7,19 @@ export default function initMap(svg: SVGSVGElement) {
   let mapMinY = Infinity;
   let mapMaxY = -Infinity;
 
-  for (const room of mapData.rooms) {
-    const { origin, path } = room;
+  for (const region of Object.values(mapData.regions)) {
+    for (const room of region.rooms) {
+      const { origin, path } = room;
 
-    for (const vertex of path) {
-      const absoluteX = origin[0] + vertex[0];
-      const absoluteY = origin[1] + vertex[1];
+      for (const vertex of path) {
+        const absoluteX = origin[0] + vertex[0];
+        const absoluteY = origin[1] + vertex[1];
 
-      if (absoluteX < mapMinX) mapMinX = absoluteX;
-      if (absoluteX > mapMaxX) mapMaxX = absoluteX;
-      if (absoluteY < mapMinY) mapMinY = absoluteY;
-      if (absoluteY > mapMaxY) mapMaxY = absoluteY;
+        if (absoluteX < mapMinX) mapMinX = absoluteX;
+        if (absoluteX > mapMaxX) mapMaxX = absoluteX;
+        if (absoluteY < mapMinY) mapMinY = absoluteY;
+        if (absoluteY > mapMaxY) mapMaxY = absoluteY;
+      }
     }
   }
 
