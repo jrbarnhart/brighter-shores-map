@@ -8,7 +8,7 @@ export default function drawRooms(
   for (const room of mapData.rooms) {
     // Create the path that represents the room in the map svg
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const pathData = generatePathData(room, originOffset);
+    const pathData = generateRoomPathData(room, originOffset);
     path.setAttribute("d", pathData);
 
     // Add id and other attributes
@@ -24,7 +24,7 @@ export default function drawRooms(
   }
 }
 
-function generatePathData(room: RoomData, originOffset: [number, number]) {
+function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
   const start = room.path[0];
   // Convert numbers to strings and ensure proper spacing
   let d =

@@ -9,7 +9,7 @@ export type MapData = {
   /**
    * Array of rooms, each with a label, origin, shape, and type.
    * - id: HTML id used to create path that represents this room.
-   * - origin: The coordinates [x, y] of the room.
+   * - origin: The coordinates [x, y] of the room. Origin (0,0) is top-left corner of Captain Degreene's Office.
    * - path: An array of coordinates representing the room's shape.
    * - type: The type of room, which can be "residence", "shop", or "world".
    */
@@ -45,21 +45,6 @@ const mapData: MapData = {
     {
       id: "training-ground",
       origin: [-6, 8],
-      path: [
-        [0, 0],
-        [5, 0],
-        [5, 5],
-        [4, 5],
-        [4, 6],
-        [2, 6],
-        [2, 5],
-        [0, 5],
-      ],
-      type: "world",
-    },
-    {
-      id: "training-ground-two",
-      origin: [-6, -8],
       path: [
         [0, 0],
         [5, 0],
