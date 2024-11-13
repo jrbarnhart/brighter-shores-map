@@ -37,6 +37,7 @@ export default function MapSVG() {
     >
       <svg
         ref={svgRef}
+        className="border border-green-500"
         style={{
           transform: `translate(${mapPos.x.toString()}px, ${mapPos.y.toString()}px)`,
         }}
