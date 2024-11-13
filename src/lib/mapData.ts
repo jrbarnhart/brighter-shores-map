@@ -2,7 +2,7 @@ export type RoomData = {
   id: string;
   origin: [number, number];
   path: Array<[number, number]>;
-  type: "residence" | "shop" | "world" | "profession";
+  type: "residence" | "shop" | "world" | "profession" | "obelisk" | "portal";
 };
 
 export type MapData = {
@@ -22,6 +22,17 @@ export type MapData = {
  */
 const mapData: MapData = {
   rooms: [
+    /*
+      Template:
+    {
+      id: "id",
+      origin: [0,0],
+      path: [
+        [0,0],
+      ],
+      type: "world"
+    } 
+    */
     {
       id: "captain-degreenes-office",
       origin: [0, 0],
@@ -83,7 +94,7 @@ const mapData: MapData = {
         [7, 9],
         [0, 9],
       ],
-      type: "world",
+      type: "portal",
     },
     {
       id: "sparring-area",
@@ -269,6 +280,122 @@ const mapData: MapData = {
         [0, 1],
       ],
       type: "world",
+    },
+    {
+      id: "melvs-fishing-supplies",
+      origin: [20, 42],
+      path: [
+        [0, 0],
+        [7, 0],
+        [7, 7],
+        [0, 7],
+        [0, 4],
+        [-1, 4],
+        [-1, 2],
+        [0, 2],
+      ],
+      type: "shop",
+    },
+    {
+      id: "brannof-boulevard",
+      origin: [-16, 48],
+      path: [
+        [0, 0],
+        [19, 0],
+        [19, 6],
+        [16, 6],
+        [16, 7],
+        [14, 7],
+        [14, 6],
+        [0, 6],
+        [0, 4],
+        [-1, 4],
+        [-1, 2],
+        [0, 2],
+      ],
+      type: "world",
+    },
+    {
+      id: "brannof-halls-hallway",
+      origin: [-21, 47],
+      path: [
+        [0, 0],
+        [2, 0],
+        [2, 1],
+        [4, 1],
+        [4, 7],
+        [-2, 7],
+        [-2, 5],
+        [-3, 5],
+        [-3, 3],
+        [-2, 3],
+        [-2, 1],
+        [0, 1],
+      ],
+      type: "residence",
+    },
+    {
+      id: "brannofs-chamber",
+      origin: [-23, 40],
+      path: [
+        [0, 0],
+        [6, 0],
+        [6, 6],
+        [4, 6],
+        [4, 7],
+        [2, 7],
+        [2, 6],
+        [0, 6],
+      ],
+      type: "residence",
+    },
+    {
+      id: "brannofs-dining-room",
+      origin: [-32, 48],
+      path: [
+        [0, 0],
+        [7, 0],
+        [7, 2],
+        [8, 2],
+        [8, 4],
+        [7, 4],
+        [7, 6],
+        [0, 6],
+      ],
+      type: "residence",
+    },
+    {
+      id: "hopeport-obelisk",
+      origin: [-2, 55],
+      path: [
+        [0, 0],
+        [2, 0],
+        [2, 2],
+        [3, 2],
+        [3, 3],
+        [4, 3],
+        [4, 5],
+        [5, 5],
+        [5, 11],
+        [4, 11],
+        [4, 12],
+        [3, 12],
+        [3, 13],
+        [-7, 13],
+        [-7, 12],
+        [-8, 12],
+        [-8, 11],
+        [-9, 11],
+        [-9, 4],
+        [-8, 4],
+        [-8, 3],
+        [-7, 3],
+        [-7, 2],
+        [-5, 2],
+        [-5, 1],
+        [0, 1],
+      ],
+      type: "obelisk",
     },
   ],
 };
