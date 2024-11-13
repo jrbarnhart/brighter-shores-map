@@ -14,16 +14,11 @@ export type MapData = {
    * - type: The type of room, which can be "residence", "shop", or "world".
    */
   rooms: RoomData[];
-  /**
-   * A list of coordinate pairs that represent transitions between rooms.
-   */
-  transitions: Array<[number, number]>;
 };
 
 /**
  * Data that represents the game world of Brighter Shores.
  * - rooms: Array of rooms, each with a label, origin, shape, and type.
- * - transitions: A list of coordinate pairs that represent transitions between rooms.
  */
 const mapData: MapData = {
   rooms: [
@@ -32,35 +27,51 @@ const mapData: MapData = {
       origin: [0, 0],
       path: [
         [0, 0],
-        [5, 0],
-        [5, 5],
-        [4, 5],
-        [4, 6],
-        [2, 6],
-        [2, 5],
-        [0, 5],
+        [6, 0],
+        [6, 6],
+        [5, 6],
+        [5, 7],
+        [3, 7],
+        [3, 6],
+        [0, 6],
       ],
       type: "residence",
     },
     {
       id: "training-ground",
-      origin: [-6, 8],
+      origin: [-6, 7],
       path: [
         [0, 0],
-        [5, 0],
-        [5, 5],
-        [4, 5],
-        [4, 6],
-        [2, 6],
-        [2, 5],
-        [0, 5],
+        [2, 0],
+        [2, 2],
+        [9, 2],
+        [9, 0],
+        [11, 0],
+        [11, 2],
+        [18, 2],
+        [18, 0],
+        [20, 0],
+        [20, 2],
+        [21, 2],
+        [21, 3],
+        [23, 3],
+        [23, 5],
+        [21, 5],
+        [21, 14],
+        [23, 14],
+        [23, 16],
+        [21, 16],
+        [21, 19],
+        [19, 19],
+        [19, 15],
+        [1, 15],
+        [1, 11],
+        [-1, 11],
+        [-1, 9],
+        [0, 9],
       ],
       type: "world",
     },
-  ],
-  transitions: [
-    [3, 7],
-    [4, 7],
   ],
 };
 

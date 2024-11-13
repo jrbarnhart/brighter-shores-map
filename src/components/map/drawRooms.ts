@@ -17,7 +17,7 @@ export default function drawRooms(
     path.setAttribute("stroke", "#333");
     path.setAttribute("stroke-width", "2");
 
-    // Add event listeners
+    // Add event listeners here
 
     // Add path to svg
     svg.appendChild(path);
