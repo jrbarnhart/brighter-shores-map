@@ -1,5 +1,5 @@
-import mapData, { RoomData } from "../../lib/mapData";
-import mapConfig from "../../lib/mapConfig";
+import mapData, { RoomData } from "../../lib/map/mapData";
+import mapConfig from "../../lib/map/mapConfig";
 
 export default function drawRooms(
   svg: SVGSVGElement,

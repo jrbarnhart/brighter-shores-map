@@ -1,5 +1,5 @@
-import mapConfig from "@/lib/mapConfig";
-import mapData from "@/lib/mapData";
+import mapConfig from "@/lib/map/mapConfig";
+import mapData from "@/lib/map/mapData";
 
 export default function initMap(svg: SVGSVGElement) {
   let mapMinX = Infinity;
