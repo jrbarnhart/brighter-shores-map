@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import drawRooms from "./drawRooms";
 import initMap from "./initMap";
 import usePan from "./usePan";
+import useZoom from "./useZoom";
 
 export default function MapSVG() {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -13,6 +14,8 @@ export default function MapSVG() {
     mapPos,
     isDragging,
   } = usePan();
+
+  const { handleWheel, zoomScale } = useZoom();
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -33,14 +36,24 @@ export default function MapSVG() {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onWheel={handleWheel}
     >
       <svg
         ref={svgRef}
-        className="border border-green-500"
         style={{
-          transform: `translate(${mapPos.x.toString()}px, ${mapPos.y.toString()}px)`,
+          transform: `translate(${mapPos.x.toString()}px, ${mapPos.y.toString()}px) scale(${zoomScale.toString()})`,
         }}
-      ></svg>
+      >
+        <rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          stroke="green"
+          strokeWidth="2"
+          fill="none"
+        />
+      </svg>
     </div>
   );
 }
