@@ -72,6 +72,34 @@ const mapData: MapData = {
       ],
       type: "world",
     },
+    {
+      id: "hopeport-portal-stone",
+      origin: [-13, -4],
+      path: [
+        [0, 0],
+        [9, 0],
+        [9, 11],
+        [7, 11],
+        [7, 9],
+        [0, 9],
+      ],
+      type: "world",
+    },
+    {
+      id: "sparring-area",
+      origin: [-22, 12],
+      path: [
+        [0, 0],
+        [13, 0],
+        [13, 4],
+        [15, 4],
+        [15, 6],
+        [13, 6],
+        [13, 9],
+        [0, 9],
+      ],
+      type: "world",
+    },
   ],
 };
 
