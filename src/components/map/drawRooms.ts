@@ -5,7 +5,6 @@ export default function drawRooms(
   svg: SVGSVGElement,
   originOffset: [number, number]
 ) {
-  console.log(originOffset);
   for (const room of mapData.rooms) {
     // Create the path that represents the room in the map svg
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
