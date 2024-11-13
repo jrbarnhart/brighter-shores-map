@@ -1,7 +1,7 @@
 export type RoomData = {
   id: string;
   origin: [number, number];
-  path: Array<number[]>;
+  path: Array<[number, number]>;
   type: "residence" | "shop" | "world";
 };
 
@@ -28,7 +28,7 @@ export type MapData = {
 const mapData: MapData = {
   rooms: [
     {
-      id: "captainDegreenesOffice",
+      id: "captain-degreenes-office",
       origin: [0, 0],
       path: [
         [0, 0],
@@ -41,6 +41,36 @@ const mapData: MapData = {
         [0, 5],
       ],
       type: "residence",
+    },
+    {
+      id: "training-ground",
+      origin: [-6, 8],
+      path: [
+        [0, 0],
+        [5, 0],
+        [5, 5],
+        [4, 5],
+        [4, 6],
+        [2, 6],
+        [2, 5],
+        [0, 5],
+      ],
+      type: "world",
+    },
+    {
+      id: "training-ground-two",
+      origin: [-6, -8],
+      path: [
+        [0, 0],
+        [5, 0],
+        [5, 5],
+        [4, 5],
+        [4, 6],
+        [2, 6],
+        [2, 5],
+        [0, 5],
+      ],
+      type: "world",
     },
   ],
   transitions: [

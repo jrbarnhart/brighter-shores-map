@@ -19,12 +19,11 @@ export default function MapSVG() {
 
     // Draw the map from the map data
     if (!svgRef.current.hasAttribute("data-drawn")) {
-      initMap(svgRef.current);
-      drawRooms(svgRef.current);
+      const initMapValues = initMap(svgRef.current);
+      drawRooms(svgRef.current, initMapValues.originOffset);
       svgRef.current.setAttribute("data-drawn", "true");
     }
   }, []);
-
   return (
     <div
       className={`w-screen h-screen overflow-hidden ${
