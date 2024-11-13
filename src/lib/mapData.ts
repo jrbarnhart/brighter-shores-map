@@ -2,7 +2,7 @@ export type RoomData = {
   id: string;
   origin: [number, number];
   path: Array<[number, number]>;
-  type: "residence" | "shop" | "world";
+  type: "residence" | "shop" | "world" | "profession";
 };
 
 export type MapData = {
@@ -185,6 +185,40 @@ const mapData: MapData = {
         [0, 1],
       ],
       type: "world",
+    },
+    {
+      id: "delectable-dab-restaurant",
+      origin: [-5, 33],
+      path: [
+        [0, 0],
+        [13, 0],
+        [13, 2],
+        [14, 2],
+        [14, 4],
+        [13, 4],
+        [13, 6],
+        [0, 6],
+        [0, 3],
+        [-1, 3],
+        [-1, 1],
+        [0, 1],
+      ],
+      type: "residence",
+    },
+    {
+      id: "delectable-dab-kitchen",
+      origin: [-15, 27],
+      path: [
+        [0, 0],
+        [8, 0],
+        [8, 7],
+        [9, 7],
+        [9, 9],
+        [8, 9],
+        [8, 14],
+        [0, 14],
+      ],
+      type: "profession",
     },
   ],
 };
