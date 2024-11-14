@@ -3,6 +3,7 @@ import hopeportData from "./hopeportData";
 export type RoomData = {
   id: string;
   label: string;
+  labelOffset?: [number, number];
   origin: [number, number];
   path: Array<[number, number]>;
   type: "residence" | "shop" | "world" | "profession" | "obelisk" | "portal";
