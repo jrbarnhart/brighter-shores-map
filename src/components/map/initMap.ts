@@ -29,10 +29,10 @@ export default function initMap(svg: SVGSVGElement) {
 }
 
 function initMapSize(mapData: MapData) {
-  let mapMinX = 0;
-  let mapMaxX = 0;
-  let mapMinY = 0;
-  let mapMaxY = 0;
+  let mapMinX = Infinity;
+  let mapMaxX = -Infinity;
+  let mapMinY = Infinity;
+  let mapMaxY = -Infinity;
 
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
@@ -60,21 +60,27 @@ function initRoomCenters(mapData: MapData, originOffset: [number, number]) {
   const roomCenters: RoomCenter[] = [];
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
-      let roomMinX = 0 + originOffset[0];
-      let roomMaxX = 0 + originOffset[0];
-      let roomMinY = 0 + originOffset[1];
-      let roomMaxY = 0 + originOffset[1];
+      let roomMinX = Infinity;
+      let roomMaxX = -Infinity;
+      let roomMinY = Infinity;
+      let roomMaxY = -Infinity;
       // Track the minX/Y and maxX/Y
       for (const vertex of room.path) {
-        if (vertex[0] < roomMinX) roomMinX = vertex[0];
-        if (vertex[0] > roomMaxX) roomMaxX = vertex[0];
-        if (vertex[1] < roomMinY) roomMinY = vertex[1];
-        if (vertex[1] > roomMaxY) roomMaxY = vertex[1];
+        const absoluteX = room.origin[0] + vertex[0];
+        const absoluteY = room.origin[1] + vertex[1];
+
+        if (absoluteX < roomMinX) roomMinX = absoluteX;
+        if (absoluteX > roomMaxX) roomMaxX = absoluteX;
+        if (absoluteY < roomMinY) roomMinY = absoluteY;
+        if (absoluteY > roomMaxY) roomMaxY = absoluteY;
       }
       // Find the center of those values
       const roomCenter: RoomCenter = {
         roomId: room.id,
-        center: [(roomMaxX - roomMinX) / 2, (roomMaxY - roomMinY) / 2],
+        center: [
+          (roomMinX + roomMaxX) / 2 + originOffset[0],
+          (roomMinY + roomMaxY) / 2 + originOffset[1],
+        ],
       };
       roomCenters.push(roomCenter);
     }
