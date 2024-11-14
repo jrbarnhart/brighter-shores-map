@@ -85,8 +85,8 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const [x, y] = roomCenter?.center ?? [0, 0];
 
   // Label position modifiers
-  const defaultXMod = room.label.length * -5;
-  const defaultYMod = -32;
+  const defaultXMod = 0;
+  const defaultYMod = 0;
   const [xMod, yMod] = room.labelOffset ?? [defaultXMod, defaultYMod];
 
   // Max width before wrapping
@@ -137,7 +137,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   rect.setAttribute("height", (textHeight + 2 * padding).toString());
   rect.setAttribute("rx", "5");
   rect.setAttribute("ry", "5");
-  rect.setAttribute("class", "fill-gray-800");
+  rect.setAttribute("class", "fill-zinc-900");
 
   // Create text
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -146,7 +146,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
     "y",
     (y * mapConfig.cellSize + yMod - textHeight / 2 + lineHeight / 2).toString()
   );
-  text.setAttribute("class", "fill-green-300 font-bold");
+  text.setAttribute("class", "fill-blue-100 font-bold");
   text.setAttribute("text-anchor", "middle");
 
   // Add lines to text
