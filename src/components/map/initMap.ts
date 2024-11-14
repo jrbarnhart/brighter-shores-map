@@ -1,7 +1,19 @@
 import mapConfig from "@/lib/map/mapConfig";
-import mapData from "@/lib/map/mapData";
+import mapData, { MapData } from "@/lib/map/mapData";
 
 export default function initMap(svg: SVGSVGElement) {
+  const { originOffset, mapHeight, mapWidth } = initMapSize(mapData);
+
+  svg.setAttribute("width", mapWidth.toString());
+  svg.setAttribute("height", mapHeight.toString());
+
+  return {
+    originOffset,
+    mapSize: { width: mapWidth, height: mapHeight },
+  };
+}
+
+function initMapSize(mapData: MapData) {
   let mapMinX = Infinity;
   let mapMaxX = -Infinity;
   let mapMinY = Infinity;
@@ -26,12 +38,5 @@ export default function initMap(svg: SVGSVGElement) {
   const originOffset: [number, number] = [-mapMinX, -mapMinY];
   const mapWidth = (mapMaxX - mapMinX) * mapConfig.cellSize;
   const mapHeight = (mapMaxY - mapMinY) * mapConfig.cellSize;
-
-  svg.setAttribute("width", mapWidth.toString());
-  svg.setAttribute("height", mapHeight.toString());
-
-  return {
-    originOffset,
-    mapSize: { width: mapWidth, height: mapHeight },
-  };
+  return { originOffset, mapWidth, mapHeight };
 }
