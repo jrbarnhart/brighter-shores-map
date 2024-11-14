@@ -89,17 +89,47 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const defaultYMod = -32;
   const [xMod, yMod] = room.labelOffset ?? [defaultXMod, defaultYMod];
 
+  // Max width before wrapping
+  const maxWidth = 124;
+  const padding = 8;
+  const lineHeight = 20;
+
+  // Split text into words for wrapping
+  const words = room.label.split(" ");
+  let currentLine = "";
+  const lines = [];
+  let maxLineWidth = 0;
+
+  for (const word of words) {
+    const testLine = currentLine ? `${currentLine} ${word}` : word;
+    const testWidth = testLine.length * 10;
+
+    if (testWidth <= maxWidth) {
+      currentLine = testLine;
+    } else {
+      lines.push(currentLine);
+      maxLineWidth = Math.max(maxLineWidth, currentLine.length * 10);
+      currentLine = word;
+    }
+  }
+  if (currentLine) {
+    lines.push(currentLine);
+    maxLineWidth = Math.max(maxLineWidth, currentLine.length * 10);
+  }
+
   // Calculate bg dimensions
-  const padding = 6;
-  const textWidth = room.label.length * 10;
-  const textHeight = 20;
+  const textWidth = Math.min(maxWidth, maxLineWidth);
+  const textHeight = lineHeight * lines.length;
 
   // Create bg rect
   const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  rect.setAttribute("x", (x * mapConfig.cellSize + xMod - padding).toString());
+  rect.setAttribute(
+    "x",
+    (x * mapConfig.cellSize + xMod - textWidth / 2 - padding).toString()
+  );
   rect.setAttribute(
     "y",
-    (y * mapConfig.cellSize + yMod - textHeight - padding / 2).toString()
+    (y * mapConfig.cellSize + yMod - textHeight / 2 - padding).toString()
   );
   rect.setAttribute("width", (textWidth + 2 * padding).toString());
   rect.setAttribute("height", (textHeight + 2 * padding).toString());
@@ -109,23 +139,31 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
 
   // Create text
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  text.textContent = room.label;
-  text.setAttribute(
-    "x",
-    (
-      x * mapConfig.cellSize +
-      xMod -
-      padding +
-      (textWidth + 2 * padding) / 2
-    ).toString()
-  );
+  text.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
   text.setAttribute(
     "y",
-    (y * mapConfig.cellSize + yMod - textHeight / 4).toString()
+    (y * mapConfig.cellSize + yMod - textHeight / 2 + lineHeight / 2).toString()
   );
-  text.setAttribute("text-anchor", "middle");
-  text.setAttribute("dominant-baseline", "middle");
   text.setAttribute("class", "fill-green-300 font-bold");
+  text.setAttribute("text-anchor", "middle");
+
+  // Add lines to text
+  lines.forEach((line, index) => {
+    {
+      const tspan = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "tspan"
+      );
+      tspan.textContent = line;
+      tspan.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
+      tspan.setAttribute("dy", index === 0 ? "0" : lineHeight.toString());
+      tspan.setAttribute(
+        "dominant-baseline",
+        index === 0 ? "middle" : "hanging"
+      );
+      text.appendChild(tspan);
+    }
+  });
 
   // Group elements
   const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
