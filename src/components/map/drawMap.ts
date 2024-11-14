@@ -1,8 +1,8 @@
 import mapData, { RoomData } from "../../lib/map/mapData";
 import mapConfig from "../../lib/map/mapConfig";
-import { InitializedMapValues } from "./initMap";
+import { InitializedMapValues, RoomCenter } from "./initMap";
 
-export default function drawRooms(
+export function drawRooms(
   svg: SVGSVGElement,
   initMapValues: InitializedMapValues
 ) {
@@ -17,9 +17,6 @@ export default function drawRooms(
       const pathData = generateRoomPathData(room, originOffset);
       path.setAttribute("d", pathData);
 
-      // Create the text element for room label
-      const label = generateRoomLabel(room, originOffset);
-
       // Add id and other attributes
       path.setAttribute("id", room.id);
       path.setAttribute("fill", "#eee");
@@ -30,7 +27,6 @@ export default function drawRooms(
 
       // Add path to svg
       svg.appendChild(path);
-      svg.appendChild(label);
     }
   }
 }
@@ -72,16 +68,14 @@ function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
 }
 
 // goal: text element created and centered on the room
-function generateRoomLabel(room: RoomData, originOffset: [number, number]) {
+function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
+  const roomCenter = roomCenters.find((center) => center.roomId === room.id);
+  const [x, y] = roomCenter?.center ?? [0, 0];
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
   text.textContent = room.label;
-  text.setAttribute(
-    "x",
-    ((room.origin[0] + originOffset[0]) * mapConfig.cellSize).toString()
-  );
-  text.setAttribute(
-    "y",
-    ((room.origin[1] + originOffset[1]) * mapConfig.cellSize).toString()
-  );
+  const textWidth = text.getBBox().width;
+  text.setAttribute("x", (x * mapConfig.cellSize - textWidth).toString());
+  text.setAttribute("y", (y * mapConfig.cellSize).toString());
+  text.setAttribute("class", "fill-green-500");
   return text;
 }

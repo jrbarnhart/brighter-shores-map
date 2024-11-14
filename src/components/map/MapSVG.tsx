@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import drawRooms from "./drawRooms";
+import { drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import usePan from "./usePan";
 import useZoom from "./useZoom";
