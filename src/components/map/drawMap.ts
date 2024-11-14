@@ -83,11 +83,40 @@ export function drawLabels(
 function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const roomCenter = roomCenters.find((center) => center.roomId === room.id);
   const [x, y] = roomCenter?.center ?? [0, 0];
+
+  // Label position modifiers
+  const defaultXMod = room.label.length * -5;
+  const defaultYMod = -32;
+  const [xMod, yMod] = room.labelOffset ?? [defaultXMod, defaultYMod];
+
+  // Calculate bg dimensions
+  const padding = 4;
+  const textWidth = room.label.length * 10;
+  const textHeight = 20;
+
+  // Create bg rect
+  const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  rect.setAttribute("x", (x * mapConfig.cellSize + xMod - padding).toString());
+  rect.setAttribute(
+    "y",
+    (y * mapConfig.cellSize + yMod - textHeight + padding).toString()
+  );
+  rect.setAttribute("width", (textWidth + 2 * padding).toString());
+  rect.setAttribute("height", (textHeight + 2 * padding).toString());
+  rect.setAttribute("rx", "5");
+  rect.setAttribute("ry", "5");
+  rect.setAttribute("class", "fill-gray-800");
+
+  // Create text
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
   text.textContent = room.label;
-  const textWidth = text.getBBox().width;
-  text.setAttribute("x", (x * mapConfig.cellSize - textWidth).toString());
-  text.setAttribute("y", (y * mapConfig.cellSize).toString());
-  text.setAttribute("class", "fill-green-500");
-  return text;
+  text.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
+  text.setAttribute("y", (y * mapConfig.cellSize + yMod).toString());
+  text.setAttribute("class", "fill-green-300 font-bold");
+
+  // Group elements
+  const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  group.appendChild(rect);
+  group.appendChild(text);
+  return group;
 }
