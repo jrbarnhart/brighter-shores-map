@@ -1,6 +1,12 @@
 import mapConfig from "@/lib/map/mapConfig";
 import mapData, { MapData } from "@/lib/map/mapData";
 
+export type InitializedMapValues = {
+  originOffset: [number, number];
+  mapSize: { width: number; height: number };
+  roomCenters: { roomId: string; center: [number, number] }[];
+};
+
 export default function initMap(svg: SVGSVGElement) {
   const { originOffset, mapHeight, mapWidth } = initMapSize(mapData);
   const roomCenters = initRoomCenters(mapData, originOffset);
@@ -8,11 +14,13 @@ export default function initMap(svg: SVGSVGElement) {
   svg.setAttribute("width", mapWidth.toString());
   svg.setAttribute("height", mapHeight.toString());
 
-  return {
+  const initMapValues: InitializedMapValues = {
     originOffset,
     mapSize: { width: mapWidth, height: mapHeight },
     roomCenters,
   };
+
+  return initMapValues;
 }
 
 function initMapSize(mapData: MapData) {
