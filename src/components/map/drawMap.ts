@@ -67,7 +67,19 @@ function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
   return d;
 }
 
-// goal: text element created and centered on the room
+export function drawLabels(
+  svg: SVGSVGElement,
+  initMapValues: InitializedMapValues
+) {
+  const { roomCenters } = initMapValues;
+  for (const region of Object.values(mapData.regions)) {
+    for (const room of region.rooms) {
+      const label = generateRoomLabel(room, roomCenters);
+      svg.appendChild(label);
+    }
+  }
+}
+
 function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const roomCenter = roomCenters.find((center) => center.roomId === room.id);
   const [x, y] = roomCenter?.center ?? [0, 0];
