@@ -1,10 +1,12 @@
 import mapData, { RoomData } from "../../lib/map/mapData";
 import mapConfig from "../../lib/map/mapConfig";
+import { InitializedMapValues } from "./initMap";
 
 export default function drawRooms(
   svg: SVGSVGElement,
-  originOffset: [number, number]
+  initMapValues: InitializedMapValues
 ) {
+  const { originOffset } = initMapValues;
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
       // Create the path that represents the room in the map svg
@@ -14,6 +16,9 @@ export default function drawRooms(
       );
       const pathData = generateRoomPathData(room, originOffset);
       path.setAttribute("d", pathData);
+
+      // Create the text element for room label
+      const label = generateRoomLabel(room, originOffset);
 
       // Add id and other attributes
       path.setAttribute("id", room.id);
@@ -25,6 +30,7 @@ export default function drawRooms(
 
       // Add path to svg
       svg.appendChild(path);
+      svg.appendChild(label);
     }
   }
 }
@@ -63,4 +69,19 @@ function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
   // Close the path
   d += " Z";
   return d;
+}
+
+// goal: text element created and centered on the room
+function generateRoomLabel(room: RoomData, originOffset: [number, number]) {
+  const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  text.textContent = room.label;
+  text.setAttribute(
+    "x",
+    ((room.origin[0] + originOffset[0]) * mapConfig.cellSize).toString()
+  );
+  text.setAttribute(
+    "y",
+    ((room.origin[1] + originOffset[1]) * mapConfig.cellSize).toString()
+  );
+  return text;
 }
