@@ -6,7 +6,8 @@ const hopeportData: RegionData = {
         Template:
       {
         id: "id",
-        origin: [0,0],
+        label:
+,origin: [0,0],
         path: [
           [0,0],
         ],
@@ -15,6 +16,7 @@ const hopeportData: RegionData = {
       */
     {
       id: "captain-degreenes-office",
+      label: "Captain Degreene's Office",
       origin: [0, 0],
       path: [
         [0, 0],
@@ -30,6 +32,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "training-ground",
+      label: "Training Ground",
       origin: [-6, 7],
       path: [
         [0, 0],
@@ -65,6 +68,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "hopeport-portal-stone",
+      label: "Hopeport Portal Stone",
       origin: [-13, -4],
       path: [
         [0, 0],
@@ -78,6 +82,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "sparring-area",
+      label: "Sparring Area",
       origin: [-22, 12],
       path: [
         [0, 0],
@@ -93,6 +98,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "barracks",
+      label: "Barracks",
       origin: [10, -1],
       path: [
         [0, 0],
@@ -110,6 +116,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "infirmary",
+      label: "Infirmary",
       origin: [18, 9],
       path: [
         [0, 0],
@@ -129,6 +136,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "quartermaster",
+      label: "Quartermaster",
       origin: [20, 17],
       path: [
         [0, 0],
@@ -148,6 +156,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "stone-street",
+      label: "Stone Street",
       origin: [12, 26],
       path: [
         [0, 0],
@@ -179,6 +188,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "delectable-dab-restaurant",
+      label: "The Delectable Dab Restaurant",
       origin: [-5, 33],
       path: [
         [0, 0],
@@ -198,6 +208,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "delectable-dab-kitchen",
+      label: "The Delectable Dab Kitchen",
       origin: [-15, 27],
       path: [
         [0, 0],
@@ -213,6 +224,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "apothecary",
+      label: "Apothecary",
       origin: [22, 29],
       path: [
         [0, 0],
@@ -230,6 +242,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "town-square",
+      label: "Town Square",
       origin: [12, 43],
       path: [
         [0, 0],
@@ -263,6 +276,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "melvs-fishing-supplies",
+      label: "Melv's Fishing Supplies",
       origin: [20, 42],
       path: [
         [0, 0],
@@ -278,6 +292,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "brannof-boulevard",
+      label: "Brannof Boulevard",
       origin: [-16, 48],
       path: [
         [0, 0],
@@ -297,6 +312,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "brannof-halls-hallway",
+      label: "Brannof Hall's Hallway",
       origin: [-21, 47],
       path: [
         [0, 0],
@@ -316,6 +332,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "brannofs-chamber",
+      label: "Brannof's Chamber",
       origin: [-23, 40],
       path: [
         [0, 0],
@@ -331,6 +348,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "brannofs-dining-room",
+      label: "Brannof's Dining Room",
       origin: [-32, 48],
       path: [
         [0, 0],
@@ -346,6 +364,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "hopeport-obelisk",
+      label: "Hopeport Obelisk",
       origin: [-2, 55],
       path: [
         [0, 0],
@@ -379,6 +398,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "old-street-west",
+      label: "Old Street West",
       origin: [19, 51],
       path: [
         [0, 0],
@@ -398,6 +418,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "hairdresser",
+      label: "Hairdresser",
       origin: [30, 44],
       path: [
         [0, 0],
@@ -413,6 +434,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "old-street-east",
+      label: "Old Street West",
       origin: [39, 50],
       path: [
         [0, 0],
@@ -437,6 +459,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "pipe-alley",
+      label: "Pipe Alley",
       origin: [47, 39],
       path: [
         [0, 0],
@@ -452,6 +475,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "cloakroom",
+      label: "The Cloakroom",
       origin: [40, 44],
       path: [
         [0, 0],
@@ -467,6 +491,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "foragers-warehouse",
+      label: "The Forager's Warehouse",
       origin: [50, 41],
       path: [
         [0, 0],
@@ -480,6 +505,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "town-gates",
+      label: "Town Gates",
       origin: [58, 51],
       path: [
         [0, 0],
@@ -509,6 +535,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "north-walls",
+      label: "North Walls",
       origin: [69, 30],
       path: [
         [0, 0],
@@ -524,6 +551,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "south-walls",
+      label: "South Walls",
       origin: [69, 59],
       path: [
         [0, 0],
@@ -535,6 +563,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "naybeths-house",
+      label: "Naybeth's House",
       origin: [60, 60],
       path: [
         [0, 0],
@@ -550,6 +579,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "enchantress-shop",
+      label: "Enchantress Shop",
       origin: [46, 60],
       path: [
         [0, 0],
@@ -565,6 +595,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "tims-alley",
+      label: "Tim's Alley",
       origin: [43, 58],
       path: [
         [0, 0],
@@ -576,6 +607,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "eel-street-bridge",
+      label: "Eel Street Bridge",
       origin: [6, 58],
       path: [
         [0, 0],
@@ -611,6 +643,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "eel-street",
+      label: "Eel Street",
       origin: [8, 69],
       path: [
         [0, 0],
@@ -626,6 +659,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "wilhope-crossing",
+      label: "Willhope Crossing",
       origin: [14, 71],
       path: [
         [0, 0],
@@ -643,6 +677,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "wilhope-passage",
+      label: "Willhope Passage",
       origin: [27, 69],
       path: [
         [0, 0],
@@ -662,6 +697,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "monob-row",
+      label: "Monob Row",
       origin: [36, 58],
       path: [
         [0, 0],
@@ -677,6 +713,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "thieves-den",
+      label: "Thieve's Den",
       origin: [28, 58],
       path: [
         [0, 0],
@@ -696,6 +733,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "little-square",
+      label: "Little Square",
       origin: [41, 69],
       path: [
         [0, 0],
@@ -723,6 +761,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "murk-close",
+      label: "Murk Close",
       origin: [48, 71],
       path: [
         [0, 0],
@@ -740,6 +779,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "limpet-lane",
+      label: "Limpet Lane",
       origin: [43, 76],
       path: [
         [0, 0],
@@ -755,6 +795,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "nook-alley",
+      label: "Nook Alley",
       origin: [47, 79],
       path: [
         [0, 0],
@@ -766,6 +807,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "east-waterfront",
+      label: "East Waterfront",
       origin: [37, 88],
       path: [
         [0, 0],
@@ -787,6 +829,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "vincible",
+      label: "Vincible",
       origin: [48, 99],
       path: [
         [0, 0],
@@ -820,6 +863,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "vacant-pier",
+      label: "Vacant Pier",
       origin: [37, 99],
       path: [
         [0, 0],
@@ -839,6 +883,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "boardwalk",
+      label: "Boardwalk",
       origin: [16, 88],
       path: [
         [0, 0],
@@ -858,6 +903,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "central-waterfront",
+      label: "Central Waterfront",
       origin: [-2, 88],
       path: [
         [0, 0],
@@ -885,6 +931,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "salty-swine",
+      label: "Salty Swine",
       origin: [-1, 99],
       path: [
         [0, 0],
@@ -918,6 +965,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "hooked-hand",
+      label: "The Hooked Hand",
       origin: [-2, 71],
       path: [
         [0, 0],
@@ -933,6 +981,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "west-waterfront",
+      label: "West Waterfront",
       origin: [-23, 82],
       path: [
         [0, 0],
@@ -956,6 +1005,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "little-lucy",
+      label: "Little Lucy",
       origin: [-15, 99],
       path: [
         [0, 0],
@@ -983,6 +1033,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "sea-road",
+      label: "Sea Road",
       origin: [-41, 82],
       path: [
         [0, 0],
@@ -1014,6 +1065,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "scrapyard",
+      label: "Scrapyard",
       origin: [-23, 69],
       path: [
         [0, 0],
@@ -1029,6 +1081,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "overgrown-pond",
+      label: "Overgrown Pond",
       origin: [-44, 56],
       path: [
         [0, 0],
@@ -1070,6 +1123,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "east-beach",
+      label: "East Beach",
       origin: [-44, 89],
       path: [
         [0, 0],
@@ -1099,6 +1153,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "seashells-seashore",
+      label: "Seashells Seashore",
       origin: [-60, 88],
       path: [
         [0, 0],
@@ -1132,6 +1187,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "jellyfish-landing",
+      label: "Jellyfish Landing",
       origin: [-81, 88],
       path: [
         [0, 0],
@@ -1165,6 +1221,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "starfish-point",
+      label: "Starfish Point",
       origin: [-93, 85],
       path: [
         [0, 0],
@@ -1198,6 +1255,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "ray-bay",
+      label: "Ray Bay",
       origin: [-96, 67],
       path: [
         [0, 0],
@@ -1231,6 +1289,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "pirate-hideout",
+      label: "Pirate Hideout",
       origin: [-94, 46],
       path: [
         [0, 0],
@@ -1270,6 +1329,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "fallen-monument",
+      label: "Fallen Monument",
       origin: [-77, 67],
       path: [
         [0, 0],
@@ -1317,6 +1377,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "overgrown-field",
+      label: "Overgrown Field",
       origin: [-60, 70],
       path: [
         [0, 0],
@@ -1352,6 +1413,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "rubble-road",
+      label: "Rubble Road",
       origin: [-58, 48],
       path: [
         [0, 0],
@@ -1381,6 +1443,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "overgrown-road",
+      label: "Overgrown Road",
       origin: [-58, 28],
       path: [
         [0, 0],
@@ -1408,6 +1471,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "wasteland",
+      label: "Wasteland",
       origin: [-72, 23],
       path: [
         [0, 0],
@@ -1458,6 +1522,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "crater",
+      label: "Crater",
       origin: [-75, 49],
       path: [
         [0, 0],
@@ -1503,6 +1568,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "collapsed-hovels",
+      label: "Collapsed Hovels",
       origin: [-87, 15],
       path: [
         [0, 0],
@@ -1556,6 +1622,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "rocky-road",
+      label: "Rocky Road",
       origin: [-76, -6],
       path: [
         [0, 0],
