@@ -90,7 +90,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const [xMod, yMod] = room.labelOffset ?? [defaultXMod, defaultYMod];
 
   // Max width before wrapping
-  const maxWidth = 124;
+  const maxWidth = 100;
   const padding = 8;
   const lineHeight = 20;
 
@@ -100,18 +100,20 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const lines = [];
   let maxLineWidth = 0;
 
-  for (const word of words) {
+  words.forEach((word, index) => {
     const testLine = currentLine ? `${currentLine} ${word}` : word;
     const testWidth = testLine.length * 10;
 
-    if (testWidth <= maxWidth) {
+    if (testWidth <= maxWidth && words.length) {
+      currentLine = testLine;
+    } else if (words.length === 1 || index === 0) {
       currentLine = testLine;
     } else {
       lines.push(currentLine);
       maxLineWidth = Math.max(maxLineWidth, currentLine.length * 10);
       currentLine = word;
     }
-  }
+  });
   if (currentLine) {
     lines.push(currentLine);
     maxLineWidth = Math.max(maxLineWidth, currentLine.length * 10);
@@ -157,10 +159,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
       tspan.textContent = line;
       tspan.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
       tspan.setAttribute("dy", index === 0 ? "0" : lineHeight.toString());
-      tspan.setAttribute(
-        "dominant-baseline",
-        index === 0 ? "middle" : "hanging"
-      );
+      tspan.setAttribute("dominant-baseline", "middle");
       text.appendChild(tspan);
     }
   });
