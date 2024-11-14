@@ -90,7 +90,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const [xMod, yMod] = room.labelOffset ?? [defaultXMod, defaultYMod];
 
   // Calculate bg dimensions
-  const padding = 4;
+  const padding = 6;
   const textWidth = room.label.length * 10;
   const textHeight = 20;
 
@@ -99,7 +99,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   rect.setAttribute("x", (x * mapConfig.cellSize + xMod - padding).toString());
   rect.setAttribute(
     "y",
-    (y * mapConfig.cellSize + yMod - textHeight + padding).toString()
+    (y * mapConfig.cellSize + yMod - textHeight - padding / 2).toString()
   );
   rect.setAttribute("width", (textWidth + 2 * padding).toString());
   rect.setAttribute("height", (textHeight + 2 * padding).toString());
@@ -110,8 +110,21 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   // Create text
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
   text.textContent = room.label;
-  text.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
-  text.setAttribute("y", (y * mapConfig.cellSize + yMod).toString());
+  text.setAttribute(
+    "x",
+    (
+      x * mapConfig.cellSize +
+      xMod -
+      padding +
+      (textWidth + 2 * padding) / 2
+    ).toString()
+  );
+  text.setAttribute(
+    "y",
+    (y * mapConfig.cellSize + yMod - textHeight / 4).toString()
+  );
+  text.setAttribute("text-anchor", "middle");
+  text.setAttribute("dominant-baseline", "middle");
   text.setAttribute("class", "fill-green-300 font-bold");
 
   // Group elements
