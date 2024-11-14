@@ -1,10 +1,15 @@
 import mapConfig from "@/lib/map/mapConfig";
 import mapData, { MapData } from "@/lib/map/mapData";
 
+export type RoomCenter = {
+  roomId: string;
+  center: [number, number];
+};
+
 export type InitializedMapValues = {
   originOffset: [number, number];
   mapSize: { width: number; height: number };
-  roomCenters: { roomId: string; center: [number, number] }[];
+  roomCenters: RoomCenter[];
 };
 
 export default function initMap(svg: SVGSVGElement) {
@@ -52,7 +57,7 @@ function initMapSize(mapData: MapData) {
 }
 
 function initRoomCenters(mapData: MapData, originOffset: [number, number]) {
-  const roomCenters: { roomId: string; center: [number, number] }[] = [];
+  const roomCenters: RoomCenter[] = [];
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
       let roomMinX = 0 + originOffset[0];
@@ -67,7 +72,7 @@ function initRoomCenters(mapData: MapData, originOffset: [number, number]) {
         if (vertex[1] > roomMaxY) roomMaxY = vertex[1];
       }
       // Find the center of those values
-      const roomCenter: { roomId: string; center: [number, number] } = {
+      const roomCenter: RoomCenter = {
         roomId: room.id,
         center: [(roomMaxX - roomMinX) / 2, (roomMaxY - roomMinY) / 2],
       };
