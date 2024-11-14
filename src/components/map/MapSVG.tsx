@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { drawRooms } from "./drawMap";
+import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import usePan from "./usePan";
 import useZoom from "./useZoom";
@@ -24,6 +24,7 @@ export default function MapSVG() {
     if (!svgRef.current.hasAttribute("data-drawn")) {
       const initMapValues = initMap(svgRef.current);
       drawRooms(svgRef.current, initMapValues);
+      drawLabels(svgRef.current, initMapValues);
       svgRef.current.setAttribute("data-drawn", "true");
     }
   }, []);
