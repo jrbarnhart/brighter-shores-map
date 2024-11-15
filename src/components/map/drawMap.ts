@@ -7,6 +7,7 @@ export function drawRooms(
   initMapValues: InitializedMapValues
 ) {
   const { originOffset } = initMapValues;
+  const roomPathElements = [];
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
       // Create the path that represents the room in the map svg
@@ -27,8 +28,10 @@ export function drawRooms(
 
       // Add path to svg
       svg.appendChild(path);
+      roomPathElements.push(path);
     }
   }
+  return roomPathElements;
 }
 
 function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
@@ -72,12 +75,16 @@ export function drawLabels(
   initMapValues: InitializedMapValues
 ) {
   const { roomCenters } = initMapValues;
+  const labelGroupElements = [];
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
       const label = generateRoomLabel(room, roomCenters);
       svg.appendChild(label);
+      labelGroupElements.push(label);
     }
   }
+
+  return labelGroupElements;
 }
 
 function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
