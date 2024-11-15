@@ -6,6 +6,7 @@ export type RoomData = {
   labelOffset?: [number, number];
   origin: [number, number];
   path: Array<[number, number]>;
+  color?: string;
   type: "residence" | "shop" | "world" | "profession" | "obelisk" | "portal";
 };
 
