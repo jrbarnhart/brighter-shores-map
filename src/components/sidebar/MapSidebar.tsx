@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/sidebar";
 import React, { SetStateAction } from "react";
 
-export default function MapSidebar(
-  setLabelsHidden: React.Dispatch<SetStateAction<boolean>>
-) {
+export default function MapSidebar({
+  setLabelsHidden,
+}: {
+  setLabelsHidden: React.Dispatch<SetStateAction<boolean>>;
+}) {
   const handleLabelsToggle = () => {
     setLabelsHidden((prev) => !prev);
   };
