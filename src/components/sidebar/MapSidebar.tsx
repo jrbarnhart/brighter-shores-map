@@ -8,8 +8,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import React, { SetStateAction } from "react";
 
-export default function MapSidebar() {
+export default function MapSidebar(
+  setLabelsHidden: React.Dispatch<SetStateAction<boolean>>
+) {
+  const handleLabelsToggle = () => {
+    setLabelsHidden((prev) => !prev);
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -18,7 +25,9 @@ export default function MapSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton>Labels</SidebarMenuButton>
+                <SidebarMenuButton onClick={handleLabelsToggle}>
+                  Labels
+                </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
