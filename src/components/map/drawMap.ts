@@ -20,7 +20,7 @@ export function drawRooms(
 
       // Add id and other attributes
       path.setAttribute("id", room.id);
-      path.setAttribute("fill", "#eee");
+      path.setAttribute("fill", room.color ?? mapConfig.defaultColor);
       path.setAttribute("stroke", "#333");
       path.setAttribute("stroke-width", "2");
 
