@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { MapState } from "./useMapState";
 
 export function setHiddenGroups(groups: SVGGElement[], value: boolean) {
@@ -16,12 +16,12 @@ export default function useMapControls({
   ...props
 }: {
   mapState: MapState;
-  labelGroups: SVGGElement[];
+  labelGroups: React.RefObject<SVGGElement[]>;
 }) {
   const { mapState, labelGroups } = props;
 
   // Hide labels on state change
   useEffect(() => {
-    setHiddenGroups(labelGroups, mapState.labelsHidden.value);
+    setHiddenGroups(labelGroups.current ?? [], mapState.labelsHidden.value);
   }, [labelGroups, mapState.labelsHidden.value]);
 }
