@@ -1,7 +1,7 @@
-export function toggleLabels(labels: SVGGElement[]) {
+export function toggleGroup(groups: SVGGElement[]) {
   // Check if first label is hidden
-  const isHidden = labels[0].getAttribute("hidden") === "true";
-  for (const label of labels) {
-    label.setAttribute("hidden", (!isHidden).toString());
+  const isHidden = groups[0].getAttribute("hidden") === "true";
+  for (const g of groups) {
+    g.setAttribute("hidden", (!isHidden).toString());
   }
 }
