@@ -2,18 +2,6 @@ import { RegionData } from "./mapData";
 
 const hopeportData: RegionData = {
   rooms: [
-    /*
-        Template:
-      {
-        id: "id",
-        label:
-,origin: [0,0],
-        path: [
-          [0,0],
-        ],
-        type: "world"
-      } 
-      */
     {
       id: "captain-degreenes-office",
       label: "Captain Degreene's Office",
@@ -28,6 +16,7 @@ const hopeportData: RegionData = {
         [3, 6],
         [0, 6],
       ],
+      color: "#734242",
       type: "residence",
     },
     {
@@ -64,6 +53,7 @@ const hopeportData: RegionData = {
         [-1, 9],
         [0, 9],
       ],
+      color: "#949452",
       type: "world",
     },
     {
@@ -78,6 +68,7 @@ const hopeportData: RegionData = {
         [7, 9],
         [0, 9],
       ],
+      color: "#949452",
       type: "portal",
     },
     {
@@ -94,6 +85,7 @@ const hopeportData: RegionData = {
         [13, 9],
         [0, 9],
       ],
+      color: "#949452",
       type: "world",
     },
     {
@@ -112,6 +104,7 @@ const hopeportData: RegionData = {
         [2, 7],
         [0, 7],
       ],
+      color: "#6b634a",
       type: "residence",
     },
     {
@@ -132,6 +125,7 @@ const hopeportData: RegionData = {
         [-1, 1],
         [0, 1],
       ],
+      color: "#8c8c73",
       type: "residence",
     },
     {
@@ -152,6 +146,7 @@ const hopeportData: RegionData = {
         [-2, 1],
         [0, 1],
       ],
+      color: "#6b634a",
       type: "shop",
     },
     {
@@ -204,6 +199,7 @@ const hopeportData: RegionData = {
         [-1, 1],
         [0, 1],
       ],
+      color: "#636352",
       type: "residence",
     },
     {
@@ -220,6 +216,7 @@ const hopeportData: RegionData = {
         [8, 14],
         [0, 14],
       ],
+      color: "#636352",
       type: "profession",
     },
     {
@@ -238,6 +235,7 @@ const hopeportData: RegionData = {
         [-2, 4],
         [0, 4],
       ],
+      color: "#638452",
       type: "profession",
     },
     {
@@ -288,6 +286,7 @@ const hopeportData: RegionData = {
         [-1, 2],
         [0, 2],
       ],
+      color: "#735a4a",
       type: "shop",
     },
     {
@@ -328,6 +327,7 @@ const hopeportData: RegionData = {
         [-2, 1],
         [0, 1],
       ],
+      color: "#734242",
       type: "residence",
     },
     {
@@ -344,6 +344,7 @@ const hopeportData: RegionData = {
         [2, 6],
         [0, 6],
       ],
+      color: "#734242",
       type: "residence",
     },
     {
@@ -360,6 +361,7 @@ const hopeportData: RegionData = {
         [7, 6],
         [0, 6],
       ],
+      color: "#735a4a",
       type: "residence",
     },
     {
@@ -394,6 +396,7 @@ const hopeportData: RegionData = {
         [-5, 1],
         [0, 1],
       ],
+      color: "#8c944a",
       type: "obelisk",
     },
     {
@@ -430,6 +433,7 @@ const hopeportData: RegionData = {
         [3, 5],
         [0, 5],
       ],
+      color: "#adadad",
       type: "shop",
     },
     {
@@ -487,6 +491,7 @@ const hopeportData: RegionData = {
         [5, 5],
         [0, 5],
       ],
+      color: "#3a4a6b",
       type: "shop",
     },
     {
@@ -501,6 +506,7 @@ const hopeportData: RegionData = {
         [4, 7],
         [0, 7],
       ],
+      color: "#6b634a",
       type: "shop",
     },
     {
@@ -547,6 +553,7 @@ const hopeportData: RegionData = {
         [-1, 8],
         [0, 8],
       ],
+      color: "#949452",
       type: "world",
     },
     {
@@ -559,6 +566,7 @@ const hopeportData: RegionData = {
         [9, 19],
         [0, 19],
       ],
+      color: "#949452",
       type: "world",
     },
     {
@@ -575,6 +583,7 @@ const hopeportData: RegionData = {
         [7, 5],
         [0, 5],
       ],
+      color: "#6b634a",
       type: "world",
     },
     {
@@ -591,6 +600,7 @@ const hopeportData: RegionData = {
         [7, 7],
         [0, 7],
       ],
+      color: "#736394",
       type: "shop",
     },
     {
@@ -603,6 +613,7 @@ const hopeportData: RegionData = {
         [2, 11],
         [0, 11],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -639,6 +650,7 @@ const hopeportData: RegionData = {
         [-1, 1],
         [0, 1],
       ],
+      color: "#8c944a",
       type: "world",
     },
     {
@@ -693,6 +705,7 @@ const hopeportData: RegionData = {
         [-1, 2],
         [0, 2],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -709,6 +722,7 @@ const hopeportData: RegionData = {
         [-1, 2],
         [0, 2],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -729,6 +743,7 @@ const hopeportData: RegionData = {
         [2, 9],
         [0, 9],
       ],
+      color: "#526373",
       type: "world",
     },
     {
@@ -757,6 +772,7 @@ const hopeportData: RegionData = {
         [-1, 2],
         [0, 2],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -775,6 +791,7 @@ const hopeportData: RegionData = {
         [6, 2],
         [0, 2],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -791,6 +808,7 @@ const hopeportData: RegionData = {
         [2, 10],
         [0, 10],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -803,6 +821,7 @@ const hopeportData: RegionData = {
         [7, 2],
         [0, 2],
       ],
+      color: "#948463",
       type: "world",
     },
     {
@@ -977,6 +996,7 @@ const hopeportData: RegionData = {
         [5, 9],
         [0, 9],
       ],
+      color: "#735a4a",
       type: "world",
     },
     {
