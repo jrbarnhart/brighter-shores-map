@@ -3,18 +3,16 @@ import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import usePan from "./usePan";
 import useZoom from "./useZoom";
-import { setHiddenGroups } from "./mapControls";
+import useMapControls from "./useMapControls";
+import { MapState } from "./useMapState";
 
-export default function MapSVG({ ...props }: { labelsHidden: boolean }) {
-  const { labelsHidden } = props;
+export default function MapSVG({ ...props }: { mapState: MapState }) {
+  const { mapState } = props;
+
   const svgRef = useRef<SVGSVGElement | null>(null);
-
   const labelGroups = useRef<SVGGElement[]>([]);
 
-  // Hide labels on state change
-  useEffect(() => {
-    setHiddenGroups(labelGroups.current, labelsHidden);
-  }, [labelsHidden]);
+  useMapControls({ mapState, labelGroups });
 
   const {
     handleMouseDown,
@@ -26,6 +24,7 @@ export default function MapSVG({ ...props }: { labelsHidden: boolean }) {
 
   const { handleWheel, zoomScale } = useZoom();
 
+  // Initialize the map elements by drawing them from data
   useEffect(() => {
     if (!svgRef.current) return;
 
@@ -38,6 +37,7 @@ export default function MapSVG({ ...props }: { labelsHidden: boolean }) {
       svgRef.current.setAttribute("data-drawn", "true");
     }
   }, []);
+
   return (
     <div
       className={`w-screen h-screen overflow-hidden ${
