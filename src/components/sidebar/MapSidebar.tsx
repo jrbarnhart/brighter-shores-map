@@ -8,15 +8,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import React, { SetStateAction } from "react";
 
-export default function MapSidebar({
-  setLabelsHidden,
-}: {
-  setLabelsHidden: React.Dispatch<SetStateAction<boolean>>;
-}) {
+import { MapState } from "../map/useMapState";
+
+export default function MapSidebar({ mapState }: { mapState: MapState }) {
   const handleLabelsToggle = () => {
-    setLabelsHidden((prev) => !prev);
+    mapState.labelsHidden.set((prev) => !prev);
   };
 
   return (
