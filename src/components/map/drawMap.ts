@@ -146,7 +146,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
     "y",
     (y * mapConfig.cellSize + yMod - textHeight / 2 + lineHeight / 2).toString()
   );
-  text.setAttribute("class", "fill-blue-100 font-bold");
+  text.setAttribute("class", "fill-blue-100 font-bold select-none");
   text.setAttribute("text-anchor", "middle");
 
   // Add lines to text
