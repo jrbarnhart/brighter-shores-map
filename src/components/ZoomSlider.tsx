@@ -5,9 +5,10 @@ import { MapState } from "./map/useMapState";
 type SliderProps = React.ComponentProps<typeof Slider>;
 
 export default function ZoomSlider({
+  mapState,
   ...props
 }: SliderProps & { mapState: MapState }) {
-  const { className, mapState } = props;
+  const { className } = props;
   return (
     <div className="absolute top-0 left-0 z-10 w-full mt-7 flex justify-around">
       <Slider
