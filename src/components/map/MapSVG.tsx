@@ -53,24 +53,12 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       className={`w-screen h-screen overflow-hidden touch-none ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
-      onMouseDown={(e) => {
-        if (e.buttons === 2) {
-          dragEnabled.current = true;
-        }
-        if (dragEnabled.current || dragLocked) {
-          handleMouseDown(e);
-        }
-      }}
+      onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
       onDoubleClick={handleDoubleClick}
-      onTouchStart={(e) => {
-        if (e.touches.length > 1) {
-          dragEnabled.current = true;
-        }
-        if (dragEnabled.current || dragLocked) handleTouchStart(e);
-      }}
+      onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onWheel={handleWheel}
