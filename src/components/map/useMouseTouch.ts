@@ -9,15 +9,16 @@ export default function useMouseTouch({
   dragEnabled: React.MutableRefObject<boolean>;
   mapState: MapState;
 }) {
-  // Panning
   const { value: mapPos, set: setMapPos } = mapState.mapPos;
   const [isDragging, setIsDragging] = useState(false);
   const dragLocked = mapState.drag.lock.value;
   const dragStart = useRef({ x: 0, y: 0 });
   const mouseMoved = useRef(false);
-  // Zooming
+  const lastTouchTime = useRef(0);
+  const isDoubleTouchHold = useRef(false);
   const { value: scale, set: setScale } = mapState.scale;
-  const { scaleIncrement, minScale, maxScale } = mapConfig;
+  const { scaleIncrement, minScale, maxScale, doubleTouchThreshold } =
+    mapConfig;
 
   // General handlers for panning
   const handleDragStart = useCallback(
@@ -45,6 +46,7 @@ export default function useMouseTouch({
 
   const handleDragEnd = useCallback(() => {
     dragEnabled.current = false;
+    isDoubleTouchHold.current = false;
     setIsDragging(false);
   }, [dragEnabled]);
 
@@ -85,7 +87,12 @@ export default function useMouseTouch({
   // Touch handlers
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
-      if (e.touches.length > 1) {
+      const now = new Date().getTime();
+      if (now - lastTouchTime.current < doubleTouchThreshold) {
+        isDoubleTouchHold.current = true;
+      }
+      lastTouchTime.current = now;
+      if (e.touches.length > 1 || isDoubleTouchHold.current) {
         dragEnabled.current = true;
       }
       if (dragEnabled.current || dragLocked) {
@@ -93,7 +100,7 @@ export default function useMouseTouch({
         handleDragStart(touch.clientX, touch.clientY);
       }
     },
-    [dragEnabled, dragLocked, handleDragStart]
+    [doubleTouchThreshold, dragEnabled, dragLocked, handleDragStart]
   );
 
   const handleTouchMove = useCallback(
