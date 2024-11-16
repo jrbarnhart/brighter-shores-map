@@ -1,8 +1,9 @@
 const mapConfig = {
   cellSize: 20,
-  minScale: 10,
+  minScale: 15,
   maxScale: 150,
   scaleIncrement: 15,
+  defaultScale: 15,
   bgColor: "#2a2b2a",
   defaultColor: "#c5b57b",
 };

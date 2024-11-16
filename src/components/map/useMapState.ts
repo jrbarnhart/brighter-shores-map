@@ -1,3 +1,4 @@
+import mapConfig from "@/lib/map/mapConfig";
 import { SetStateAction, useState } from "react";
 
 export type MapState = {
@@ -16,8 +17,9 @@ export type MapState = {
 };
 
 export default function useMapState() {
+  const { defaultScale } = mapConfig;
   const [labelsHidden, setLabelsHidden] = useState(false);
-  const [scale, setScale] = useState(30);
+  const [scale, setScale] = useState(defaultScale);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
 
   const mapState: MapState = {
