@@ -1,4 +1,4 @@
-import { RegionData } from "./mapData";
+import { RegionData } from "../mapData";
 
 const hopeportData: RegionData = {
   rooms: [
@@ -438,7 +438,7 @@ const hopeportData: RegionData = {
     },
     {
       id: "old-street-east",
-      label: "Old Street West",
+      label: "Old Street East",
       origin: [39, 50],
       path: [
         [0, 0],

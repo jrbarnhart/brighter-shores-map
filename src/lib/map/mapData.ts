@@ -1,7 +1,8 @@
-import hopeportData from "./hopeportData";
+import hopeportData from "./hopeport/hopeportData";
+import { HopePortRoomNames } from "./hopeport/hopeportRoomNames";
 
 export type RoomData = {
-  id: string;
+  id: HopePortRoomNames;
   label: string;
   labelOffset?: [number, number];
   origin: [number, number];
@@ -12,6 +13,35 @@ export type RoomData = {
 
 export type RegionData = {
   rooms: RoomData[];
+};
+
+export type NPC = {
+  name: string;
+  types: ["vendor" | "quest" | "extra"];
+};
+
+export type Monster = {};
+
+export type Bank =
+  | "bait"
+  | "bones"
+  | "equipment"
+  | "ingredients"
+  | "lumber"
+  | "monument"
+  | "potions"
+  | "timber"
+  | "leathers";
+
+export type RoomContentsData = {
+  obelisk?: boolean;
+  storageRift?: boolean;
+  portalStone?: boolean;
+  // Mobs
+  // Resources
+  npcs?: NPC[];
+  banks?: Bank[];
+  // Quest step
 };
 
 export type MapData = {
