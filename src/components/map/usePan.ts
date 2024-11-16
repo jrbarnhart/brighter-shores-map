@@ -5,7 +5,7 @@ export default function usePan() {
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
 
-  const handleMouseDown = useCallback(
+  const handleMouseDownPan = useCallback(
     (e: React.MouseEvent) => {
       setIsDragging(true);
       dragStart.current = {
@@ -16,7 +16,7 @@ export default function usePan() {
     [mapPos]
   );
 
-  const handleMouseMove = useCallback(
+  const handleMouseMovePan = useCallback(
     (e: React.MouseEvent) => {
       if (!isDragging) return;
 
@@ -29,14 +29,14 @@ export default function usePan() {
     [isDragging]
   );
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUpPan = useCallback(() => {
     setIsDragging(false);
   }, []);
 
   return {
-    handleMouseDown,
-    handleMouseMove,
-    handleMouseUp,
+    handleMouseDownPan,
+    handleMouseMovePan,
+    handleMouseUpPan,
     mapPos,
     isDragging,
   };
