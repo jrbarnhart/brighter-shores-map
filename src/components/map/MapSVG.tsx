@@ -25,8 +25,11 @@ export default function MapSVG({
   const {
     handleMouseDownPan,
     handleMouseMovePan,
-    handleDragEnd: handleMouseUpPan,
+    handleMouseUpPan,
     handleContextMenuPan,
+    handleTouchStartPan,
+    handleTouchEndPan,
+    handleTouchMovePan,
     mapPos,
     isDragging,
   } = usePan({ dragEnabled });
@@ -49,7 +52,7 @@ export default function MapSVG({
 
   return (
     <div
-      className={`w-screen h-screen overflow-hidden ${
+      className={`w-screen h-screen overflow-hidden touch-none ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       onMouseDown={(e) => {
@@ -63,6 +66,11 @@ export default function MapSVG({
       onMouseMove={handleMouseMovePan}
       onMouseUp={handleMouseUpPan}
       onMouseLeave={handleMouseUpPan}
+      onTouchStart={(e) => {
+        if (dragLocked) handleTouchStartPan(e);
+      }}
+      onTouchMove={handleTouchMovePan}
+      onTouchEnd={handleTouchEndPan}
       onWheel={handleWheel}
       onContextMenu={handleContextMenuPan}
     >

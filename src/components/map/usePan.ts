@@ -52,6 +52,26 @@ export default function usePan({
     [handleDragMove]
   );
 
+  const handleTouchStartPan = useCallback(
+    (e: React.TouchEvent) => {
+      const touch = e.touches[0];
+      handleDragStart(touch.clientX, touch.clientY);
+    },
+    [handleDragStart]
+  );
+
+  const handleTouchMovePan = useCallback(
+    (e: React.TouchEvent) => {
+      const touch = e.touches[0];
+      handleDragMove(touch.clientX, touch.clientY);
+
+      if (isDragging) {
+        e.preventDefault();
+      }
+    },
+    [handleDragMove, isDragging]
+  );
+
   const handleContextMenuPan = useCallback((e: React.MouseEvent) => {
     if (mouseMoved.current) {
       e.preventDefault();
@@ -61,8 +81,11 @@ export default function usePan({
   return {
     handleMouseDownPan,
     handleMouseMovePan,
-    handleDragEnd,
+    handleMouseUpPan: handleDragEnd,
     handleContextMenuPan,
+    handleTouchStartPan,
+    handleTouchMovePan,
+    handleTouchEndPan: handleDragEnd,
     mapPos,
     isDragging,
   };
