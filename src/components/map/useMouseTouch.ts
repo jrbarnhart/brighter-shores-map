@@ -11,12 +11,13 @@ export default function useMouseTouch({
   const dragStart = useRef({ x: 0, y: 0 });
   const mouseMoved = useRef(false);
   // Zooming
-  const [isPinching, setIsPinching] = useState(false);
-  const pinchInitialDistance = useRef(0);
+  const [scale, setScale] = useState(100);
+  const initialScale = useRef(100);
   const scaleIncrement = 15;
   const minScale = 10;
   const maxScale = 200;
-  const [scale, setScale] = useState(100);
+  const [isPinching, setIsPinching] = useState(false);
+  const pinchInitialDistance = useRef(0);
 
   // General handlers for panning
   const handleDragStart = useCallback(
@@ -63,6 +64,12 @@ export default function useMouseTouch({
   );
 
   // Touch handlers
+  const getTouchDistance = useCallback((touchA: Touch, touchB: Touch) => {
+    const dx = touchA.clientX - touchB.clientX;
+    const dy = touchA.clientY - touchB.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }, []);
+
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       const touch = e.touches[0];
