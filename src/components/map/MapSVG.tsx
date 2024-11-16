@@ -8,7 +8,6 @@ import mapConfig from "@/lib/map/mapConfig";
 
 export default function MapSVG({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
-  const dragLocked = mapState.drag.lock.value;
   const dragEnabled = mapState.drag.enabledRef;
   const svgRef = useRef<SVGSVGElement | null>(null);
   const labelGroups = useRef<SVGGElement[]>([]);
