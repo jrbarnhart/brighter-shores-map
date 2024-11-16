@@ -5,6 +5,7 @@ import usePan from "./usePan";
 import useZoom from "./useZoom";
 import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
+import mapConfig from "@/lib/map/mapConfig";
 
 export default function MapSVG({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
@@ -50,21 +51,12 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       onWheel={handleWheel}
     >
       <svg
+        className={`bg-[${mapConfig.bgColor}]`}
         ref={svgRef}
         style={{
           transform: `translate(${mapPos.x.toString()}px, ${mapPos.y.toString()}px) scale(${zoomScale.toString()})`,
         }}
-      >
-        <rect
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          stroke="green"
-          strokeWidth="2"
-          fill="none"
-        />
-      </svg>
+      ></svg>
     </div>
   );
 }
