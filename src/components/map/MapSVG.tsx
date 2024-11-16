@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { SetStateAction, useEffect, useRef } from "react";
 import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import usePan from "./usePan";
@@ -11,7 +11,9 @@ export default function MapSVG({
   ...props
 }: {
   mapState: MapState;
-  dragEnabled: boolean;
+  dragEnabled: React.MutableRefObject<boolean>;
+  dragLocked: boolean;
+  setDragLocked: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const { mapState, dragEnabled } = props;
 
@@ -26,7 +28,7 @@ export default function MapSVG({
     handleMouseUpPan,
     mapPos,
     isDragging,
-  } = usePan();
+  } = usePan({ dragEnabled });
 
   const { handleWheel, zoomScale } = useZoom();
 
@@ -50,7 +52,10 @@ export default function MapSVG({
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
       onMouseDown={(e) => {
-        if (dragEnabled) {
+        if (e.buttons === 2) {
+          dragEnabled.current = true;
+        }
+        if (dragEnabled.current) {
           handleMouseDownPan(e);
         }
       }}
@@ -58,6 +63,9 @@ export default function MapSVG({
       onMouseUp={handleMouseUpPan}
       onMouseLeave={handleMouseUpPan}
       onWheel={handleWheel}
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
     >
       <svg
         ref={svgRef}
