@@ -23,6 +23,10 @@ export function drawRooms(
       path.setAttribute("fill", room.color ?? mapConfig.defaultColor);
       path.setAttribute("stroke", "#333");
       path.setAttribute("stroke-width", "2");
+      path.setAttribute(
+        "class",
+        "hover:stroke-sidebar-accent hover:fill-sidebar"
+      );
 
       // Add event listeners here
 
@@ -173,6 +177,7 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
 
   // Group elements
   const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  group.setAttribute("class", "pointer-events-none");
   group.appendChild(rect);
   group.appendChild(text);
   return group;
