@@ -15,7 +15,7 @@ export default function MapSVG({
   dragLocked: boolean;
   setDragLocked: React.Dispatch<SetStateAction<boolean>>;
 }) {
-  const { mapState, dragEnabled } = props;
+  const { mapState, dragEnabled, dragLocked } = props;
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const labelGroups = useRef<SVGGElement[]>([]);
@@ -55,7 +55,7 @@ export default function MapSVG({
         if (e.buttons === 2) {
           dragEnabled.current = true;
         }
-        if (dragEnabled.current) {
+        if (dragEnabled.current || dragLocked) {
           handleMouseDownPan(e);
         }
       }}
