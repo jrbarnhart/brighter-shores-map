@@ -65,11 +65,7 @@ export default function useMouseTouch({
   const handleDoubleClick = useCallback(() => {
     setScale((prev) => {
       // Set to next pre determined scale level
-      const defaultScaleBreakpoints = [
-        maxScale * 0.25,
-        maxScale * 0.66,
-        maxScale,
-      ];
+      const defaultScaleBreakpoints = [minScale, maxScale / 2, maxScale];
 
       // Find the next breakpoint
       const nextBreakpoint = defaultScaleBreakpoints.find((breakpoint) => {
@@ -78,7 +74,7 @@ export default function useMouseTouch({
       if (nextBreakpoint) return nextBreakpoint;
       return defaultScaleBreakpoints[0];
     });
-  }, [maxScale, setScale]);
+  }, [maxScale, minScale, setScale]);
 
   // Touch handlers
   const handleTouchStart = useCallback(
