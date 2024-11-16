@@ -2,7 +2,6 @@ import React, { SetStateAction, useEffect, useRef } from "react";
 import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import useMouseTouch from "./useMouseTouch";
-import useWheelZoom from "./useWheelZoom";
 import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
@@ -30,11 +29,11 @@ export default function MapSVG({
     handleTouchStart,
     handleTouchEnd,
     handleTouchMove,
+    handleWheel,
+    zoomScale,
     mapPos,
     isDragging,
   } = useMouseTouch({ dragEnabled });
-
-  const { handleWheel, zoomScale } = useWheelZoom();
 
   // Initialize the map elements by drawing them from data
   useEffect(() => {
