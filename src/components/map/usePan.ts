@@ -10,31 +10,41 @@ export default function usePan({
   const dragStart = useRef({ x: 0, y: 0 });
   const mouseMoved = useRef(false);
 
-  const handleMouseDownPan = useCallback(
-    (e: React.MouseEvent) => {
+  const handleDragStart = useCallback(
+    (pointX: number, pointY: number) => {
       setIsDragging(true);
       dragStart.current = {
-        x: e.clientX - mapPos.x,
-        y: e.clientY - mapPos.y,
+        x: pointX - mapPos.x,
+        y: pointY - mapPos.y,
       };
       mouseMoved.current = false;
     },
     [mapPos]
   );
 
-  const handleMouseMovePan = useCallback(
-    (e: React.MouseEvent) => {
+  const handleDragMove = useCallback(
+    (pointX: number, pointY: number) => {
       if (!isDragging) return;
-
       mouseMoved.current = true;
-
-      const newX = e.clientX - dragStart.current.x;
-      const newY = e.clientY - dragStart.current.y;
-
-      // Add bounds checking here if needed
+      const newX = pointX - dragStart.current.x;
+      const newY = pointY - dragStart.current.y;
       setMapPos({ x: newX, y: newY });
     },
     [isDragging]
+  );
+
+  const handleMouseDownPan = useCallback(
+    (e: React.MouseEvent) => {
+      handleDragStart(e.clientX, e.clientY);
+    },
+    [handleDragStart]
+  );
+
+  const handleMouseMovePan = useCallback(
+    (e: React.MouseEvent) => {
+      handleDragMove(e.clientX, e.clientY);
+    },
+    [handleDragMove]
   );
 
   const handleMouseUpPan = useCallback(() => {
