@@ -4,13 +4,13 @@ import { Move } from "lucide-react";
 
 export default function MoveButton({
   dragLocked,
-  setDragEnabled,
+  setDragLocked,
 }: {
   dragLocked: boolean;
-  setDragEnabled: React.Dispatch<SetStateAction<boolean>>;
+  setDragLocked: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const handleClick = () => {
-    setDragEnabled((prev) => !prev);
+    setDragLocked((prev) => !prev);
   };
 
   return (
