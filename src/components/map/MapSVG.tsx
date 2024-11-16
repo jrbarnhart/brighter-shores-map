@@ -51,10 +51,10 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       onWheel={handleWheel}
     >
       <svg
-        className={`bg-[${mapConfig.bgColor}]`}
         ref={svgRef}
         style={{
           transform: `translate(${mapPos.x.toString()}px, ${mapPos.y.toString()}px) scale(${zoomScale.toString()})`,
+          backgroundColor: mapConfig.bgColor,
         }}
       ></svg>
     </div>
