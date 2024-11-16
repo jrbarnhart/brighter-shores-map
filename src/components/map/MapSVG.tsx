@@ -2,7 +2,7 @@ import React, { SetStateAction, useEffect, useRef } from "react";
 import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import usePan from "./usePan";
-import useZoom from "./useZoom";
+import useWheelZoom from "./useWheelZoom";
 import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
@@ -34,7 +34,7 @@ export default function MapSVG({
     isDragging,
   } = usePan({ dragEnabled });
 
-  const { handleWheel, zoomScale } = useZoom();
+  const { handleWheel, zoomScale } = useWheelZoom();
 
   // Initialize the map elements by drawing them from data
   useEffect(() => {

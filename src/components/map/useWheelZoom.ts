@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-export default function useZoom() {
+export default function useWheelZoom() {
   const scaleIncrement = 15;
   const minScale = 10;
   const maxScale = 200;
