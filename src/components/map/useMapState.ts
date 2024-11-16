@@ -1,5 +1,5 @@
 import mapConfig from "@/lib/map/mapConfig";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 
 export type MapState = {
   labelsHidden: {
@@ -14,6 +14,10 @@ export type MapState = {
     value: { x: number; y: number };
     set: React.Dispatch<SetStateAction<{ x: number; y: number }>>;
   };
+  drag: {
+    lock: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
+    enabledRef: React.MutableRefObject<boolean>;
+  };
 };
 
 export default function useMapState() {
@@ -21,11 +25,14 @@ export default function useMapState() {
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [scale, setScale] = useState(defaultScale);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
+  const [dragLocked, setDragLocked] = useState(false);
+  const enabledRef = useRef(false);
 
   const mapState: MapState = {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
+    drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
   };
 
   return mapState;

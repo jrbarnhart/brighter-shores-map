@@ -1,14 +1,9 @@
-import { SetStateAction } from "react";
 import { Button } from "../ui/button";
 import { Move } from "lucide-react";
+import { MapState } from "../map/useMapState";
 
-export default function MoveButton({
-  dragLocked,
-  setDragLocked,
-}: {
-  dragLocked: boolean;
-  setDragLocked: React.Dispatch<SetStateAction<boolean>>;
-}) {
+export default function MoveButton({ mapState }: { mapState: MapState }) {
+  const { value: dragLocked, set: setDragLocked } = mapState.drag.lock;
   const handleClick = () => {
     setDragLocked((prev) => !prev);
   };

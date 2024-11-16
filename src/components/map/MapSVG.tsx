@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
 import useMouseTouch from "./useMouseTouch";
@@ -6,16 +6,10 @@ import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 
-export default function MapSVG({
-  ...props
-}: {
-  mapState: MapState;
-  dragEnabled: React.MutableRefObject<boolean>;
-  dragLocked: boolean;
-  setDragLocked: React.Dispatch<SetStateAction<boolean>>;
-}) {
-  const { mapState, dragEnabled, dragLocked } = props;
-
+export default function MapSVG({ ...props }: { mapState: MapState }) {
+  const { mapState } = props;
+  const dragLocked = mapState.drag.lock.value;
+  const dragEnabled = mapState.drag.enabledRef;
   const svgRef = useRef<SVGSVGElement | null>(null);
   const labelGroups = useRef<SVGGElement[]>([]);
 
