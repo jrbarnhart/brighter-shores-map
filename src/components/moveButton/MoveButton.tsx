@@ -17,7 +17,7 @@ export default function MoveButton({
     <Button
       onClick={handleClick}
       className={
-        "absolute top-0 right-0 z-10 m-3 h-11 w-11 border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground " +
+        "absolute top-0 right-0 z-10 m-3 h-12 w-12 border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground " +
         (dragLocked
           ? "bg-sidebar-accent text-foreground"
           : "bg-sidebar text-sidebar-foreground")
