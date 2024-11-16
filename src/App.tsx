@@ -14,7 +14,7 @@ function App() {
         className="h-screen w-screen relative overflow-hidden"
         style={{ backgroundColor: mapConfig.bgColor }}
       >
-        <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-neutral-50 h-12 w-12 border border-green-500" />
+        <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-accent hover:bg-sidebar-accent" />
         <MapSVG mapState={mapState} />
       </main>
     </SidebarProvider>

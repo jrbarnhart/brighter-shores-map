@@ -17,7 +17,7 @@ export default function MapSidebar({ mapState }: { mapState: MapState }) {
   };
 
   return (
-    <Sidebar>
+    <Sidebar className="border-zinc-600">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Brighter Map</SidebarGroupLabel>
