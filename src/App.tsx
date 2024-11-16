@@ -5,6 +5,7 @@ import MoveButton from "./components/moveButton/MoveButton";
 import MapSidebar from "./components/sidebar/MapSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import mapConfig from "./lib/map/mapConfig";
+import ZoomSlider from "./components/ZoomSlider";
 
 function App() {
   const mapState = useMapState();
@@ -20,6 +21,7 @@ function App() {
       >
         <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-accent hover:bg-sidebar-accent" />
         <MoveButton dragLocked={dragLocked} setDragLocked={setDragLocked} />
+        <ZoomSlider />
         <MapSVG
           mapState={mapState}
           dragEnabled={dragEnabled}
