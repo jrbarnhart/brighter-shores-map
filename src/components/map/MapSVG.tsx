@@ -67,7 +67,10 @@ export default function MapSVG({
       onMouseUp={handleMouseUpPan}
       onMouseLeave={handleMouseUpPan}
       onTouchStart={(e) => {
-        if (dragLocked) handleTouchStartPan(e);
+        if (e.touches.length > 1) {
+          dragEnabled.current = true;
+        }
+        if (dragEnabled.current || dragLocked) handleTouchStartPan(e);
       }}
       onTouchMove={handleTouchMovePan}
       onTouchEnd={handleTouchEndPan}
