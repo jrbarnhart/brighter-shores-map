@@ -7,8 +7,13 @@ import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 
-export default function MapSVG({ ...props }: { mapState: MapState }) {
-  const { mapState } = props;
+export default function MapSVG({
+  ...props
+}: {
+  mapState: MapState;
+  dragEnabled: boolean;
+}) {
+  const { mapState, dragEnabled } = props;
 
   const svgRef = useRef<SVGSVGElement | null>(null);
   const labelGroups = useRef<SVGGElement[]>([]);
@@ -16,9 +21,9 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
   useMapControls({ mapState, labelGroups });
 
   const {
-    handleMouseDown,
-    handleMouseMove,
-    handleMouseUp,
+    handleMouseDownPan,
+    handleMouseMovePan,
+    handleMouseUpPan,
     mapPos,
     isDragging,
   } = usePan();
@@ -44,10 +49,14 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       className={`w-screen h-screen overflow-hidden ${
         isDragging ? "cursor-grabbing" : "cursor-grab"
       }`}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseDown={(e) => {
+        if (dragEnabled) {
+          handleMouseDownPan(e);
+        }
+      }}
+      onMouseMove={handleMouseMovePan}
+      onMouseUp={handleMouseUpPan}
+      onMouseLeave={handleMouseUpPan}
       onWheel={handleWheel}
     >
       <svg
