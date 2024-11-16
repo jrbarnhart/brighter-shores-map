@@ -26,6 +26,7 @@ export default function MapSVG({
     handleMouseDownPan,
     handleMouseMovePan,
     handleMouseUpPan,
+    handleContextMenuPan,
     mapPos,
     isDragging,
   } = usePan({ dragEnabled });
@@ -63,9 +64,7 @@ export default function MapSVG({
       onMouseUp={handleMouseUpPan}
       onMouseLeave={handleMouseUpPan}
       onWheel={handleWheel}
-      onContextMenu={(e) => {
-        e.preventDefault();
-      }}
+      onContextMenu={handleContextMenuPan}
     >
       <svg
         ref={svgRef}
