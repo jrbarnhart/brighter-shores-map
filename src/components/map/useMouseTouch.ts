@@ -1,9 +1,12 @@
 import { useCallback, useRef, useState } from "react";
+import { MapState } from "./useMapState";
 
 export default function useMouseTouch({
   dragEnabled,
+  mapState,
 }: {
   dragEnabled: React.MutableRefObject<boolean>;
+  mapState: MapState;
 }) {
   // Panning
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
@@ -11,7 +14,7 @@ export default function useMouseTouch({
   const dragStart = useRef({ x: 0, y: 0 });
   const mouseMoved = useRef(false);
   // Zooming
-  const [scale, setScale] = useState(100);
+  const { value: scale, set: setScale } = mapState.scale;
   const scaleIncrement = 15;
   const minScale = 10;
   const maxScale = 200;
@@ -81,29 +84,32 @@ export default function useMouseTouch({
   );
 
   // Wheel zoom handler
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    // Transform origin at cursor?
-    // Scrolling up
-    if (e.deltaY < 0) {
-      // Increase scale
-      setScale((prev) => {
-        if (prev + scaleIncrement <= maxScale) {
-          return prev + scaleIncrement;
-        }
-        return maxScale;
-      });
-    }
-    // Scrolling down
-    else {
-      // Decrease scale
-      setScale((prev) => {
-        if (prev - scaleIncrement > minScale) {
-          return prev - scaleIncrement;
-        }
-        return minScale;
-      });
-    }
-  }, []);
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      // Transform origin at cursor?
+      // Scrolling up
+      if (e.deltaY < 0) {
+        // Increase scale
+        setScale((prev) => {
+          if (prev + scaleIncrement <= maxScale) {
+            return prev + scaleIncrement;
+          }
+          return maxScale;
+        });
+      }
+      // Scrolling down
+      else {
+        // Decrease scale
+        setScale((prev) => {
+          if (prev - scaleIncrement > minScale) {
+            return prev - scaleIncrement;
+          }
+          return minScale;
+        });
+      }
+    },
+    [setScale]
+  );
 
   // Context handler
   const handleContextMenu = useCallback((e: React.MouseEvent) => {

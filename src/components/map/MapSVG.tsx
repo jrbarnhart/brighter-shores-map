@@ -33,7 +33,7 @@ export default function MapSVG({
     zoomScale,
     mapPos,
     isDragging,
-  } = useMouseTouch({ dragEnabled });
+  } = useMouseTouch({ dragEnabled, mapState });
 
   // Initialize the map elements by drawing them from data
   useEffect(() => {
