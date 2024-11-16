@@ -18,6 +18,10 @@ export type MapState = {
     lock: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
     enabledRef: React.MutableRefObject<boolean>;
   };
+  selectedRoomId: {
+    value: string | null;
+    set: React.Dispatch<SetStateAction<string | null>>;
+  };
 };
 
 export default function useMapState() {
@@ -27,12 +31,14 @@ export default function useMapState() {
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
+  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
 
   const mapState: MapState = {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
+    selectedRoomId: { value: selectedRoomId, set: setSelectedRoomId },
   };
 
   return mapState;
