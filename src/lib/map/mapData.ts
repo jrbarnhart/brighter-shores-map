@@ -1,5 +1,5 @@
 import hopeportData from "./hopeport/hopeportData";
-import { HopePortRoomNames } from "./hopeport/hopeportRoomNames";
+import { HopePortRoomNames } from "./hopeport/hopeportNames";
 
 export type RoomData = {
   id: HopePortRoomNames;
