@@ -63,6 +63,26 @@ export default function useMouseTouch({
     [handleDragMove]
   );
 
+  const handleDoubleClick = useCallback(() => {
+    setScale((prev) => {
+      // Set to next pre determined scale level
+      const defaultScaleBreakpoints = [
+        maxScale * 0.25,
+        maxScale * 0.5,
+        maxScale * 0.75,
+        maxScale,
+      ];
+
+      // Find the next breakpoint
+      const nextBreakpoint = defaultScaleBreakpoints.find((breakpoint) => {
+        return breakpoint > prev;
+      });
+      if (nextBreakpoint) return nextBreakpoint;
+      return defaultScaleBreakpoints[0];
+    });
+  }, [setScale]);
+
+  // Touch handlers
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       const touch = e.touches[0];
@@ -122,6 +142,7 @@ export default function useMouseTouch({
     handleMouseDown,
     handleMouseMove,
     handleMouseUp: handleDragEnd,
+    handleDoubleClick,
     handleContextMenu,
     handleTouchStart,
     handleTouchMove,
