@@ -25,6 +25,7 @@ export default function MapSVG({
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
+    handleDoubleClick,
     handleContextMenu,
     handleTouchStart,
     handleTouchEnd,
@@ -69,6 +70,7 @@ export default function MapSVG({
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onDoubleClick={handleDoubleClick}
       onTouchStart={(e) => {
         if (e.touches.length > 1) {
           dragEnabled.current = true;
