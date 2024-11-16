@@ -45,9 +45,13 @@ export default function MapSVG({
       drawRooms(svgRef.current, initMapValues);
       const labelGroupElements = drawLabels(svgRef.current, initMapValues);
       labelGroups.current = labelGroupElements;
+      mapState.mapPos.set({
+        x: -(initMapValues.mapSize.width / 2 - window.innerWidth / 2),
+        y: -(initMapValues.mapSize.height / 2 - window.innerHeight / 2),
+      });
       svgRef.current.setAttribute("data-drawn", "true");
     }
-  }, []);
+  }, [mapState.mapPos]);
 
   return (
     <div

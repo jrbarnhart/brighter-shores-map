@@ -17,7 +17,7 @@ export type MapState = {
 
 export default function useMapState() {
   const [labelsHidden, setLabelsHidden] = useState(false);
-  const [scale, setScale] = useState(100);
+  const [scale, setScale] = useState(30);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
 
   const mapState: MapState = {
