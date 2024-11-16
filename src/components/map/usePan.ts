@@ -1,6 +1,10 @@
 import { useCallback, useRef, useState } from "react";
 
-export default function usePan() {
+export default function usePan({
+  dragEnabled,
+}: {
+  dragEnabled: React.MutableRefObject<boolean>;
+}) {
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
@@ -30,8 +34,9 @@ export default function usePan() {
   );
 
   const handleMouseUpPan = useCallback(() => {
+    dragEnabled.current = false;
     setIsDragging(false);
-  }, []);
+  }, [dragEnabled]);
 
   return {
     handleMouseDownPan,
