@@ -9,7 +9,7 @@ export default function useMouseTouch({
   mapState: MapState;
 }) {
   // Panning
-  const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
+  const { value: mapPos, set: setMapPos } = mapState.mapPos;
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
   const mouseMoved = useRef(false);
@@ -40,7 +40,7 @@ export default function useMouseTouch({
       const newY = pointY - dragStart.current.y;
       setMapPos({ x: newX, y: newY });
     },
-    [isDragging]
+    [isDragging, setMapPos]
   );
 
   const handleDragEnd = useCallback(() => {
