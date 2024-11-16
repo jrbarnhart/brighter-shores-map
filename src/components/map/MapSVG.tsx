@@ -1,7 +1,7 @@
 import React, { SetStateAction, useEffect, useRef } from "react";
 import { drawLabels, drawRooms } from "./drawMap";
 import initMap from "./initMap";
-import usePan from "./usePan";
+import useMouseTouch from "./useMouseTouch";
 import useWheelZoom from "./useWheelZoom";
 import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
@@ -23,16 +23,16 @@ export default function MapSVG({
   useMapControls({ mapState, labelGroups });
 
   const {
-    handleMouseDownPan,
-    handleMouseMovePan,
-    handleMouseUpPan,
-    handleContextMenuPan,
-    handleTouchStartPan,
-    handleTouchEndPan,
-    handleTouchMovePan,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleContextMenu,
+    handleTouchStart,
+    handleTouchEnd,
+    handleTouchMove,
     mapPos,
     isDragging,
-  } = usePan({ dragEnabled });
+  } = useMouseTouch({ dragEnabled });
 
   const { handleWheel, zoomScale } = useWheelZoom();
 
@@ -60,22 +60,22 @@ export default function MapSVG({
           dragEnabled.current = true;
         }
         if (dragEnabled.current || dragLocked) {
-          handleMouseDownPan(e);
+          handleMouseDown(e);
         }
       }}
-      onMouseMove={handleMouseMovePan}
-      onMouseUp={handleMouseUpPan}
-      onMouseLeave={handleMouseUpPan}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
       onTouchStart={(e) => {
         if (e.touches.length > 1) {
           dragEnabled.current = true;
         }
-        if (dragEnabled.current || dragLocked) handleTouchStartPan(e);
+        if (dragEnabled.current || dragLocked) handleTouchStart(e);
       }}
-      onTouchMove={handleTouchMovePan}
-      onTouchEnd={handleTouchEndPan}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       onWheel={handleWheel}
-      onContextMenu={handleContextMenuPan}
+      onContextMenu={handleContextMenu}
     >
       <svg
         ref={svgRef}

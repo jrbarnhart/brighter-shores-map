@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 
-export default function usePan({
+export default function useMouseTouch({
   dragEnabled,
 }: {
   dragEnabled: React.MutableRefObject<boolean>;
@@ -38,21 +38,21 @@ export default function usePan({
     setIsDragging(false);
   }, [dragEnabled]);
 
-  const handleMouseDownPan = useCallback(
+  const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
       handleDragStart(e.clientX, e.clientY);
     },
     [handleDragStart]
   );
 
-  const handleMouseMovePan = useCallback(
+  const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
       handleDragMove(e.clientX, e.clientY);
     },
     [handleDragMove]
   );
 
-  const handleTouchStartPan = useCallback(
+  const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       const touch = e.touches[0];
       handleDragStart(touch.clientX, touch.clientY);
@@ -60,7 +60,7 @@ export default function usePan({
     [handleDragStart]
   );
 
-  const handleTouchMovePan = useCallback(
+  const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
       const touch = e.touches[0];
       handleDragMove(touch.clientX, touch.clientY);
@@ -72,20 +72,20 @@ export default function usePan({
     [handleDragMove, isDragging]
   );
 
-  const handleContextMenuPan = useCallback((e: React.MouseEvent) => {
+  const handleContextMenu = useCallback((e: React.MouseEvent) => {
     if (mouseMoved.current) {
       e.preventDefault();
     }
   }, []);
 
   return {
-    handleMouseDownPan,
-    handleMouseMovePan,
-    handleMouseUpPan: handleDragEnd,
-    handleContextMenuPan,
-    handleTouchStartPan,
-    handleTouchMovePan,
-    handleTouchEndPan: handleDragEnd,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp: handleDragEnd,
+    handleContextMenu,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd: handleDragEnd,
     mapPos,
     isDragging,
   };
