@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
+import mapConfig from "@/lib/map/mapConfig";
 
 export default function useMouseTouch({
   dragEnabled,
@@ -15,9 +16,7 @@ export default function useMouseTouch({
   const mouseMoved = useRef(false);
   // Zooming
   const { value: scale, set: setScale } = mapState.scale;
-  const scaleIncrement = 15;
-  const minScale = 10;
-  const maxScale = 200;
+  const { scaleIncrement, minScale, maxScale } = mapConfig;
 
   // General handlers for panning
   const handleDragStart = useCallback(
@@ -68,8 +67,7 @@ export default function useMouseTouch({
       // Set to next pre determined scale level
       const defaultScaleBreakpoints = [
         maxScale * 0.25,
-        maxScale * 0.5,
-        maxScale * 0.75,
+        maxScale * 0.66,
         maxScale,
       ];
 
@@ -80,7 +78,7 @@ export default function useMouseTouch({
       if (nextBreakpoint) return nextBreakpoint;
       return defaultScaleBreakpoints[0];
     });
-  }, [setScale]);
+  }, [maxScale, setScale]);
 
   // Touch handlers
   const handleTouchStart = useCallback(
@@ -128,7 +126,7 @@ export default function useMouseTouch({
         });
       }
     },
-    [setScale]
+    [maxScale, minScale, scaleIncrement, setScale]
   );
 
   // Context handler
