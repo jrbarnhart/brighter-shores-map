@@ -25,7 +25,7 @@ export default function MapSVG({
   const {
     handleMouseDownPan,
     handleMouseMovePan,
-    handleMouseUpPan,
+    handleDragEnd: handleMouseUpPan,
     handleContextMenuPan,
     mapPos,
     isDragging,

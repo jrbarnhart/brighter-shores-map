@@ -33,6 +33,11 @@ export default function usePan({
     [isDragging]
   );
 
+  const handleDragEnd = useCallback(() => {
+    dragEnabled.current = false;
+    setIsDragging(false);
+  }, [dragEnabled]);
+
   const handleMouseDownPan = useCallback(
     (e: React.MouseEvent) => {
       handleDragStart(e.clientX, e.clientY);
@@ -47,11 +52,6 @@ export default function usePan({
     [handleDragMove]
   );
 
-  const handleMouseUpPan = useCallback(() => {
-    dragEnabled.current = false;
-    setIsDragging(false);
-  }, [dragEnabled]);
-
   const handleContextMenuPan = useCallback((e: React.MouseEvent) => {
     if (mouseMoved.current) {
       e.preventDefault();
@@ -61,7 +61,7 @@ export default function usePan({
   return {
     handleMouseDownPan,
     handleMouseMovePan,
-    handleMouseUpPan,
+    handleDragEnd,
     handleContextMenuPan,
     mapPos,
     isDragging,
