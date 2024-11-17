@@ -20,8 +20,6 @@ export type NPC = {
   types: ["vendor" | "quest" | "extra"];
 };
 
-export type Monster = {};
-
 export type Bank =
   | "bait"
   | "bones"
