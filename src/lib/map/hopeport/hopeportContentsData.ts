@@ -1,5 +1,5 @@
-type HopeportMonsterVariants = {
-  guard: ["recruit", "rookie", "patrol", "wall", "veteran", "decorated"];
+export const HopeportMonsters = {
+  guard: ["recruit", "rookie", "patrol", "wall", "veteran", "decorated"],
   deathcrow: [
     "glinteye",
     "beady-eyed",
@@ -7,8 +7,8 @@ type HopeportMonsterVariants = {
     "slickwing",
     "shadowy",
     "vicious",
-    "malevolent"
-  ];
+    "malevolent",
+  ],
   thief: [
     "common",
     "scruffy",
@@ -17,25 +17,25 @@ type HopeportMonsterVariants = {
     "shifty",
     "crafty",
     "sneaky",
-    "dangerous"
-  ];
-  "golbin solider": [
+    "dangerous",
+  ],
+  "goblin solider": [
     "looter",
     "hooligan",
     "plunderer",
     "raider",
     "marauder",
     "trooper",
-    "warrior"
-  ];
+    "warrior",
+  ],
   "goblin chief": [
     "irritable",
     "bossy",
     "robust",
     "authoritative",
     "fierce",
-    "preeminent"
-  ];
+    "preeminent",
+  ],
   hairbeast: [
     "feral",
     "tangled",
@@ -43,18 +43,18 @@ type HopeportMonsterVariants = {
     "shaggy",
     "hefty",
     "savage",
-    "psychic"
-  ];
-  ghoul: ["shambling", "foraging", "pale", "crazed", "prowling", "frenzied"];
-  "street louse": ["creepy", "blotchy", "black", "copper", "angry", "furious"];
+    "psychic",
+  ],
+  ghoul: ["shambling", "foraging", "pale", "crazed", "prowling", "frenzied"],
+  "street louse": ["creepy", "blotchy", "black", "copper", "angry", "furious"],
   "carnivorous plant": [
     "snap",
     "leafjaw",
     "munching",
     "bladefang",
     "armsnapper",
-    "bonecruncher"
-  ];
+    "bonecruncher",
+  ],
   crab: [
     "pearlcap",
     "large",
@@ -63,8 +63,8 @@ type HopeportMonsterVariants = {
     "granite shell",
     "boulder",
     "giant boulder",
-    "enormous"
-  ];
+    "enormous",
+  ],
   bugman: [
     "primitive",
     "hungry",
@@ -72,8 +72,8 @@ type HopeportMonsterVariants = {
     "ugly",
     "widejaw",
     "hunter",
-    "terrifying"
-  ];
+    "terrifying",
+  ],
   jellyfish: [
     "tiderider",
     "orange stinger",
@@ -81,16 +81,16 @@ type HopeportMonsterVariants = {
     "man-o-combat",
     "fastvenom",
     "black",
-    "doom"
-  ];
+    "doom",
+  ],
   "giant ant": [
     "drone",
     "soldier",
     "amber stripe",
     "prowler",
     "nightwarrior",
-    "goliath"
-  ];
+    "goliath",
+  ],
   pirate: [
     "grumpy",
     "ragged",
@@ -99,20 +99,20 @@ type HopeportMonsterVariants = {
     "rugged",
     "treacherous",
     "nefarious",
-    "swashbuckling"
-  ];
+    "swashbuckling",
+  ],
   punkupine: [
     "shabby",
     "striped",
     "neon",
     "watchmen",
     "heavy",
-    "orange tipped"
-  ];
-  thug: ["scruffy", "loutish", "rowdy", "angry", "tough", "elite"];
-};
+    "orange tipped",
+  ],
+  thug: ["scruffy", "loutish", "rowdy", "angry", "tough", "elite"],
+} as const;
 
-type HopeportMonsterNameType = keyof HopeportMonsterVariants;
+export type HopeportMonsterType = keyof typeof HopeportMonsters;
 
-export type HopeportMonsterName<T extends HopeportMonsterNameType> =
-  `${HopeportMonsterVariants[T][number]} ${T}`;
+export type HopeportMonsterName<T extends HopeportMonsterType> =
+  `${(typeof HopeportMonsters)[T][number]} ${T}`;
