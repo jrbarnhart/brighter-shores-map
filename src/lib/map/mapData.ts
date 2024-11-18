@@ -2,7 +2,7 @@ import {
   HopeportMonsterName,
   HopeportMonsterType,
 } from "./hopeport/hopeportContentsData";
-import hopeportRoomData from "./hopeport/hopeportRoomData";
+import hopeportRoomData, { HopeportRoomId } from "./hopeport/hopeportRoomData";
 
 /*
   Room Template:
@@ -30,8 +30,10 @@ export type NPC = {
   types: ["vendor" | "quest" | "extra"];
 };
 
+type MonsterName = HopeportMonsterName<HopeportMonsterType>;
+
 export type Monster = {
-  name: HopeportMonsterName<HopeportMonsterType>;
+  name: MonsterName;
 };
 
 type BankType =
@@ -45,7 +47,10 @@ type BankType =
   | "timber"
   | "leathers";
 
+type RoomId = HopeportRoomId;
+
 export type RoomContentsData = {
+  roomId: RoomId;
   obelisk?: boolean;
   storageRift?: boolean;
   portalStone?: boolean;
