@@ -53,14 +53,14 @@ export default function useMouseTouch({
   // Mouse handlers
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      if (e.buttons === 2) {
+      if (e.buttons === 2 || dragLocked) {
         dragEnabled.current = true;
       }
       if (dragEnabled.current) {
         handleDragStart(e.clientX, e.clientY);
       }
     },
-    [dragEnabled, handleDragStart]
+    [dragEnabled, dragLocked, handleDragStart]
   );
 
   const handleMouseMove = useCallback(
