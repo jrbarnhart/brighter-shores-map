@@ -2,8 +2,19 @@ import {
   HopeportMonsterName,
   HopeportMonsterType,
 } from "./hopeport/hopeportContentsData";
-import hopeportData from "./hopeport/hopeportData";
+import hopeportRoomData from "./hopeport/hopeportRoomData";
 
+/*
+  Room Template:
+  {
+    id: "id",
+    origin: [0,0],
+    path: [
+      [0,0],
+    ],
+    type: "world"
+  } 
+*/
 export type RoomData = {
   id: string;
   label: string;
@@ -12,10 +23,6 @@ export type RoomData = {
   path: Array<[number, number]>;
   color?: string;
   type: "residence" | "shop" | "world" | "profession" | "obelisk" | "portal";
-};
-
-export type RegionData = {
-  rooms: RoomData[];
 };
 
 export type NPC = {
@@ -49,24 +56,17 @@ export type RoomContentsData = {
   // Quest step
 };
 
+export type RegionData = {
+  rooms: readonly RoomData[];
+  contents?: RoomContentsData[];
+};
+
 export type MapData = {
   regions: { hopeport: RegionData };
 };
 
-/*
-  Room Template:
-  {
-    id: "id",
-    origin: [0,0],
-    path: [
-      [0,0],
-    ],
-    type: "world"
-  } 
-*/
-
 const mapData: MapData = {
-  regions: { hopeport: hopeportData },
+  regions: { hopeport: { rooms: hopeportRoomData } },
 };
 
 export default mapData;
