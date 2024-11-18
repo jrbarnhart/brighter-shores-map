@@ -34,7 +34,7 @@ export type Monster = {
   name: HopeportMonsterName<HopeportMonsterType>;
 };
 
-export type Bank =
+type BankType =
   | "bait"
   | "bones"
   | "equipment"
@@ -49,10 +49,10 @@ export type RoomContentsData = {
   obelisk?: boolean;
   storageRift?: boolean;
   portalStone?: boolean;
-  // Mobs
   // Resources
+  monsters?: Monster[];
   npcs?: NPC[];
-  banks?: Bank[];
+  banks?: BankType[];
   // Quest step
 };
 
