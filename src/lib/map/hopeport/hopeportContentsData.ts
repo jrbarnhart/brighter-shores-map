@@ -112,7 +112,7 @@ type HopeportMonsterVariants = {
   thug: ["scruffy", "loutish", "rowdy", "angry", "tough", "elite"];
 };
 
-type HopeportMonsterType = keyof HopeportMonsterVariants;
+type HopeportMonsterNameType = keyof HopeportMonsterVariants;
 
-export type HopeportMonster<T extends HopeportMonsterType> =
+export type HopeportMonsterName<T extends HopeportMonsterNameType> =
   `${HopeportMonsterVariants[T][number]} ${T}`;
