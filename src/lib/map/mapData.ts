@@ -1,8 +1,11 @@
+import {
+  HopeportMonsterName,
+  HopeportMonsterType,
+} from "./hopeport/hopeportContentsData";
 import hopeportData from "./hopeport/hopeportData";
-import { HopePortRoomNames } from "./hopeport/hopeportRoomNames";
 
 export type RoomData = {
-  id: HopePortRoomNames;
+  id: string;
   label: string;
   labelOffset?: [number, number];
   origin: [number, number];
@@ -18,6 +21,10 @@ export type RegionData = {
 export type NPC = {
   name: string;
   types: ["vendor" | "quest" | "extra"];
+};
+
+export type Monster = {
+  name: HopeportMonsterName<HopeportMonsterType>;
 };
 
 export type Bank =

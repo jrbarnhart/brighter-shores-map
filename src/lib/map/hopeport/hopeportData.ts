@@ -1,5 +1,7 @@
 import { RegionData } from "../mapData";
 
+export type HopeportRoomId = (typeof hopeportData)["rooms"][number]["id"];
+
 const hopeportData: RegionData = {
   rooms: [
     {
@@ -1679,7 +1681,7 @@ const hopeportData: RegionData = {
       color: "#846b4a",
       type: "world",
     },
-  ],
-};
+  ] as const,
+} as const;
 
 export default hopeportData;
