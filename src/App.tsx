@@ -20,7 +20,6 @@ function App() {
         <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-accent hover:bg-sidebar-accent" />
         <MoveButton mapState={mapState} />
         <ZoomSlider mapState={mapState} />
-        <ToolTips mapState={mapState} />
         <MapSVG mapState={mapState} />
       </main>
     </SidebarProvider>
