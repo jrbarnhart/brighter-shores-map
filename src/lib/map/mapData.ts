@@ -29,9 +29,9 @@ export type NPC = {
 
 export type MonsterVariant = {
   name: string;
-  health?: number;
-  experience?: number;
-  skillLevel?: number;
+  health: number;
+  experience: number;
+  skillLevel: number;
 };
 
 export type Monster = {
