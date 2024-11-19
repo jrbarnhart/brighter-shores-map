@@ -36,7 +36,12 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
     // Draw the map from the map data
     if (!svgRef.current.hasAttribute("data-drawn")) {
       const initMapValues = initMap(svgRef.current);
-      drawRooms(svgRef.current, initMapValues);
+      drawRooms({
+        svg: svgRef.current,
+        initMapValues,
+        setHoveredId: mapState.hoveredId.set,
+        setIsHovering: mapState.isHovering.set,
+      });
       const labelGroupElements = drawLabels(svgRef.current, initMapValues);
       labelGroups.current = labelGroupElements;
       mapState.mapPos.set({
@@ -45,7 +50,7 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       });
       svgRef.current.setAttribute("data-drawn", "true");
     }
-  }, [mapState.mapPos]);
+  }, [mapState.hoveredId.set, mapState.isHovering.set, mapState.mapPos]);
 
   return (
     <div

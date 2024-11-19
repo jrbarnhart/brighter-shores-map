@@ -1,11 +1,17 @@
-import mapData, { RoomData } from "../../lib/map/mapData";
+import mapData, { RoomData, RoomId } from "../../lib/map/mapData";
 import mapConfig from "../../lib/map/mapConfig";
 import { InitializedMapValues, RoomCenter } from "./initMap";
+import { SetStateAction } from "react";
 
-export function drawRooms(
-  svg: SVGSVGElement,
-  initMapValues: InitializedMapValues
-) {
+export function drawRooms({
+  ...args
+}: {
+  svg: SVGSVGElement;
+  initMapValues: InitializedMapValues;
+  setHoveredId: React.Dispatch<SetStateAction<RoomId | null>>;
+  setIsHovering: React.Dispatch<SetStateAction<boolean>>;
+}) {
+  const { svg, initMapValues, setHoveredId, setIsHovering } = args;
   const { originOffset } = initMapValues;
   const roomPathElements = [];
   for (const region of Object.values(mapData.regions)) {
@@ -29,6 +35,15 @@ export function drawRooms(
       );
 
       // Add event listeners here
+      path.addEventListener("mouseover", () => {
+        setHoveredId(room.id as RoomId);
+        setIsHovering(true);
+      });
+
+      path.addEventListener("mouseleave", () => {
+        setHoveredId(null);
+        setIsHovering(false);
+      });
 
       // Add path to svg
       svg.appendChild(path);
