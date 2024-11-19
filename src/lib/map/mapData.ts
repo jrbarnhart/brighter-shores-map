@@ -1,8 +1,9 @@
 import {
   HopeportMonsterName,
   HopeportMonsterType,
-} from "./hopeport/hopeportContentsData";
+} from "./hopeport/hopeportContentData";
 import hopeportRoomData, { HopeportRoomId } from "./hopeport/hopeportRoomData";
+import hopeportContentData from "./hopeport/hopeportContentData";
 
 /*
   Room Template:
@@ -47,10 +48,7 @@ type BankType =
   | "timber"
   | "leathers";
 
-type RoomId = HopeportRoomId;
-
-export type RoomContentsData = {
-  roomId: RoomId;
+export type RoomContentData = {
   obelisk?: boolean;
   storageRift?: boolean;
   portalStone?: boolean;
@@ -61,9 +59,14 @@ export type RoomContentsData = {
   // Quest step
 };
 
+// Union type for all room ids
+type RoomId = HopeportRoomId;
+
+export type RoomIdContentData = RoomContentData & { roomId: RoomId };
+
 export type RegionData = {
   rooms: readonly RoomData[];
-  contents?: RoomContentsData[];
+  contents?: readonly RoomIdContentData[];
 };
 
 export type MapData = {
@@ -71,7 +74,9 @@ export type MapData = {
 };
 
 const mapData: MapData = {
-  regions: { hopeport: { rooms: hopeportRoomData } },
+  regions: {
+    hopeport: { rooms: hopeportRoomData, contents: hopeportContentData },
+  },
 };
 
 export default mapData;

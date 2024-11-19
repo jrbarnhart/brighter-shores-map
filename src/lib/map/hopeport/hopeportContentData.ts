@@ -1,3 +1,8 @@
+import { RoomContentData } from "../mapData";
+import { HopeportRoomId } from "./hopeportRoomData";
+
+type HopeportContentData = RoomContentData & { roomId: HopeportRoomId };
+
 export const HopeportMonsters = {
   guard: ["recruit", "rookie", "patrol", "wall", "veteran", "decorated"],
   deathcrow: [
@@ -116,3 +121,9 @@ export type HopeportMonsterType = keyof typeof HopeportMonsters;
 
 export type HopeportMonsterName<T extends HopeportMonsterType> =
   `${(typeof HopeportMonsters)[T][number]} ${T}`;
+
+const hopeportContentData = [
+  { roomId: "captain-degreenes-office" },
+] as const satisfies readonly HopeportContentData[];
+
+export default hopeportContentData;
