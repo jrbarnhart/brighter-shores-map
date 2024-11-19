@@ -1,4 +1,5 @@
 import mapConfig from "@/lib/map/mapConfig";
+import { RoomId } from "@/lib/map/mapData";
 import { SetStateAction, useRef, useState } from "react";
 
 export type MapState = {
@@ -20,7 +21,7 @@ export type MapState = {
   };
   selectedRoomId: {
     value: string | null;
-    set: React.Dispatch<SetStateAction<string | null>>;
+    set: React.Dispatch<SetStateAction<RoomId | null>>;
   };
 };
 
@@ -31,7 +32,7 @@ export default function useMapState() {
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
-  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+  const [selectedRoomId, setSelectedRoomId] = useState<RoomId | null>(null);
 
   const mapState: MapState = {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
