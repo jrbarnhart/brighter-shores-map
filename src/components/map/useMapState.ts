@@ -1,6 +1,5 @@
 import mapConfig from "@/lib/map/mapConfig";
-import { RoomId } from "@/lib/map/mapData";
-import { ReactNode, SetStateAction, useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 
 export type MapState = {
   labelsHidden: {
@@ -19,18 +18,7 @@ export type MapState = {
     lock: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
     enabledRef: React.MutableRefObject<boolean>;
   };
-  selectedRoomId: {
-    value: string | null;
-    set: React.Dispatch<SetStateAction<RoomId | null>>;
-  };
-  hoveredRoomId: {
-    value: string | null;
-    set: React.Dispatch<SetStateAction<RoomId | null>>;
-  };
-  toolTipTrigger: {
-    value: ReactNode;
-    set: React.Dispatch<SetStateAction<ReactNode>>;
-  };
+  toolTipTriggerRef: React.MutableRefObject<HTMLElement | null>;
 };
 
 export default function useMapState() {
@@ -40,18 +28,14 @@ export default function useMapState() {
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
-  const [selectedRoomId, setSelectedRoomId] = useState<RoomId | null>(null);
-  const [hoveredRoomId, setHoveredRoomId] = useState<RoomId | null>(null);
-  const [toolTipTrigger, setToolTipTrigger] = useState<ReactNode>(null);
+  const toolTipTriggerRef = useRef(null);
 
   const mapState: MapState = {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
-    selectedRoomId: { value: selectedRoomId, set: setSelectedRoomId },
-    hoveredRoomId: { value: hoveredRoomId, set: setHoveredRoomId },
-    toolTipTrigger: { value: toolTipTrigger, set: setToolTipTrigger },
+    toolTipTriggerRef,
   };
 
   return mapState;
