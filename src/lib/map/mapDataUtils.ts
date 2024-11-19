@@ -10,8 +10,9 @@ export function getRoomContent(searchId: RoomId | null) {
 // Get a room's styled title
 export function getRoomLabel(searchId: RoomId | null) {
   const roomData = hopeportRoomData.find((data) => data.id === searchId);
-  return roomData?.label ?? "";
+  return roomData?.label ?? "Not Selected";
 }
+
 // Get detailed contents with specific functions
 // get monsters
 // get resources
