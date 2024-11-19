@@ -11,9 +11,16 @@ export function drawRooms({
   setHoveredId: React.Dispatch<SetStateAction<RoomId | null>>;
   setIsHovering: React.Dispatch<SetStateAction<boolean>>;
   setSelectedId: React.Dispatch<SetStateAction<RoomId | null>>;
+  setDetailsOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
-  const { svg, initMapValues, setHoveredId, setIsHovering, setSelectedId } =
-    args;
+  const {
+    svg,
+    initMapValues,
+    setHoveredId,
+    setIsHovering,
+    setSelectedId,
+    setDetailsOpen,
+  } = args;
   const { originOffset } = initMapValues;
   const roomPathElements = [];
   for (const region of Object.values(mapData.regions)) {
@@ -48,6 +55,7 @@ export function drawRooms({
       path.addEventListener("mousedown", (e) => {
         if (e.buttons === 1) {
           setSelectedId(room.id as RoomId);
+          setDetailsOpen(true);
         }
       });
 

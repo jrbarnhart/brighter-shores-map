@@ -42,6 +42,7 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
         setHoveredId: mapState.hoveredId.set,
         setIsHovering: mapState.isHovering.set,
         setSelectedId: mapState.selectedId.set,
+        setDetailsOpen: mapState.detailsOpen.set,
       });
       const labelGroupElements = drawLabels(svgRef.current, initMapValues);
       labelGroups.current = labelGroupElements;
@@ -52,10 +53,11 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       svgRef.current.setAttribute("data-drawn", "true");
     }
   }, [
+    mapState.mapPos,
     mapState.hoveredId.set,
     mapState.isHovering.set,
-    mapState.mapPos,
     mapState.selectedId.set,
+    mapState.detailsOpen.set,
   ]);
 
   return (
