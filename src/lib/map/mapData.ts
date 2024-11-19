@@ -1,7 +1,3 @@
-import {
-  HopeportMonsterName,
-  HopeportMonsterType,
-} from "./hopeport/hopeportContentData";
 import hopeportRoomData, { HopeportRoomId } from "./hopeport/hopeportRoomData";
 import hopeportContentData from "./hopeport/hopeportContentData";
 
@@ -31,10 +27,14 @@ export type NPC = {
   types: ["vendor" | "quest" | "extra"];
 };
 
-type MonsterName = HopeportMonsterName<HopeportMonsterType>;
+export type MonsterVariant = {
+  health: number;
+  experience: number;
+  skillLevel: number;
+};
 
 export type Monster = {
-  name: MonsterName;
+  type: { variants: MonsterVariant[] };
 };
 
 type BankType =
