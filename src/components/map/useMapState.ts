@@ -1,4 +1,5 @@
 import mapConfig from "@/lib/map/mapConfig";
+import { RoomId } from "@/lib/map/mapData";
 import { SetStateAction, useRef, useState } from "react";
 
 export type MapState = {
@@ -18,7 +19,11 @@ export type MapState = {
     lock: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
     enabledRef: React.MutableRefObject<boolean>;
   };
-  toolTipTriggerRef: React.MutableRefObject<HTMLElement | null>;
+  isHovering: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
+  hoveredId: {
+    value: RoomId | null;
+    set: React.Dispatch<SetStateAction<RoomId | null>>;
+  };
 };
 
 export default function useMapState() {
@@ -28,14 +33,16 @@ export default function useMapState() {
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
-  const toolTipTriggerRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [hoveredId, setHoveredId] = useState<RoomId | null>(null);
 
   const mapState: MapState = {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
-    toolTipTriggerRef,
+    isHovering: { value: isHovering, set: setIsHovering },
+    hoveredId: { value: hoveredId, set: setHoveredId },
   };
 
   return mapState;
