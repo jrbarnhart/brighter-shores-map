@@ -1,6 +1,6 @@
 import { Monster } from "../../mapData";
 
-const HOPEPORT_MONSTERS = [
+const HOPEPORT_MONSTER_DATA = [
   {
     name: "guard",
     variants: [
@@ -190,4 +190,14 @@ const HOPEPORT_MONSTERS = [
   },
 ] as const satisfies readonly Monster[];
 
-export default HOPEPORT_MONSTERS;
+export default HOPEPORT_MONSTER_DATA;
+
+export type HopeportMonsterName =
+  (typeof HOPEPORT_MONSTER_DATA)[number]["name"];
+
+export const HOPEPORT_MONSTER_MAP: Record<
+  HopeportMonsterName,
+  (typeof HOPEPORT_MONSTER_DATA)[number]
+> = Object.fromEntries(
+  HOPEPORT_MONSTER_DATA.map((monster) => [monster.name, monster])
+) as Record<HopeportMonsterName, (typeof HOPEPORT_MONSTER_DATA)[number]>;
