@@ -4,7 +4,7 @@ import { MapState } from "../map/useMapState";
 import { getRoomContent, getRoomLabel } from "@/lib/map/mapDataUtils";
 import CloseButton from "../ui/CloseButton";
 
-export default function ToolTips({ mapState }: { mapState: MapState }) {
+export default function Details({ mapState }: { mapState: MapState }) {
   const { selectedId, detailsOpen } = mapState;
   const [cardContent, setCardContent] = useState<{
     roomLabel: string;
