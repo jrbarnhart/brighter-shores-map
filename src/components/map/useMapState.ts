@@ -1,6 +1,6 @@
 import mapConfig from "@/lib/map/mapConfig";
 import { RoomId } from "@/lib/map/mapData";
-import { SetStateAction, useRef, useState } from "react";
+import React, { SetStateAction, useRef, useState } from "react";
 
 export type MapState = {
   labelsHidden: {
@@ -28,6 +28,10 @@ export type MapState = {
     value: RoomId | null;
     set: React.Dispatch<SetStateAction<RoomId | null>>;
   };
+  detailsOpen: {
+    value: boolean;
+    set: React.Dispatch<SetStateAction<boolean>>;
+  };
 };
 
 export default function useMapState() {
@@ -40,6 +44,7 @@ export default function useMapState() {
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredId, setHoveredId] = useState<RoomId | null>(null);
   const [selectedId, setSelectedId] = useState<RoomId | null>(null);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   const mapState: MapState = {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
@@ -49,6 +54,7 @@ export default function useMapState() {
     isHovering: { value: isHovering, set: setIsHovering },
     hoveredId: { value: hoveredId, set: setHoveredId },
     selectedId: { value: selectedId, set: setSelectedId },
+    detailsOpen: { value: detailsOpen, set: setDetailsOpen },
   };
 
   return mapState;
