@@ -28,13 +28,15 @@ export type NPC = {
 };
 
 export type MonsterVariant = {
-  health: number;
-  experience: number;
-  skillLevel: number;
+  name: string;
+  health?: number;
+  experience?: number;
+  skillLevel?: number;
 };
 
 export type Monster = {
-  type: { variants: MonsterVariant[] };
+  name: string;
+  variants: MonsterVariant[];
 };
 
 type BankType =
