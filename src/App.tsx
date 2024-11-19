@@ -5,6 +5,7 @@ import MapSidebar from "./components/sidebar/MapSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import mapConfig from "./lib/map/mapConfig";
 import ZoomSlider from "./components/ZoomSlider";
+import ToolTips from "./components/toolTips/ToolTips";
 
 function App() {
   const mapState = useMapState();
@@ -19,6 +20,7 @@ function App() {
         <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-accent hover:bg-sidebar-accent" />
         <MoveButton mapState={mapState} />
         <ZoomSlider mapState={mapState} />
+        <ToolTips mapState={mapState} />
         <MapSVG mapState={mapState} />
       </main>
     </SidebarProvider>
