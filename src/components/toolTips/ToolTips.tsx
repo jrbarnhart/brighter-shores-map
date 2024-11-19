@@ -1,31 +1,27 @@
 import { useEffect, useState } from "react";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "../ui/hover-card";
+import { HoverCard, HoverCardContent } from "../ui/hover-card";
 import { MapState } from "../map/useMapState";
-import { Monster } from "@/lib/map/mapData";
+import { getRoomContent } from "@/lib/map/mapDataUtils";
 
 export default function ToolTips({ mapState }: { mapState: MapState }) {
-  // Update display data when hovered room changes
-  const [cardContent, setCardContent] = useState<{ monsters: Monster[] }>({
+  const { isHovering, hoveredId } = mapState;
+  const [cardContent, setCardContent] = useState<{ monsters: string[] }>({
     monsters: [],
   });
 
   useEffect(() => {
-    // Set trigger element
-    // Get the room's content
-    // Find array of monsters based on content
-    // Set the card content state with this array
-  }, [mapState.hoveredRoomId]);
+    setCardContent(() => {
+      const roomContent = getRoomContent(hoveredId.value);
+      return { monsters: roomContent?.monsters ?? ["None"] };
+    });
+  }, [hoveredId.value]);
 
   return (
-    <HoverCard>
-      <HoverCardTrigger>{mapState.toolTipTrigger.value}</HoverCardTrigger>
-      <HoverCardContent>
+    <HoverCard open={isHovering.value}>
+      <HoverCardContent className="z-20 translate-x-0">
+        <p>{hoveredId.value ?? ""}</p>
         <p>Monsters:</p>
-        <p>{cardContent.monsters[0].name}</p>
+        <p>{cardContent.monsters.map((monster) => monster.toString())}</p>
       </HoverCardContent>
     </HoverCard>
   );
