@@ -1,28 +1,41 @@
 import { useEffect, useState } from "react";
-import { HoverCard, HoverCardContent } from "../ui/hover-card";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { MapState } from "../map/useMapState";
-import { getRoomContent } from "@/lib/map/mapDataUtils";
+import { getRoomContent, getRoomLabel } from "@/lib/map/mapDataUtils";
 
 export default function ToolTips({ mapState }: { mapState: MapState }) {
-  const { isHovering, hoveredId } = mapState;
-  const [cardContent, setCardContent] = useState<{ monsters: string[] }>({
+  const { selectedId } = mapState;
+  const [cardContent, setCardContent] = useState<{
+    roomLabel: string;
+    monsters: string[];
+  }>({
+    roomLabel: "Not Selected",
     monsters: [],
   });
 
   useEffect(() => {
     setCardContent(() => {
-      const roomContent = getRoomContent(hoveredId.value);
-      return { monsters: roomContent?.monsters ?? ["None"] };
+      const roomContent = getRoomContent(selectedId.value);
+      const roomLabel = getRoomLabel(selectedId.value);
+      return { roomLabel, monsters: roomContent?.monsters ?? ["None"] };
     });
-  }, [hoveredId.value]);
+  }, [selectedId.value]);
 
   return (
-    <HoverCard open={isHovering.value}>
-      <HoverCardContent className="z-20 translate-x-0">
-        <p>{hoveredId.value ?? ""}</p>
-        <p>Monsters:</p>
-        <p>{cardContent.monsters.map((monster) => monster.toString())}</p>
-      </HoverCardContent>
-    </HoverCard>
+    <div
+      className={`${
+        selectedId.value ? "" : "opacity-0"
+      } transition-opacity w-full min-h-40 absolute bottom-0 z-20 pointer-events-none grid justify-center`}
+    >
+      <Card className="h-full w-min min-w-80 bg-sidebar text-sidebar-foreground border-sidebar-accent pointer-events-auto">
+        <CardHeader>
+          <CardTitle className="h-6">{cardContent.roomLabel}</CardTitle>
+        </CardHeader>
+        <CardContent className="z-10">
+          <p>Monsters:</p>
+          <p>{cardContent.monsters.map((monster) => monster.toString())}</p>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
