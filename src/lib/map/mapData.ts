@@ -54,7 +54,7 @@ export type BankType =
 
 // Union type for all regions
 type RoomContentData = HopeportRoomContentData;
-type RoomId = HopeportRoomId;
+export type RoomId = HopeportRoomId;
 
 export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 
