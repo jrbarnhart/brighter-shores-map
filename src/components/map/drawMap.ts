@@ -36,17 +36,15 @@ export function drawRooms({
         "hover:stroke-sidebar-accent hover:fill-sidebar"
       );
 
-      // Add event listeners here
+      // Add event listeners
       path.addEventListener("mouseover", () => {
         setHoveredId(room.id as RoomId);
         setIsHovering(true);
       });
-
       path.addEventListener("mouseleave", () => {
         setHoveredId(null);
         setIsHovering(false);
       });
-
       path.addEventListener("mousedown", (e) => {
         if (e.buttons === 1) {
           setSelectedId(room.id as RoomId);
