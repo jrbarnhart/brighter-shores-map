@@ -95,6 +95,18 @@ const HOPEPORT_MONSTER_DATA = [
     ],
   },
   {
+    name: "thug",
+    variants: [
+      { name: "back alley", health: 0, experience: 0, skillLevel: 0 },
+      { name: "scruffy", health: 0, experience: 0, skillLevel: 0 },
+      { name: "loutish", health: 0, experience: 0, skillLevel: 0 },
+      { name: "rowdy", health: 0, experience: 0, skillLevel: 0 },
+      { name: "angry", health: 0, experience: 0, skillLevel: 0 },
+      { name: "tough", health: 0, experience: 0, skillLevel: 0 },
+      { name: "elite", health: 0, experience: 0, skillLevel: 0 },
+    ],
+  },
+  {
     name: "carnivorous plant",
     variants: [
       { name: "snap", health: 0, experience: 0, skillLevel: 0 },
@@ -175,17 +187,6 @@ const HOPEPORT_MONSTER_DATA = [
       { name: "watchmen", health: 0, experience: 0, skillLevel: 0 },
       { name: "heavy", health: 0, experience: 0, skillLevel: 0 },
       { name: "orange tipped", health: 0, experience: 0, skillLevel: 0 },
-    ],
-  },
-  {
-    name: "thug",
-    variants: [
-      { name: "scruffy", health: 0, experience: 0, skillLevel: 0 },
-      { name: "loutish", health: 0, experience: 0, skillLevel: 0 },
-      { name: "rowdy", health: 0, experience: 0, skillLevel: 0 },
-      { name: "angry", health: 0, experience: 0, skillLevel: 0 },
-      { name: "tough", health: 0, experience: 0, skillLevel: 0 },
-      { name: "elite", health: 0, experience: 0, skillLevel: 0 },
     ],
   },
 ] as const satisfies readonly Monster[];
