@@ -28,7 +28,11 @@ export default function Details({ mapState }: { mapState: MapState }) {
         detailsOpen.value ? "" : "opacity-0"
       } transition-opacity w-full min-h-40 absolute bottom-0 z-20 pointer-events-none grid justify-center`}
     >
-      <Card className="h-full w-min min-w-80 bg-sidebar text-sidebar-foreground border-sidebar-accent pointer-events-auto">
+      <Card
+        className={`${
+          detailsOpen.value ? "pointer-events-auto" : "pointer-events-none"
+        } h-full w-min min-w-80 bg-sidebar text-sidebar-foreground border-sidebar-accent`}
+      >
         <CardHeader>
           <div className="flex justify-between gap-3 items-center">
             <CardTitle className="h-6 text-nowrap">
