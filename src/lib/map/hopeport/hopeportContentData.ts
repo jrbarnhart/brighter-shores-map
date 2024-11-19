@@ -1,14 +1,21 @@
-import { RoomContentData } from "../mapData";
+import { BankType, NPC } from "../mapData";
 import { HopeportRoomId } from "./hopeportRoomData";
-import HOPEPORT_MONSTERS from "./roomContents/hopeportMonsterData";
+import { HopeportMonsterName } from "./roomContents/hopeportMonsterData";
 
-type HopeportContentData = RoomContentData & { roomId: HopeportRoomId };
+export type HopeportRoomContentData = {
+  roomId: HopeportRoomId;
+  obelisk?: boolean;
+  storageRift?: boolean;
+  portalStone?: boolean;
+  // Resources
+  monsters?: HopeportMonsterName[];
+  npcs?: NPC[];
+  banks?: BankType[];
+  // Quest step
+};
 
-const HOPEPORT_MONSTER_MAP = Object.fromEntries(
-  HOPEPORT_MONSTERS.map((monster) => [monster.name, monster])
-);
 const hopeportContentData = [
-  { roomId: "sparring-area", monsters: [HOPEPORT_MONSTER_MAP["guard"]] },
-] as const satisfies readonly HopeportContentData[];
+  { roomId: "sparring-area", monsters: ["guard"] },
+] as const satisfies readonly HopeportRoomContentData[];
 
 export default hopeportContentData;

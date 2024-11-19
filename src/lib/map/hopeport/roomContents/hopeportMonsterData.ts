@@ -192,12 +192,16 @@ const HOPEPORT_MONSTER_DATA = [
 
 export default HOPEPORT_MONSTER_DATA;
 
+type MonsterData = typeof HOPEPORT_MONSTER_DATA;
+
+type MonsterVariantNames<T extends MonsterData[number]> =
+  `${T["variants"][number]["name"]} ${T["name"]}`;
+
 export type HopeportMonsterName =
   (typeof HOPEPORT_MONSTER_DATA)[number]["name"];
 
-export const HOPEPORT_MONSTER_MAP: Record<
-  HopeportMonsterName,
-  (typeof HOPEPORT_MONSTER_DATA)[number]
-> = Object.fromEntries(
-  HOPEPORT_MONSTER_DATA.map((monster) => [monster.name, monster])
-) as Record<HopeportMonsterName, (typeof HOPEPORT_MONSTER_DATA)[number]>;
+export type HopeportMonsterVariantName = MonsterData[number] extends infer T
+  ? T extends MonsterData[number]
+    ? MonsterVariantNames<T>
+    : never
+  : never;

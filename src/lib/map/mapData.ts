@@ -1,5 +1,7 @@
 import hopeportRoomData, { HopeportRoomId } from "./hopeport/hopeportRoomData";
-import hopeportContentData from "./hopeport/hopeportContentData";
+import hopeportContentData, {
+  HopeportRoomContentData,
+} from "./hopeport/hopeportContentData";
 
 /*
   Room Template:
@@ -39,7 +41,7 @@ export type Monster = {
   variants: MonsterVariant[];
 };
 
-type BankType =
+export type BankType =
   | "bait"
   | "bones"
   | "equipment"
@@ -50,18 +52,8 @@ type BankType =
   | "timber"
   | "leathers";
 
-export type RoomContentData = {
-  obelisk?: boolean;
-  storageRift?: boolean;
-  portalStone?: boolean;
-  // Resources
-  monsters?: Monster[];
-  npcs?: NPC[];
-  banks?: BankType[];
-  // Quest step
-};
-
-// Union type for all room ids
+// Union type for all regions
+type RoomContentData = HopeportRoomContentData;
 type RoomId = HopeportRoomId;
 
 export type RoomIdContentData = RoomContentData & { roomId: RoomId };
