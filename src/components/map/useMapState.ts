@@ -15,6 +15,10 @@ export type MapState = {
     value: { x: number; y: number };
     set: React.Dispatch<SetStateAction<{ x: number; y: number }>>;
   };
+  animatedMapPos: {
+    value: { x: number; y: number };
+    set: React.Dispatch<SetStateAction<{ x: number; y: number }>>;
+  };
   drag: {
     lock: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
     enabledRef: React.MutableRefObject<boolean>;
@@ -39,6 +43,7 @@ export default function useMapState() {
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [scale, setScale] = useState(defaultScale);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
+  const [animatedMapPos, setAnimatedMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -50,6 +55,7 @@ export default function useMapState() {
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
+    animatedMapPos: { value: animatedMapPos, set: setAnimatedMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
     isHovering: { value: isHovering, set: setIsHovering },
     hoveredId: { value: hoveredId, set: setHoveredId },
