@@ -16,7 +16,7 @@ export default function useMouseTouch({
   const mouseMoved = useRef(false);
   const lastTouchTime = useRef(0);
   const isDoubleTouchHold = useRef(false);
-  const { value: scale, set: setScale } = mapState.scale;
+  const { set: setScale } = mapState.scale;
   const { scaleIncrement, minScale, maxScale, doubleTouchThreshold } =
     mapConfig;
 
@@ -158,8 +158,5 @@ export default function useMouseTouch({
     handleTouchMove,
     handleTouchEnd: handleDragEnd,
     handleWheel,
-    zoomScale: scale / 100,
-    mapPos,
-    isDragging,
   };
 }

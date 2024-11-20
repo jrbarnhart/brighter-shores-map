@@ -5,12 +5,18 @@ import useMouseTouch from "./useMouseTouch";
 import useMapControls from "./useMapControls";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
+import useAnimatedPos from "./useAnimatedPos";
 
 export default function MapSVG({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
   const dragEnabled = mapState.drag.enabledRef;
   const svgRef = useRef<SVGSVGElement | null>(null);
   const labelGroups = useRef<SVGGElement[]>([]);
+
+  useAnimatedPos(mapState);
+  const { animatedMapPos, drag, scale } = mapState;
+  const isDragging = drag.enabledRef.current;
+  const zoomScale = scale.value / 100;
 
   useMapControls({ mapState, labelGroups });
 
@@ -24,9 +30,6 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
     handleTouchEnd,
     handleTouchMove,
     handleWheel,
-    zoomScale,
-    mapPos,
-    isDragging,
   } = useMouseTouch({ dragEnabled, mapState });
 
   // Initialize the map elements by drawing them from data
@@ -79,8 +82,9 @@ export default function MapSVG({ ...props }: { mapState: MapState }) {
       <svg
         ref={svgRef}
         style={{
-          transform: `translate(${mapPos.x.toString()}px, ${mapPos.y.toString()}px) scale(${zoomScale.toString()})`,
+          transform: `translate(${animatedMapPos.value.x.toString()}px, ${animatedMapPos.value.y.toString()}px) scale(${zoomScale.toString()})`,
           backgroundColor: mapConfig.bgColor,
+          willChange: "transform",
         }}
       ></svg>
     </div>
