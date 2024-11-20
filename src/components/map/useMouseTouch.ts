@@ -145,9 +145,7 @@ export default function useMouseTouch({
 
   // Context handler
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
-    if (mouseMoved.current) {
-      e.preventDefault();
-    }
+    e.preventDefault();
   }, []);
 
   return {
