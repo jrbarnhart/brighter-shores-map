@@ -9,14 +9,15 @@ import useAnimatedPos from "./useAnimatedPos";
 
 export default function MapSVG({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
+  const { animatedMapPos, drag, scale } = mapState;
+  const isDragging = drag.enabledRef.current;
+  const zoomScale = scale.value / 100;
   const dragEnabled = mapState.drag.enabledRef;
+
   const svgRef = useRef<SVGSVGElement | null>(null);
   const labelGroups = useRef<SVGGElement[]>([]);
 
   useAnimatedPos(mapState);
-  const { animatedMapPos, drag, scale } = mapState;
-  const isDragging = drag.enabledRef.current;
-  const zoomScale = scale.value / 100;
 
   useMapControls({ mapState, labelGroups });
 
