@@ -9,7 +9,7 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     const roomsCanvas = canvas.rooms.ref.current;
     if (!roomsCanvas || !rTree.value) return;
 
-    const cellSize = mapState.cellSize.value;
+    const cellSize = mapState.currentCellSize.value;
 
     const bbox: BBox = {
       minX: mapPos.value.x * cellSize,
@@ -32,7 +32,7 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     canvas.rooms.size.value,
     mapPos.value.x,
     mapPos.value.y,
-    mapState.cellSize.value,
+    mapState.currentCellSize.value,
     rTree.value,
     roomPaths.value,
     setVisibleRooms,

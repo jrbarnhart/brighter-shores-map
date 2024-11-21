@@ -15,7 +15,7 @@ export type MapState = {
       };
     };
   };
-  cellSize: {
+  currentCellSize: {
     value: number;
     set: React.Dispatch<SetStateAction<number>>;
   };
@@ -90,7 +90,7 @@ export default function useMapState() {
         size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       },
     },
-    cellSize: { value: cellSize, set: setCellSize },
+    currentCellSize: { value: cellSize, set: setCellSize },
     roomPaths: { value: roomPaths, set: setRoomPaths },
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
