@@ -14,9 +14,9 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
 
     const bbox: BBox = {
       minX: mapPos.value.x * cellSize,
-      minY: -mapPos.value.y * cellSize,
+      minY: mapPos.value.y * cellSize,
       maxX: roomsCanvas.width + mapPos.value.x * cellSize,
-      maxY: roomsCanvas.height - mapPos.value.y * cellSize,
+      maxY: roomsCanvas.height + mapPos.value.y * cellSize,
     };
 
     console.log("Bounding box for search:", bbox); // Console
