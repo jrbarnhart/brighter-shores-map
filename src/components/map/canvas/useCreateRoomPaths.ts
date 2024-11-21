@@ -4,6 +4,7 @@ import React, { SetStateAction, useEffect } from "react";
 export type RoomPathData = {
   element: Path2D;
   roomId: RoomId;
+  fillColor: string;
 };
 
 function createCanvasPath2D(path: [number, number][]) {
@@ -35,6 +36,7 @@ export default function useCreateRoomPaths({
         const roomPath = {
           element: createCanvasPath2D(room.path),
           roomId: room.id as RoomId,
+          fillColor: room.color ?? "black",
         };
         roomPaths.push(roomPath);
       }
