@@ -3,6 +3,10 @@ import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
 
 export type MapState = {
+  roomPaths: {
+    value: Path2D[];
+    set: React.Dispatch<SetStateAction<Path2D[]>>;
+  };
   labelsHidden: {
     value: boolean;
     set: React.Dispatch<SetStateAction<boolean>>;
@@ -36,6 +40,7 @@ export type MapState = {
 
 export default function useMapState() {
   const { defaultScale } = mapConfig;
+  const [roomPaths, setRoomPaths] = useState<Path2D[]>([]);
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [scale, setScale] = useState(defaultScale);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
@@ -47,6 +52,7 @@ export default function useMapState() {
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   const mapState: MapState = {
+    roomPaths: { value: roomPaths, set: setRoomPaths },
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
