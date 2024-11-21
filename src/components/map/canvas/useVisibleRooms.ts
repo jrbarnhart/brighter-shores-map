@@ -10,13 +10,17 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     const roomsCanvas = canvas.rooms.ref.current;
     if (!roomsCanvas || !rTree.value) return;
 
+    const { cellSize } = mapConfig;
+
+    // This won't work. I need to manage the canvas size with state.
     const bbox: BBox = {
-      minX: mapPos.value.x,
-      minY: mapPos.value.y,
-      maxX: roomsCanvas.width / mapConfig.cellSize - mapPos.value.x,
-      maxY: roomsCanvas.height / mapConfig.cellSize - mapPos.value.y,
+      minX: mapPos.value.x * cellSize,
+      minY: -mapPos.value.y * cellSize,
+      maxX: (roomsCanvas.width + mapPos.value.x) * cellSize,
+      maxY: (roomsCanvas.height - mapPos.value.y) * cellSize,
     };
 
+    console.log("Bounding box for search:", bbox); // Console
     const foundRoomIds = rTree.value
       .search(bbox)
       .map((foundNode) => foundNode.roomId);

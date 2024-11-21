@@ -13,11 +13,13 @@ function createCanvasPath2D(path: [number, number][]) {
 
   if (path.length === 0) return canvasPath;
 
-  const [startX, startY] = path[0];
+  const { cellSize } = mapConfig;
+  // Multiply startX/Y by cell size
+  const [startX, startY] = [path[0][0] * cellSize, path[0][1] * cellSize];
   canvasPath.moveTo(startX, startY);
 
   for (let i = 1; i < path.length; i++) {
-    const [x, y] = path[i];
+    const [x, y] = [path[i][0] * cellSize, path[i][1 * cellSize]];
     canvasPath.lineTo(x, y);
   }
 
