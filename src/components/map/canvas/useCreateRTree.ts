@@ -1,4 +1,3 @@
-import mapConfig from "@/lib/map/mapConfig";
 import mapData, { RoomData, RoomId } from "@/lib/map/mapData";
 import RBush, { BBox } from "rbush";
 import { SetStateAction, useEffect } from "react";
@@ -7,7 +6,7 @@ export type RoomTreeNode = BBox & {
   roomId: RoomId;
 };
 
-function createRoomTreeNode(roomData: RoomData, cellSize: number) {
+function createRoomTreeNode(roomData: RoomData) {
   let minX = Infinity;
   let minY = Infinity;
   let maxX = -Infinity;
@@ -21,12 +20,6 @@ function createRoomTreeNode(roomData: RoomData, cellSize: number) {
     if (originAdjustedVertex[0] > maxX) maxX = originAdjustedVertex[0];
     if (originAdjustedVertex[1] > maxY) maxY = originAdjustedVertex[1];
   }
-
-  // Adjust coords for cell size
-  minX *= cellSize;
-  minY *= cellSize;
-  maxX *= cellSize;
-  maxY *= cellSize;
 
   return {
     minX,
@@ -42,16 +35,15 @@ export default function useCreateRTree({
 }: {
   setRTree: React.Dispatch<SetStateAction<RBush<RoomTreeNode> | undefined>>;
 }) {
-  const { defaultCellSize } = mapConfig;
   useEffect(() => {
     const allRoomBoxes: RoomTreeNode[] = [];
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
-        allRoomBoxes.push(createRoomTreeNode(room, defaultCellSize));
+        allRoomBoxes.push(createRoomTreeNode(room));
       }
     }
     const tree = new RBush<RoomTreeNode>();
     tree.load(allRoomBoxes);
     setRTree(tree);
-  }, [defaultCellSize, setRTree]);
+  }, [setRTree]);
 }
