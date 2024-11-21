@@ -1,16 +1,18 @@
-import { useRef } from "react";
 import { MapState } from "../useMapState";
 import useCreateRoomPaths from "./useCreateRoomPaths";
 import useCreateRTree from "./useCreateRTree";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
-  const roomCanvasRef = useRef<HTMLCanvasElement>(null);
-
+  const { canvas } = mapState;
+  const roomCanvasRef = canvas.rooms.ref;
   // Computes path2D's and set them to state
   useCreateRoomPaths({ setRoomPaths: mapState.roomPaths.set });
+  // Creates an rtree of objects with min/max x/y and room id
   useCreateRTree({ setRTree: mapState.rTree.set });
 
-  return <canvas ref={roomCanvasRef}></canvas>;
+  // Search the rtree for the visible rooms
+
+  return <canvas ref={roomCanvasRef} className="w-screen h-screen"></canvas>;
 }
 
 // This draw function should only run when needed (zoom or panning the map for example)
