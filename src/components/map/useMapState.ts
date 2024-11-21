@@ -7,7 +7,13 @@ import RBush from "rbush";
 
 export type MapState = {
   canvas: {
-    rooms: { ref: React.MutableRefObject<HTMLCanvasElement | null> };
+    rooms: {
+      ref: React.MutableRefObject<HTMLCanvasElement | null>;
+      size: {
+        value: { height: number; width: number };
+        set: React.Dispatch<SetStateAction<{ height: number; width: number }>>;
+      };
+    };
   };
   roomPaths: {
     value: RoomPathData[];
@@ -55,6 +61,10 @@ export type MapState = {
 export default function useMapState() {
   const { defaultScale } = mapConfig;
   const roomCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [roomsCanvasSize, setRoomsCanvasSize] = useState({
+    height: 0,
+    width: 0,
+  });
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
   const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
@@ -69,7 +79,12 @@ export default function useMapState() {
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   const mapState: MapState = {
-    canvas: { rooms: { ref: roomCanvasRef } },
+    canvas: {
+      rooms: {
+        ref: roomCanvasRef,
+        size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
+      },
+    },
     roomPaths: { value: roomPaths, set: setRoomPaths },
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
