@@ -13,13 +13,13 @@ export type MapState = {
     value: RoomPathData[];
     set: React.Dispatch<SetStateAction<RoomPathData[]>>;
   };
+  visibleRoomPaths: {
+    value: RoomPathData[];
+    set: React.Dispatch<SetStateAction<RoomPathData[]>>;
+  };
   rTree: {
     value: RBush<RoomTreeNode> | undefined;
     set: React.Dispatch<SetStateAction<RBush<RoomTreeNode> | undefined>>;
-  };
-  visibleRooms: {
-    value: RoomId[];
-    set: React.Dispatch<SetStateAction<RoomId[]>>;
   };
   labelsHidden: {
     value: boolean;
@@ -56,7 +56,7 @@ export default function useMapState() {
   const { defaultScale } = mapConfig;
   const roomCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
-  const [visibleRooms, setVisibleRooms] = useState<RoomId[]>([]);
+  const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [scale, setScale] = useState(defaultScale);
@@ -72,7 +72,7 @@ export default function useMapState() {
     canvas: { rooms: { ref: roomCanvasRef } },
     roomPaths: { value: roomPaths, set: setRoomPaths },
     rTree: { value: rTree, set: setRTree },
-    visibleRooms: { value: visibleRooms, set: setVisibleRooms },
+    visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
