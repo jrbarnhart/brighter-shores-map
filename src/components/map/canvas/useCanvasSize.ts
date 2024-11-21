@@ -2,11 +2,8 @@ import { useEffect } from "react";
 import { MapState } from "../useMapState";
 import { debounce } from "@/lib/utils";
 
-export default function useDebouncedResize({
-  mapState,
-}: {
-  mapState: MapState;
-}) {
+// Sets canvas size to window size, debounced
+export default function useCanvasSize({ mapState }: { mapState: MapState }) {
   const { value: size, set: setSize } = mapState.canvas.rooms.size;
 
   useEffect(() => {
