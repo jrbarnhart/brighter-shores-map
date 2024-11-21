@@ -6,6 +6,9 @@ import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 
 export type MapState = {
+  canvas: {
+    rooms: { ref: React.MutableRefObject<HTMLCanvasElement | null> };
+  };
   roomPaths: {
     value: RoomPathData[];
     set: React.Dispatch<SetStateAction<RoomPathData[]>>;
@@ -51,6 +54,7 @@ export type MapState = {
 
 export default function useMapState() {
   const { defaultScale } = mapConfig;
+  const roomCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
   const [visibleRooms, setVisibleRooms] = useState<RoomId[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
@@ -65,6 +69,7 @@ export default function useMapState() {
   const [detailsOpen, setDetailsOpen] = useState(false);
 
   const mapState: MapState = {
+    canvas: { rooms: { ref: roomCanvasRef } },
     roomPaths: { value: roomPaths, set: setRoomPaths },
     rTree: { value: rTree, set: setRTree },
     visibleRooms: { value: visibleRooms, set: setVisibleRooms },
