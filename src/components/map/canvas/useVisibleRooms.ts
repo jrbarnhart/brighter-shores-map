@@ -19,7 +19,6 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
       maxY: roomsCanvas.height + mapPos.value.y * cellSize,
     };
 
-    console.log("Bounding box for search:", bbox); // Console
     const foundRoomIds = rTree.value
       .search(bbox)
       .map((foundNode) => foundNode.roomId);
