@@ -62,8 +62,8 @@ export default function useMapState() {
   const { defaultScale } = mapConfig;
   const roomCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomsCanvasSize, setRoomsCanvasSize] = useState({
-    height: 0,
-    width: 0,
+    height: window.innerHeight,
+    width: window.innerWidth,
   });
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
   const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
