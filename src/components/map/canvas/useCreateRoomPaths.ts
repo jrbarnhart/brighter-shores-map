@@ -23,9 +23,11 @@ function createCanvasPath2D(path: [number, number][]) {
   return canvasPath;
 }
 
-export default function useCreateRoomPaths(
-  setRoomPaths: React.Dispatch<SetStateAction<RoomPathData[]>>
-) {
+export default function useCreateRoomPaths({
+  setRoomPaths,
+}: {
+  setRoomPaths: React.Dispatch<SetStateAction<RoomPathData[]>>;
+}) {
   useEffect(() => {
     const roomPaths: RoomPathData[] = [];
     for (const region of Object.values(mapData.regions)) {

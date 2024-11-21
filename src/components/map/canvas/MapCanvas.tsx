@@ -6,7 +6,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const roomCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Computes path2D's and set them to state
-  useCreateRoomPaths(mapState.roomPaths.set);
+  useCreateRoomPaths({ setRoomPaths: mapState.roomPaths.set });
 
   return <canvas ref={roomCanvasRef}></canvas>;
 }
