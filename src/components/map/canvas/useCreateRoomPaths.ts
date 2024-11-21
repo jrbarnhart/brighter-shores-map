@@ -8,18 +8,24 @@ export type RoomPathData = {
   fillColor: string;
 };
 
-function createCanvasPath2D(path: [number, number][]) {
+function createCanvasPath2D(
+  path: [number, number][],
+  origin: [number, number]
+) {
   const canvasPath = new Path2D();
 
   if (path.length === 0) return canvasPath;
 
   const { cellSize } = mapConfig;
   // Multiply startX/Y by cell size
-  const [startX, startY] = [path[0][0] * cellSize, path[0][1] * cellSize];
+  const startX = (path[0][0] + origin[0]) * cellSize;
+  const startY = (path[0][1] + origin[1]) * cellSize;
+
   canvasPath.moveTo(startX, startY);
 
   for (let i = 1; i < path.length; i++) {
-    const [x, y] = [path[i][0] * cellSize, path[i][1 * cellSize]];
+    const x = (path[i][0] + origin[0]) * cellSize;
+    const y = (path[i][1] + origin[1]) * cellSize;
     canvasPath.lineTo(x, y);
   }
 
@@ -37,7 +43,7 @@ export default function useCreateRoomPaths({
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
         const roomPath = {
-          element: createCanvasPath2D(room.path),
+          element: createCanvasPath2D(room.path, room.origin),
           roomId: room.id as RoomId,
           fillColor: room.color ?? mapConfig.defaultRoomFill,
         };
