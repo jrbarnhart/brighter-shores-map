@@ -15,6 +15,10 @@ export type MapState = {
       };
     };
   };
+  cellSize: {
+    value: number;
+    set: React.Dispatch<SetStateAction<number>>;
+  };
   roomPaths: {
     value: RoomPathData[];
     set: React.Dispatch<SetStateAction<RoomPathData[]>>;
@@ -65,6 +69,7 @@ export default function useMapState() {
     height: window.innerHeight,
     width: window.innerWidth,
   });
+  const [cellSize, setCellSize] = useState(mapConfig.cellSize);
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
   const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
@@ -85,6 +90,7 @@ export default function useMapState() {
         size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       },
     },
+    cellSize: { value: cellSize, set: setCellSize },
     roomPaths: { value: roomPaths, set: setRoomPaths },
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
