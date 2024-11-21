@@ -1,4 +1,3 @@
-import MapSVG from "./components/map/MapSVG";
 import useMapState from "./components/map/useMapState";
 import MoveButton from "./components/moveButton/MoveButton";
 import MapSidebar from "./components/sidebar/MapSidebar";
@@ -6,6 +5,7 @@ import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import mapConfig from "./lib/map/mapConfig";
 import ZoomSlider from "./components/ZoomSlider";
 import Details from "./components/toolTips/Details";
+import MapCanvas from "./components/map/canvas/MapCanvas";
 
 function App() {
   const mapState = useMapState();
@@ -21,7 +21,7 @@ function App() {
         <MoveButton mapState={mapState} />
         <ZoomSlider mapState={mapState} />
         <Details mapState={mapState} />
-        <MapSVG mapState={mapState} />
+        <MapCanvas mapState={mapState} />
       </main>
     </SidebarProvider>
   );
