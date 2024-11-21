@@ -16,15 +16,17 @@ function createRoomTreeNode(roomData: RoomData, cellSize: number) {
 
   for (const vertex of roomData.path) {
     const originAdjustedVertex = [vertex[0] + origin[0], vertex[1] + origin[1]];
-    if (originAdjustedVertex[0] < minX)
-      minX = originAdjustedVertex[0] * cellSize;
-    if (originAdjustedVertex[1] < minY)
-      minY = originAdjustedVertex[1] * cellSize;
-    if (originAdjustedVertex[0] > maxX)
-      maxX = originAdjustedVertex[0] * cellSize;
-    if (originAdjustedVertex[1] > maxY)
-      maxY = originAdjustedVertex[1] * cellSize;
+    if (originAdjustedVertex[0] < minX) minX = originAdjustedVertex[0];
+    if (originAdjustedVertex[1] < minY) minY = originAdjustedVertex[1];
+    if (originAdjustedVertex[0] > maxX) maxX = originAdjustedVertex[0];
+    if (originAdjustedVertex[1] > maxY) maxY = originAdjustedVertex[1];
   }
+
+  // Adjust coords for cell size
+  minX *= cellSize;
+  minY *= cellSize;
+  maxX *= cellSize;
+  maxY *= cellSize;
 
   return {
     minX,
