@@ -3,6 +3,7 @@ import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
 import { RoomPathData } from "./canvas/useCreateRoomPaths";
 import { RoomBox } from "./canvas/useCreateRTree";
+import RBush from "rbush";
 
 export type MapState = {
   roomPaths: {
@@ -10,8 +11,8 @@ export type MapState = {
     set: React.Dispatch<SetStateAction<RoomPathData[]>>;
   };
   rTree: {
-    value: RoomBox | undefined;
-    set: React.Dispatch<SetStateAction<RoomBox | undefined>>;
+    value: RBush<RoomBox> | undefined;
+    set: React.Dispatch<SetStateAction<RBush<RoomBox> | undefined>>;
   };
   labelsHidden: {
     value: boolean;
@@ -47,7 +48,7 @@ export type MapState = {
 export default function useMapState() {
   const { defaultScale } = mapConfig;
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
-  const [rTree, setRTree] = useState<RoomBox | undefined>();
+  const [rTree, setRTree] = useState<RBush<RoomBox> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [scale, setScale] = useState(defaultScale);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
