@@ -26,7 +26,7 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
 
   useEffect(() => {
     const mapPos = mapState.mapPos.value;
-    const cellSize = mapState.currentCellSize.value;
+    const currentCellSize = mapState.currentCellSize.value;
     const roomsCanvas = mapState.canvas.rooms.ref.current;
     const roomsCanvasContext =
       mapState.canvas.rooms.ref.current?.getContext("2d");
@@ -34,7 +34,7 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
     if (!roomsCanvasContext || !roomsCanvas || visibleRooms.length === 0)
       return;
     roomsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
-    drawRoomPaths(roomsCanvasContext, visibleRooms, mapPos, cellSize);
+    drawRoomPaths(roomsCanvasContext, visibleRooms, mapPos, currentCellSize);
   }, [
     mapState.canvas.rooms.ref,
     mapState.currentCellSize.value,

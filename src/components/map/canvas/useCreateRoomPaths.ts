@@ -41,12 +41,12 @@ export default function useCreateRoomPaths({
 }) {
   useEffect(() => {
     const setRoomPaths = mapState.roomPaths.set;
-    const cellSize = mapState.currentCellSize.value;
+    const currentCellSize = mapState.currentCellSize.value;
     const roomPaths: RoomPathData[] = [];
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
         const roomPath = {
-          element: createCanvasPath2D(room.path, room.origin, cellSize),
+          element: createCanvasPath2D(room.path, room.origin, currentCellSize),
           roomId: room.id as RoomId,
           fillColor: room.color ?? mapConfig.defaultRoomFill,
         };

@@ -9,13 +9,13 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     const roomsCanvas = canvas.rooms.ref.current;
     if (!roomsCanvas || !rTree.value) return;
 
-    const cellSize = mapState.currentCellSize.value;
+    const currentCellSize = mapState.currentCellSize.value;
 
     const bbox: BBox = {
-      minX: mapPos.value.x * cellSize,
-      minY: mapPos.value.y * cellSize,
-      maxX: roomsCanvas.width + mapPos.value.x * cellSize,
-      maxY: roomsCanvas.height + mapPos.value.y * cellSize,
+      minX: mapPos.value.x * currentCellSize,
+      minY: mapPos.value.y * currentCellSize,
+      maxX: roomsCanvas.width + mapPos.value.x * currentCellSize,
+      maxY: roomsCanvas.height + mapPos.value.y * currentCellSize,
     };
 
     const foundRoomIds = rTree.value
