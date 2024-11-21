@@ -1,12 +1,14 @@
 import { useRef } from "react";
 import { MapState } from "../useMapState";
 import useCreateRoomPaths from "./useCreateRoomPaths";
+import useCreateRTree from "./useCreateRTree";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const roomCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Computes path2D's and set them to state
   useCreateRoomPaths({ setRoomPaths: mapState.roomPaths.set });
+  useCreateRTree({ setRTree: mapState.rTree.set });
 
   return <canvas ref={roomCanvasRef}></canvas>;
 }
