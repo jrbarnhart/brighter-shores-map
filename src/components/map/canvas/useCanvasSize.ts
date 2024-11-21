@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import { MapState } from "../useMapState";
 import { debounce } from "@/lib/utils";
 
-const useDebouncedResize = ({ mapState }: { mapState: MapState }) => {
+export default function useDebouncedResize({
+  mapState,
+}: {
+  mapState: MapState;
+}) {
   const { value: size, set: setSize } = mapState.canvas.rooms.size;
 
   useEffect(() => {
@@ -17,6 +21,4 @@ const useDebouncedResize = ({ mapState }: { mapState: MapState }) => {
   }, [setSize]);
 
   return size;
-};
-
-export default useDebouncedResize;
+}
