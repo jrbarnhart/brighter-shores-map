@@ -2,14 +2,9 @@ import { useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 
-export default function useMouseTouch({
-  dragEnabled,
-  mapState,
-}: {
-  dragEnabled: React.MutableRefObject<boolean>;
-  mapState: MapState;
-}) {
+export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const { value: mapPos, set: setMapPos } = mapState.mapPos;
+  const dragEnabled = mapState.drag.enabledRef;
   const [isDragging, setIsDragging] = useState(false);
   const dragLocked = mapState.drag.lock.value;
   const dragStart = useRef({ x: 0, y: 0 });
