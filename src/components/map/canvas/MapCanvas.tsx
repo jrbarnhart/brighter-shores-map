@@ -1,6 +1,7 @@
 import { MapState } from "../useMapState";
 import useCreateRoomPaths from "./useCreateRoomPaths";
 import useCreateRTree from "./useCreateRTree";
+import useDrawRooms from "./useDrawRooms";
 import useVisibleRooms from "./useVisibleRooms";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
@@ -10,9 +11,10 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   useCreateRoomPaths({ setRoomPaths: mapState.roomPaths.set });
   // Creates an rtree of objects with min/max x/y and room id
   useCreateRTree({ setRTree: mapState.rTree.set });
-
   // Search the rtree for the visible rooms
   useVisibleRooms({ mapState });
+  // Draw the visible rooms
+  useDrawRooms({ mapState });
 
   return <canvas ref={roomCanvasRef} className="w-screen h-screen"></canvas>;
 }
