@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { RoomPathData } from "./useCreateRoomPaths";
 import { MapState } from "../useMapState";
-import mapConfig from "@/lib/map/mapConfig";
 
 export default function useDrawRooms({ mapState }: { mapState: MapState }) {
   function drawRoomPaths(
@@ -27,7 +26,7 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
 
   useEffect(() => {
     const mapPos = mapState.mapPos.value;
-    const { cellSize } = mapConfig;
+    const cellSize = mapState.cellSize.value;
     const roomsCanvas = mapState.canvas.rooms.ref.current;
     const roomsCanvasContext =
       mapState.canvas.rooms.ref.current?.getContext("2d");
@@ -38,6 +37,7 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
     drawRoomPaths(roomsCanvasContext, visibleRooms, mapPos, cellSize);
   }, [
     mapState.canvas.rooms.ref,
+    mapState.cellSize.value,
     mapState.mapPos.value,
     mapState.visibleRoomPaths.value,
   ]);

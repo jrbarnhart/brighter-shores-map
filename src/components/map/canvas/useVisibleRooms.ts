@@ -1,7 +1,6 @@
 import { BBox } from "rbush";
 import { MapState } from "../useMapState";
 import { useEffect } from "react";
-import mapConfig from "@/lib/map/mapConfig";
 
 export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
   const { rTree, canvas, mapPos, visibleRoomPaths, roomPaths } = mapState;
@@ -10,7 +9,7 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     const roomsCanvas = canvas.rooms.ref.current;
     if (!roomsCanvas || !rTree.value) return;
 
-    const { cellSize } = mapConfig;
+    const cellSize = mapState.cellSize.value;
 
     const bbox: BBox = {
       minX: mapPos.value.x * cellSize,
@@ -33,6 +32,7 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     canvas.rooms.size.value,
     mapPos.value.x,
     mapPos.value.y,
+    mapState.cellSize.value,
     rTree.value,
     roomPaths.value,
     setVisibleRooms,
