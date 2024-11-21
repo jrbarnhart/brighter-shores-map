@@ -32,8 +32,8 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
     (pointX: number, pointY: number) => {
       if (!isDragging) return;
       mouseMoved.current = true;
-      const newX = pointX - dragStart.current.x;
-      const newY = pointY - dragStart.current.y;
+      const newX = -(pointX - dragStart.current.x);
+      const newY = -(pointY - dragStart.current.y);
       setMapPos({ x: newX, y: newY });
     },
     [isDragging, setMapPos]
