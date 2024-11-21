@@ -1,5 +1,10 @@
-import mapData from "@/lib/map/mapData";
+import mapData, { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useEffect } from "react";
+
+export type RoomPathData = {
+  element: Path2D;
+  roomId: RoomId;
+};
 
 function createCanvasPath2D(path: [number, number][]) {
   const canvasPath = new Path2D();
@@ -19,13 +24,17 @@ function createCanvasPath2D(path: [number, number][]) {
 }
 
 export default function useCreateRoomPaths(
-  setRoomPaths: React.Dispatch<SetStateAction<Path2D[]>>
+  setRoomPaths: React.Dispatch<SetStateAction<RoomPathData[]>>
 ) {
   useEffect(() => {
-    const roomPaths = [];
+    const roomPaths: RoomPathData[] = [];
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
-        roomPaths.push(createCanvasPath2D(room.path));
+        const roomPath = {
+          element: createCanvasPath2D(room.path),
+          roomId: room.id as RoomId,
+        };
+        roomPaths.push(roomPath);
       }
       setRoomPaths(roomPaths);
     }
