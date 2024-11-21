@@ -12,12 +12,11 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
 
     const { cellSize } = mapConfig;
 
-    // This won't work. I need to manage the canvas size with state.
     const bbox: BBox = {
       minX: mapPos.value.x * cellSize,
       minY: -mapPos.value.y * cellSize,
-      maxX: (roomsCanvas.width + mapPos.value.x) * cellSize,
-      maxY: (roomsCanvas.height - mapPos.value.y) * cellSize,
+      maxX: roomsCanvas.width + mapPos.value.x * cellSize,
+      maxY: roomsCanvas.height - mapPos.value.y * cellSize,
     };
 
     console.log("Bounding box for search:", bbox); // Console
@@ -32,6 +31,7 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     setVisibleRooms(result);
   }, [
     canvas.rooms.ref,
+    canvas.rooms.size.value,
     mapPos.value.x,
     mapPos.value.y,
     rTree.value,
