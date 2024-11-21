@@ -9,13 +9,11 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     const roomsCanvas = canvas.rooms.ref.current;
     if (!roomsCanvas || !rTree.value) return;
 
-    const currentCellSize = mapState.currentCellSize.value;
-
     const bbox: BBox = {
-      minX: mapPos.value.x * currentCellSize,
-      minY: mapPos.value.y * currentCellSize,
-      maxX: roomsCanvas.width + mapPos.value.x * currentCellSize,
-      maxY: roomsCanvas.height + mapPos.value.y * currentCellSize,
+      minX: mapPos.value.x,
+      minY: mapPos.value.y,
+      maxX: roomsCanvas.width + mapPos.value.x,
+      maxY: roomsCanvas.height + mapPos.value.y,
     };
 
     const foundRoomIds = rTree.value
@@ -32,7 +30,6 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     canvas.rooms.size.value,
     mapPos.value.x,
     mapPos.value.y,
-    mapState.currentCellSize.value,
     rTree.value,
     roomPaths.value,
     setVisibleRooms,
