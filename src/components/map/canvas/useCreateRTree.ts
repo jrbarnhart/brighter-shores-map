@@ -2,7 +2,7 @@ import mapData, { RoomData, RoomId } from "@/lib/map/mapData";
 import RBush, { BBox } from "rbush";
 import { SetStateAction, useEffect } from "react";
 
-export type RoomBox = BBox & {
+export type RoomTreeNode = BBox & {
   roomId: RoomId;
 };
 
@@ -27,22 +27,22 @@ function getBoundingBox(roomData: RoomData) {
     maxX,
     maxY,
     roomId: roomData.id as RoomId,
-  } satisfies RoomBox;
+  } satisfies RoomTreeNode;
 }
 
 export default function useCreateRTree({
   setRTree,
 }: {
-  setRTree: React.Dispatch<SetStateAction<RBush<RoomBox> | undefined>>;
+  setRTree: React.Dispatch<SetStateAction<RBush<RoomTreeNode> | undefined>>;
 }) {
   useEffect(() => {
-    const allRoomBoxes: RoomBox[] = [];
+    const allRoomBoxes: RoomTreeNode[] = [];
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
         allRoomBoxes.push(getBoundingBox(room));
       }
     }
-    const tree = new RBush<RoomBox>();
+    const tree = new RBush<RoomTreeNode>();
     tree.load(allRoomBoxes);
     setRTree(tree);
   }, [setRTree]);
