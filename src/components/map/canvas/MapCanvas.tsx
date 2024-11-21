@@ -1,4 +1,5 @@
 import { MapState } from "../useMapState";
+import useMouseTouch from "../useMouseTouch";
 import useCanvasSize from "./useCanvasSize";
 import useCreateRoomPaths from "./useCreateRoomPaths";
 import useCreateRTree from "./useCreateRTree";
@@ -19,13 +20,27 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   useVisibleRooms({ mapState });
   // Draw the visible rooms
   useDrawRooms({ mapState });
+  // Get handler functions for map controls
+  const {
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleDoubleClick,
+    handleWheel,
+    handleContextMenu,
+  } = useMouseTouch({ mapState });
 
   return (
     <canvas
       ref={roomCanvasRef}
       height={roomCanvasSize.height}
       width={roomCanvasSize.width}
-      className="bg-blue-500"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onDoubleClick={handleDoubleClick}
+      onWheel={handleWheel}
+      onContextMenu={handleContextMenu}
     ></canvas>
   );
 }
