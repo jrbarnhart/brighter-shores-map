@@ -1,6 +1,7 @@
 import mapConfig from "@/lib/map/mapConfig";
 import mapData, { RoomId } from "@/lib/map/mapData";
-import React, { SetStateAction, useEffect } from "react";
+import { useEffect } from "react";
+import { MapState } from "../useMapState";
 
 export type RoomPathData = {
   element: Path2D;
@@ -10,13 +11,13 @@ export type RoomPathData = {
 
 function createCanvasPath2D(
   path: [number, number][],
-  origin: [number, number]
+  origin: [number, number],
+  cellSize: number
 ) {
   const canvasPath = new Path2D();
 
   if (path.length === 0) return canvasPath;
 
-  const { cellSize } = mapConfig;
   // Multiply startX/Y by cell size
   const startX = (path[0][0] + origin[0]) * cellSize;
   const startY = (path[0][1] + origin[1]) * cellSize;
@@ -34,16 +35,18 @@ function createCanvasPath2D(
 }
 
 export default function useCreateRoomPaths({
-  setRoomPaths,
+  mapState,
 }: {
-  setRoomPaths: React.Dispatch<SetStateAction<RoomPathData[]>>;
+  mapState: MapState;
 }) {
   useEffect(() => {
+    const setRoomPaths = mapState.roomPaths.set;
+    const cellSize = mapState.currentCellSize.value;
     const roomPaths: RoomPathData[] = [];
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
         const roomPath = {
-          element: createCanvasPath2D(room.path, room.origin),
+          element: createCanvasPath2D(room.path, room.origin, cellSize),
           roomId: room.id as RoomId,
           fillColor: room.color ?? mapConfig.defaultRoomFill,
         };
@@ -51,5 +54,5 @@ export default function useCreateRoomPaths({
       }
       setRoomPaths(roomPaths);
     }
-  }, [setRoomPaths]);
+  }, [mapState.currentCellSize.value, mapState.roomPaths.set]);
 }

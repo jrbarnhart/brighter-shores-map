@@ -11,8 +11,8 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const mouseMoved = useRef(false);
   const lastTouchTime = useRef(0);
   const isDoubleTouchHold = useRef(false);
-  const { set: setScale } = mapState.scale;
-  const { scaleIncrement, minScale, maxScale, doubleTouchThreshold } =
+  const { set: setCellSize } = mapState.currentCellSize;
+  const { minCellSize, maxCellSize, cellSizeIncrement, doubleTouchThreshold } =
     mapConfig;
 
   // General handlers for panning
@@ -66,9 +66,13 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   );
 
   const handleDoubleClick = useCallback(() => {
-    setScale((prev) => {
+    setCellSize((prev) => {
       // Set to next pre determined scale level
-      const defaultScaleBreakpoints = [minScale, maxScale / 2, maxScale];
+      const defaultScaleBreakpoints = [
+        minCellSize,
+        maxCellSize / 2,
+        maxCellSize,
+      ];
 
       // Find the next breakpoint
       const nextBreakpoint = defaultScaleBreakpoints.find((breakpoint) => {
@@ -77,7 +81,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       if (nextBreakpoint) return nextBreakpoint;
       return defaultScaleBreakpoints[0];
     });
-  }, [maxScale, minScale, setScale]);
+  }, [maxCellSize, minCellSize, setCellSize]);
 
   // Touch handlers
   const handleTouchStart = useCallback(
@@ -117,25 +121,25 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       // Scrolling up
       if (e.deltaY < 0) {
         // Increase scale
-        setScale((prev) => {
-          if (prev + scaleIncrement <= maxScale) {
-            return prev + scaleIncrement;
+        setCellSize((prev) => {
+          if (prev + cellSizeIncrement <= maxCellSize) {
+            return prev + cellSizeIncrement;
           }
-          return maxScale;
+          return maxCellSize;
         });
       }
       // Scrolling down
       else {
         // Decrease scale
-        setScale((prev) => {
-          if (prev - scaleIncrement > minScale) {
-            return prev - scaleIncrement;
+        setCellSize((prev) => {
+          if (prev - cellSizeIncrement > minCellSize) {
+            return prev - cellSizeIncrement;
           }
-          return minScale;
+          return minCellSize;
         });
       }
     },
-    [maxScale, minScale, scaleIncrement, setScale]
+    [cellSizeIncrement, maxCellSize, minCellSize, setCellSize]
   );
 
   // Context handler

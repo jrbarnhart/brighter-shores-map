@@ -13,7 +13,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   // Set canvas size
   useCanvasSize({ mapState });
   // Computes path2D's and set them to state
-  useCreateRoomPaths({ setRoomPaths: mapState.roomPaths.set });
+  useCreateRoomPaths({ mapState });
   // Creates an rtree of objects with min/max x/y and room id
   useCreateRTree({ setRTree: mapState.rTree.set });
   // Search the rtree for the visible rooms
