@@ -1,3 +1,4 @@
+import mapConfig from "@/lib/map/mapConfig";
 import mapData, { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useEffect } from "react";
 
@@ -36,7 +37,7 @@ export default function useCreateRoomPaths({
         const roomPath = {
           element: createCanvasPath2D(room.path),
           roomId: room.id as RoomId,
-          fillColor: room.color ?? "black",
+          fillColor: room.color ?? mapConfig.defaultRoomFill,
         };
         roomPaths.push(roomPath);
       }
