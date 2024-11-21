@@ -69,7 +69,7 @@ export default function useMapState() {
     height: window.innerHeight,
     width: window.innerWidth,
   });
-  const [cellSize, setCellSize] = useState(mapConfig.cellSize);
+  const [cellSize, setCellSize] = useState(mapConfig.defaultCellSize);
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
   const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();

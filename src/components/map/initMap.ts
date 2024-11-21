@@ -51,8 +51,8 @@ function initMapSize(mapData: MapData) {
   }
 
   const originOffset: [number, number] = [-mapMinX, -mapMinY];
-  const mapWidth = (mapMaxX - mapMinX) * mapConfig.cellSize;
-  const mapHeight = (mapMaxY - mapMinY) * mapConfig.cellSize;
+  const mapWidth = (mapMaxX - mapMinX) * mapConfig.defaultCellSize;
+  const mapHeight = (mapMaxY - mapMinY) * mapConfig.defaultCellSize;
   return { originOffset, mapWidth, mapHeight };
 }
 

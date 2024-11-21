@@ -42,16 +42,16 @@ export default function useCreateRTree({
 }: {
   setRTree: React.Dispatch<SetStateAction<RBush<RoomTreeNode> | undefined>>;
 }) {
-  const { cellSize } = mapConfig;
+  const { defaultCellSize } = mapConfig;
   useEffect(() => {
     const allRoomBoxes: RoomTreeNode[] = [];
     for (const region of Object.values(mapData.regions)) {
       for (const room of region.rooms) {
-        allRoomBoxes.push(createRoomTreeNode(room, cellSize));
+        allRoomBoxes.push(createRoomTreeNode(room, defaultCellSize));
       }
     }
     const tree = new RBush<RoomTreeNode>();
     tree.load(allRoomBoxes);
     setRTree(tree);
-  }, [cellSize, setRTree]);
+  }, [defaultCellSize, setRTree]);
 }

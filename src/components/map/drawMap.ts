@@ -74,12 +74,12 @@ function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
     "M " +
     (
       (room.origin[0] + originOffset[0] + start[0]) *
-      mapConfig.cellSize
+      mapConfig.defaultCellSize
     ).toString() +
     " " +
     (
       (room.origin[1] + originOffset[1] + start[1]) *
-      mapConfig.cellSize
+      mapConfig.defaultCellSize
     ).toString();
 
   // Add line segments to each vertex
@@ -89,12 +89,12 @@ function generateRoomPathData(room: RoomData, originOffset: [number, number]) {
       " L " +
       (
         (room.origin[0] + originOffset[0] + point[0]) *
-        mapConfig.cellSize
+        mapConfig.defaultCellSize
       ).toString() +
       " " +
       (
         (room.origin[1] + originOffset[1] + point[1]) *
-        mapConfig.cellSize
+        mapConfig.defaultCellSize
       ).toString();
   }
 
@@ -167,11 +167,11 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
   const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   rect.setAttribute(
     "x",
-    (x * mapConfig.cellSize + xMod - textWidth / 2 - padding).toString()
+    (x * mapConfig.defaultCellSize + xMod - textWidth / 2 - padding).toString()
   );
   rect.setAttribute(
     "y",
-    (y * mapConfig.cellSize + yMod - textHeight / 2 - padding).toString()
+    (y * mapConfig.defaultCellSize + yMod - textHeight / 2 - padding).toString()
   );
   rect.setAttribute("width", (textWidth + 2 * padding).toString());
   rect.setAttribute("height", (textHeight + 2 * padding).toString());
@@ -181,10 +181,15 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
 
   // Create text
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  text.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
+  text.setAttribute("x", (x * mapConfig.defaultCellSize + xMod).toString());
   text.setAttribute(
     "y",
-    (y * mapConfig.cellSize + yMod - textHeight / 2 + lineHeight / 2).toString()
+    (
+      y * mapConfig.defaultCellSize +
+      yMod -
+      textHeight / 2 +
+      lineHeight / 2
+    ).toString()
   );
   text.setAttribute("class", "fill-blue-100 font-bold select-none");
   text.setAttribute("text-anchor", "middle");
@@ -197,7 +202,10 @@ function generateRoomLabel(room: RoomData, roomCenters: RoomCenter[]) {
         "tspan"
       );
       tspan.textContent = line;
-      tspan.setAttribute("x", (x * mapConfig.cellSize + xMod).toString());
+      tspan.setAttribute(
+        "x",
+        (x * mapConfig.defaultCellSize + xMod).toString()
+      );
       tspan.setAttribute("dy", index === 0 ? "0" : lineHeight.toString());
       tspan.setAttribute("dominant-baseline", "middle");
       text.appendChild(tspan);

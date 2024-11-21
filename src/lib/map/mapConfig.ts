@@ -1,5 +1,5 @@
 const mapConfig = {
-  cellSize: 20,
+  defaultCellSize: 20,
   minScale: 15,
   maxScale: 120,
   maxCellSize: 30,
