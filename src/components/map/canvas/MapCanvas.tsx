@@ -28,7 +28,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   } = useMouseTouch({ mapState });
 
   return (
-    <div className="touch-none">
+    <div className="touch-none relative">
       <canvas
         ref={roomCanvasRef}
         height={roomCanvasSize.height}
@@ -42,6 +42,11 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+      ></canvas>
+      <canvas
+        height={roomCanvasSize.height}
+        width={roomCanvasSize.width}
+        className="bg-blue-500/20 absolute top-0 left-0 pointer-events-none"
       ></canvas>
     </div>
   );
