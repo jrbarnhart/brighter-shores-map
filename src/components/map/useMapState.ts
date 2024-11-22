@@ -15,6 +15,9 @@ export type MapState = {
     rooms: {
       ref: React.MutableRefObject<HTMLCanvasElement | null>;
     };
+    labels: {
+      ref: React.MutableRefObject<HTMLCanvasElement | null>;
+    };
   };
   currentCellSize: {
     value: number;
@@ -59,6 +62,7 @@ export type MapState = {
 
 export default function useMapState() {
   const roomsCanvasRef = useRef<HTMLCanvasElement>(null);
+  const labelsCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomsCanvasSize, setRoomsCanvasSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -88,6 +92,9 @@ export default function useMapState() {
       size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       rooms: {
         ref: roomsCanvasRef,
+      },
+      labels: {
+        ref: labelsCanvasRef,
       },
     },
     currentCellSize: { value: currentCellSize, set: setCurrentCellSize },

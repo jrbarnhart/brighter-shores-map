@@ -6,8 +6,10 @@ import useDrawRooms from "./useDrawRooms";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const { canvas } = mapState;
+  const canvasSize = canvas.size.value;
   const roomCanvasRef = canvas.rooms.ref;
-  const roomCanvasSize = canvas.size.value;
+  const labelsCanvasRef = canvas.labels.ref;
+
   // Set canvas size
   useCanvasSize({ mapState });
   // Creates an rtree of objects with min/max x/y and room id
@@ -31,8 +33,8 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     <div className="touch-none relative">
       <canvas
         ref={roomCanvasRef}
-        height={roomCanvasSize.height}
-        width={roomCanvasSize.width}
+        height={canvasSize.height}
+        width={canvasSize.width}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -44,16 +46,11 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         onTouchEnd={handleTouchEnd}
       ></canvas>
       <canvas
-        height={roomCanvasSize.height}
-        width={roomCanvasSize.width}
+        ref={labelsCanvasRef}
+        height={canvasSize.height}
+        width={canvasSize.width}
         className="bg-blue-500/20 absolute top-0 left-0 pointer-events-none"
       ></canvas>
     </div>
   );
 }
-
-// This draw function should only run when needed (zoom or panning the map for example)
-// It should implement request animation frame in some way to handle the draw function calls
-// The map will start centred on some part of Hopeport. Default coords in mapConfig.ts
-// Determine the rooms (paths) that are visible or partially visible based on coords * mapConfig.cellSize compared against the canvas size (all in px)
-// Draw these paths to the canvas
