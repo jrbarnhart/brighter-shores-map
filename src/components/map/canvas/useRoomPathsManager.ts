@@ -1,9 +1,14 @@
 import { useMemo } from "react";
-import { RoomPathData } from "./useCreateRoomPaths";
 import mapData, { RoomId } from "@/lib/map/mapData";
 import mapConfig from "@/lib/map/mapConfig";
 import RBush, { BBox } from "rbush";
 import { RoomTreeNode } from "./useCreateRTree";
+
+export type RoomPathData = {
+  element: Path2D;
+  roomId: RoomId;
+  fillColor: string;
+};
 
 function createCanvasPath2D(
   path: [number, number][],

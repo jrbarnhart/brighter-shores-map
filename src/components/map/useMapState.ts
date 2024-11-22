@@ -1,7 +1,7 @@
 import mapConfig from "@/lib/map/mapConfig";
 import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
-import { RoomPathData } from "./canvas/useCreateRoomPaths";
+import { RoomPathData } from "./canvas/useRoomPathsManager";
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 import useRoomPathsManager from "./canvas/useRoomPathsManager";
