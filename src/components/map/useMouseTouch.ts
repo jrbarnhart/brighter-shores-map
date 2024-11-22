@@ -11,7 +11,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const mouseMoved = useRef(false);
   const lastTouchTime = useRef(0);
   const isDoubleTouchHold = useRef(false);
-  const { set: setCellSize } = mapState.currentCellSize;
+  const { value: currentCellSize, set: setCellSize } = mapState.currentCellSize;
   const {
     minCellSize,
     maxCellSize,
@@ -33,11 +33,17 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const handleDragMove = useCallback(
     (pointX: number, pointY: number) => {
       if (!isDragging) return;
-
       mouseMoved.current = true;
 
-      const deltaX = -(pointX - dragStart.current.x) * dragDeltaMod;
-      const deltaY = -(pointY - dragStart.current.y) * dragDeltaMod;
+      // Mods the drag amount in a way that keeps it consistent between all cell sizes
+      // Smaller cell sizes should be > 1, the middle cell size should = 1, and larger cell sizes should be < 1
+      const midpoint = (minCellSize + maxCellSize) / 2;
+      const cellSizeMod = midpoint / currentCellSize;
+
+      const deltaX =
+        -(pointX - dragStart.current.x) * dragDeltaMod * cellSizeMod;
+      const deltaY =
+        -(pointY - dragStart.current.y) * dragDeltaMod * cellSizeMod;
 
       setMapPos((prevPos) => ({
         x: prevPos.x + deltaX,
@@ -47,7 +53,14 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       // Update dragStart for the next frame
       dragStart.current = { x: pointX, y: pointY };
     },
-    [dragDeltaMod, isDragging, setMapPos]
+    [
+      currentCellSize,
+      dragDeltaMod,
+      isDragging,
+      maxCellSize,
+      minCellSize,
+      setMapPos,
+    ]
   );
 
   const handleDragEnd = useCallback(() => {

@@ -3,7 +3,7 @@ const mapConfig = {
   maxCellSize: 30,
   minCellSize: 5,
   cellSizeIncrement: 5,
-  dragDeltaMod: 0.2,
+  dragDeltaMod: 0.1,
   doubleTouchThreshold: 300,
   bgColor: "#2a2b2a",
   defaultColor: "#c5b57b",
