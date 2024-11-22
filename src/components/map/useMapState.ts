@@ -64,7 +64,9 @@ export default function useMapState() {
     height: window.innerHeight,
     width: window.innerWidth,
   });
-  const [cellSize, setCellSize] = useState(mapConfig.defaultCellSize);
+  const [currentCellSize, setCurrentCellSize] = useState(
+    mapConfig.defaultCellSize
+  );
   const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
   const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
@@ -84,7 +86,7 @@ export default function useMapState() {
         size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       },
     },
-    currentCellSize: { value: cellSize, set: setCellSize },
+    currentCellSize: { value: currentCellSize, set: setCurrentCellSize },
     roomPaths: { value: roomPaths, set: setRoomPaths },
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
