@@ -35,7 +35,7 @@ export default function useVisibleRooms({ mapState }: { mapState: MapState }) {
     const result = roomPaths.value.filter((path) =>
       foundRoomIds.includes(path.roomId)
     );
-
+    console.log("useVisibleRooms");
     setVisibleRooms(result);
   }, [
     canvas.rooms.ref,
