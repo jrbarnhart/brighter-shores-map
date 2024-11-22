@@ -40,7 +40,7 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
     console.log("drawRoomPaths");
   }, [
     mapState.canvas.rooms.ref,
-    mapState.canvas.rooms.size,
+    mapState.canvas.size,
     mapState.currentCellSize.value,
     mapState.mapPos.value,
     mapState.visibleRoomPaths.value,

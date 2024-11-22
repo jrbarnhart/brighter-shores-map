@@ -4,7 +4,7 @@ import useDebounce from "@/hooks/useDebounce";
 
 // Sets canvas size to window size, debounced
 export default function useCanvasSize({ mapState }: { mapState: MapState }) {
-  const { value: size, set: setSize } = mapState.canvas.rooms.size;
+  const { value: size, set: setSize } = mapState.canvas.size;
 
   const handleResize = useDebounce(() => {
     setSize({ width: window.innerWidth, height: window.innerHeight });

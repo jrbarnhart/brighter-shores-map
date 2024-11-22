@@ -8,12 +8,12 @@ import useRoomPathsManager from "./canvas/useRoomPathsManager";
 
 export type MapState = {
   canvas: {
+    size: {
+      value: { height: number; width: number };
+      set: React.Dispatch<SetStateAction<{ height: number; width: number }>>;
+    };
     rooms: {
       ref: React.MutableRefObject<HTMLCanvasElement | null>;
-      size: {
-        value: { height: number; width: number };
-        set: React.Dispatch<SetStateAction<{ height: number; width: number }>>;
-      };
     };
   };
   currentCellSize: {
@@ -85,9 +85,9 @@ export default function useMapState() {
 
   const mapState: MapState = {
     canvas: {
+      size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       rooms: {
         ref: roomsCanvasRef,
-        size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       },
     },
     currentCellSize: { value: currentCellSize, set: setCurrentCellSize },

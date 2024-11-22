@@ -7,7 +7,7 @@ import useDrawRooms from "./useDrawRooms";
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const { canvas } = mapState;
   const roomCanvasRef = canvas.rooms.ref;
-  const roomCanvasSize = canvas.rooms.size.value;
+  const roomCanvasSize = canvas.size.value;
   // Set canvas size
   useCanvasSize({ mapState });
   // Creates an rtree of objects with min/max x/y and room id
