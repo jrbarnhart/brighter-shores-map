@@ -35,10 +35,6 @@ export type MapState = {
     value: boolean;
     set: React.Dispatch<SetStateAction<boolean>>;
   };
-  scale: {
-    value: number;
-    set: React.Dispatch<SetStateAction<number>>;
-  };
   mapPos: {
     value: { x: number; y: number };
     set: React.Dispatch<SetStateAction<{ x: number; y: number }>>;
@@ -63,7 +59,6 @@ export type MapState = {
 };
 
 export default function useMapState() {
-  const { defaultScale } = mapConfig;
   const roomCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomsCanvasSize, setRoomsCanvasSize] = useState({
     height: window.innerHeight,
@@ -74,7 +69,6 @@ export default function useMapState() {
   const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
-  const [scale, setScale] = useState(defaultScale);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
@@ -95,7 +89,6 @@ export default function useMapState() {
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
-    scale: { value: scale, set: setScale },
     mapPos: { value: mapPos, set: setMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
     isHovering: { value: isHovering, set: setIsHovering },
