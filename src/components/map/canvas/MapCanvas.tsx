@@ -28,20 +28,28 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     handleDoubleClick,
     handleWheel,
     handleContextMenu,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
   } = useMouseTouch({ mapState });
 
   return (
-    <canvas
-      ref={roomCanvasRef}
-      height={roomCanvasSize.height}
-      width={roomCanvasSize.width}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onDoubleClick={handleDoubleClick}
-      onWheel={handleWheel}
-      onContextMenu={handleContextMenu}
-    ></canvas>
+    <div className="touch-none">
+      <canvas
+        ref={roomCanvasRef}
+        height={roomCanvasSize.height}
+        width={roomCanvasSize.width}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onDoubleClick={handleDoubleClick}
+        onWheel={handleWheel}
+        onContextMenu={handleContextMenu}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      ></canvas>
+    </div>
   );
 }
 
