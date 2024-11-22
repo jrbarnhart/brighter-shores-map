@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { MapState } from "../useMapState";
 import { RoomPathData } from "./useCreateRoomPaths";
 import mapData, { RoomId } from "@/lib/map/mapData";
 import mapConfig from "@/lib/map/mapConfig";
@@ -72,28 +71,29 @@ function filterVisiblePaths(
 }
 
 export default function useRoomPathsManager({
-  mapState,
+  currentCellSize,
+  roomsCanvas,
+  mapPos,
+  rTree,
 }: {
-  mapState: MapState;
+  roomsCanvas: HTMLCanvasElement | null;
+  currentCellSize: number;
+  mapPos: { x: number; y: number };
+  rTree: RBush<RoomTreeNode> | undefined;
 }) {
-  const currentCellSize = mapState.currentCellSize.value;
-  const roomCanvas = mapState.canvas.rooms.ref.current;
-  const mapPos = mapState.mapPos.value;
-  const rTree = mapState.rTree.value;
-
-  const fullPaths = useMemo(() => {
+  const roomPaths = useMemo(() => {
     return createCanvasPaths(currentCellSize);
   }, [currentCellSize]);
 
-  const visiblePaths = useMemo(() => {
+  const visibleRoomPaths = useMemo(() => {
     return filterVisiblePaths(
-      fullPaths,
-      roomCanvas,
+      roomPaths,
+      roomsCanvas,
       currentCellSize,
       mapPos,
       rTree
     );
-  }, [currentCellSize, fullPaths, mapPos, rTree, roomCanvas]);
+  }, [currentCellSize, roomPaths, mapPos, rTree, roomsCanvas]);
 
-  return { fullPaths, visiblePaths };
+  return { roomPaths, visibleRoomPaths };
 }

@@ -4,6 +4,7 @@ import React, { SetStateAction, useRef, useState } from "react";
 import { RoomPathData } from "./canvas/useCreateRoomPaths";
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
+import useRoomPathsManager from "./canvas/useRoomPathsManager";
 
 export type MapState = {
   canvas: {
@@ -21,11 +22,9 @@ export type MapState = {
   };
   roomPaths: {
     value: RoomPathData[];
-    set: React.Dispatch<SetStateAction<RoomPathData[]>>;
   };
   visibleRoomPaths: {
     value: RoomPathData[];
-    set: React.Dispatch<SetStateAction<RoomPathData[]>>;
   };
   rTree: {
     value: RBush<RoomTreeNode> | undefined;
@@ -59,7 +58,7 @@ export type MapState = {
 };
 
 export default function useMapState() {
-  const roomCanvasRef = useRef<HTMLCanvasElement>(null);
+  const roomsCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomsCanvasSize, setRoomsCanvasSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -67,8 +66,6 @@ export default function useMapState() {
   const [currentCellSize, setCurrentCellSize] = useState(
     mapConfig.defaultCellSize
   );
-  const [roomPaths, setRoomPaths] = useState<RoomPathData[]>([]);
-  const [visibleRoomPaths, setVisibleRoomPaths] = useState<RoomPathData[]>([]);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
@@ -79,17 +76,24 @@ export default function useMapState() {
   const [selectedId, setSelectedId] = useState<RoomId | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
 
+  const { roomPaths, visibleRoomPaths } = useRoomPathsManager({
+    roomsCanvas: roomsCanvasRef.current,
+    currentCellSize,
+    mapPos,
+    rTree,
+  });
+
   const mapState: MapState = {
     canvas: {
       rooms: {
-        ref: roomCanvasRef,
+        ref: roomsCanvasRef,
         size: { value: roomsCanvasSize, set: setRoomsCanvasSize },
       },
     },
     currentCellSize: { value: currentCellSize, set: setCurrentCellSize },
-    roomPaths: { value: roomPaths, set: setRoomPaths },
+    roomPaths: { value: roomPaths },
     rTree: { value: rTree, set: setRTree },
-    visibleRoomPaths: { value: visibleRoomPaths, set: setVisibleRoomPaths },
+    visibleRoomPaths: { value: visibleRoomPaths },
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
     mapPos: { value: mapPos, set: setMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },

@@ -1,10 +1,8 @@
 import { MapState } from "../useMapState";
 import useMouseTouch from "../useMouseTouch";
 import useCanvasSize from "./useCanvasSize";
-import useCreateRoomPaths from "./useCreateRoomPaths";
 import useCreateRTree from "./useCreateRTree";
 import useDrawRooms from "./useDrawRooms";
-import useVisibleRooms from "./useVisibleRooms";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const { canvas } = mapState;
@@ -12,12 +10,8 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const roomCanvasSize = canvas.rooms.size.value;
   // Set canvas size
   useCanvasSize({ mapState });
-  // Computes path2D's and set them to state
-  useCreateRoomPaths({ mapState });
   // Creates an rtree of objects with min/max x/y and room id
   useCreateRTree({ setRTree: mapState.rTree.set });
-  // Search the rtree for the visible rooms
-  useVisibleRooms({ mapState });
   // Draw the visible rooms
   useDrawRooms({ mapState });
   // Get handler functions for map controls
