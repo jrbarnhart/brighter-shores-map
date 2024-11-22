@@ -78,19 +78,19 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
 
   const handleDoubleClick = useCallback(() => {
     setCellSize((prev) => {
-      // Set to next pre determined scale level
-      const defaultScaleBreakpoints = [
+      // Set to next pre determined cell size
+      const defaultSizeBreakpoints = [
         minCellSize,
         maxCellSize / 2,
         maxCellSize,
       ];
 
       // Find the next breakpoint
-      const nextBreakpoint = defaultScaleBreakpoints.find((breakpoint) => {
+      const nextBreakpoint = defaultSizeBreakpoints.find((breakpoint) => {
         return breakpoint > prev;
       });
       if (nextBreakpoint) return nextBreakpoint;
-      return defaultScaleBreakpoints[0];
+      return defaultSizeBreakpoints[0];
     });
   }, [maxCellSize, minCellSize, setCellSize]);
 
@@ -128,10 +128,9 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   // Wheel zoom handler
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
-      // Transform origin at cursor?
       // Scrolling up
       if (e.deltaY < 0) {
-        // Increase scale
+        // Increase current cell size
         setCellSize((prev) => {
           if (prev + cellSizeIncrement <= maxCellSize) {
             return prev + cellSizeIncrement;
@@ -141,7 +140,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       }
       // Scrolling down
       else {
-        // Decrease scale
+        // Decrease current cell size
         setCellSize((prev) => {
           if (prev - cellSizeIncrement > minCellSize) {
             return prev - cellSizeIncrement;
