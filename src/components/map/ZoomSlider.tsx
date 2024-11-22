@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Slider } from "@/components/ui/slider";
-import { MapState } from "./map/useMapState";
+import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 
 type SliderProps = React.ComponentProps<typeof Slider>;
