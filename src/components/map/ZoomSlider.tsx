@@ -10,17 +10,17 @@ export default function ZoomSlider({
   ...props
 }: SliderProps & { mapState: MapState }) {
   const { className } = props;
-  const { scaleIncrement, minScale, maxScale } = mapConfig;
+  const { cellSizeIncrement, minCellSize, maxCellSize } = mapConfig;
   return (
     <div className="absolute top-0 left-0 z-10 w-full mt-7 flex justify-around">
       <Slider
-        value={[mapState.scale.value]}
+        value={[mapState.currentCellSize.value]}
         onValueChange={(value) => {
-          mapState.scale.set(value[0]);
+          mapState.currentCellSize.set(value[0]);
         }}
-        max={maxScale}
-        min={minScale}
-        step={scaleIncrement}
+        max={maxCellSize}
+        min={minCellSize}
+        step={cellSizeIncrement}
         className={cn("w-40 sm:w-72 md:w-96 z-10", className)}
         {...props}
       />
