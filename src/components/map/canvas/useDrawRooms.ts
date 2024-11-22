@@ -37,8 +37,10 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
 
     roomsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
     drawRoomPaths(roomsCanvasContext, visibleRooms, mapPos, currentCellSize);
+    console.log("drawRoomPaths");
   }, [
     mapState.canvas.rooms.ref,
+    mapState.canvas.rooms.size,
     mapState.currentCellSize.value,
     mapState.mapPos.value,
     mapState.visibleRoomPaths.value,
