@@ -7,6 +7,7 @@ const mapConfig = {
   cellSizeIncrement: 5,
   scaleIncrement: 15,
   defaultScale: 15,
+  dragDeltaMod: 0.2,
   doubleTouchThreshold: 300,
   bgColor: "#2a2b2a",
   defaultColor: "#c5b57b",

@@ -3,7 +3,7 @@ import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 
 export default function useMouseTouch({ mapState }: { mapState: MapState }) {
-  const { value: mapPos, set: setMapPos } = mapState.mapPos;
+  const { set: setMapPos } = mapState.mapPos;
   const dragEnabled = mapState.drag.enabledRef;
   const [isDragging, setIsDragging] = useState(false);
   const dragLocked = mapState.drag.lock.value;
@@ -12,31 +12,42 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const lastTouchTime = useRef(0);
   const isDoubleTouchHold = useRef(false);
   const { set: setCellSize } = mapState.currentCellSize;
-  const { minCellSize, maxCellSize, cellSizeIncrement, doubleTouchThreshold } =
-    mapConfig;
+  const {
+    minCellSize,
+    maxCellSize,
+    cellSizeIncrement,
+    dragDeltaMod,
+    doubleTouchThreshold,
+  } = mapConfig;
 
   // General handlers for panning
-  const handleDragStart = useCallback(
-    (pointX: number, pointY: number) => {
-      setIsDragging(true);
-      dragStart.current = {
-        x: pointX - mapPos.x,
-        y: pointY - mapPos.y,
-      };
-      mouseMoved.current = false;
-    },
-    [mapPos]
-  );
+  const handleDragStart = useCallback((pointX: number, pointY: number) => {
+    setIsDragging(true);
+    dragStart.current = {
+      x: pointX,
+      y: pointY,
+    };
+    mouseMoved.current = false;
+  }, []);
 
   const handleDragMove = useCallback(
     (pointX: number, pointY: number) => {
       if (!isDragging) return;
+
       mouseMoved.current = true;
-      const newX = -(pointX - dragStart.current.x);
-      const newY = -(pointY - dragStart.current.y);
-      setMapPos({ x: newX, y: newY });
+
+      const deltaX = -(pointX - dragStart.current.x) * dragDeltaMod;
+      const deltaY = -(pointY - dragStart.current.y) * dragDeltaMod;
+
+      setMapPos((prevPos) => ({
+        x: prevPos.x + deltaX,
+        y: prevPos.y + deltaY,
+      }));
+
+      // Update dragStart for the next frame
+      dragStart.current = { x: pointX, y: pointY };
     },
-    [isDragging, setMapPos]
+    [dragDeltaMod, isDragging, setMapPos]
   );
 
   const handleDragEnd = useCallback(() => {
