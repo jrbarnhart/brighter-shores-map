@@ -13,24 +13,24 @@ function createCanvasPath2D(
   origin: [number, number],
   cellSize: number
 ) {
-  const canvasPath = new Path2D();
+  const path2D = new Path2D();
 
-  if (path.length === 0) return canvasPath;
+  if (path.length === 0) return path2D;
 
   // Multiply startX/Y by cell size
   const startX = (path[0][0] + origin[0]) * cellSize;
   const startY = (path[0][1] + origin[1]) * cellSize;
 
-  canvasPath.moveTo(startX, startY);
+  path2D.moveTo(startX, startY);
 
   for (let i = 1; i < path.length; i++) {
     const x = (path[i][0] + origin[0]) * cellSize;
     const y = (path[i][1] + origin[1]) * cellSize;
-    canvasPath.lineTo(x, y);
+    path2D.lineTo(x, y);
   }
 
-  canvasPath.closePath();
-  return canvasPath;
+  path2D.closePath();
+  return path2D;
 }
 
 // Finds centers of rooms on a normalized grid with origin 0,0
@@ -149,6 +149,7 @@ function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
 
 function createLabelRect(
   roomPath: RoomDataWithPath,
+  defaultCellSize: number,
   wrappedLabelText: WrappedLabelText
 ) {
   // Label position modifiers
@@ -158,16 +159,38 @@ function createLabelRect(
   const [xMod, yMod] = labelOffset ?? [defaultXMod, defaultYMod];
   const padding = 0.32;
 
-  const { lines, textWidth, textHeight } = wrappedLabelText;
+  const { textWidth, textHeight } = wrappedLabelText;
+
+  const path2D = new Path2D();
+  const rectX = center.x * defaultCellSize + xMod - textWidth / 2 - padding;
+  const rectY = center.y * defaultCellSize + yMod - textHeight / 2 - padding;
+  const rectWidth = textWidth + 2 * padding;
+  const rectHeight = textHeight + 2 * padding;
+
+  path2D.roundRect(rectX, rectY, rectWidth, rectHeight);
+
+  return path2D;
 }
 
-function createLabelsForRoomPaths(roomPaths: RoomDataWithPath[]) {
+function createLabelsForRoomPaths(
+  roomPaths: RoomDataWithPath[],
+  defaultCellSize: number
+) {
+  const labelElements: { lines: string[]; rectElement: Path2D }[] = [];
   for (const roomPath of Object.values(roomPaths)) {
     // Get the wrapped label text
-    const wrappedLabelText = wrapLabelText(roomPath);
-    const labelRect = createLabelRect(roomPath, wrappedLabelText);
+    const wrappedLabelText = wrapLabelText(roomPath, defaultCellSize);
+    const labelRect = createLabelRect(
+      roomPath,
+      defaultCellSize,
+      wrappedLabelText
+    );
+    labelElements.push({
+      lines: wrappedLabelText.lines,
+      rectElement: labelRect,
+    });
   }
-  // later when drawing the rects must be drawn first
+  return labelElements;
 }
 
 export default function useCanvasElementsManager({
