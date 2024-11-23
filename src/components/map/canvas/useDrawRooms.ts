@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { RoomPathData } from "./useRoomPathsManager";
+import { RoomPathData } from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
 
 export default function useDrawRooms({ mapState }: { mapState: MapState }) {

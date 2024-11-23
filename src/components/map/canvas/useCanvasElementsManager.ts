@@ -75,7 +75,7 @@ function filterVisiblePaths(
   return result;
 }
 
-export default function useRoomPathsManager({
+export default function useCanvasElementsManager({
   currentCellSize,
   roomsCanvas,
   mapPos,

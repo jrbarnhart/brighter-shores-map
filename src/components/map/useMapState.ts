@@ -1,10 +1,10 @@
 import mapConfig from "@/lib/map/mapConfig";
 import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
-import { RoomPathData } from "./canvas/useRoomPathsManager";
+import { RoomPathData } from "./canvas/useCanvasElementsManager";
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
-import useRoomPathsManager from "./canvas/useRoomPathsManager";
+import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
 
 export type MapState = {
   canvas: {
@@ -80,7 +80,7 @@ export default function useMapState() {
   const [selectedId, setSelectedId] = useState<RoomId | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
 
-  const { roomPaths, visibleRoomPaths } = useRoomPathsManager({
+  const { roomPaths, visibleRoomPaths } = useCanvasElementsManager({
     roomsCanvas: roomsCanvasRef.current,
     currentCellSize,
     mapPos,
