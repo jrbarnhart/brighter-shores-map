@@ -167,7 +167,7 @@ function createLabelRect(
   const rectWidth = textWidth + 2 * padding;
   const rectHeight = textHeight + 2 * padding;
 
-  path2D.roundRect(rectX, rectY, rectWidth, rectHeight);
+  path2D.roundRect(rectX, rectY, rectWidth, rectHeight, 40);
 
   return path2D;
 }
@@ -198,15 +198,21 @@ export default function useCanvasElementsManager({
   roomsCanvas,
   mapPos,
   rTree,
+  defaultCellSize,
 }: {
   roomsCanvas: HTMLCanvasElement | null;
   currentCellSize: number;
   mapPos: { x: number; y: number };
   rTree: RBush<RoomTreeNode> | undefined;
+  defaultCellSize: number;
 }) {
   const roomPaths = useMemo(() => {
     return createRoomPaths(currentCellSize, mapData);
   }, [currentCellSize]);
+
+  const roomLabels = useMemo(() => {
+    return createLabelsForRoomPaths(roomPaths, defaultCellSize);
+  }, [defaultCellSize, roomPaths]);
 
   const visibleRoomPaths = useMemo(() => {
     return filterVisibleRooms(
@@ -218,5 +224,5 @@ export default function useCanvasElementsManager({
     );
   }, [currentCellSize, roomPaths, mapPos, rTree, roomsCanvas]);
 
-  return { roomPaths, visibleRoomPaths };
+  return { roomPaths, visibleRoomPaths, roomLabels };
 }
