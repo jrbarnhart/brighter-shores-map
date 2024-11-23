@@ -61,15 +61,16 @@ export type MapState = {
 };
 
 export default function useMapState() {
+  // Map config
+  const { defaultCellSize } = mapConfig;
+
   const roomsCanvasRef = useRef<HTMLCanvasElement>(null);
   const labelsCanvasRef = useRef<HTMLCanvasElement>(null);
   const [roomsCanvasSize, setRoomsCanvasSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
   });
-  const [currentCellSize, setCurrentCellSize] = useState(
-    mapConfig.defaultCellSize
-  );
+  const [currentCellSize, setCurrentCellSize] = useState(defaultCellSize);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
@@ -85,6 +86,7 @@ export default function useMapState() {
     currentCellSize,
     mapPos,
     rTree,
+    defaultCellSize,
   });
 
   const mapState: MapState = {
