@@ -96,6 +96,80 @@ function filterVisibleRooms(
   return result;
 }
 
+type WrappedLabelText = {
+  lines: string[];
+  textWidth: number;
+  textHeight: number;
+};
+
+function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
+  // Max width before wrapping in normalized grid units
+  const maxWidth = 4 * defaultCellSize;
+  const lineHeight = 0.8 * defaultCellSize;
+
+  // Split text into words for wrapping
+  const words = roomPath.label.split(" ");
+  let currentLine = "";
+  const lines = [];
+  let maxLineWidth = 0;
+
+  words.forEach((word, index) => {
+    const testLine = currentLine ? `${currentLine} ${word}` : word;
+    const testWidth = testLine.length * 1 * defaultCellSize;
+
+    if (testWidth <= maxWidth && words.length) {
+      currentLine = testLine;
+    } else if (words.length === 1 || index === 0) {
+      currentLine = testLine;
+    } else {
+      lines.push(currentLine);
+      maxLineWidth = Math.max(
+        maxLineWidth,
+        currentLine.length * 1 * defaultCellSize
+      );
+      currentLine = word;
+    }
+  });
+  if (currentLine) {
+    lines.push(currentLine);
+    maxLineWidth = Math.max(
+      maxLineWidth,
+      currentLine.length * 1 * defaultCellSize
+    );
+  }
+
+  // Calculate text dimensions
+  const textWidth = Math.min(maxWidth, maxLineWidth);
+  const textHeight = lineHeight * lines.length;
+
+  const wrappedLabelText: WrappedLabelText = { lines, textHeight, textWidth };
+
+  return wrappedLabelText;
+}
+
+function createLabelRect(
+  roomPath: RoomDataWithPath,
+  wrappedLabelText: WrappedLabelText
+) {
+  // Label position modifiers
+  const { center, labelOffset } = roomPath;
+  const defaultXMod = 0;
+  const defaultYMod = 0;
+  const [xMod, yMod] = labelOffset ?? [defaultXMod, defaultYMod];
+  const padding = 0.32;
+
+  const { lines, textWidth, textHeight } = wrappedLabelText;
+}
+
+function createLabelsForRoomPaths(roomPaths: RoomDataWithPath[]) {
+  for (const roomPath of Object.values(roomPaths)) {
+    // Get the wrapped label text
+    const wrappedLabelText = wrapLabelText(roomPath);
+    const labelRect = createLabelRect(roomPath, wrappedLabelText);
+  }
+  // later when drawing the rects must be drawn first
+}
+
 export default function useCanvasElementsManager({
   currentCellSize,
   roomsCanvas,
