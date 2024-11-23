@@ -29,6 +29,9 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     handleTouchEnd,
   } = useMouseTouch({ mapState });
 
+  // Draw labels to their canvas
+  // useDrawLabels({mapState});
+
   return (
     <div className="touch-none relative">
       <canvas
