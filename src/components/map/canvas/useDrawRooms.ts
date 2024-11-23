@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { RoomPathData } from "./useCanvasElementsManager";
+import { RoomDataWithPath } from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
+import mapConfig from "@/lib/map/mapConfig";
 
 export default function useDrawRooms({ mapState }: { mapState: MapState }) {
   function drawRoomPaths(
     ctx: CanvasRenderingContext2D,
-    roomPaths: RoomPathData[],
+    roomPaths: RoomDataWithPath[],
     mapPos: { x: number; y: number },
     cellSize: number
   ): void {
@@ -15,7 +16,7 @@ export default function useDrawRooms({ mapState }: { mapState: MapState }) {
     ctx.translate(-mapPos.x * cellSize, -mapPos.y * cellSize);
 
     roomPaths.forEach((roomPath) => {
-      ctx.fillStyle = roomPath.fillColor;
+      ctx.fillStyle = roomPath.color ?? mapConfig.defaultRoomFill;
       ctx.fill(roomPath.element);
       ctx.strokeStyle = "black";
       ctx.stroke(roomPath.element);

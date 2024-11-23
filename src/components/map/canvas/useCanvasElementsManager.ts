@@ -1,13 +1,11 @@
 import { useMemo } from "react";
-import mapData, { RoomId } from "@/lib/map/mapData";
-import mapConfig from "@/lib/map/mapConfig";
+import mapData, { MapData, RoomData, RoomId } from "@/lib/map/mapData";
 import RBush, { BBox } from "rbush";
 import { RoomTreeNode } from "./useCreateRTree";
 
-export type RoomPathData = {
+export type RoomDataWithPath = RoomData & {
   element: Path2D;
-  roomId: RoomId;
-  fillColor: string;
+  center: { x: number; y: number };
 };
 
 function createCanvasPath2D(
@@ -35,14 +33,35 @@ function createCanvasPath2D(
   return canvasPath;
 }
 
-function createCanvasPaths(currentCellSize: number) {
-  const roomPaths: RoomPathData[] = [];
+// Finds centers of rooms on a normalized grid with origin 0,0
+function findRoomCenter(room: RoomData) {
+  let minX = Infinity;
+  let maxX = -Infinity;
+  let minY = Infinity;
+  let maxY = -Infinity;
+
+  for (const vertex of room.path) {
+    // Adjust position for room origin
+    const absoluteX = room.origin[0] + vertex[0];
+    const absoluteY = room.origin[1] + vertex[1];
+
+    if (absoluteX < minX) minX = absoluteX;
+    if (absoluteX > maxX) maxX = absoluteX;
+    if (absoluteY < minY) minY = absoluteY;
+    if (absoluteY > maxY) maxY = absoluteY;
+  }
+
+  return { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+}
+
+function createRoomPaths(currentCellSize: number, mapData: MapData) {
+  const roomPaths: RoomDataWithPath[] = [];
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
       const roomPath = {
         element: createCanvasPath2D(room.path, room.origin, currentCellSize),
-        roomId: room.id as RoomId,
-        fillColor: room.color ?? mapConfig.defaultRoomFill,
+        center: findRoomCenter(room),
+        ...room,
       };
       roomPaths.push(roomPath);
     }
@@ -50,8 +69,8 @@ function createCanvasPaths(currentCellSize: number) {
   return roomPaths;
 }
 
-function filterVisiblePaths(
-  roomPaths: RoomPathData[],
+function filterVisibleRooms(
+  roomPaths: RoomDataWithPath[],
   roomsCanvas: HTMLCanvasElement | null,
   currentCellSize: number,
   mapPos: { x: number; y: number },
@@ -71,7 +90,9 @@ function filterVisiblePaths(
 
   const foundRoomIds = rTree.search(bbox).map((foundNode) => foundNode.roomId);
 
-  const result = roomPaths.filter((path) => foundRoomIds.includes(path.roomId));
+  const result = roomPaths.filter((path) =>
+    foundRoomIds.includes(path.id as RoomId)
+  );
   return result;
 }
 
@@ -87,11 +108,11 @@ export default function useCanvasElementsManager({
   rTree: RBush<RoomTreeNode> | undefined;
 }) {
   const roomPaths = useMemo(() => {
-    return createCanvasPaths(currentCellSize);
+    return createRoomPaths(currentCellSize, mapData);
   }, [currentCellSize]);
 
   const visibleRoomPaths = useMemo(() => {
-    return filterVisiblePaths(
+    return filterVisibleRooms(
       roomPaths,
       roomsCanvas,
       currentCellSize,

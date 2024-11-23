@@ -1,7 +1,7 @@
 import mapConfig from "@/lib/map/mapConfig";
 import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
-import { RoomPathData } from "./canvas/useCanvasElementsManager";
+import { RoomDataWithPath } from "./canvas/useCanvasElementsManager";
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
@@ -24,10 +24,10 @@ export type MapState = {
     set: React.Dispatch<SetStateAction<number>>;
   };
   roomPaths: {
-    value: RoomPathData[];
+    value: RoomDataWithPath[];
   };
   visibleRoomPaths: {
-    value: RoomPathData[];
+    value: RoomDataWithPath[];
   };
   rTree: {
     value: RBush<RoomTreeNode> | undefined;
