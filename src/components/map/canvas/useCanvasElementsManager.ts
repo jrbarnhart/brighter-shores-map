@@ -213,15 +213,17 @@ export default function useCanvasElementsManager({
   rTree: RBush<RoomTreeNode> | undefined;
   defaultCellSize: number;
 }) {
-  const roomPaths = useMemo(() => {
-    return createRoomPaths(currentCellSize, mapData);
-  }, [currentCellSize]);
+  const mapElements = useMemo(() => {
+    console.log("Elements");
+    const roomPaths = createRoomPaths(currentCellSize, mapData);
+    const roomLabels = createLabelsForRoomPaths(roomPaths, defaultCellSize);
+    return { roomPaths, roomLabels };
+  }, [currentCellSize, defaultCellSize]);
 
-  const roomLabels = useMemo(() => {
-    return createLabelsForRoomPaths(roomPaths, defaultCellSize);
-  }, [defaultCellSize, roomPaths]);
+  const { roomPaths, roomLabels } = mapElements;
 
   const visibleRoomPaths = useMemo(() => {
+    console.log("Visible");
     return filterVisibleRooms(
       roomPaths,
       roomsCanvas,
