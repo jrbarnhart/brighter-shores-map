@@ -3,7 +3,7 @@ import { RoomDataWithPath } from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 
-export default function useDrawRooms({ mapState }: { mapState: MapState }) {
+export default function useDrawMap({ mapState }: { mapState: MapState }) {
   function drawRoomPaths(
     ctx: CanvasRenderingContext2D,
     roomPaths: RoomDataWithPath[],
