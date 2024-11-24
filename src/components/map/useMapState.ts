@@ -1,7 +1,10 @@
 import mapConfig from "@/lib/map/mapConfig";
 import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
-import { RoomDataWithPath } from "./canvas/useCanvasElementsManager";
+import {
+  LabelDataWithPath,
+  RoomDataWithPath,
+} from "./canvas/useCanvasElementsManager";
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
@@ -25,6 +28,9 @@ export type MapState = {
   };
   roomPaths: {
     value: RoomDataWithPath[];
+  };
+  roomLabels: {
+    value: LabelDataWithPath[];
   };
   visibleRoomPaths: {
     value: RoomDataWithPath[];
@@ -81,7 +87,7 @@ export default function useMapState() {
   const [selectedId, setSelectedId] = useState<RoomId | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
 
-  const { roomPaths, visibleRoomPaths } = useCanvasElementsManager({
+  const { roomPaths, visibleRoomPaths, roomLabels } = useCanvasElementsManager({
     roomsCanvas: roomsCanvasRef.current,
     currentCellSize,
     mapPos,
@@ -101,6 +107,7 @@ export default function useMapState() {
     },
     currentCellSize: { value: currentCellSize, set: setCurrentCellSize },
     roomPaths: { value: roomPaths },
+    roomLabels: { value: roomLabels },
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths },
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },

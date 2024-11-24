@@ -8,6 +8,11 @@ export type RoomDataWithPath = RoomData & {
   center: { x: number; y: number };
 };
 
+export type LabelDataWithPath = {
+  lines: string[];
+  element: Path2D;
+};
+
 function createCanvasPath2D(
   path: [number, number][],
   origin: [number, number],
@@ -176,7 +181,7 @@ function createLabelsForRoomPaths(
   roomPaths: RoomDataWithPath[],
   defaultCellSize: number
 ) {
-  const labelElements: { lines: string[]; rectElement: Path2D }[] = [];
+  const labelElements: LabelDataWithPath[] = [];
   for (const roomPath of Object.values(roomPaths)) {
     // Get the wrapped label text
     const wrappedLabelText = wrapLabelText(roomPath, defaultCellSize);
@@ -187,7 +192,7 @@ function createLabelsForRoomPaths(
     );
     labelElements.push({
       lines: wrappedLabelText.lines,
-      rectElement: labelRect,
+      element: labelRect,
     });
   }
   return labelElements;
