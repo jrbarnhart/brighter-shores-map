@@ -49,7 +49,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         ref={labelsCanvasRef}
         height={canvasSize.height}
         width={canvasSize.width}
-        className="bg-blue-500/20 absolute top-0 left-0 pointer-events-none"
+        className="absolute top-0 left-0 pointer-events-none"
       ></canvas>
     </div>
   );
