@@ -11,6 +11,7 @@ export type RoomDataWithPath = RoomData & {
 export type LabelDataWithPath = {
   lines: string[];
   element: Path2D;
+  roomId: RoomId;
 };
 
 function createCanvasPath2D(
@@ -193,6 +194,7 @@ function createLabelsForRoomPaths(
     labelElements.push({
       lines: wrappedLabelText.lines,
       element: labelRect,
+      roomId: roomPath.id as RoomId,
     });
   }
   return labelElements;
