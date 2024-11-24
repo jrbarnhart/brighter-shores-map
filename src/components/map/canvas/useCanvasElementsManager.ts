@@ -173,7 +173,7 @@ function createLabelRect(
   const rectWidth = textWidth + 2 * padding;
   const rectHeight = textHeight + 2 * padding;
 
-  path2D.roundRect(rectX, rectY, rectWidth, rectHeight, 40);
+  path2D.roundRect(rectX, rectY, rectWidth, rectHeight, 6);
 
   return path2D;
 }
