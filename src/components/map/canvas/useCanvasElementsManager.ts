@@ -7,6 +7,7 @@ import mapConfig from "@/lib/map/mapConfig";
 export type RoomDataWithPath = RoomData & {
   element: Path2D;
   center: { x: number; y: number };
+  size: { height: number; width: number };
 };
 
 export type LabelDataWithPath = {
@@ -14,6 +15,7 @@ export type LabelDataWithPath = {
   element: Path2D;
   roomId: RoomId;
   roomCenter: { x: number; y: number };
+  roomSize: { height: number; width: number };
 };
 
 function createCanvasPath2D(
@@ -42,7 +44,7 @@ function createCanvasPath2D(
 }
 
 // Finds centers of rooms on a normalized grid with origin 0,0
-function findRoomCenter(room: RoomData) {
+function getRoomDimensions(room: RoomData) {
   let minX = Infinity;
   let maxX = -Infinity;
   let minY = Infinity;
@@ -59,16 +61,22 @@ function findRoomCenter(room: RoomData) {
     if (absoluteY > maxY) maxY = absoluteY;
   }
 
-  return { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+  const center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+  const height = maxX - minX;
+  const width = maxY - minY;
+  const size = { height, width };
+  return { center, size };
 }
 
 function createRoomPaths(currentCellSize: number, mapData: MapData) {
   const roomPaths: RoomDataWithPath[] = [];
   for (const region of Object.values(mapData.regions)) {
     for (const room of region.rooms) {
+      const { center, size } = getRoomDimensions(room);
       const roomPath = {
         element: createCanvasPath2D(room.path, room.origin, currentCellSize),
-        center: findRoomCenter(room),
+        center,
+        size,
         ...room,
       };
       roomPaths.push(roomPath);
@@ -214,6 +222,7 @@ function createLabelsForRoomPaths(
       element: labelRect,
       roomId: roomPath.id as RoomId,
       roomCenter: roomPath.center,
+      roomSize: roomPath.size,
     });
   }
   return labelElements;
