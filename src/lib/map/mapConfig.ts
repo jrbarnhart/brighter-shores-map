@@ -8,6 +8,9 @@ const mapConfig = {
   bgColor: "#2a2b2a",
   defaultColor: "#c5b57b",
   defaultRoomFill: "#c5b57b",
+  labelPadding: 0.32,
+  labelMaxLineWidth: 4,
+  labelLineHeight: 0.8,
 };
 
 export default mapConfig;
