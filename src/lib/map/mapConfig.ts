@@ -11,6 +11,8 @@ const mapConfig = {
   labelPadding: 0.32,
   labelMaxLineWidth: 4,
   labelLineHeight: 0.8,
-};
+} as const;
+
+export type MapConfig = typeof mapConfig;
 
 export default mapConfig;

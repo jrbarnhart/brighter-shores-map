@@ -1,4 +1,5 @@
 import { MapState } from "../useMapState";
+import mapConfig from "@/lib/map/mapConfig";
 import useMouseTouch from "../useMouseTouch";
 import useCanvasSize from "./useCanvasSize";
 import useCreateRTree from "./useCreateRTree";
@@ -15,7 +16,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   // Creates an rtree of objects with min/max x/y and room id
   useCreateRTree({ setRTree: mapState.rTree.set });
   // Draw the map
-  useDrawMap({ mapState });
+  useDrawMap({ mapState, mapConfig });
   // Get handler functions for map controls
   const {
     handleMouseDown,

@@ -76,7 +76,8 @@ export default function useMapState() {
     height: window.innerHeight,
     width: window.innerWidth,
   });
-  const [currentCellSize, setCurrentCellSize] = useState(defaultCellSize);
+  const [currentCellSize, setCurrentCellSize] =
+    useState<number>(defaultCellSize);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
