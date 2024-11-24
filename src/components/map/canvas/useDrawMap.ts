@@ -82,7 +82,6 @@ export default function useDrawMap({ mapState }: { mapState: MapState }) {
       mapPos,
       currentCellSize
     );
-    console.log("drawRoomPaths");
   }, [
     mapState.canvas.labels.ref,
     mapState.canvas.rooms.ref,

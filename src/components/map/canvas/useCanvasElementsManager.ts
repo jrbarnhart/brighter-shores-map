@@ -214,7 +214,6 @@ export default function useCanvasElementsManager({
   defaultCellSize: number;
 }) {
   const mapElements = useMemo(() => {
-    console.log("Elements");
     const roomPaths = createRoomPaths(currentCellSize, mapData);
     const roomLabels = createLabelsForRoomPaths(roomPaths, defaultCellSize);
     return { roomPaths, roomLabels };
@@ -223,7 +222,6 @@ export default function useCanvasElementsManager({
   const { roomPaths, roomLabels } = mapElements;
 
   const visibleRoomPaths = useMemo(() => {
-    console.log("Visible");
     return filterVisibleRooms(
       roomPaths,
       roomsCanvas,
