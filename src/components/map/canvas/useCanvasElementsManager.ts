@@ -108,10 +108,10 @@ type WrappedLabelText = {
   textHeight: number;
 };
 
-function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
+function wrapLabelText(roomPath: RoomDataWithPath, currentCellSize: number) {
   // Max width before wrapping in normalized grid units
-  const maxWidth = 4 * defaultCellSize;
-  const lineHeight = 0.8 * defaultCellSize;
+  const maxWidth = 4 * currentCellSize;
+  const lineHeight = 0.8 * currentCellSize;
 
   // Split text into words for wrapping
   const words = roomPath.label.split(" ");
@@ -121,7 +121,7 @@ function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
 
   words.forEach((word, index) => {
     const testLine = currentLine ? `${currentLine} ${word}` : word;
-    const testWidth = testLine.length * 1 * defaultCellSize;
+    const testWidth = testLine.length * 1 * currentCellSize;
 
     if (testWidth <= maxWidth && words.length) {
       currentLine = testLine;
@@ -131,7 +131,7 @@ function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
       lines.push(currentLine);
       maxLineWidth = Math.max(
         maxLineWidth,
-        currentLine.length * 1 * defaultCellSize
+        currentLine.length * 1 * currentCellSize
       );
       currentLine = word;
     }
@@ -140,7 +140,7 @@ function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
     lines.push(currentLine);
     maxLineWidth = Math.max(
       maxLineWidth,
-      currentLine.length * 1 * defaultCellSize
+      currentLine.length * 1 * currentCellSize
     );
   }
 
@@ -155,7 +155,7 @@ function wrapLabelText(roomPath: RoomDataWithPath, defaultCellSize: number) {
 
 function createLabelRect(
   roomPath: RoomDataWithPath,
-  defaultCellSize: number,
+  currentCellSize: number,
   wrappedLabelText: WrappedLabelText
 ) {
   // Label position modifiers
@@ -168,8 +168,8 @@ function createLabelRect(
   const { textWidth, textHeight } = wrappedLabelText;
 
   const path2D = new Path2D();
-  const rectX = center.x * defaultCellSize + xMod - textWidth / 2 - padding;
-  const rectY = center.y * defaultCellSize + yMod - textHeight / 2 - padding;
+  const rectX = center.x * currentCellSize + xMod - textWidth / 2 - padding;
+  const rectY = center.y * currentCellSize + yMod - textHeight / 2 - padding;
   const rectWidth = textWidth + 2 * padding;
   const rectHeight = textHeight + 2 * padding;
 
@@ -180,15 +180,15 @@ function createLabelRect(
 
 function createLabelsForRoomPaths(
   roomPaths: RoomDataWithPath[],
-  defaultCellSize: number
+  currentCellSize: number
 ) {
   const labelElements: LabelDataWithPath[] = [];
   for (const roomPath of Object.values(roomPaths)) {
     // Get the wrapped label text
-    const wrappedLabelText = wrapLabelText(roomPath, defaultCellSize);
+    const wrappedLabelText = wrapLabelText(roomPath, currentCellSize);
     const labelRect = createLabelRect(
       roomPath,
-      defaultCellSize,
+      currentCellSize,
       wrappedLabelText
     );
     labelElements.push({
@@ -205,19 +205,17 @@ export default function useCanvasElementsManager({
   roomsCanvas,
   mapPos,
   rTree,
-  defaultCellSize,
 }: {
   roomsCanvas: HTMLCanvasElement | null;
   currentCellSize: number;
   mapPos: { x: number; y: number };
   rTree: RBush<RoomTreeNode> | undefined;
-  defaultCellSize: number;
 }) {
   const mapElements = useMemo(() => {
     const roomPaths = createRoomPaths(currentCellSize, mapData);
-    const roomLabels = createLabelsForRoomPaths(roomPaths, defaultCellSize);
+    const roomLabels = createLabelsForRoomPaths(roomPaths, currentCellSize);
     return { roomPaths, roomLabels };
-  }, [currentCellSize, defaultCellSize]);
+  }, [currentCellSize]);
 
   const { roomPaths, roomLabels } = mapElements;
 

@@ -92,7 +92,6 @@ export default function useMapState() {
     currentCellSize,
     mapPos,
     rTree,
-    defaultCellSize,
   });
 
   const mapState: MapState = {
