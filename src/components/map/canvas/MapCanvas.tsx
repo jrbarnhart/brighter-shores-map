@@ -14,7 +14,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   useCanvasSize({ mapState });
   // Creates an rtree of objects with min/max x/y and room id
   useCreateRTree({ setRTree: mapState.rTree.set });
-  // Draw the visible rooms
+  // Draw the map
   useDrawMap({ mapState });
   // Get handler functions for map controls
   const {
@@ -28,9 +28,6 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     handleTouchMove,
     handleTouchEnd,
   } = useMouseTouch({ mapState });
-
-  // Draw labels to their canvas
-  // useDrawLabels({mapState});
 
   return (
     <div className="touch-none relative">
