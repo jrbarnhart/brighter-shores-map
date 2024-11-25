@@ -5,6 +5,8 @@ import {
 } from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
 import { MapConfig } from "@/lib/map/mapConfig";
+import { NormalizedValue, Point } from "@/lib/generalTypes";
+import { toPixels } from "@/lib/utils";
 
 export default function useDrawMap({
   mapState,
@@ -37,49 +39,54 @@ export default function useDrawMap({
 
   function drawRoomLabels(
     ctx: CanvasRenderingContext2D,
-    roomLabels: LabelDataWithPath[],
-    visibleRoomPaths: RoomDataWithPath[],
-    mapPos: { x: number; y: number },
-    currentCellSize: number,
-    mapConfig: MapConfig
+    labels: LabelDataWithPath[],
+    visibleRooms: RoomDataWithPath[],
+    viewport: { position: Point },
+    cellSize: number,
+    style: {
+      padding: NormalizedValue;
+      lineHeight: NormalizedValue;
+      backgroundColor: string;
+      borderColor: string;
+      textColor: string;
+    }
   ) {
     ctx.save();
-
-    ctx.translate(-mapPos.x * currentCellSize, -mapPos.y * currentCellSize);
-
-    const visibleRoomIds = visibleRoomPaths.map((path) => path.id);
-    const visibleRoomLabels = roomLabels.filter((label) =>
-      visibleRoomIds.includes(label.roomId)
+    ctx.translate(
+      -toPixels(viewport.position.x, cellSize),
+      -toPixels(viewport.position.y, cellSize)
     );
 
-    for (const roomLabel of visibleRoomLabels) {
-      // Draw the label rect
-      ctx.fillStyle = "green";
-      ctx.fill(roomLabel.element);
-      ctx.strokeStyle = "blue";
-      ctx.stroke(roomLabel.element);
+    const visibleLabels = labels.filter((label) =>
+      visibleRooms.some((room) => room.id === label.roomId)
+    );
 
-      // Values that are normalized need to be * cell size to get px values
-      const { labelPadding, labelLineHeight } = mapConfig;
-      const pxLabelLineHeight = labelLineHeight * currentCellSize;
-      const pxLabelPadding = labelPadding * currentCellSize;
-      const totalLineHeight = pxLabelLineHeight * roomLabel.lines.length;
-      const labelY =
-        roomLabel.center.y * currentCellSize - roomLabel.size.height / 2;
+    for (const label of visibleLabels) {
+      // Draw background and border
+      ctx.fillStyle = style.backgroundColor;
+      ctx.strokeStyle = style.borderColor;
+      ctx.fill(label.element);
+      ctx.stroke(label.element);
+
+      // Draw text
+      const lineHeightPx = toPixels(style.lineHeight, cellSize);
+      const paddingPx = toPixels(style.padding, cellSize);
+      const totalLinesHeight = lineHeightPx * label.lines.length;
+
       const textStartY =
-        labelY +
-        pxLabelPadding +
-        (roomLabel.size.height - pxLabelPadding * 2 - totalLineHeight) / 2;
+        toPixels(label.center.y, cellSize) -
+        label.size.height / 2 +
+        paddingPx +
+        (label.size.height - paddingPx * 2 - totalLinesHeight) / 2;
 
-      // Draw the label text
-      ctx.fillStyle = "black";
+      ctx.fillStyle = style.textColor;
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
 
-      roomLabel.lines.forEach((line, index) => {
-        const textStartX = roomLabel.center.x * currentCellSize;
-        const y = textStartY + index * pxLabelLineHeight;
-        ctx.fillText(line, textStartX, y);
+      label.lines.forEach((line, index) => {
+        const x = toPixels(label.center.x, cellSize);
+        const y = textStartY + index * lineHeightPx;
+        ctx.fillText(line, x, y);
       });
     }
 
@@ -87,6 +94,13 @@ export default function useDrawMap({
   }
 
   useEffect(() => {
+    const {
+      labelPadding,
+      labelLineHeight,
+      labelColor,
+      labelTextColor,
+      labelBorderColor,
+    } = mapConfig;
     const mapPos = mapState.mapPos.value;
     const currentCellSize = mapState.currentCellSize.value;
     const roomsCanvas = mapState.canvas.rooms.ref.current;
@@ -118,9 +132,15 @@ export default function useDrawMap({
       roomsCanvasContext,
       roomLabels,
       visibleRooms,
-      mapPos,
+      { position: mapPos },
       currentCellSize,
-      mapConfig
+      {
+        padding: labelPadding,
+        backgroundColor: labelColor,
+        borderColor: labelBorderColor,
+        lineHeight: labelLineHeight,
+        textColor: labelTextColor,
+      }
     );
   }, [
     mapConfig,

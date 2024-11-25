@@ -13,6 +13,9 @@ const mapConfig = {
   labelPadding: 2 as NormalizedValue,
   labelMaxLineWidth: 4 as NormalizedValue,
   labelLineHeight: 0.8 as NormalizedValue,
+  labelColor: "lightblue",
+  labelTextColor: "black",
+  labelBorderColor: "black",
 } as const;
 
 export type MapConfig = typeof mapConfig;
