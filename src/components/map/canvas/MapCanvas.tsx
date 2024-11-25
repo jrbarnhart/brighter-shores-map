@@ -6,7 +6,7 @@ import useCreateRTree from "./useCreateRTree";
 import useDrawMap from "./useDrawMap";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
-  const { canvas } = mapState;
+  const { canvas, labelsHidden } = mapState;
   const canvasSize = canvas.size.value;
   const roomCanvasRef = canvas.rooms.ref;
   const labelsCanvasRef = canvas.labels.ref;
@@ -50,8 +50,10 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         ref={labelsCanvasRef}
         height={canvasSize.height}
         width={canvasSize.width}
-        className="absolute top-0 left-0 pointer-events-none"
-      ></canvas>
+        className={`absolute top-0 left-0 pointer-events-none ${
+          labelsHidden.value ? "scale-0" : ""
+        }`}
+      />
     </div>
   );
 }
