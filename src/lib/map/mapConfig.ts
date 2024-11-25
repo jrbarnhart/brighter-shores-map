@@ -11,7 +11,7 @@ const mapConfig = {
   defaultColor: "#c5b57b",
   defaultRoomFill: "#c5b57b",
   labelPadding: 8 as PixelValue,
-  labelMaxLineWidth: 100 as PixelValue,
+  labelMaxLineWidth: 96 as PixelValue,
   labelLineHeight: 16 as PixelValue,
   labelColor: "lightblue",
   labelTextColor: "black",
