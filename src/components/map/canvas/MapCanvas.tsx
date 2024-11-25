@@ -50,8 +50,8 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         ref={labelsCanvasRef}
         height={canvasSize.height}
         width={canvasSize.width}
-        className={`absolute top-0 left-0 pointer-events-none ${
-          labelsHidden.value ? "scale-0" : ""
+        className={`absolute top-0 left-0 pointer-events-none transition-opacity ${
+          labelsHidden.value ? "opacity-0" : ""
         }`}
       />
     </div>
