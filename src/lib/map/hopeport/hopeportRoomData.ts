@@ -351,6 +351,7 @@ const hopeportRoomData = [
   {
     id: "brannofs-dining-room",
     label: "Brannof's Dining Room",
+    labelOffset: [-4, 0],
     origin: [-32, 48],
     path: [
       [0, 0],
@@ -423,6 +424,7 @@ const hopeportRoomData = [
   {
     id: "hairdresser",
     label: "Hairdresser",
+    labelOffset: [0, 1],
     origin: [30, 44],
     path: [
       [0, 0],
@@ -465,6 +467,7 @@ const hopeportRoomData = [
   {
     id: "pipe-alley",
     label: "Pipe Alley",
+    labelOffset: [0, -5],
     origin: [47, 39],
     path: [
       [0, 0],
@@ -481,6 +484,7 @@ const hopeportRoomData = [
   {
     id: "cloakroom",
     label: "The Cloakroom",
+    labelOffset: [0, -2],
     origin: [40, 44],
     path: [
       [0, 0],
@@ -498,6 +502,7 @@ const hopeportRoomData = [
   {
     id: "foragers-warehouse",
     label: "The Forager's Warehouse",
+    labelOffset: [4, -1],
     origin: [50, 41],
     path: [
       [0, 0],
@@ -590,6 +595,7 @@ const hopeportRoomData = [
   {
     id: "enchantress-shop",
     label: "Enchantress Shop",
+    labelOffset: [4, 2],
     origin: [46, 60],
     path: [
       [0, 0],
@@ -607,6 +613,7 @@ const hopeportRoomData = [
   {
     id: "tims-alley",
     label: "Tim's Alley",
+    labelOffset: [0, -3],
     origin: [43, 58],
     path: [
       [0, 0],
@@ -712,6 +719,7 @@ const hopeportRoomData = [
   {
     id: "monob-row",
     label: "Monob Row",
+    labelOffset: [0, 1],
     origin: [36, 58],
     path: [
       [0, 0],
@@ -729,6 +737,7 @@ const hopeportRoomData = [
   {
     id: "thieves-den",
     label: "Thieve's Den",
+    labelOffset: [-1, -3],
     origin: [28, 58],
     path: [
       [0, 0],
@@ -779,6 +788,7 @@ const hopeportRoomData = [
   {
     id: "murk-close",
     label: "Murk Close",
+    labelOffset: [5, -3],
     origin: [48, 71],
     path: [
       [0, 0],
@@ -798,6 +808,7 @@ const hopeportRoomData = [
   {
     id: "limpet-lane",
     label: "Limpet Lane",
+    labelOffset: [-6, 0],
     origin: [43, 76],
     path: [
       [0, 0],
@@ -815,6 +826,7 @@ const hopeportRoomData = [
   {
     id: "nook-alley",
     label: "Nook Alley",
+    labelOffset: [3, 2],
     origin: [47, 79],
     path: [
       [0, 0],
@@ -992,6 +1004,7 @@ const hopeportRoomData = [
   {
     id: "hooked-hand",
     label: "The Hooked Hand",
+    labelOffset: [0, -3],
     origin: [-2, 71],
     path: [
       [0, 0],
