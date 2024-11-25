@@ -5,7 +5,7 @@ import {
 } from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
 import { MapConfig } from "@/lib/map/mapConfig";
-import { NormalizedValue, Point } from "@/lib/generalTypes";
+import { NormalizedValue, PixelValue, Point } from "@/lib/generalTypes";
 import { toPixels } from "@/lib/utils";
 
 export default function useDrawMap({
@@ -45,10 +45,11 @@ export default function useDrawMap({
     cellSize: number,
     style: {
       padding: NormalizedValue;
-      lineHeight: NormalizedValue;
+      lineHeight: PixelValue;
       backgroundColor: string;
       borderColor: string;
       textColor: string;
+      textSize: PixelValue;
     }
   ) {
     ctx.save();
@@ -69,9 +70,8 @@ export default function useDrawMap({
       ctx.stroke(label.element);
 
       // Draw text
-      const lineHeightPx = toPixels(style.lineHeight, cellSize);
       const paddingPx = toPixels(style.padding, cellSize);
-      const totalLinesHeight = lineHeightPx * label.lines.length;
+      const totalLinesHeight = style.lineHeight * label.lines.length;
 
       const textStartY =
         toPixels(label.center.y, cellSize) -
@@ -80,12 +80,13 @@ export default function useDrawMap({
         (label.size.height - paddingPx * 2 - totalLinesHeight) / 2;
 
       ctx.fillStyle = style.textColor;
+      ctx.font = `${style.textSize.toString()}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
 
       label.lines.forEach((line, index) => {
         const x = toPixels(label.center.x, cellSize);
-        const y = textStartY + index * lineHeightPx;
+        const y = textStartY + index * style.lineHeight;
         ctx.fillText(line, x, y);
       });
     }
@@ -99,6 +100,7 @@ export default function useDrawMap({
       labelLineHeight,
       labelColor,
       labelTextColor,
+      labelTextSize,
       labelBorderColor,
     } = mapConfig;
     const mapPos = mapState.mapPos.value;
@@ -140,6 +142,7 @@ export default function useDrawMap({
         borderColor: labelBorderColor,
         lineHeight: labelLineHeight,
         textColor: labelTextColor,
+        textSize: labelTextSize,
       }
     );
   }, [

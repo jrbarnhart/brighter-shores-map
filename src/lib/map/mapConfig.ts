@@ -10,11 +10,12 @@ const mapConfig = {
   bgColor: "#2a2b2a",
   defaultColor: "#c5b57b",
   defaultRoomFill: "#c5b57b",
-  labelPadding: 2 as NormalizedValue,
+  labelPadding: 1 as NormalizedValue,
   labelMaxLineWidth: 4 as NormalizedValue,
-  labelLineHeight: 0.8 as NormalizedValue,
+  labelLineHeight: 16 as PixelValue,
   labelColor: "lightblue",
   labelTextColor: "black",
+  labelTextSize: 16 as PixelValue,
   labelBorderColor: "black",
 } as const;
 

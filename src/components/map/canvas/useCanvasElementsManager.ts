@@ -3,7 +3,7 @@ import mapData, { MapData, RoomData, RoomId } from "@/lib/map/mapData";
 import RBush, { BBox } from "rbush";
 import { RoomTreeNode } from "./useCreateRTree";
 import mapConfig from "@/lib/map/mapConfig";
-import { NormalizedValue, Point, Size } from "@/lib/generalTypes";
+import { NormalizedValue, PixelValue, Point, Size } from "@/lib/generalTypes";
 import { toPixels } from "@/lib/utils";
 
 export type RoomDataWithPath = RoomData & {
@@ -123,10 +123,9 @@ function createWrappedText(
   text: string,
   cellSize: number,
   maxLineWidth: NormalizedValue,
-  lineHeight: NormalizedValue
+  lineHeight: PixelValue
 ): WrappedText {
   const maxWidthPx = toPixels(maxLineWidth, cellSize);
-  const lineHeightPx = toPixels(lineHeight, cellSize);
 
   const words = text.split(" ");
   const lines: string[] = [];
@@ -161,7 +160,7 @@ function createWrappedText(
     lines,
     size: {
       width: Math.min(maxWidthPx, maxLineWidthPx),
-      height: lineHeightPx * lines.length,
+      height: lineHeight * lines.length,
     },
   };
 }
@@ -209,7 +208,7 @@ function createLabels(
   config: {
     padding: NormalizedValue;
     maxLineWidth: NormalizedValue;
-    lineHeight: NormalizedValue;
+    lineHeight: PixelValue;
   }
 ): LabelDataWithPath[] {
   return roomPaths.map((roomPath) => {
