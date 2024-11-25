@@ -123,6 +123,8 @@ export default function useDrawMap({
     }
 
     roomsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
+    labelsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
+
     drawRoomPaths(
       roomsCanvasContext,
       visibleRooms,
@@ -131,7 +133,7 @@ export default function useDrawMap({
       mapConfig
     );
     drawRoomLabels(
-      roomsCanvasContext,
+      labelsCanvasContext,
       roomLabels,
       visibleRooms,
       { position: mapPos },
