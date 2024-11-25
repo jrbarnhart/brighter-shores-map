@@ -80,7 +80,7 @@ export default function useDrawMap({
         (label.size.height - paddingPx * 2 - totalLinesHeight) / 2;
 
       ctx.fillStyle = style.textColor;
-      ctx.font = `${style.textSize.toString()}px Arial`;
+      ctx.font = `bold ${style.textSize.toString()}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
 
