@@ -1,4 +1,4 @@
-import { NormalizedValue, PixelValue } from "../generalTypes";
+import { PixelValue } from "../generalTypes";
 
 const mapConfig = {
   defaultCellSize: 20 as PixelValue,
@@ -10,8 +10,8 @@ const mapConfig = {
   bgColor: "#2a2b2a",
   defaultColor: "#c5b57b",
   defaultRoomFill: "#c5b57b",
-  labelPadding: 1 as NormalizedValue,
-  labelMaxLineWidth: 4 as NormalizedValue,
+  labelPadding: 8 as PixelValue,
+  labelMaxLineWidth: 100 as PixelValue,
   labelLineHeight: 16 as PixelValue,
   labelColor: "lightblue",
   labelTextColor: "black",

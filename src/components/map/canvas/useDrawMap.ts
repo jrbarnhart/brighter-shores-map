@@ -5,7 +5,7 @@ import {
 } from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
 import { MapConfig } from "@/lib/map/mapConfig";
-import { NormalizedValue, PixelValue, Point } from "@/lib/generalTypes";
+import { PixelValue, Point } from "@/lib/generalTypes";
 import { toPixels } from "@/lib/utils";
 
 export default function useDrawMap({
@@ -44,7 +44,7 @@ export default function useDrawMap({
     viewport: { position: Point },
     cellSize: number,
     style: {
-      padding: NormalizedValue;
+      padding: PixelValue;
       lineHeight: PixelValue;
       backgroundColor: string;
       borderColor: string;

@@ -121,46 +121,53 @@ type WrappedText = {
 
 function createWrappedText(
   text: string,
-  cellSize: number,
   maxLineWidth: NormalizedValue,
-  lineHeight: PixelValue
+  labelTextSize: PixelValue
 ): WrappedText {
-  const maxWidthPx = toPixels(maxLineWidth, cellSize);
+  function estimateTextWidth(text: string): PixelValue {
+    const getCharWidthRatio = (size: number) => {
+      if (size <= 10) return 0.5;
+      if (size <= 14) return 0.55;
+      if (size <= 18) return 0.6;
+      return 0.65;
+    };
+    const charWidthRatio = getCharWidthRatio(labelTextSize);
+    const spaceWidth = labelTextSize * charWidthRatio * 0.5;
+    const charWidth = labelTextSize * charWidthRatio;
+    const spaceCount = (text.match(/\s/g) || []).length;
+    const nonSpaceCharCount = text.replace(/\s/g, "").length;
+    return nonSpaceCharCount * charWidth + spaceCount * spaceWidth;
+  }
 
-  const words = text.split(" ");
+  const maxWidthPx = maxLineWidth; // Direct use of provided max width
+  const words = text.split(/\s+/); // Split on any whitespace
   const lines: string[] = [];
   let currentLine = "";
-  let maxLineWidthPx = 0;
 
-  words.forEach((word, index) => {
+  for (const word of words) {
     const testLine = currentLine ? `${currentLine} ${word}` : word;
-    const testWidthPx = toPixels(testLine.length, cellSize);
+    const testLineWidth = estimateTextWidth(testLine);
 
-    if (testWidthPx <= maxWidthPx || words.length === 1 || index === 0) {
+    if (testLineWidth <= maxWidthPx) {
+      // If line still fits, add word
       currentLine = testLine;
     } else {
-      lines.push(currentLine);
-      maxLineWidthPx = Math.max(
-        maxLineWidthPx,
-        toPixels(currentLine.length, cellSize)
-      );
+      // If line doesn't fit, start new line
+      if (currentLine) lines.push(currentLine);
       currentLine = word;
     }
-  });
+  }
 
+  // Add last line
   if (currentLine) {
     lines.push(currentLine);
-    maxLineWidthPx = Math.max(
-      maxLineWidthPx,
-      toPixels(currentLine.length, cellSize)
-    );
   }
 
   return {
     lines,
     size: {
-      width: Math.min(maxWidthPx, maxLineWidthPx),
-      height: lineHeight * lines.length,
+      width: maxWidthPx,
+      height: labelTextSize * lines.length,
     },
   };
 }
@@ -176,21 +183,20 @@ function createLabelGeometry(
   labelOffset: [NormalizedValue, NormalizedValue] | undefined,
   wrappedText: WrappedText,
   cellSize: number,
-  padding: NormalizedValue
+  padding: PixelValue
 ): LabelGeometry {
   const [xOffset, yOffset] = labelOffset ?? [0, 0];
-  const paddingPx = toPixels(padding, cellSize);
 
   const rectX =
     toPixels(center.x + xOffset, cellSize) -
     wrappedText.size.width / 2 -
-    paddingPx;
+    padding;
   const rectY =
     toPixels(center.y + yOffset, cellSize) -
     wrappedText.size.height / 2 -
-    paddingPx;
-  const rectWidth = wrappedText.size.width + 2 * paddingPx;
-  const rectHeight = wrappedText.size.height + 2 * paddingPx;
+    padding;
+  const rectWidth = wrappedText.size.width + 2 * padding;
+  const rectHeight = wrappedText.size.height + 2 * padding;
 
   const path = new Path2D();
   path.roundRect(rectX, rectY, rectWidth, rectHeight, 6);
@@ -206,17 +212,16 @@ function createLabels(
   roomPaths: RoomDataWithPath[],
   cellSize: number,
   config: {
-    padding: NormalizedValue;
+    padding: PixelValue;
     maxLineWidth: NormalizedValue;
-    lineHeight: PixelValue;
+    textSize: PixelValue;
   }
 ): LabelDataWithPath[] {
   return roomPaths.map((roomPath) => {
     const wrappedText = createWrappedText(
       roomPath.label,
-      cellSize,
       config.maxLineWidth,
-      config.lineHeight
+      config.textSize
     );
 
     const geometry = createLabelGeometry(
@@ -248,17 +253,17 @@ export default function useCanvasElementsManager({
   mapPos: { x: number; y: number };
   rTree: RBush<RoomTreeNode> | undefined;
 }) {
-  const { labelPadding, labelLineHeight, labelMaxLineWidth } = mapConfig;
+  const { labelPadding, labelMaxLineWidth, labelTextSize } = mapConfig;
 
   const mapElements = useMemo(() => {
     const roomPaths = createRoomPaths(currentCellSize, mapData);
     const roomLabels = createLabels(roomPaths, currentCellSize, {
       padding: labelPadding,
-      lineHeight: labelLineHeight,
+      textSize: labelTextSize,
       maxLineWidth: labelMaxLineWidth,
     });
     return { roomPaths, roomLabels };
-  }, [currentCellSize, labelLineHeight, labelMaxLineWidth, labelPadding]);
+  }, [currentCellSize, labelMaxLineWidth, labelPadding, labelTextSize]);
 
   const { roomPaths, roomLabels } = mapElements;
 
