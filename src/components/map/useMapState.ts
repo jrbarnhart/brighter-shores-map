@@ -8,12 +8,15 @@ import {
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
+import { NormalizedValue, PixelValue } from "@/lib/generalTypes";
 
 export type MapState = {
   canvas: {
     size: {
-      value: { height: number; width: number };
-      set: React.Dispatch<SetStateAction<{ height: number; width: number }>>;
+      value: { height: PixelValue; width: PixelValue };
+      set: React.Dispatch<
+        SetStateAction<{ height: PixelValue; width: PixelValue }>
+      >;
     };
     rooms: {
       ref: React.MutableRefObject<HTMLCanvasElement | null>;
@@ -23,8 +26,8 @@ export type MapState = {
     };
   };
   currentCellSize: {
-    value: number;
-    set: React.Dispatch<SetStateAction<number>>;
+    value: PixelValue;
+    set: React.Dispatch<SetStateAction<PixelValue>>;
   };
   roomPaths: {
     value: RoomDataWithPath[];
@@ -44,8 +47,10 @@ export type MapState = {
     set: React.Dispatch<SetStateAction<boolean>>;
   };
   mapPos: {
-    value: { x: number; y: number };
-    set: React.Dispatch<SetStateAction<{ x: number; y: number }>>;
+    value: { x: NormalizedValue; y: NormalizedValue };
+    set: React.Dispatch<
+      SetStateAction<{ x: NormalizedValue; y: NormalizedValue }>
+    >;
   };
   drag: {
     lock: { value: boolean; set: React.Dispatch<SetStateAction<boolean>> };
