@@ -4,9 +4,10 @@ import useMouseTouch from "../useMouseTouch";
 import useCanvasSize from "./useCanvasSize";
 import useCreateRTree from "./useCreateRTree";
 import useDrawMap from "./useDrawMap";
+import { useEffect } from "react";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
-  const { canvas, labelsHidden } = mapState;
+  const { canvas, labelsHidden, currentCellSize, labelsWereVisible } = mapState;
   const canvasSize = canvas.size.value;
   const roomCanvasRef = canvas.rooms.ref;
   const labelsCanvasRef = canvas.labels.ref;
@@ -29,6 +30,20 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     handleTouchMove,
     handleTouchEnd,
   } = useMouseTouch({ mapState });
+
+  // Auto hide labels when map scales to min scale
+  useEffect(() => {
+    if (currentCellSize.value <= mapConfig.minCellSize) {
+      if (!labelsHidden.value) {
+        labelsWereVisible.set(true);
+      }
+      labelsHidden.set(true);
+    } else if (currentCellSize.value > mapConfig.minCellSize) {
+      if (labelsWereVisible.value) {
+        labelsHidden.set(false);
+      }
+    }
+  }, [currentCellSize.value, labelsHidden, labelsWereVisible]);
 
   return (
     <div className="touch-none relative">

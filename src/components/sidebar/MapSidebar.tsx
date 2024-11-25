@@ -13,6 +13,7 @@ import { MapState } from "../map/useMapState";
 
 export default function MapSidebar({ mapState }: { mapState: MapState }) {
   const handleLabelsToggle = () => {
+    mapState.labelsWereVisible.set((prev) => !prev);
     mapState.labelsHidden.set((prev) => !prev);
   };
 
