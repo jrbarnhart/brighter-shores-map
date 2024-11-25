@@ -18,6 +18,7 @@ export type LabelDataWithPath = {
   roomId: RoomId;
   center: { x: number; y: number };
   size: { height: number; width: number };
+  offset: { x: number; y: number } | undefined;
 };
 
 function createCanvasPath2D(
@@ -232,12 +233,15 @@ function createLabels(
       config.padding
     );
 
+    const offset = roomPath.labelOffset;
+
     return {
       lines: wrappedText.lines,
       element: geometry.path,
       roomId: roomPath.id as RoomId,
       size: geometry.size,
       center: geometry.center,
+      offset: offset ? { x: offset[0], y: offset[1] } : undefined,
     };
   });
 }

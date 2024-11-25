@@ -72,9 +72,13 @@ export default function useDrawMap({
       // Draw text
       const paddingPx = toPixels(style.padding, cellSize);
       const totalLinesHeight = style.lineHeight * label.lines.length;
+      let offSet = { x: 0, y: 0 };
+      if (label.offset) {
+        offSet = label.offset;
+      }
 
       const textStartY =
-        toPixels(label.center.y, cellSize) -
+        toPixels(label.center.y + offSet.y, cellSize) -
         label.size.height / 2 +
         paddingPx +
         (label.size.height - paddingPx * 2 - totalLinesHeight) / 2;
@@ -85,7 +89,7 @@ export default function useDrawMap({
       ctx.textBaseline = "top";
 
       label.lines.forEach((line, index) => {
-        const x = toPixels(label.center.x, cellSize);
+        const x = toPixels(label.center.x + offSet.x, cellSize);
         const y = textStartY + index * style.lineHeight;
         ctx.fillText(line, x, y);
       });
