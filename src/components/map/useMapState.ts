@@ -46,6 +46,10 @@ export type MapState = {
     value: boolean;
     set: React.Dispatch<SetStateAction<boolean>>;
   };
+  labelsWereVisible: {
+    value: boolean;
+    set: React.Dispatch<SetStateAction<boolean>>;
+  };
   mapPos: {
     value: { x: NormalizedValue; y: NormalizedValue };
     set: React.Dispatch<
@@ -85,6 +89,7 @@ export default function useMapState() {
     useState<number>(defaultCellSize);
   const [rTree, setRTree] = useState<RBush<RoomTreeNode> | undefined>();
   const [labelsHidden, setLabelsHidden] = useState(false);
+  const [labelsWereVisible, setLabelsWereVisible] = useState(true);
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const [dragLocked, setDragLocked] = useState(false);
   const enabledRef = useRef(false);
@@ -116,6 +121,7 @@ export default function useMapState() {
     rTree: { value: rTree, set: setRTree },
     visibleRoomPaths: { value: visibleRoomPaths },
     labelsHidden: { value: labelsHidden, set: setLabelsHidden },
+    labelsWereVisible: { value: labelsWereVisible, set: setLabelsWereVisible },
     mapPos: { value: mapPos, set: setMapPos },
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
     isHovering: { value: isHovering, set: setIsHovering },
