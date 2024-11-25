@@ -14,8 +14,8 @@ export type LabelDataWithPath = {
   lines: string[];
   element: Path2D;
   roomId: RoomId;
-  roomCenter: { x: number; y: number };
-  roomSize: { height: number; width: number };
+  center: { x: number; y: number };
+  size: { height: number; width: number };
 };
 
 function createCanvasPath2D(
@@ -62,8 +62,8 @@ function getRoomDimensions(room: RoomData) {
   }
 
   const center = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
-  const height = maxX - minX;
-  const width = maxY - minY;
+  const width = maxX - minX;
+  const height = maxY - minY;
   const size = { height, width };
   return { center, size };
 }
@@ -192,7 +192,11 @@ function createLabelRect(
 
   path2D.roundRect(rectX, rectY, rectWidth, rectHeight, 6);
 
-  return path2D;
+  return {
+    labelPath: path2D,
+    labelSize: { height: rectHeight, width: rectWidth },
+    labelCenter: { x: center.x, y: center.y },
+  };
 }
 
 function createLabelsForRoomPaths(
@@ -211,7 +215,7 @@ function createLabelsForRoomPaths(
       labelMaxLineWidth,
       labelLineHeight
     );
-    const labelRect = createLabelRect(
+    const { labelPath, labelSize, labelCenter } = createLabelRect(
       roomPath,
       currentCellSize,
       labelPadding,
@@ -219,10 +223,10 @@ function createLabelsForRoomPaths(
     );
     labelElements.push({
       lines: wrappedLabelText.lines,
-      element: labelRect,
+      element: labelPath,
       roomId: roomPath.id as RoomId,
-      roomCenter: roomPath.center,
-      roomSize: roomPath.size,
+      size: labelSize,
+      center: labelCenter,
     });
   }
   return labelElements;
