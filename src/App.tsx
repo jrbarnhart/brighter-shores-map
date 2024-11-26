@@ -12,7 +12,7 @@ function App() {
 
   return (
     <SidebarProvider>
-      <MapSidebar mapState={mapState} />
+      <MapSidebar mapState={mapState} mapConfig={mapConfig} />
       <main
         className="h-screen w-screen relative overflow-hidden"
         style={{ backgroundColor: mapConfig.bgColor }}
