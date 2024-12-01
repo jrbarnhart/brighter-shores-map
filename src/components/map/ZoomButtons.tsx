@@ -2,7 +2,7 @@ import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 import { Button } from "../ui/button";
 import { useCallback } from "react";
-import { toNormalizedGridSpace } from "@/lib/utils";
+import { adjustMapPosOnZoom } from "@/lib/utils";
 
 export default function ZoomButtons({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
@@ -23,42 +23,22 @@ export default function ZoomButtons({ ...props }: { mapState: MapState }) {
 
       // Only proceed if cell size should change
       if (testCellSize !== currentCellSize.value) {
-        mapPos.set((prev) => {
-          // Canvas center point
-          const centerX = canvasSize.width / 2;
-          const centerY = canvasSize.height / 2;
-
-          // Convert screen center to current grid coordinates
-          const currentNormX = toNormalizedGridSpace(
-            centerX,
-            currentCellSize.value
-          );
-          const currentNormY = toNormalizedGridSpace(
-            centerY,
-            currentCellSize.value
-          );
-
-          // Convert screen center to new grid coordinates
-          const newNormX = toNormalizedGridSpace(centerX, testCellSize);
-          const newNormY = toNormalizedGridSpace(centerY, testCellSize);
-
-          // Calculate the adjustment needed to keep the center point
-          const newX = prev.x + (currentNormX - newNormX);
-          const newY = prev.y + (currentNormY - newNormY);
-
-          return { x: newX, y: newY };
-        });
+        adjustMapPosOnZoom(
+          mapPos.set,
+          canvasSize,
+          currentCellSize.value,
+          testCellSize
+        );
 
         // Update cell size
         currentCellSize.set(testCellSize);
       }
     },
     [
-      canvasSize.height,
-      canvasSize.width,
+      canvasSize,
       cellSizeIncrement,
       currentCellSize,
-      mapPos,
+      mapPos.set,
       maxCellSize,
       minCellSize,
     ]
