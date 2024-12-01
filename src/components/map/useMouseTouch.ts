@@ -99,6 +99,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       mapPos,
       currentCellSize,
       setSelectedId,
+      setDetailsOpen,
     }: {
       e: React.MouseEvent;
       visibleRooms: RoomDataWithPath[];
@@ -106,6 +107,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       mapPos: { x: NormalizedValue; y: NormalizedValue };
       currentCellSize: number;
       setSelectedId: React.Dispatch<SetStateAction<RoomId | null>>;
+      setDetailsOpen: React.Dispatch<SetStateAction<boolean>>;
     }) => {
       if (!canvasCtx) return;
 
@@ -116,9 +118,12 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
         if (canvasCtx.isPointInPath(room.element, x, y)) {
           console.log(x, y, room.id);
           setSelectedId(room.id);
-          break;
+          setDetailsOpen(true);
+          return;
         }
       }
+
+      setDetailsOpen(false);
     },
     []
   );

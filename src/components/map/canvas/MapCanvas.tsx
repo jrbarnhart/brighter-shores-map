@@ -15,6 +15,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     labelsWereVisible,
     visibleRoomPaths,
     selectedId,
+    detailsOpen,
   } = mapState;
   const canvasSize = canvas.size.value;
   const roomCanvasRef = canvas.rooms.ref;
@@ -71,6 +72,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
             mapPos: mapPos.value,
             currentCellSize: currentCellSize.value,
             setSelectedId: selectedId.set,
+            setDetailsOpen: detailsOpen.set,
           });
         }}
         onDoubleClick={handleDoubleClick}
