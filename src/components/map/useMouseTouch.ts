@@ -131,22 +131,26 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   );
 
   const handleDoubleClick = useCallback(() => {
-    setCurrentCellSize((prev) => {
-      // Set to next pre determined cell size
-      const defaultSizeBreakpoints = [
-        minCellSize,
-        maxCellSize / 2,
-        maxCellSize,
-      ];
+    // Set to next pre determined cell size
+    const defaultSizeBreakpoints = [minCellSize, maxCellSize / 2, maxCellSize];
 
-      // Find the next breakpoint
-      const nextBreakpoint = defaultSizeBreakpoints.find((breakpoint) => {
-        return breakpoint > prev;
-      });
-      if (nextBreakpoint) return nextBreakpoint;
-      return defaultSizeBreakpoints[0];
-    });
-  }, [maxCellSize, minCellSize, setCurrentCellSize]);
+    // Find the next breakpoint
+    const nextBreakpoint =
+      defaultSizeBreakpoints.find((breakpoint) => {
+        return breakpoint > currentCellSize;
+      }) ?? defaultSizeBreakpoints[0];
+
+    // Adjust mapPos
+    adjustMapPosOnZoom(setMapPos, canvasSize, currentCellSize, nextBreakpoint);
+    setCurrentCellSize(nextBreakpoint);
+  }, [
+    canvasSize,
+    currentCellSize,
+    maxCellSize,
+    minCellSize,
+    setCurrentCellSize,
+    setMapPos,
+  ]);
 
   // Touch handlers
   const handleTouchStart = useCallback(
