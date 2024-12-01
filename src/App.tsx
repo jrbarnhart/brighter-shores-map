@@ -3,7 +3,7 @@ import MoveButton from "./components/moveButton/MoveButton";
 import MapSidebar from "./components/sidebar/MapSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import mapConfig from "./lib/map/mapConfig";
-import ZoomSlider from "./components/map/ZoomSlider";
+import ZoomButtons from "./components/map/ZoomButtons";
 import Details from "./components/toolTips/Details";
 import MapCanvas from "./components/map/canvas/MapCanvas";
 
@@ -19,7 +19,7 @@ function App() {
       >
         <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-accent hover:bg-sidebar-accent" />
         <MoveButton mapState={mapState} />
-        <ZoomSlider mapState={mapState} />
+        <ZoomButtons mapState={mapState} />
         <Details mapState={mapState} />
         <MapCanvas mapState={mapState} />
       </main>

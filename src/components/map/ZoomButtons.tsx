@@ -3,7 +3,7 @@ import mapConfig from "@/lib/map/mapConfig";
 import { Button } from "../ui/button";
 import { useCallback } from "react";
 
-export default function ZoomSlider({ ...props }: { mapState: MapState }) {
+export default function ZoomButtons({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
   const { currentCellSize } = mapState;
 
