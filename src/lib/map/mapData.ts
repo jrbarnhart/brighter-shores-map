@@ -52,7 +52,7 @@ export type BankType =
   | "timber"
   | "leathers";
 
-// Union type for all regions
+// Union types for all regions
 type RoomContentData = HopeportRoomContentData;
 export type RoomId = HopeportRoomId;
 
