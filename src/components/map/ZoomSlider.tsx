@@ -1,29 +1,46 @@
-import { cn } from "@/lib/utils";
-import { Slider } from "@/components/ui/slider";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
+import { Button } from "../ui/button";
+import { useCallback } from "react";
 
-type SliderProps = React.ComponentProps<typeof Slider>;
+export default function ZoomSlider({ ...props }: { mapState: MapState }) {
+  const { mapState } = props;
+  const { currentCellSize } = mapState;
 
-export default function ZoomSlider({
-  mapState,
-  ...props
-}: SliderProps & { mapState: MapState }) {
-  const { className } = props;
   const { cellSizeIncrement, minCellSize, maxCellSize } = mapConfig;
+
+  const onClick = useCallback(
+    (positive: boolean) => {
+      const change = cellSizeIncrement * (positive ? 1 : -1);
+      currentCellSize.set((prev) => {
+        return Math.min(maxCellSize, Math.max(minCellSize, prev + change));
+      });
+    },
+    [cellSizeIncrement, currentCellSize, maxCellSize, minCellSize]
+  );
+
   return (
-    <div className="absolute top-0 left-0 z-10 w-full mt-7 flex justify-around">
-      <Slider
-        value={[mapState.currentCellSize.value]}
-        onValueChange={(value) => {
-          mapState.currentCellSize.set(value[0]);
+    <div className="absolute right-0 z-10 w-12 h-full mr-3 flex flex-col justify-center gap-10">
+      <Button
+        onClick={() => {
+          onClick(true);
         }}
-        max={maxCellSize}
-        min={minCellSize}
-        step={cellSizeIncrement}
-        className={cn("w-40 sm:w-72 md:w-96 z-10", className)}
-        {...props}
-      />
+        className={`${
+          currentCellSize.value >= maxCellSize ? "brightness-50" : " "
+        } h-20 w-full font-bold bg-sidebar border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground`}
+      >
+        +
+      </Button>
+      <Button
+        onClick={() => {
+          onClick(false);
+        }}
+        className={`${
+          currentCellSize.value <= minCellSize ? "brightness-50" : " "
+        } h-20 w-full font-bold bg-sidebar border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground`}
+      >
+        -
+      </Button>
     </div>
   );
 }
