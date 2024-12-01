@@ -121,8 +121,7 @@ export default function useDrawMap({
       !roomsCanvasContext ||
       !roomsCanvas ||
       !labelsCanvasContext ||
-      !labelsCanvas ||
-      visibleRooms.length === 0
+      !labelsCanvas
     ) {
       return;
     }
