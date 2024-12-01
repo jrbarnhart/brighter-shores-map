@@ -2,21 +2,66 @@ import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 import { Button } from "../ui/button";
 import { useCallback } from "react";
+import { toNormalizedGridSpace } from "@/lib/utils";
 
 export default function ZoomButtons({ ...props }: { mapState: MapState }) {
   const { mapState } = props;
-  const { currentCellSize } = mapState;
+  const { currentCellSize, mapPos, canvas } = mapState;
+  const canvasSize = canvas.size.value;
 
   const { cellSizeIncrement, minCellSize, maxCellSize } = mapConfig;
 
   const onClick = useCallback(
-    (positive: boolean) => {
-      const change = cellSizeIncrement * (positive ? 1 : -1);
-      currentCellSize.set((prev) => {
-        return Math.min(maxCellSize, Math.max(minCellSize, prev + change));
-      });
+    (zoomIn: boolean) => {
+      const change = cellSizeIncrement * (zoomIn ? 1 : -1);
+
+      // Calculate the new cell size first
+      const testCellSize = Math.min(
+        maxCellSize,
+        Math.max(minCellSize, currentCellSize.value + change)
+      );
+
+      // Only proceed if cell size should change
+      if (testCellSize !== currentCellSize.value) {
+        mapPos.set((prev) => {
+          // Canvas center point
+          const centerX = canvasSize.width / 2;
+          const centerY = canvasSize.height / 2;
+
+          // Convert screen center to current grid coordinates
+          const currentNormX = toNormalizedGridSpace(
+            centerX,
+            currentCellSize.value
+          );
+          const currentNormY = toNormalizedGridSpace(
+            centerY,
+            currentCellSize.value
+          );
+
+          // Convert screen center to new grid coordinates
+          const newNormX = toNormalizedGridSpace(centerX, testCellSize);
+          const newNormY = toNormalizedGridSpace(centerY, testCellSize);
+
+          // Calculate the adjustment needed to keep the center point
+          const newX = prev.x + (currentNormX - newNormX);
+          const newY = prev.y + (currentNormY - newNormY);
+
+          return { x: newX, y: newY };
+        });
+
+        // Update cell size
+        currentCellSize.set(testCellSize);
+      }
     },
-    [cellSizeIncrement, currentCellSize, maxCellSize, minCellSize]
+    [
+      canvasSize.height,
+      canvasSize.width,
+      cellSizeIncrement,
+      currentCellSize,
+      mapPos,
+      maxCellSize,
+      minCellSize,
+    ]
   );
 
   return (
