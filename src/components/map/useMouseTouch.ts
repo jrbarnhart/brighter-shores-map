@@ -1,6 +1,7 @@
-import { useCallback, useRef, useState } from "react";
+import React, { SetStateAction, useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
+import { RoomDataWithPath, RoomId } from "@/lib/types";
 
 export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const { set: setMapPos } = mapState.mapPos;
@@ -89,6 +90,30 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
     [handleDragMove]
   );
 
+  const handleClick = useCallback(
+    ({
+      e,
+      visibleRooms,
+      canvasCtx,
+      setSelectedId,
+    }: {
+      e: React.MouseEvent;
+      visibleRooms: RoomDataWithPath[];
+      canvasCtx: CanvasRenderingContext2D;
+      setSelectedId: React.Dispatch<SetStateAction<RoomId>>;
+    }) => {
+      const x = e.clientX;
+      const y = e.clientY;
+
+      for (const room of visibleRooms) {
+        if (canvasCtx.isPointInPath(room.element, x, y)) {
+          setSelectedId(room.id);
+        }
+      }
+    },
+    []
+  );
+
   const handleDoubleClick = useCallback(() => {
     setCellSize((prev) => {
       // Set to next pre determined cell size
@@ -174,6 +199,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp: handleDragEnd,
+    handleClick,
     handleDoubleClick,
     handleContextMenu,
     handleTouchStart,
