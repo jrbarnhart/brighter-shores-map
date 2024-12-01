@@ -1,7 +1,8 @@
 import React, { SetStateAction, useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
-import { RoomDataWithPath, RoomId } from "@/lib/types";
+import { NormalizedValue, RoomDataWithPath, RoomId } from "@/lib/types";
+import { toPixels } from "@/lib/utils";
 
 export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const { set: setMapPos } = mapState.mapPos;
@@ -95,19 +96,27 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       e,
       visibleRooms,
       canvasCtx,
+      mapPos,
+      currentCellSize,
       setSelectedId,
     }: {
       e: React.MouseEvent;
       visibleRooms: RoomDataWithPath[];
-      canvasCtx: CanvasRenderingContext2D;
-      setSelectedId: React.Dispatch<SetStateAction<RoomId>>;
+      canvasCtx: CanvasRenderingContext2D | null | undefined;
+      mapPos: { x: NormalizedValue; y: NormalizedValue };
+      currentCellSize: number;
+      setSelectedId: React.Dispatch<SetStateAction<RoomId | null>>;
     }) => {
-      const x = e.clientX;
-      const y = e.clientY;
+      if (!canvasCtx) return;
+
+      const x = e.clientX + toPixels(mapPos.x, currentCellSize);
+      const y = e.clientY + toPixels(mapPos.y, currentCellSize);
 
       for (const room of visibleRooms) {
         if (canvasCtx.isPointInPath(room.element, x, y)) {
+          console.log(x, y, room.id);
           setSelectedId(room.id);
+          break;
         }
       }
     },
