@@ -2,9 +2,10 @@ import React, { SetStateAction, useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 import { NormalizedValue, RoomDataWithPath, RoomId } from "@/lib/types";
-import { toPixels } from "@/lib/utils";
+import { adjustMapPosOnZoom, toPixels } from "@/lib/utils";
 
 export default function useMouseTouch({ mapState }: { mapState: MapState }) {
+  const canvasSize = mapState.canvas.size.value;
   const { set: setMapPos } = mapState.mapPos;
   const dragEnabled = mapState.drag.enabledRef;
   const [isDragging, setIsDragging] = useState(false);
@@ -13,7 +14,8 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const mouseMoved = useRef(false);
   const lastTouchTime = useRef(0);
   const isDoubleTouchHold = useRef(false);
-  const { value: currentCellSize, set: setCellSize } = mapState.currentCellSize;
+  const { value: currentCellSize, set: setCurrentCellSize } =
+    mapState.currentCellSize;
   const {
     minCellSize,
     maxCellSize,
@@ -129,7 +131,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   );
 
   const handleDoubleClick = useCallback(() => {
-    setCellSize((prev) => {
+    setCurrentCellSize((prev) => {
       // Set to next pre determined cell size
       const defaultSizeBreakpoints = [
         minCellSize,
@@ -144,7 +146,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       if (nextBreakpoint) return nextBreakpoint;
       return defaultSizeBreakpoints[0];
     });
-  }, [maxCellSize, minCellSize, setCellSize]);
+  }, [maxCellSize, minCellSize, setCurrentCellSize]);
 
   // Touch handlers
   const handleTouchStart = useCallback(
@@ -180,28 +182,32 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   // Wheel zoom handler
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
-      // Scrolling up
-      if (e.deltaY < 0) {
-        // Increase current cell size
-        setCellSize((prev) => {
-          if (prev + cellSizeIncrement <= maxCellSize) {
-            return prev + cellSizeIncrement;
-          }
-          return maxCellSize;
-        });
-      }
-      // Scrolling down
-      else {
-        // Decrease current cell size
-        setCellSize((prev) => {
-          if (prev - cellSizeIncrement > minCellSize) {
-            return prev - cellSizeIncrement;
-          }
-          return minCellSize;
-        });
+      // Calculate new cell size
+      const change = cellSizeIncrement * (e.deltaY < 0 ? 1 : -1);
+      const testCellSize = Math.min(
+        maxCellSize,
+        Math.max(minCellSize, currentCellSize + change)
+      );
+
+      if (testCellSize !== currentCellSize) {
+        adjustMapPosOnZoom(
+          setMapPos,
+          canvasSize,
+          currentCellSize,
+          testCellSize
+        );
+        setCurrentCellSize(testCellSize);
       }
     },
-    [cellSizeIncrement, maxCellSize, minCellSize, setCellSize]
+    [
+      canvasSize,
+      cellSizeIncrement,
+      currentCellSize,
+      maxCellSize,
+      minCellSize,
+      setCurrentCellSize,
+      setMapPos,
+    ]
   );
 
   // Context handler
