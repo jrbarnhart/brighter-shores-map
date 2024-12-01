@@ -118,7 +118,6 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
 
       for (const room of visibleRooms) {
         if (canvasCtx.isPointInPath(room.element, x, y)) {
-          console.log(x, y, room.id);
           setSelectedId(room.id);
           setDetailsOpen(true);
           return;
