@@ -8,7 +8,7 @@ import {
 import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
-import { NormalizedValue, PixelValue } from "@/lib/generalTypes";
+import { NormalizedValue, PixelValue } from "@/lib/types";
 
 export type MapState = {
   canvas: {

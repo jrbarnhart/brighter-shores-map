@@ -1,4 +1,4 @@
-import { PixelValue } from "../generalTypes";
+import { PixelValue } from "../types";
 
 const mapConfig = {
   defaultCellSize: 20 as PixelValue,

@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import mapData, { MapData, RoomData, RoomId } from "@/lib/map/mapData";
+import mapData, { MapData, Room, RoomData, RoomId } from "@/lib/map/mapData";
 import RBush, { BBox } from "rbush";
 import { RoomTreeNode } from "./useCreateRTree";
 import mapConfig from "@/lib/map/mapConfig";
-import { NormalizedValue, PixelValue, Point, Size } from "@/lib/generalTypes";
+import { NormalizedValue, PixelValue, Point, Size } from "@/lib/types";
 import { toPixels } from "@/lib/utils";
 
-export type RoomDataWithPath = RoomData & {
+export type RoomDataWithPath = Room & {
   element: Path2D;
   center: { x: number; y: number };
   size: { height: number; width: number };
