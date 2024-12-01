@@ -1,19 +1,16 @@
-import mapData, { RoomData, RoomId } from "@/lib/map/mapData";
-import RBush, { BBox } from "rbush";
+import mapData from "@/lib/map/mapData";
+import { Room, RoomTreeNode } from "@/lib/types";
+import RBush from "rbush";
 import { SetStateAction, useEffect } from "react";
 
-export type RoomTreeNode = BBox & {
-  roomId: RoomId;
-};
-
-function createRoomTreeNode(roomData: RoomData) {
+function createRoomTreeNode(room: Room) {
   let minX = Infinity;
   let minY = Infinity;
   let maxX = -Infinity;
   let maxY = -Infinity;
-  const { origin } = roomData;
+  const { origin } = room;
 
-  for (const vertex of roomData.path) {
+  for (const vertex of room.path) {
     const originAdjustedVertex = [vertex[0] + origin[0], vertex[1] + origin[1]];
     if (originAdjustedVertex[0] < minX) minX = originAdjustedVertex[0];
     if (originAdjustedVertex[1] < minY) minY = originAdjustedVertex[1];
@@ -26,7 +23,7 @@ function createRoomTreeNode(roomData: RoomData) {
     minY,
     maxX,
     maxY,
-    roomId: roomData.id as RoomId,
+    roomId: room.id,
   } satisfies RoomTreeNode;
 }
 

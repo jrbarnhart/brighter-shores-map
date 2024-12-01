@@ -1,4 +1,4 @@
-import { Monster } from "../../mapData";
+import { Monster } from "@/lib/types";
 
 const HOPEPORT_MONSTER_DATA = [
   {

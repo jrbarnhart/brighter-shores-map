@@ -1,4 +1,4 @@
-import { BankType, NPC } from "../mapData";
+import { BankType, NPC } from "@/lib/types";
 import { HopeportRoomId } from "./hopeportRoomData";
 import { HopeportMonsterName } from "./roomContents/hopeportMonsterData";
 

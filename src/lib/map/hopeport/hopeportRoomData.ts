@@ -1,4 +1,4 @@
-import { RoomData } from "../mapData";
+import { RoomData } from "@/lib/types";
 
 export type HopeportRoomId = (typeof hopeportRoomData)[number]["id"];
 

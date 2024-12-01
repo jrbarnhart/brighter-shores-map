@@ -1,14 +1,15 @@
 import mapConfig from "@/lib/map/mapConfig";
-import { RoomId } from "@/lib/map/mapData";
 import React, { SetStateAction, useRef, useState } from "react";
-import {
-  LabelDataWithPath,
-  RoomDataWithPath,
-} from "./canvas/useCanvasElementsManager";
-import { RoomTreeNode } from "./canvas/useCreateRTree";
 import RBush from "rbush";
 import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
-import { NormalizedValue, PixelValue } from "@/lib/types";
+import {
+  LabelDataWithPath,
+  NormalizedValue,
+  PixelValue,
+  RoomDataWithPath,
+  RoomId,
+  RoomTreeNode,
+} from "@/lib/types";
 
 export type MapState = {
   canvas: {

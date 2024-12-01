@@ -1,25 +1,19 @@
 import { useMemo } from "react";
-import mapData, { MapData, Room, RoomData, RoomId } from "@/lib/map/mapData";
+import mapData from "@/lib/map/mapData";
 import RBush, { BBox } from "rbush";
-import { RoomTreeNode } from "./useCreateRTree";
 import mapConfig from "@/lib/map/mapConfig";
-import { NormalizedValue, PixelValue, Point, Size } from "@/lib/types";
+import {
+  LabelDataWithPath,
+  MapData,
+  NormalizedValue,
+  PixelValue,
+  Point,
+  Room,
+  RoomDataWithPath,
+  RoomTreeNode,
+  Size,
+} from "@/lib/types";
 import { toPixels } from "@/lib/utils";
-
-export type RoomDataWithPath = Room & {
-  element: Path2D;
-  center: { x: number; y: number };
-  size: { height: number; width: number };
-};
-
-export type LabelDataWithPath = {
-  lines: string[];
-  element: Path2D;
-  roomId: RoomId;
-  center: { x: number; y: number };
-  size: { height: number; width: number };
-  offset: { x: number; y: number } | undefined;
-};
 
 function createCanvasPath2D(
   path: [number, number][],
@@ -47,7 +41,7 @@ function createCanvasPath2D(
 }
 
 // Finds centers of rooms on a normalized grid with origin 0,0
-function getRoomDimensions(room: RoomData) {
+function getRoomDimensions(room: Room) {
   let minX = Infinity;
   let maxX = -Infinity;
   let minY = Infinity;
@@ -109,9 +103,7 @@ function filterVisibleRooms(
 
   const foundRoomIds = rTree.search(bbox).map((foundNode) => foundNode.roomId);
 
-  const result = roomPaths.filter((path) =>
-    foundRoomIds.includes(path.id as RoomId)
-  );
+  const result = roomPaths.filter((path) => foundRoomIds.includes(path.id));
   return result;
 }
 
@@ -238,7 +230,7 @@ function createLabels(
     return {
       lines: wrappedText.lines,
       element: geometry.path,
-      roomId: roomPath.id as RoomId,
+      roomId: roomPath.id,
       size: geometry.size,
       center: geometry.center,
       offset: offset ? { x: offset[0], y: offset[1] } : undefined,

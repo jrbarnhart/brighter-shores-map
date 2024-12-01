@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import {
-  LabelDataWithPath,
-  RoomDataWithPath,
-} from "./useCanvasElementsManager";
 import { MapState } from "../useMapState";
 import { MapConfig } from "@/lib/map/mapConfig";
-import { PixelValue, Point } from "@/lib/types";
+import {
+  LabelDataWithPath,
+  PixelValue,
+  Point,
+  RoomDataWithPath,
+} from "@/lib/types";
 import { toPixels } from "@/lib/utils";
 
 export default function useDrawMap({

@@ -106,7 +106,7 @@ export type BankType =
  ************************ */
 
 export type RegionData = {
-  rooms: readonly RoomData[];
+  rooms: readonly Room[];
   contents?: readonly RoomIdContentData[];
 };
 

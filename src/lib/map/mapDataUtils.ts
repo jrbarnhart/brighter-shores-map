@@ -1,6 +1,6 @@
+import { RoomId } from "../types";
 import hopeportContentData from "./hopeport/hopeportContentData";
 import hopeportRoomData from "./hopeport/hopeportRoomData";
-import { RoomId } from "./mapData";
 
 // Get the top level contents
 export function getRoomContent(searchId: RoomId | null) {
