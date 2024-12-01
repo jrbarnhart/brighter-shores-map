@@ -7,7 +7,15 @@ import useDrawMap from "./useDrawMap";
 import { useEffect } from "react";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
-  const { canvas, labelsHidden, currentCellSize, labelsWereVisible } = mapState;
+  const {
+    canvas,
+    mapPos,
+    labelsHidden,
+    currentCellSize,
+    labelsWereVisible,
+    visibleRoomPaths,
+    selectedId,
+  } = mapState;
   const canvasSize = canvas.size.value;
   const roomCanvasRef = canvas.rooms.ref;
   const labelsCanvasRef = canvas.labels.ref;
@@ -23,6 +31,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
+    handleClick,
     handleDoubleClick,
     handleWheel,
     handleContextMenu,
@@ -54,6 +63,16 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        onClick={(e) => {
+          handleClick({
+            e,
+            visibleRooms: visibleRoomPaths.value,
+            canvasCtx: roomCanvasRef.current?.getContext("2d"),
+            mapPos: mapPos.value,
+            currentCellSize: currentCellSize.value,
+            setSelectedId: selectedId.set,
+          });
+        }}
         onDoubleClick={handleDoubleClick}
         onWheel={handleWheel}
         onContextMenu={handleContextMenu}
