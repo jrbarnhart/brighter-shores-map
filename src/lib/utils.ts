@@ -9,3 +9,10 @@ export function cn(...inputs: ClassValue[]) {
 export function toPixels(value: NormalizedValue, cellSize: number): PixelValue {
   return value * cellSize;
 }
+
+export function toNormalizedGridSpace(
+  value: PixelValue,
+  cellSize: number
+): NormalizedValue {
+  return Math.round(value / cellSize);
+}
