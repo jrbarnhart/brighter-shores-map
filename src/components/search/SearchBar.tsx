@@ -42,7 +42,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
       <div className="relative">
         <Search className="absolute left-0 h-full ml-1 stroke-sidebar-accent pointer-events-none" />
         <input
-          className="h-10 w-36 md:w-48 lg:w-64 text-sidebar-foreground bg-sidebar rounded-md border border-sidebar-accent pl-8 pr-1"
+          className="h-10 w-36 md:w-48 lg:w-64 text-sidebar-foreground bg-sidebar rounded-md border border-sidebar-border pl-8 pr-1"
           ref={searchInputRef}
           value={search.query.value}
           onChange={(e) => {
@@ -52,6 +52,11 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
           id="map-search"
           name="query"
         />
+        <div
+          className={`${
+            search.results.value.length > 0 ? "" : "hidden"
+          } absolute bottom-100 left-0 mt-2 h-content w-36 md:w-48 lg:w-64 bg-sidebar border border-sidebar-border rounded-md`}
+        ></div>
       </div>
     </div>
   );
