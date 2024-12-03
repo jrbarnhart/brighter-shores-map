@@ -52,7 +52,7 @@ export default function ZoomButtons({ ...props }: { mapState: MapState }) {
         }}
         className={`${
           currentCellSize.value >= maxCellSize ? "brightness-50" : " "
-        } h-20 w-full font-bold bg-sidebar border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground`}
+        } h-20 w-full font-bold text-sidebar-foreground bg-sidebar border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground`}
       >
         +
       </Button>
@@ -62,7 +62,7 @@ export default function ZoomButtons({ ...props }: { mapState: MapState }) {
         }}
         className={`${
           currentCellSize.value <= minCellSize ? "brightness-50" : " "
-        } h-20 w-full font-bold bg-sidebar border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground`}
+        } h-20 w-full font-bold text-sidebar-foreground bg-sidebar border border-sidebar-accent hover:bg-sidebar-accent hover:text-foreground`}
       >
         -
       </Button>

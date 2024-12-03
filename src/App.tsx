@@ -17,7 +17,7 @@ function App() {
         className="h-screen w-screen relative overflow-hidden"
         style={{ backgroundColor: mapConfig.bgColor }}
       >
-        <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-accent hover:bg-sidebar-accent" />
+        <SidebarTrigger className="absolute mt-3 ml-3 z-10 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-foreground hover:bg-sidebar-accent" />
         <MoveButton mapState={mapState} />
         <ZoomButtons mapState={mapState} />
         <Details mapState={mapState} />
