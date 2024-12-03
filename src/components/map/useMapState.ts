@@ -9,6 +9,7 @@ import {
   RoomDataWithPath,
   RoomId,
   RoomTreeNode,
+  SearchResult,
 } from "@/lib/types";
 
 export type MapState = {
@@ -74,6 +75,16 @@ export type MapState = {
     value: boolean;
     set: React.Dispatch<SetStateAction<boolean>>;
   };
+  search: {
+    query: {
+      value: string;
+      set: React.Dispatch<SetStateAction<string>>;
+    };
+    results: {
+      value: SearchResult[];
+      set: React.Dispatch<SetStateAction<SearchResult[]>>;
+    };
+  };
 };
 
 export default function useMapState() {
@@ -98,6 +109,8 @@ export default function useMapState() {
   const [hoveredId, setHoveredId] = useState<RoomId | null>(null);
   const [selectedId, setSelectedId] = useState<RoomId | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
 
   const { roomPaths, visibleRoomPaths, roomLabels } = useCanvasElementsManager({
     roomsCanvas: roomsCanvasRef.current,
@@ -129,6 +142,16 @@ export default function useMapState() {
     hoveredId: { value: hoveredId, set: setHoveredId },
     selectedId: { value: selectedId, set: setSelectedId },
     detailsOpen: { value: detailsOpen, set: setDetailsOpen },
+    search: {
+      query: {
+        value: searchQuery,
+        set: setSearchQuery,
+      },
+      results: {
+        value: searchResults,
+        set: setSearchResults,
+      },
+    },
   };
 
   return mapState;
