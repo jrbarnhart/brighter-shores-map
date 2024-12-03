@@ -39,8 +39,8 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   }, [handleSearchQueryChange, search.query.value, search.results.set]);
 
   return (
-    <div className="absolute top-0 z-10 right-0 mt-3 w-full flex items-center justify-center h-12">
-      <div className="relative">
+    <div className="absolutetop-0 z-10 right-0 mt-3 w-full flex flex-col items-center justify-center gap-3">
+      <div className="relative mt-1">
         <Search className="absolute left-0 h-full ml-1 stroke-sidebar-accent pointer-events-none" />
         <input
           className="h-10 w-36 md:w-48 lg:w-64 text-sidebar-foreground bg-sidebar rounded-md border border-sidebar-border pl-8 pr-1"
@@ -53,17 +53,17 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
           id="map-search"
           name="query"
         />
-        <div
-          className={`${
-            search.results.value.length > 0 ? "" : "hidden"
-          } absolute bottom-100 left-0 mt-2 h-content w-36 md:w-48 lg:w-64 bg-sidebar border border-sidebar-border rounded-md`}
-        >
-          {search.results.value.map((value, index) => {
-            if (value.dataType === "monster") {
-              return <MonsterCard monster={value} key={index} />;
-            }
-          })}
-        </div>
+      </div>
+      <div
+        className={`${
+          search.results.value.length > 0 ? "" : "hidden"
+        } max-h-52 w-64 md:w-80 lg:w-96 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
+      >
+        {search.results.value.map((value, index) => {
+          if (value.dataType === "monster") {
+            return <MonsterCard monster={value} key={index} />;
+          }
+        })}
       </div>
     </div>
   );
