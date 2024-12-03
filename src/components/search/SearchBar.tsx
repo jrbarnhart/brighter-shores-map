@@ -1,4 +1,10 @@
-import { SetStateAction, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { MapState } from "../map/useMapState";
 import useDebounce from "@/hooks/useDebounce";
 import Fuse from "fuse.js";
@@ -12,6 +18,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
 
   const [resultsOpen, setResultsOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchResultsRef = useRef<HTMLDivElement>(null);
 
   const fuse = useMemo(
     () =>
@@ -36,12 +43,32 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     300
   );
 
+  // Update the search results when the query value changes
   useEffect(() => {
     handleSearchQueryChange(search.query.value, search.results.set);
     return () => {
       handleSearchQueryChange.cancel();
     };
   }, [handleSearchQueryChange, search.query.value, search.results.set]);
+
+  // Hide the search results when clicking outside of results and input
+  useEffect(() => {
+    const closeOnClickHandler = (e: MouseEvent) => {
+      if (
+        searchInputRef.current &&
+        !searchInputRef.current.contains(e.target as Node) &&
+        searchResultsRef.current &&
+        !searchResultsRef.current.contains(e.target as Node)
+      ) {
+        setResultsOpen(false);
+      }
+    };
+    window.addEventListener("click", closeOnClickHandler);
+
+    return () => {
+      window.removeEventListener("click", closeOnClickHandler);
+    };
+  }, []);
 
   return (
     <div className="absolute top-0 right-0 z-10 mt-3 w-full flex flex-col items-center justify-center gap-3">
@@ -60,6 +87,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         />
       </div>
       <div
+        ref={searchResultsRef}
         className={`${
           resultsOpen ? "" : "hidden"
         } max-h-52 w-64 md:w-80 lg:w-96 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
