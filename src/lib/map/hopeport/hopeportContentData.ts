@@ -7,11 +7,10 @@ export type HopeportRoomContentData = {
   obelisk?: boolean;
   storageRift?: boolean;
   portalStone?: boolean;
-  // Resources
+  // Add Resources later
   monsters?: HopeportMonsterName[];
   npcs?: NPC[];
   banks?: BankType[];
-  // Quest step
 };
 
 const hopeportContentData = [
