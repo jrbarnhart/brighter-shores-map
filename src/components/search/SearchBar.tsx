@@ -4,6 +4,7 @@ import useDebounce from "@/hooks/useDebounce";
 import Fuse from "fuse.js";
 import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
+import { Search } from "lucide-react";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
@@ -37,18 +38,21 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   }, [handleSearchQueryChange, search.query.value, search.results.set]);
 
   return (
-    <div className="absolute top-0 z-10 right-0 mt-3 bg-green-500/50 w-full flex justify-center h-12">
-      <input
-        className="h-full w-24"
-        ref={searchInputRef}
-        value={search.query.value}
-        onChange={(e) => {
-          search.query.set(e.target.value);
-        }}
-        type="search"
-        id="map-search"
-        name="query"
-      />
+    <div className="absolute top-0 z-10 right-0 mt-3 w-full flex items-center justify-center h-12">
+      <div className="relative">
+        <Search className="absolute left-0 h-full ml-1 stroke-sidebar-accent pointer-events-none" />
+        <input
+          className="h-10 w-36 md:w-48 lg:w-64 text-sidebar-foreground bg-sidebar rounded-md border border-sidebar-accent pl-8 pr-1"
+          ref={searchInputRef}
+          value={search.query.value}
+          onChange={(e) => {
+            search.query.set(e.target.value);
+          }}
+          type="search"
+          id="map-search"
+          name="query"
+        />
+      </div>
     </div>
   );
 }
