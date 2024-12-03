@@ -5,6 +5,7 @@ import Fuse from "fuse.js";
 import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
 import { Search } from "lucide-react";
+import MonsterCard from "../thingCards/MonsterCard";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
@@ -56,7 +57,13 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
           className={`${
             search.results.value.length > 0 ? "" : "hidden"
           } absolute bottom-100 left-0 mt-2 h-content w-36 md:w-48 lg:w-64 bg-sidebar border border-sidebar-border rounded-md`}
-        ></div>
+        >
+          {search.results.value.map((value, index) => {
+            if (value.dataType === "monster") {
+              return <MonsterCard monster={value} key={index} />;
+            }
+          })}
+        </div>
       </div>
     </div>
   );
