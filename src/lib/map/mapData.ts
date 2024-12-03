@@ -21,7 +21,12 @@ const mapData: MapData = {
   },
 };
 
-const searchableData: SearchResult[] = [...HOPEPORT_MONSTER_DATA];
+const searchableData: SearchResult[] = [
+  ...HOPEPORT_MONSTER_DATA.map((data) => ({
+    ...data,
+    dataType: "monster" as const,
+  })),
+];
 
 // For each region
 // For every room in that region
