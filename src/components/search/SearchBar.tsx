@@ -90,7 +90,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         ref={searchResultsRef}
         className={`${
           resultsOpen ? "" : "hidden"
-        } max-h-52 w-64 md:w-80 lg:w-96 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
+        } max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
       >
         {search.results.value.map((value, index) => {
           if (value.dataType === "monster") {

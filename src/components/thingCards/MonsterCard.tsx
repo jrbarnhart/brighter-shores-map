@@ -9,7 +9,7 @@ import {
 
 export default function MonsterCard({ monster }: { monster: Monster }) {
   return (
-    <Card className="bg-sidebar border-sidebar-border border-l-0 border-r-0 text-sidebar-foreground">
+    <Card className="bg-sidebar border-sidebar-border text-sidebar-foreground">
       <CardHeader className="p-3">
         <CardTitle>
           {monster.name[0].toUpperCase() + monster.name.slice(1)}
