@@ -76,11 +76,6 @@ export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 // Type that combines searchable data which includes monsters, npcs, and resources
 export type SearchResult = NPC | Monster | ResourceNode;
 
-export type SearchableData = {
-  name: string;
-  type: "NPC" | "Monster" | "ResourceNode";
-};
-
 export type NPC = {
   name: string;
   types: ["vendor" | "quest" | "extra"];
