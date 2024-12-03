@@ -73,6 +73,9 @@ export type RoomContentData = HopeportRoomContentData;
 
 export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 
+// Type that combines searchable data which includes monsters, npcs, and resources
+export type SearchResult = NPC | Monster | ResourceNode;
+
 export type NPC = {
   name: string;
   types: ["vendor" | "quest" | "extra"];
@@ -88,6 +91,10 @@ export type MonsterVariant = {
 export type Monster = {
   name: string;
   variants: MonsterVariant[];
+};
+
+export type ResourceNode = {
+  name: string;
 };
 
 export type BankType =
