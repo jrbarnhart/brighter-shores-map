@@ -1,6 +1,7 @@
 import hopeportRoomData from "./hopeport/hopeportRoomData";
 import hopeportContentData from "./hopeport/hopeportContentData";
-import { MapData } from "../types";
+import { MapData, SearchableData } from "../types";
+import HOPEPORT_MONSTER_DATA from "./hopeport/roomContents/hopeportMonsterData";
 
 /*
   Room Template:
@@ -20,4 +21,16 @@ const mapData: MapData = {
   },
 };
 
+const searchableData: SearchableData[] = [];
+
+HOPEPORT_MONSTER_DATA.forEach((monster) => {
+  searchableData.push({ name: monster.name, type: "Monster" });
+});
+
+// For each region
+// For every room in that region
+// Add that string
+
 export default mapData;
+
+export { searchableData };
