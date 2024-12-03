@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useMemo, useRef } from "react";
+import { SetStateAction, useEffect, useMemo, useRef, useState } from "react";
 import { MapState } from "../map/useMapState";
 import useDebounce from "@/hooks/useDebounce";
 import Fuse from "fuse.js";
@@ -10,6 +10,7 @@ import MonsterCard from "../thingCards/MonsterCard";
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
 
+  const [resultsOpen, setResultsOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const fuse = useMemo(
@@ -26,7 +27,11 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     ) => {
       const results = fuse.search(query);
       setResults(results.map((result) => result.item));
-      console.log("Debounced");
+      if (results.length > 0) {
+        setResultsOpen(true);
+      } else if (results.length === 0) {
+        setResultsOpen(false);
+      }
     },
     300
   );
@@ -39,7 +44,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   }, [handleSearchQueryChange, search.query.value, search.results.set]);
 
   return (
-    <div className="absolutetop-0 z-10 right-0 mt-3 w-full flex flex-col items-center justify-center gap-3">
+    <div className="absolute top-0 right-0 z-10 mt-3 w-full flex flex-col items-center justify-center gap-3">
       <div className="relative mt-1">
         <Search className="absolute left-0 h-full ml-1 stroke-sidebar-accent pointer-events-none" />
         <input
@@ -56,7 +61,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
       </div>
       <div
         className={`${
-          search.results.value.length > 0 ? "" : "hidden"
+          resultsOpen ? "" : "hidden"
         } max-h-52 w-64 md:w-80 lg:w-96 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
       >
         {search.results.value.map((value, index) => {
