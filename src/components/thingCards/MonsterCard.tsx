@@ -9,12 +9,16 @@ import {
 
 export default function MonsterCard({ monster }: { monster: Monster }) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{monster.name}</CardTitle>
+    <Card className="bg-sidebar border-sidebar-border border-l-0 border-r-0 text-sidebar-foreground">
+      <CardHeader className="p-3">
+        <CardTitle>
+          {monster.name[0].toUpperCase() + monster.name.slice(1)}
+        </CardTitle>
+        <CardDescription>Location, Location</CardDescription>
       </CardHeader>
-      <CardDescription>Location, Location</CardDescription>
-      <CardContent>Attacks: , Immune: , Vulnerable:</CardContent>
+      <CardContent className="p-3 pt-0">
+        Attacks: , Immune: , Vulnerable:
+      </CardContent>
     </Card>
   );
 }
