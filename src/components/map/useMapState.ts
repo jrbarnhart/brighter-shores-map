@@ -67,7 +67,7 @@ export type MapState = {
     value: RoomId | null;
     set: React.Dispatch<SetStateAction<RoomId | null>>;
   };
-  selectedId: {
+  selectedRoomId: {
     value: RoomId | null;
     set: React.Dispatch<SetStateAction<RoomId | null>>;
   };
@@ -140,7 +140,7 @@ export default function useMapState() {
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
     isHovering: { value: isHovering, set: setIsHovering },
     hoveredId: { value: hoveredId, set: setHoveredId },
-    selectedId: { value: selectedId, set: setSelectedId },
+    selectedRoomId: { value: selectedId, set: setSelectedId },
     detailsOpen: { value: detailsOpen, set: setDetailsOpen },
     search: {
       query: {

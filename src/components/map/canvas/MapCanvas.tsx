@@ -14,7 +14,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
     currentCellSize,
     labelsWereVisible,
     visibleRoomPaths,
-    selectedId,
+    selectedRoomId,
     detailsOpen,
   } = mapState;
   const canvasSize = canvas.size.value;
@@ -71,7 +71,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
             canvasCtx: roomCanvasRef.current?.getContext("2d"),
             mapPos: mapPos.value,
             currentCellSize: currentCellSize.value,
-            setSelectedId: selectedId.set,
+            setSelectedId: selectedRoomId.set,
             setDetailsOpen: detailsOpen.set,
           });
         }}

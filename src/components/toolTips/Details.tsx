@@ -5,7 +5,7 @@ import { getRoomContent, getRoomLabel } from "@/lib/map/mapDataUtils";
 import CloseButton from "../ui/CloseButton";
 
 export default function Details({ mapState }: { mapState: MapState }) {
-  const { selectedId, detailsOpen } = mapState;
+  const { selectedRoomId, detailsOpen } = mapState;
   const [cardContent, setCardContent] = useState<{
     roomLabel: string;
     monsters: string[];
@@ -16,11 +16,11 @@ export default function Details({ mapState }: { mapState: MapState }) {
 
   useEffect(() => {
     setCardContent(() => {
-      const roomContent = getRoomContent(selectedId.value);
-      const roomLabel = getRoomLabel(selectedId.value);
+      const roomContent = getRoomContent(selectedRoomId.value);
+      const roomLabel = getRoomLabel(selectedRoomId.value);
       return { roomLabel, monsters: roomContent?.monsters ?? ["None"] };
     });
-  }, [selectedId.value]);
+  }, [selectedRoomId.value]);
 
   return (
     <div
