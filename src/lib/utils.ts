@@ -1,7 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
-  MapData,
   NormalizedValue,
   PixelValue,
   RoomDataWithPath,
