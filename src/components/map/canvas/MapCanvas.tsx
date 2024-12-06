@@ -5,7 +5,7 @@ import useCanvasSize from "./useCanvasSize";
 import useCreateRTree from "./useCreateRTree";
 import useDrawMap from "./useDrawMap";
 import { useEffect } from "react";
-import usePanToSelectedRoom from "../useScrollToSelectedRoom";
+import usePanToSelectedRoom from "../usePanToSelectedRoom";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const {
