@@ -6,7 +6,7 @@ export default function RoomLink({
 }: {
   text: string;
   roomId: RoomId;
-  setSelectedRoomId: React.Dispatch<SetStateAction<RoomId>>;
+  setSelectedRoomId: React.Dispatch<SetStateAction<RoomId | null>>;
 }) {
   const { text, roomId, setSelectedRoomId } = props;
 

@@ -94,7 +94,9 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
       >
         {search.results.value.map((value, index) => {
           if (value.dataType === "monster") {
-            return <MonsterCard monster={value} key={index} />;
+            return (
+              <MonsterCard monster={value} mapState={mapState} key={index} />
+            );
           }
         })}
       </div>
