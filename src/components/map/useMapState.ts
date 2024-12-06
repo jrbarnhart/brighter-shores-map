@@ -107,7 +107,7 @@ export default function useMapState() {
   const enabledRef = useRef(false);
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredId, setHoveredId] = useState<RoomId | null>(null);
-  const [selectedId, setSelectedId] = useState<RoomId | null>(null);
+  const [selectedRoomId, setSelectedRoomId] = useState<RoomId | null>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
@@ -140,7 +140,7 @@ export default function useMapState() {
     drag: { lock: { value: dragLocked, set: setDragLocked }, enabledRef },
     isHovering: { value: isHovering, set: setIsHovering },
     hoveredId: { value: hoveredId, set: setHoveredId },
-    selectedRoomId: { value: selectedId, set: setSelectedId },
+    selectedRoomId: { value: selectedRoomId, set: setSelectedRoomId },
     detailsOpen: { value: detailsOpen, set: setDetailsOpen },
     search: {
       query: {
