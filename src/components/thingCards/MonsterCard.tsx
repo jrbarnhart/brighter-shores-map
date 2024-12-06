@@ -8,6 +8,7 @@ import {
 } from "../ui/card";
 import RoomLink from "../roomLink/RoomLink";
 import { MapState } from "../map/useMapState";
+import { findRoomById } from "@/lib/utils";
 
 export default function MonsterCard({
   ...props
@@ -25,13 +26,17 @@ export default function MonsterCard({
         </CardTitle>
         <CardDescription>
           {monster.locations.map((location, index) => {
+            const room = findRoomById(mapState.roomPaths.value, location);
             return (
-              <RoomLink
-                key={index}
-                text={location}
-                roomId={location}
-                setSelectedRoomId={selectedRoomId.set}
-              />
+              <>
+                <RoomLink
+                  key={index}
+                  text={room ? room.label : location}
+                  roomId={location}
+                  setSelectedRoomId={selectedRoomId.set}
+                />
+                {monster.locations.length - 1 > index ? ", " : ""}
+              </>
             );
           })}
         </CardDescription>
