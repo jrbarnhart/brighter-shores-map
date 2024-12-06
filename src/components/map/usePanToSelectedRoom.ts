@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { MapState } from "./useMapState";
 import { findRoomById, toNormalizedGridSpace } from "@/lib/utils";
+import { RoomId } from "@/lib/types";
 
 export default function usePanToSelectedRoom({
   mapState,
@@ -11,9 +12,13 @@ export default function usePanToSelectedRoom({
   const setMapPos = mapPos.set;
   const rooms = mapState.roomPaths.value;
   const currentCellSize = mapState.currentCellSize.value;
+  const lastSelectedRoom = useRef<RoomId | null>(null);
 
   useEffect(() => {
-    if (selectedRoomId.value) {
+    if (
+      selectedRoomId.value &&
+      selectedRoomId.value !== lastSelectedRoom.current
+    ) {
       const roomPath = findRoomById(rooms, selectedRoomId.value);
       if (roomPath) {
         const offX = toNormalizedGridSpace(
@@ -28,9 +33,8 @@ export default function usePanToSelectedRoom({
         x -= offX;
         y -= offY;
         setMapPos({ x, y });
+        lastSelectedRoom.current = selectedRoomId.value;
       }
     }
   }, [currentCellSize, rooms, selectedRoomId.value, setMapPos]);
-
-  // Clear the selected room id on mouse down to prevent unwanted panning
 }
