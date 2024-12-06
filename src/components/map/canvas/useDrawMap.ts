@@ -27,7 +27,6 @@ export default function useDrawMap({
     ctx.save();
 
     ctx.translate(-mapPos.x * cellSize, -mapPos.y * cellSize);
-    console.log("Draw");
     roomPaths.forEach((roomPath) => {
       ctx.fillStyle = roomPath.color ?? defaultRoomFill;
       ctx.fill(roomPath.element);
@@ -117,6 +116,7 @@ export default function useDrawMap({
     const labelsCanvasContext = labelsCanvas?.getContext("2d");
     const visibleRooms = mapState.visibleRoomPaths.value;
     const roomLabels = mapState.roomLabels.value;
+
     if (
       !roomsCanvasContext ||
       !roomsCanvas ||
