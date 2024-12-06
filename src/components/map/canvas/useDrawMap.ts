@@ -23,15 +23,15 @@ export default function useDrawMap({
     cellSize: number,
     mapConfig: MapConfig
   ) {
-    const { defaultRoomFill } = mapConfig;
+    const { defaultRoomFill, defaultRoomBorder } = mapConfig;
     ctx.save();
 
     ctx.translate(-mapPos.x * cellSize, -mapPos.y * cellSize);
-
+    console.log("Draw");
     roomPaths.forEach((roomPath) => {
       ctx.fillStyle = roomPath.color ?? defaultRoomFill;
       ctx.fill(roomPath.element);
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = defaultRoomBorder;
       ctx.stroke(roomPath.element);
     });
 
