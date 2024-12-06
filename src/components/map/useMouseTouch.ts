@@ -125,6 +125,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       }
 
       setDetailsOpen(false);
+      setSelectedId(null);
     },
     []
   );
