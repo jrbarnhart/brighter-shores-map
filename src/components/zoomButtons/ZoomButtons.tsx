@@ -1,4 +1,4 @@
-import { MapState } from "./useMapState";
+import { MapState } from "../map/useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 import { Button } from "../ui/button";
 import { useCallback } from "react";
