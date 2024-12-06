@@ -5,7 +5,7 @@ import useCanvasSize from "./useCanvasSize";
 import useCreateRTree from "./useCreateRTree";
 import useDrawMap from "./useDrawMap";
 import { useEffect } from "react";
-import useScrollToSelectedRoom from "../useScrollToSelectedRoom";
+import usePanToSelectedRoom from "../useScrollToSelectedRoom";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const {
@@ -43,7 +43,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
   } = useMouseTouch({ mapState });
 
   // Scroll to room path when it is selected
-  useScrollToSelectedRoom({ mapState });
+  usePanToSelectedRoom({ mapState });
 
   // Auto hide labels when map scales to min scale
   useEffect(() => {

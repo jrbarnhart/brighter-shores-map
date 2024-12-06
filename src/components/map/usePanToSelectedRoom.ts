@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { MapState } from "./useMapState";
 import { findRoomById, toNormalizedGridSpace } from "@/lib/utils";
 
-export default function useScrollToSelectedRoom({
+export default function usePanToSelectedRoom({
   mapState,
 }: {
   mapState: MapState;
@@ -31,4 +31,6 @@ export default function useScrollToSelectedRoom({
       }
     }
   }, [currentCellSize, rooms, selectedRoomId.value, setMapPos]);
+
+  // Clear the selected room id on mouse down to prevent unwanted panning
 }
