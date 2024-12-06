@@ -3,6 +3,7 @@ import { Monster } from "@/lib/types";
 const HOPEPORT_MONSTER_DATA = [
   {
     name: "guard",
+    locations: ["sparring-area"],
     variants: [
       { name: "recruit", health: 0, experience: 0, skillLevel: 0 },
       { name: "rookie", health: 0, experience: 0, skillLevel: 0 },
@@ -14,6 +15,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "deathcrow",
+    locations: ["town-gates", "old-street-east"],
     variants: [
       { name: "glinteye", health: 0, experience: 0, skillLevel: 0 },
       { name: "beady-eyed", health: 0, experience: 0, skillLevel: 0 },
@@ -26,6 +28,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "thief",
+    locations: ["tims-alley", "limpet-lane"],
     variants: [
       { name: "common", health: 0, experience: 0, skillLevel: 0 },
       { name: "scruffy", health: 0, experience: 0, skillLevel: 0 },
@@ -39,6 +42,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "goblin solider",
+    locations: ["north-walls"],
     variants: [
       { name: "looter", health: 0, experience: 0, skillLevel: 0 },
       { name: "hooligan", health: 0, experience: 0, skillLevel: 0 },
@@ -51,6 +55,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "goblin chief",
+    locations: ["south-walls"],
     variants: [
       { name: "irritable", health: 0, experience: 0, skillLevel: 0 },
       { name: "bossy", health: 0, experience: 0, skillLevel: 0 },
@@ -62,6 +67,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "hairbeast",
+    locations: ["overgrown-road", "rubble-road"],
     variants: [
       { name: "feral", health: 0, experience: 0, skillLevel: 0 },
       { name: "tangled", health: 0, experience: 0, skillLevel: 0 },
@@ -74,6 +80,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "ghoul",
+    locations: ["collapsed-hovels", "wasteland"],
     variants: [
       { name: "shambling", health: 0, experience: 0, skillLevel: 0 },
       { name: "foraging", health: 0, experience: 0, skillLevel: 0 },
@@ -85,6 +92,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "street louse",
+    locations: ["wilhope-passage"],
     variants: [
       { name: "creepy", health: 0, experience: 0, skillLevel: 0 },
       { name: "blotchy", health: 0, experience: 0, skillLevel: 0 },
@@ -96,6 +104,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "thug",
+    locations: ["murk-close"],
     variants: [
       { name: "back alley", health: 0, experience: 0, skillLevel: 0 },
       { name: "scruffy", health: 0, experience: 0, skillLevel: 0 },
@@ -108,6 +117,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "carnivorous plant",
+    locations: ["overgrown-field", "fallen-monument"],
     variants: [
       { name: "snap", health: 0, experience: 0, skillLevel: 0 },
       { name: "leafjaw", health: 0, experience: 0, skillLevel: 0 },
@@ -119,6 +129,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "crab",
+    locations: ["east-beach"],
     variants: [
       { name: "pearlcap", health: 0, experience: 0, skillLevel: 0 },
       { name: "large", health: 0, experience: 0, skillLevel: 0 },
@@ -132,6 +143,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "bugman",
+    locations: ["overgrown-pond"],
     variants: [
       { name: "primitive", health: 0, experience: 0, skillLevel: 0 },
       { name: "hungry", health: 0, experience: 0, skillLevel: 0 },
@@ -144,6 +156,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "jellyfish",
+    locations: ["jellyfish-landing"],
     variants: [
       { name: "tiderider", health: 0, experience: 0, skillLevel: 0 },
       { name: "orange stinger", health: 0, experience: 0, skillLevel: 0 },
@@ -156,6 +169,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "giant ant",
+    locations: ["crater"],
     variants: [
       { name: "drone", health: 0, experience: 0, skillLevel: 0 },
       { name: "soldier", health: 0, experience: 0, skillLevel: 0 },
@@ -167,6 +181,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "pirate",
+    locations: ["pirate-hideout"],
     variants: [
       { name: "grumpy", health: 0, experience: 0, skillLevel: 0 },
       { name: "ragged", health: 0, experience: 0, skillLevel: 0 },
@@ -180,6 +195,7 @@ const HOPEPORT_MONSTER_DATA = [
   },
   {
     name: "punkupine",
+    locations: ["rocky-road"],
     variants: [
       { name: "shabby", health: 0, experience: 0, skillLevel: 0 },
       { name: "striped", health: 0, experience: 0, skillLevel: 0 },

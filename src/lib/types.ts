@@ -93,6 +93,7 @@ export type MonsterVariant = {
 
 export type Monster = {
   name: string;
+  locations: RoomId[];
   variants: MonsterVariant[];
 };
 
