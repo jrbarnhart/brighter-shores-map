@@ -16,7 +16,11 @@ export default function RoomLink({
   };
 
   return (
-    <a onClick={handleClick} href={`/${roomId}`}>
+    <a
+      className="underline text-sidebar-accent"
+      onClick={handleClick}
+      href={`/${roomId}`}
+    >
       {text}
     </a>
   );
