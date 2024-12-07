@@ -8,16 +8,7 @@ import { useEffect } from "react";
 import usePanToSelectedRoom from "../usePanToSelectedRoom";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
-  const {
-    canvas,
-    mapPos,
-    labelsHidden,
-    currentCellSize,
-    labelsWereVisible,
-    visibleRoomPaths,
-    selectedRoomId,
-    detailsOpen,
-  } = mapState;
+  const { canvas, labelsHidden, currentCellSize, labelsWereVisible } = mapState;
   const canvasSize = canvas.size.value;
   const roomCanvasRef = canvas.rooms.ref;
   const labelsCanvasRef = canvas.labels.ref;
@@ -68,17 +59,7 @@ export default function MapCanvas({ mapState }: { mapState: MapState }) {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        onClick={(e) => {
-          handleClick({
-            e,
-            visibleRooms: visibleRoomPaths.value,
-            canvasCtx: roomCanvasRef.current?.getContext("2d"),
-            mapPos: mapPos.value,
-            currentCellSize: currentCellSize.value,
-            setSelectedId: selectedRoomId.set,
-            setDetailsOpen: detailsOpen.set,
-          });
-        }}
+        onClick={handleClick}
         onDoubleClick={handleDoubleClick}
         onWheel={handleWheel}
         onContextMenu={handleContextMenu}

@@ -1,21 +1,30 @@
-import React, { SetStateAction, useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
-import { NormalizedValue, RoomDataWithPath, RoomId } from "@/lib/types";
 import { adjustMapPosOnZoom, toPixels } from "@/lib/utils";
 
 export default function useMouseTouch({ mapState }: { mapState: MapState }) {
+  // Canvas info state
   const canvasSize = mapState.canvas.size.value;
-  const { set: setMapPos } = mapState.mapPos;
+  const { value: mapPos, set: setMapPos } = mapState.mapPos;
+  const roomsCanvasCtx = mapState.canvas.rooms.ref.current?.getContext("2d");
+  const visibleRoomPaths = mapState.visibleRoomPaths.value;
+  // Selected room state
+  const setSelectedId = mapState.selectedRoomId.set;
+  const setDetailsOpen = mapState.detailsOpen.set;
+  const { lastSelectedRoomId } = mapState;
+  // Drag state
   const dragEnabled = mapState.drag.enabledRef;
   const [isDragging, setIsDragging] = useState(false);
   const dragLocked = mapState.drag.lock.value;
   const dragStart = useRef({ x: 0, y: 0 });
   const mouseMoved = useRef(false);
+  // Double click state
   const lastTouchTime = useRef(0);
   const isDoubleTouchHold = useRef(false);
   const { value: currentCellSize, set: setCurrentCellSize } =
     mapState.currentCellSize;
+  // mapConfig values
   const {
     minCellSize,
     maxCellSize,
@@ -49,6 +58,8 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       const deltaY =
         -(pointY - dragStart.current.y) * dragDeltaMod * cellSizeMod;
 
+      // Clear the lastSelectedRoomId to enable pan to center on click
+      lastSelectedRoomId.ref.current = null;
       setMapPos((prevPos) => ({
         x: prevPos.x + deltaX,
         y: prevPos.y + deltaY,
@@ -61,6 +72,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       currentCellSize,
       dragDeltaMod,
       isDragging,
+      lastSelectedRoomId.ref,
       maxCellSize,
       minCellSize,
       setMapPos,
@@ -94,30 +106,14 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   );
 
   const handleClick = useCallback(
-    ({
-      e,
-      visibleRooms,
-      canvasCtx,
-      mapPos,
-      currentCellSize,
-      setSelectedId,
-      setDetailsOpen,
-    }: {
-      e: React.MouseEvent;
-      visibleRooms: RoomDataWithPath[];
-      canvasCtx: CanvasRenderingContext2D | null | undefined;
-      mapPos: { x: NormalizedValue; y: NormalizedValue };
-      currentCellSize: number;
-      setSelectedId: React.Dispatch<SetStateAction<RoomId | null>>;
-      setDetailsOpen: React.Dispatch<SetStateAction<boolean>>;
-    }) => {
-      if (!canvasCtx) return;
+    (e: React.MouseEvent) => {
+      if (!roomsCanvasCtx) return;
 
       const x = e.clientX + toPixels(mapPos.x, currentCellSize);
       const y = e.clientY + toPixels(mapPos.y, currentCellSize);
 
-      for (const room of visibleRooms) {
-        if (canvasCtx.isPointInPath(room.element, x, y)) {
+      for (const room of visibleRoomPaths) {
+        if (roomsCanvasCtx.isPointInPath(room.element, x, y)) {
           setSelectedId(room.id);
           setDetailsOpen(true);
           return;
@@ -127,7 +123,15 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       setDetailsOpen(false);
       setSelectedId(null);
     },
-    []
+    [
+      currentCellSize,
+      mapPos.x,
+      mapPos.y,
+      roomsCanvasCtx,
+      setDetailsOpen,
+      setSelectedId,
+      visibleRoomPaths,
+    ]
   );
 
   const handleDoubleClick = useCallback(() => {
