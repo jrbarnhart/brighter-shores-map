@@ -183,5 +183,6 @@ export default function useDrawMap({
     mapState.roomLabels.value,
     mapState.selectedRoomId.value,
     mapState.visibleRoomPaths.value,
+    mapState.canvas.size,
   ]);
 }
