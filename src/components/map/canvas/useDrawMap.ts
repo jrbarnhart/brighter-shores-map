@@ -146,8 +146,6 @@ export default function useDrawMap({
       return;
     }
 
-    console.log("Draw");
-
     roomsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
     labelsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
 
