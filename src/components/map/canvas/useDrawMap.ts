@@ -6,6 +6,7 @@ import {
   PixelValue,
   Point,
   RoomDataWithPath,
+  RoomId,
 } from "@/lib/types";
 import { toPixels } from "@/lib/utils";
 
@@ -22,16 +23,28 @@ export default function useDrawMap({
       roomPaths: RoomDataWithPath[],
       mapPos: { x: number; y: number },
       cellSize: number,
+      selectedRoomId: RoomId | null,
       mapConfig: MapConfig
     ) => {
-      const { defaultRoomFill, defaultRoomBorder } = mapConfig;
+      const {
+        defaultRoomFill,
+        defaultRoomBorder,
+        selectedRoomFill,
+        selectedRoomBorder,
+      } = mapConfig;
       ctx.save();
 
       ctx.translate(-mapPos.x * cellSize, -mapPos.y * cellSize);
       roomPaths.forEach((roomPath) => {
-        ctx.fillStyle = roomPath.color ?? defaultRoomFill;
+        ctx.fillStyle =
+          selectedRoomId === roomPath.id
+            ? selectedRoomFill
+            : roomPath.color ?? defaultRoomFill;
         ctx.fill(roomPath.element);
-        ctx.strokeStyle = defaultRoomBorder;
+        ctx.strokeStyle =
+          selectedRoomId === roomPath.id
+            ? selectedRoomBorder
+            : defaultRoomBorder;
         ctx.stroke(roomPath.element);
       });
 
@@ -122,6 +135,7 @@ export default function useDrawMap({
     const labelsCanvasContext = labelsCanvas?.getContext("2d");
     const visibleRooms = mapState.visibleRoomPaths.value;
     const roomLabels = mapState.roomLabels.value;
+    const selectedRoomId = mapState.selectedRoomId.value;
 
     if (
       !roomsCanvasContext ||
@@ -132,6 +146,8 @@ export default function useDrawMap({
       return;
     }
 
+    console.log("Draw");
+
     roomsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
     labelsCanvasContext.clearRect(0, 0, roomsCanvas.width, roomsCanvas.height);
 
@@ -140,6 +156,7 @@ export default function useDrawMap({
       visibleRooms,
       mapPos,
       currentCellSize,
+      selectedRoomId,
       mapConfig
     );
     drawRoomLabels(
@@ -166,6 +183,7 @@ export default function useDrawMap({
     mapState.currentCellSize.value,
     mapState.mapPos.value,
     mapState.roomLabels.value,
+    mapState.selectedRoomId.value,
     mapState.visibleRoomPaths.value,
   ]);
 }
