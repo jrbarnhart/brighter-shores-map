@@ -1,23 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { MapState } from "./useMapState";
 import { findRoomById, toNormalizedGridSpace } from "@/lib/utils";
-import { RoomId } from "@/lib/types";
 
 export default function usePanToSelectedRoom({
   mapState,
 }: {
   mapState: MapState;
 }) {
-  const { selectedRoomId, mapPos } = mapState;
+  const { selectedRoomId, mapPos, lastSelectedRoomId } = mapState;
   const setMapPos = mapPos.set;
   const rooms = mapState.roomPaths.value;
   const currentCellSize = mapState.currentCellSize.value;
-  const lastSelectedRoom = useRef<RoomId | null>(null);
 
   useEffect(() => {
     if (
       selectedRoomId.value &&
-      selectedRoomId.value !== lastSelectedRoom.current
+      selectedRoomId.value !== lastSelectedRoomId.ref.current
     ) {
       const roomPath = findRoomById(rooms, selectedRoomId.value);
       if (roomPath) {
@@ -32,9 +30,16 @@ export default function usePanToSelectedRoom({
         let { x, y } = roomPath.center;
         x -= offX;
         y -= offY;
+        console.log("Pan mapPos");
         setMapPos({ x, y });
-        lastSelectedRoom.current = selectedRoomId.value;
+        lastSelectedRoomId.ref.current = selectedRoomId.value;
       }
     }
-  }, [currentCellSize, rooms, selectedRoomId.value, setMapPos]);
+  }, [
+    currentCellSize,
+    lastSelectedRoomId.ref,
+    rooms,
+    selectedRoomId.value,
+    setMapPos,
+  ]);
 }
