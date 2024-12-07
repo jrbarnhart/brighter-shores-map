@@ -30,7 +30,6 @@ export default function usePanToSelectedRoom({
         let { x, y } = roomPath.center;
         x -= offX;
         y -= offY;
-        console.log("Pan mapPos");
         setMapPos({ x, y });
         lastSelectedRoomId.ref.current = selectedRoomId.value;
       }
