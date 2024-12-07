@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { MapState } from "../useMapState";
 import { MapConfig } from "@/lib/map/mapConfig";
 import {
@@ -16,87 +16,93 @@ export default function useDrawMap({
   mapState: MapState;
   mapConfig: MapConfig;
 }) {
-  function drawRoomPaths(
-    ctx: CanvasRenderingContext2D,
-    roomPaths: RoomDataWithPath[],
-    mapPos: { x: number; y: number },
-    cellSize: number,
-    mapConfig: MapConfig
-  ) {
-    const { defaultRoomFill, defaultRoomBorder } = mapConfig;
-    ctx.save();
+  const drawRoomPaths = useCallback(
+    (
+      ctx: CanvasRenderingContext2D,
+      roomPaths: RoomDataWithPath[],
+      mapPos: { x: number; y: number },
+      cellSize: number,
+      mapConfig: MapConfig
+    ) => {
+      const { defaultRoomFill, defaultRoomBorder } = mapConfig;
+      ctx.save();
 
-    ctx.translate(-mapPos.x * cellSize, -mapPos.y * cellSize);
-    roomPaths.forEach((roomPath) => {
-      ctx.fillStyle = roomPath.color ?? defaultRoomFill;
-      ctx.fill(roomPath.element);
-      ctx.strokeStyle = defaultRoomBorder;
-      ctx.stroke(roomPath.element);
-    });
+      ctx.translate(-mapPos.x * cellSize, -mapPos.y * cellSize);
+      roomPaths.forEach((roomPath) => {
+        ctx.fillStyle = roomPath.color ?? defaultRoomFill;
+        ctx.fill(roomPath.element);
+        ctx.strokeStyle = defaultRoomBorder;
+        ctx.stroke(roomPath.element);
+      });
 
-    ctx.restore();
-  }
+      ctx.restore();
+    },
+    []
+  );
 
-  function drawRoomLabels(
-    ctx: CanvasRenderingContext2D,
-    labels: LabelDataWithPath[],
-    visibleRooms: RoomDataWithPath[],
-    viewport: { position: Point },
-    cellSize: number,
-    style: {
-      padding: PixelValue;
-      lineHeight: PixelValue;
-      backgroundColor: string;
-      borderColor: string;
-      textColor: string;
-      textSize: PixelValue;
-    }
-  ) {
-    ctx.save();
-    ctx.translate(
-      -toPixels(viewport.position.x, cellSize),
-      -toPixels(viewport.position.y, cellSize)
-    );
+  const drawRoomLabels = useCallback(
+    (
+      ctx: CanvasRenderingContext2D,
+      labels: LabelDataWithPath[],
+      visibleRooms: RoomDataWithPath[],
+      viewport: { position: Point },
+      cellSize: number,
+      style: {
+        padding: PixelValue;
+        lineHeight: PixelValue;
+        backgroundColor: string;
+        borderColor: string;
+        textColor: string;
+        textSize: PixelValue;
+      }
+    ) => {
+      ctx.save();
+      ctx.translate(
+        -toPixels(viewport.position.x, cellSize),
+        -toPixels(viewport.position.y, cellSize)
+      );
 
-    const visibleLabels = labels.filter((label) =>
-      visibleRooms.some((room) => room.id === label.roomId)
-    );
+      const visibleLabels = labels.filter((label) =>
+        visibleRooms.some((room) => room.id === label.roomId)
+      );
 
-    for (const label of visibleLabels) {
-      // Draw background and border
-      ctx.fillStyle = style.backgroundColor;
-      ctx.strokeStyle = style.borderColor;
-      ctx.fill(label.element);
-      ctx.stroke(label.element);
+      for (const label of visibleLabels) {
+        // Draw background and border
+        ctx.fillStyle = style.backgroundColor;
+        ctx.strokeStyle = style.borderColor;
+        ctx.fill(label.element);
+        ctx.stroke(label.element);
 
-      // Draw text
-      const paddingPx = toPixels(style.padding, cellSize);
-      const totalLinesHeight = style.lineHeight * label.lines.length;
-      let offSet = { x: 0, y: 0 };
-      if (label.offset) {
-        offSet = label.offset;
+        // Draw text
+        const paddingPx = toPixels(style.padding, cellSize);
+        const totalLinesHeight = style.lineHeight * label.lines.length;
+        let offSet = { x: 0, y: 0 };
+        if (label.offset) {
+          offSet = label.offset;
+        }
+
+        const textStartY =
+          toPixels(label.center.y + offSet.y, cellSize) -
+          label.size.height / 2 +
+          paddingPx +
+          (label.size.height - paddingPx * 2 - totalLinesHeight) / 2;
+
+        ctx.fillStyle = style.textColor;
+        ctx.font = `bold ${style.textSize.toString()}px Arial`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+
+        label.lines.forEach((line, index) => {
+          const x = toPixels(label.center.x + offSet.x, cellSize);
+          const y = textStartY + index * style.lineHeight;
+          ctx.fillText(line, x, y);
+        });
       }
 
-      const textStartY =
-        toPixels(label.center.y + offSet.y, cellSize) -
-        label.size.height / 2 +
-        paddingPx +
-        (label.size.height - paddingPx * 2 - totalLinesHeight) / 2;
-
-      ctx.fillStyle = style.textColor;
-      ctx.font = `bold ${style.textSize.toString()}px Arial`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "top";
-
-      label.lines.forEach((line, index) => {
-        const x = toPixels(label.center.x + offSet.x, cellSize);
-        const y = textStartY + index * style.lineHeight;
-        ctx.fillText(line, x, y);
-      });
-    }
-
-    ctx.restore();
-  }
+      ctx.restore();
+    },
+    []
+  );
 
   useEffect(() => {
     const {
@@ -152,10 +158,11 @@ export default function useDrawMap({
       }
     );
   }, [
+    drawRoomLabels,
+    drawRoomPaths,
     mapConfig,
     mapState.canvas.labels.ref,
     mapState.canvas.rooms.ref,
-    mapState.canvas.size,
     mapState.currentCellSize.value,
     mapState.mapPos.value,
     mapState.roomLabels.value,
