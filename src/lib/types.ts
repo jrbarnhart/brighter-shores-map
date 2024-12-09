@@ -1,7 +1,10 @@
 import { BBox } from "rbush";
 import { HopeportRoomContentData } from "./map/hopeport/hopeportContentData";
 import { HopeportRoomId } from "./map/hopeport/hopeportRoomData";
-import { HopeportMonsterVariantName } from "./map/hopeport/roomContents/hopeportMonsterData";
+import {
+  HopeportMonsterBaseName,
+  HopeportMonsterNameWithVariant,
+} from "./map/hopeport/roomContents/hopeportMonsterData";
 import { SetStateAction } from "react";
 
 /************************ *
@@ -78,11 +81,11 @@ export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 // Type that combines searchable data which includes monsters, npcs, and resources
 export type SearchResult =
   | (NPC & { dataType: "npc" })
-  | (Monster & { dataType: "monster" })
+  | (MonsterData & { dataType: "monster" })
   | (ResourceNode & { dataType: "resource" });
 
 // Type that is all the possible thing names
-export type ThingName = HopeportMonsterVariantName;
+export type ThingName = HopeportMonsterNameWithVariant;
 
 // Context for thing card provider
 export type ThingCardContextType = {
@@ -95,17 +98,27 @@ export type NPC = {
   types: ["vendor" | "quest" | "extra"];
 };
 
-export type MonsterVariant = {
+// Types for data entries in monster data arrays
+export type MonsterVariantData = {
   name: string;
   health: number;
   experience: number;
   skillLevel: number;
 };
 
-export type Monster = {
+export type MonsterData = {
   name: string;
   locations: RoomId[];
-  variants: MonsterVariant[];
+  variants: MonsterVariantData[];
+};
+
+// Union types for monster base names and w/ variants
+export type MonsterBaseName = HopeportMonsterBaseName;
+export type MonsterNameWithVariant = HopeportMonsterNameWithVariant;
+
+// Types used when using the monster data in code
+export type Monster = MonsterData & {
+  name: MonsterBaseName;
 };
 
 export type ResourceNode = {

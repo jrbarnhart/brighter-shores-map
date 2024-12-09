@@ -1,4 +1,4 @@
-import { Monster } from "@/lib/types";
+import { MonsterData } from "@/lib/types";
 
 const HOPEPORT_MONSTER_DATA = [
   {
@@ -205,7 +205,7 @@ const HOPEPORT_MONSTER_DATA = [
       { name: "orange tipped", health: 0, experience: 0, skillLevel: 0 },
     ],
   },
-] as const satisfies readonly Monster[];
+] as const satisfies readonly MonsterData[];
 
 export default HOPEPORT_MONSTER_DATA;
 
