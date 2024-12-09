@@ -12,6 +12,7 @@ export default function RoomLink({
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setSelectedRoomId(roomId);
   };
 
