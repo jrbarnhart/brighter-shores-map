@@ -214,11 +214,12 @@ type MonsterDataEntries = typeof HOPEPORT_MONSTER_DATA;
 type MonsterVariantNames<T extends MonsterDataEntries[number]> =
   `${T["variants"][number]["name"]} ${T["name"]}`;
 
-export type HopeportMonsterName =
+export type HopeportMonsterBaseName =
   (typeof HOPEPORT_MONSTER_DATA)[number]["name"];
 
-export type HopeportMonsterFullName = MonsterDataEntries[number] extends infer T
-  ? T extends MonsterDataEntries[number]
-    ? MonsterVariantNames<T>
-    : never
-  : never;
+export type HopeportMonsterNameWithVariant =
+  MonsterDataEntries[number] extends infer T
+    ? T extends MonsterDataEntries[number]
+      ? MonsterVariantNames<T>
+      : never
+    : never;
