@@ -2,6 +2,7 @@ import { BBox } from "rbush";
 import { HopeportRoomContentData } from "./map/hopeport/hopeportContentData";
 import { HopeportRoomId } from "./map/hopeport/hopeportRoomData";
 import { HopeportMonsterVariantName } from "./map/hopeport/roomContents/hopeportMonsterData";
+import { SetStateAction } from "react";
 
 /************************ *
   General Types
@@ -82,6 +83,12 @@ export type SearchResult =
 
 // Type that is all the possible thing names
 export type ThingName = HopeportMonsterVariantName;
+
+// Context for thing card provider
+export type ThingCardContextType = {
+  expandedCardId: ThingName | null;
+  setExpandedCardId: React.Dispatch<SetStateAction<ThingName | null>>;
+};
 
 export type NPC = {
   name: string;
