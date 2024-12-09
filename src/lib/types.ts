@@ -78,25 +78,20 @@ export type RoomContentData = HopeportRoomContentData;
 
 export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 
-// Type that combines searchable data which includes monsters, npcs, and resources
-export type SearchResult =
-  | (NPC & { dataType: "npc" })
-  | (MonsterData & { dataType: "monster" })
-  | (ResourceNode & { dataType: "resource" });
-
-// Type that is all the possible thing names
-export type ThingName = HopeportMonsterNameWithVariant;
-
 // Context for thing card provider
 export type ThingCardContextType = {
-  expandedCardId: ThingName | null;
-  setExpandedCardId: React.Dispatch<SetStateAction<ThingName | null>>;
+  expandedCardId: ThingCardId | null;
+  setExpandedCardId: React.Dispatch<SetStateAction<ThingCardId | null>>;
 };
 
 export type NPC = {
   name: string;
   types: ["vendor" | "quest" | "extra"];
 };
+
+// Union types for monster base names and w/ variants
+export type MonsterBaseName = HopeportMonsterBaseName;
+export type MonsterNameWithVariant = HopeportMonsterNameWithVariant;
 
 // Types for data entries in monster data arrays
 export type MonsterVariantData = {
@@ -111,10 +106,6 @@ export type MonsterData = {
   locations: RoomId[];
   variants: MonsterVariantData[];
 };
-
-// Union types for monster base names and w/ variants
-export type MonsterBaseName = HopeportMonsterBaseName;
-export type MonsterNameWithVariant = HopeportMonsterNameWithVariant;
 
 // Types used when using the monster data in code other than the data files
 export type Monster = MonsterData & {
@@ -135,6 +126,15 @@ export type BankType =
   | "potions"
   | "timber"
   | "leathers";
+
+// Type that combines searchable data which includes monsters, npcs, and resources
+export type SearchResult =
+  | (NPC & { dataType: "npc" })
+  | (MonsterData & { dataType: "monster" })
+  | (ResourceNode & { dataType: "resource" });
+
+// Type that is all the possible thing card ids
+export type ThingCardId = MonsterBaseName;
 
 /************************ *
   Regions
