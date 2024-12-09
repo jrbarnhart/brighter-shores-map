@@ -1,7 +1,7 @@
 import { BankType, NPC } from "@/lib/types";
 import { HopeportRoomId } from "./hopeportRoomData";
 import HOPEPORT_MONSTER_DATA, {
-  HopeportMonsterName,
+  HopeportMonsterBaseName,
 } from "./roomContents/hopeportMonsterData";
 
 export type HopeportRoomContentData = {
@@ -10,7 +10,7 @@ export type HopeportRoomContentData = {
   storageRift?: boolean;
   portalStone?: boolean;
   // Add Resources later
-  monsters?: HopeportMonsterName[];
+  monsters?: HopeportMonsterBaseName[];
   npcs?: NPC[];
   banks?: BankType[];
 };
