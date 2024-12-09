@@ -92,10 +92,14 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
           resultsOpen ? "" : "hidden"
         } max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
       >
-        {search.results.value.map((value, index) => {
+        {search.results.value.map((value) => {
           if (value.dataType === "monster") {
             return (
-              <MonsterCard monster={value} mapState={mapState} key={index} />
+              <MonsterCard
+                monster={value}
+                mapState={mapState}
+                key={value.name}
+              />
             );
           }
         })}
