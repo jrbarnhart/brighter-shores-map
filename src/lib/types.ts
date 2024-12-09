@@ -130,7 +130,7 @@ export type BankType =
 // Type that combines searchable data which includes monsters, npcs, and resources
 export type SearchResult =
   | (NPC & { dataType: "npc" })
-  | (MonsterData & { dataType: "monster" })
+  | (Monster & { dataType: "monster" })
   | (ResourceNode & { dataType: "resource" });
 
 // Type that is all the possible thing card ids
