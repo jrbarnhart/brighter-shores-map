@@ -78,12 +78,6 @@ export type RoomContentData = HopeportRoomContentData;
 
 export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 
-// Context for thing card provider
-export type ThingCardContextType = {
-  expandedCardId: ThingCardId | null;
-  setExpandedCardId: React.Dispatch<SetStateAction<ThingCardId | null>>;
-};
-
 export type NPC = {
   name: string;
   types: ["vendor" | "quest" | "extra"];
@@ -135,6 +129,12 @@ export type SearchResult =
 
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName;
+
+// Context for thing card provider
+export type ThingCardContextType = {
+  expandedCardId: ThingCardId | null;
+  setExpandedCardId: React.Dispatch<SetStateAction<ThingCardId | null>>;
+};
 
 /************************ *
   Regions
