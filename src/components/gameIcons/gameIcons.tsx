@@ -12,6 +12,7 @@ export function Arborae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"
@@ -81,6 +82,7 @@ export function Cryonae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <path
         stroke="#5aaff2"
@@ -142,6 +144,7 @@ export function Infernae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"
@@ -169,6 +172,7 @@ export function Necromae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"
@@ -243,6 +247,7 @@ export function Tempestae({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"
@@ -284,6 +289,7 @@ export function Impact({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"
@@ -324,6 +330,7 @@ export function Guard({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"
@@ -418,6 +425,7 @@ export function Hopeport({ ...props }: React.SVGProps<SVGSVGElement>) {
       width={width ?? DEFAULT_ICON_SIZE}
       height={height ?? DEFAULT_ICON_SIZE}
       viewBox="0 0 33.867 33.867"
+      className="game-icon"
     >
       <circle
         cx="16.933"

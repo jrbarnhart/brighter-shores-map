@@ -80,3 +80,9 @@
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  .game-icon {
+    height: 100%;
+    width: 100%;
+  }
+}
