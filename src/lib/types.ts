@@ -43,7 +43,7 @@ export type RoomData = {
 // Union type for all room ids
 export type RoomId = HopeportRoomId;
 
-// Type for using the room data in code
+// Type for using the room data in code other than the data files
 export type Room = RoomData & {
   id: RoomId;
 };
@@ -116,7 +116,7 @@ export type MonsterData = {
 export type MonsterBaseName = HopeportMonsterBaseName;
 export type MonsterNameWithVariant = HopeportMonsterNameWithVariant;
 
-// Types used when using the monster data in code
+// Types used when using the monster data in code other than the data files
 export type Monster = MonsterData & {
   name: MonsterBaseName;
 };
