@@ -1,6 +1,7 @@
 import { BBox } from "rbush";
 import { HopeportRoomContentData } from "./map/hopeport/hopeportContentData";
 import { HopeportRoomId } from "./map/hopeport/hopeportRoomData";
+import { HopeportMonsterVariantName } from "./map/hopeport/roomContents/hopeportMonsterData";
 
 /************************ *
   General Types
@@ -78,6 +79,9 @@ export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
   | (ResourceNode & { dataType: "resource" });
+
+// Type that is all the possible thing names
+export type ThingName = HopeportMonsterVariantName;
 
 export type NPC = {
   name: string;
