@@ -12,8 +12,6 @@ import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
 import { Search } from "lucide-react";
 import ThingCard from "../thingCards/ThingCard";
-import MonsterCardContents from "../thingCards/monsters/MonsterCardContents";
-import MonsterCardHeader from "../thingCards/monsters/MonsterCardHeader";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
@@ -109,11 +107,8 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
             return (
               <ThingCard
                 thing={value}
+                thingType={value.dataType}
                 mapState={mapState}
-                headerNodes={
-                  <MonsterCardHeader monster={value} mapState={mapState} />
-                }
-                contentNodes={<MonsterCardContents monster={value} />}
                 key={value.name}
               />
             );

@@ -1,18 +1,18 @@
-import { Thing } from "@/lib/types";
+import { ThingCardType, Thing } from "@/lib/types";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import useThingCardContext from "./useThingCardContext";
+import MonsterCardHeader from "./monsters/MonsterCardHeader";
+import MonsterCardContents from "./monsters/MonsterCardContents";
 
 export default function ThingCard({
   thing,
+  thingType,
   mapState,
-  headerNodes,
-  contentNodes,
 }: {
   thing: Thing;
+  thingType: ThingCardType;
   mapState: MapState;
-  headerNodes: React.ReactNode;
-  contentNodes: React.ReactNode;
 }) {
   const { search } = mapState;
   const { expandedCardId, setExpandedCardId } = useThingCardContext();
@@ -45,9 +45,17 @@ export default function ThingCard({
             : "scale-100"
         } bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in`}
       >
-        <CardHeader className="px-3 py-2 md:p-6">{headerNodes}</CardHeader>
+        <CardHeader className="px-3 py-2 md:p-6">
+          {thingType === "monster" && (
+            <MonsterCardHeader
+              monster={thing}
+              mapState={mapState}
+              key={thing.name}
+            />
+          )}
+        </CardHeader>
         <CardContent className="px-3 pb-1 md:px-6 md:pb-3">
-          {contentNodes}
+          {thingType === "monster" && <MonsterCardContents monster={thing} />}
         </CardContent>
       </Card>
     </div>
