@@ -20,14 +20,16 @@ export default function MonsterCard({
   monster: Monster;
   mapState: MapState;
 }) {
-  const { selectedRoomId } = mapState;
+  const { selectedRoomId, search } = mapState;
   const { expandedCardId, setExpandedCardId } = useThingCardContext();
 
   const handleClick = () => {
     setExpandedCardId((prev) => {
       if (prev === monster.name) {
+        search.resultsOpen.set(true);
         return null;
       }
+      search.resultsOpen.set(false);
       return monster.name;
     });
   };

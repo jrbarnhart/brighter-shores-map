@@ -83,9 +83,11 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
       </div>
       <div
         ref={searchResultsRef}
-        className={`${
-          search.resultsOpen.value ? "" : "hidden"
-        } max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
+        className={
+          search.resultsOpen.value
+            ? "max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto"
+            : "h-0 w-0 p-0 overflow-hidden"
+        }
       >
         {search.results.value.map((value) => {
           if (value.dataType === "monster") {
