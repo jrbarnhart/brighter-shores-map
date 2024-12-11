@@ -7,6 +7,7 @@ import {
 } from "./map/hopeport/roomContents/hopeportMonsterData";
 import { SetStateAction } from "react";
 import { HopeportNPCName } from "./map/hopeport/roomContents/hopeportNPCData";
+import { HopeportResourceNodeName } from "./map/hopeport/roomContents/hopeportResourceData";
 
 /************************ *
   General Types
@@ -116,8 +117,17 @@ export type Monster = MonsterData & {
   name: MonsterBaseName;
 };
 
-export type ResourceNode = {
+// Type for data entires in resource node data arrays
+export type ResourceNodeData = {
   name: string;
+};
+
+// Union type for all resource node names
+export type ResourceNodeName = HopeportResourceNodeName;
+
+// Type used when using resource node data in code other than data files
+export type ResourceNode = ResourceNodeData & {
+  name: ResourceNodeName;
 };
 
 export type BankType =
@@ -135,13 +145,13 @@ export type BankType =
 export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
-  | (ResourceNode & { dataType: "resource" });
+  | (ResourceNodeData & { dataType: "resource" });
 
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName;
 
 // Type that is all the possible things for thing cards including search results
-export type Thing = NPC | Monster | ResourceNode | SearchResult;
+export type Thing = NPC | Monster | ResourceNodeData | SearchResult;
 export type ThingCardType = "npc" | "monster" | "resource";
 
 // Context for thing card provider
