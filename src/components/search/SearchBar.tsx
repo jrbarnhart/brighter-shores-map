@@ -1,4 +1,10 @@
-import React, { SetStateAction, useEffect, useMemo, useRef } from "react";
+import React, {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { MapState } from "../map/useMapState";
 import useDebounce from "@/hooks/useDebounce";
 import Fuse from "fuse.js";
@@ -38,6 +44,12 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     300
   );
 
+  const handleClickOnBar = useCallback(() => {
+    if (search.results.value.length > 0) {
+      setSearchResultsOpen(true);
+    }
+  }, [search.results.value, setSearchResultsOpen]);
+
   // Update the search results when the query value changes
   useEffect(() => {
     handleSearchQueryChange(search.query.value, search.results.set);
@@ -76,6 +88,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
           onChange={(e) => {
             search.query.set(e.target.value);
           }}
+          onClick={handleClickOnBar}
           type="search"
           id="map-search"
           name="query"
