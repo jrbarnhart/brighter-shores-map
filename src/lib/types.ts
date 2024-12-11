@@ -130,6 +130,9 @@ export type SearchResult =
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName;
 
+// Type that is all the possible things for thing cards
+export type Thing = Monster;
+
 // Context for thing card provider
 export type ThingCardContextType = {
   expandedCardId: ThingCardId | null;
