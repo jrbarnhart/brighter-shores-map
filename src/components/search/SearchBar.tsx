@@ -11,7 +11,9 @@ import Fuse from "fuse.js";
 import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
 import { Search } from "lucide-react";
-import MonsterCard from "../thingCards/monsters/MonsterCardContents";
+import ThingCard from "../thingCards/ThingCard";
+import MonsterCardContents from "../thingCards/monsters/MonsterCardContents";
+import MonsterCardHeader from "../thingCards/monsters/MonsterCardHeader";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
@@ -105,9 +107,13 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         {search.results.value.map((value) => {
           if (value.dataType === "monster") {
             return (
-              <MonsterCard
-                monster={value}
+              <ThingCard
+                thing={value}
                 mapState={mapState}
+                headerNodes={
+                  <MonsterCardHeader monster={value} mapState={mapState} />
+                }
+                contentNodes={<MonsterCardContents monster={value} />}
                 key={value.name}
               />
             );
