@@ -121,7 +121,8 @@ export type BankType =
   | "timber"
   | "leathers";
 
-// Type that combines searchable data which includes monsters, npcs, and resources
+// Types that combine searchable data which includes monsters, npcs, and resources along with their data type
+export type SearchResultDataType = "npc" | "monster" | "resource";
 export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
