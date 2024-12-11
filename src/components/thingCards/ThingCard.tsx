@@ -1,4 +1,4 @@
-import { ThingCardType, Thing } from "@/lib/types";
+import { Thing } from "@/lib/types";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import useThingCardContext from "./useThingCardContext";
@@ -7,11 +7,9 @@ import MonsterCardContents from "./monsters/MonsterCardContents";
 
 export default function ThingCard({
   thing,
-  thingType,
   mapState,
 }: {
   thing: Thing;
-  thingType: ThingCardType;
   mapState: MapState;
 }) {
   const { search } = mapState;
@@ -46,7 +44,7 @@ export default function ThingCard({
         } bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in`}
       >
         <CardHeader className="px-3 py-2 md:p-6">
-          {thingType === "monster" && (
+          {thing.type === "monster" && (
             <MonsterCardHeader
               monster={thing}
               mapState={mapState}
@@ -55,7 +53,7 @@ export default function ThingCard({
           )}
         </CardHeader>
         <CardContent className="px-3 pb-1 md:px-6 md:pb-3">
-          {thingType === "monster" && <MonsterCardContents monster={thing} />}
+          {thing.type === "monster" && <MonsterCardContents monster={thing} />}
         </CardContent>
       </Card>
     </div>

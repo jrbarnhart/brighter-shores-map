@@ -106,8 +106,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
           if (value.dataType === "monster") {
             return (
               <ThingCard
-                thing={value}
-                thingType={value.dataType}
+                thing={{ type: "monster", ...value }}
                 mapState={mapState}
                 key={value.name}
               />
