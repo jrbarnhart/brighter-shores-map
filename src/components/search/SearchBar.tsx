@@ -1,10 +1,4 @@
-import React, {
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { SetStateAction, useEffect, useMemo, useRef } from "react";
 import { MapState } from "../map/useMapState";
 import useDebounce from "@/hooks/useDebounce";
 import Fuse from "fuse.js";
@@ -15,8 +9,9 @@ import MonsterCard from "../thingCards/MonsterCard";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
+  // Get just the setter to avoid value dep in use effect
+  const setSearchResultsOpen = search.resultsOpen.set;
 
-  const [resultsOpen, setResultsOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
 
@@ -35,9 +30,9 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
       const results = fuse.search(query);
       setResults(results.map((result) => result.item));
       if (results.length > 0) {
-        setResultsOpen(true);
+        setSearchResultsOpen(true);
       } else if (results.length === 0) {
-        setResultsOpen(false);
+        setSearchResultsOpen(false);
       }
     },
     300
@@ -60,7 +55,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         searchResultsRef.current &&
         !searchResultsRef.current.contains(e.target as Node)
       ) {
-        setResultsOpen(false);
+        setSearchResultsOpen(false);
       }
     };
     window.addEventListener("click", closeOnClickHandler);
@@ -68,7 +63,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     return () => {
       window.removeEventListener("click", closeOnClickHandler);
     };
-  }, []);
+  }, [setSearchResultsOpen]);
 
   return (
     <div className="absolute top-0 right-0 z-10 mt-3 w-full flex flex-col items-center justify-center gap-3">
@@ -89,7 +84,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
       <div
         ref={searchResultsRef}
         className={`${
-          resultsOpen ? "" : "hidden"
+          search.resultsOpen.value ? "" : "hidden"
         } max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto`}
       >
         {search.results.value.map((value) => {

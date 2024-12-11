@@ -87,6 +87,10 @@ export type MapState = {
       value: SearchResult[];
       set: React.Dispatch<SetStateAction<SearchResult[]>>;
     };
+    resultsOpen: {
+      value: boolean;
+      set: React.Dispatch<SetStateAction<boolean>>;
+    };
   };
 };
 
@@ -115,6 +119,7 @@ export default function useMapState() {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchResultsOpen, setSearchResultsOpen] = useState(false);
 
   const { roomPaths, visibleRoomPaths, roomLabels } = useCanvasElementsManager({
     roomsCanvas: roomsCanvasRef.current,
@@ -155,6 +160,10 @@ export default function useMapState() {
       results: {
         value: searchResults,
         set: setSearchResults,
+      },
+      resultsOpen: {
+        value: searchResultsOpen,
+        set: setSearchResultsOpen,
       },
     },
   };
