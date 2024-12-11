@@ -50,7 +50,7 @@ export default function MonsterCard({
             : "scale-100"
         } bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in`}
       >
-        <CardHeader className="p-3">
+        <CardHeader className="px-3 py-2 md:p-6">
           <CardTitle>
             {monster.name[0].toUpperCase() + monster.name.slice(1)}
           </CardTitle>
@@ -70,13 +70,15 @@ export default function MonsterCard({
             })}
           </CardDescription>
         </CardHeader>
-        <CardContent className="h-12 p-3 pt-0 flex items-center justify-between gap-1 text-sm">
-          <p>Attack: </p>
-          <Impact />
-          <p>Immune: </p>
-          <Tempestae />
-          <p>Weak: </p>
-          <Necromae />
+        <CardContent className="px-3 pb-1 md:px-6 md:pb-3">
+          <div className="h-10 flex items-center justify-between gap-1 text-sm">
+            <p>Attack: </p>
+            <Impact />
+            <p>Immune: </p>
+            <Tempestae />
+            <p>Weak: </p>
+            <Necromae />
+          </div>
         </CardContent>
       </Card>
     </div>
