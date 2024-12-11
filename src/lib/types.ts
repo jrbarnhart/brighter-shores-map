@@ -145,14 +145,16 @@ export type BankType =
 export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
-  | (ResourceNodeData & { dataType: "resource" });
+  | (ResourceNode & { dataType: "resource" });
 
 // Type that is all the possible thing card ids
-export type ThingCardId = MonsterBaseName;
+export type ThingCardId = MonsterBaseName | NPCName | ResourceNodeName;
 
-// Type that is all the possible things for thing cards including search results
-export type Thing = NPC | Monster | ResourceNodeData | SearchResult;
-export type ThingCardType = "npc" | "monster" | "resource";
+// Type for the object that can be represented by a thing card
+export type Thing =
+  | (NPC & { type: "npc" })
+  | (Monster & { type: "monster" })
+  | (ResourceNode & { type: "resource" });
 
 // Context for thing card provider
 export type ThingCardContextType = {
