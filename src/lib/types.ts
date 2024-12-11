@@ -103,7 +103,8 @@ export type MonsterVariantData = {
   name: string;
   health: number;
   experience: number;
-  skillLevel: number;
+  monsterLevel: number;
+  unlockLevel: number;
 };
 
 export type MonsterData = {

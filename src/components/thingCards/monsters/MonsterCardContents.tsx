@@ -26,16 +26,16 @@ export default function MonsterCardContents({ monster }: { monster: Monster }) {
               <>
                 <p>{variant.name}</p>
                 <p>{variant.health}</p> <p>{variant.experience}</p>{" "}
-                <p>{variant.skillLevel}</p>
-                <p>{variant.skillLevel}</p>
+                <p>{variant.monsterLevel}</p>
+                <p>{variant.unlockLevel}</p>
               </>
             ))}
             {monster.variants.map((variant) => (
               <>
                 <p>{variant.name}</p>
                 <p>{variant.health}</p> <p>{variant.experience}</p>{" "}
-                <p>{variant.skillLevel}</p>
-                <p>{variant.skillLevel}</p>
+                <p>{variant.monsterLevel}</p>
+                <p>{variant.unlockLevel}</p>
               </>
             ))}
           </div>
