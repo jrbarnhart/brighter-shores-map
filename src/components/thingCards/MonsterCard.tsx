@@ -46,9 +46,9 @@ export default function MonsterCard({
         onClick={handleClick}
         className={`${
           expandedCardId === monster.name
-            ? "w-screen max-w-[640px] h-screen max-h-[360px] m-3"
-            : ""
-        } bg-sidebar border-sidebar-border text-sidebar-foreground`}
+            ? "w-screen max-w-[640px] h-screen max-h-[360px] m-5 scale-105"
+            : "scale-100"
+        } bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in`}
       >
         <CardHeader className="p-3">
           <CardTitle>

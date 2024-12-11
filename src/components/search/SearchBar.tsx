@@ -98,7 +98,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         ref={searchResultsRef}
         className={
           search.resultsOpen.value
-            ? "max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto"
+            ? "max-h-52 w-64 md:w-80 lg:w-96 p-2 space-y-2 bg-sidebar border border-sidebar-border rounded-md overflow-y-auto overflow-x-hidden"
             : "h-0 w-0 p-0 overflow-hidden"
         }
       >
