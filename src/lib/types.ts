@@ -122,7 +122,6 @@ export type BankType =
   | "leathers";
 
 // Types that combine searchable data which includes monsters, npcs, and resources along with their data type
-export type SearchResultDataType = "npc" | "monster" | "resource";
 export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
@@ -133,6 +132,8 @@ export type ThingCardId = MonsterBaseName;
 
 // Type that is all the possible things for thing cards
 export type Thing = Monster;
+
+export type ThingCardType = "npc" | "monster" | "resource";
 
 // Context for thing card provider
 export type ThingCardContextType = {
