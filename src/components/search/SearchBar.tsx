@@ -11,7 +11,7 @@ import Fuse from "fuse.js";
 import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
 import { Search } from "lucide-react";
-import MonsterCard from "../thingCards/MonsterCard";
+import MonsterCard from "../thingCards/monsters/MonsterCardContents";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
