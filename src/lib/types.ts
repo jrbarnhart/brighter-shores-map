@@ -6,6 +6,7 @@ import {
   HopeportMonsterNameWithVariant,
 } from "./map/hopeport/roomContents/hopeportMonsterData";
 import { SetStateAction } from "react";
+import { HopeportNPCName } from "./map/hopeport/roomContents/hopeportNPCData";
 
 /************************ *
   General Types
@@ -78,9 +79,18 @@ export type RoomContentData = HopeportRoomContentData;
 
 export type RoomIdContentData = RoomContentData & { roomId: RoomId };
 
-export type NPC = {
+// Type for data entries in NPC data arrays
+export type NPCData = {
   name: string;
   types: ["vendor" | "quest" | "extra"];
+};
+
+// Union type for all NPC names
+export type NPCName = HopeportNPCName;
+
+// Type used when using the NPC data in code other than data files
+export type NPC = NPCData & {
+  name: NPCName;
 };
 
 // Union types for monster base names and w/ variants
@@ -130,9 +140,8 @@ export type SearchResult =
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName;
 
-// Type that is all the possible things for thing cards
-export type Thing = Monster;
-
+// Type that is all the possible things for thing cards including search results
+export type Thing = NPC | Monster | ResourceNode | SearchResult;
 export type ThingCardType = "npc" | "monster" | "resource";
 
 // Context for thing card provider
