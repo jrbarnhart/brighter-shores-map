@@ -38,7 +38,7 @@ export default function MonsterCard({
     <div
       className={
         expandedCardId === monster.name
-          ? "w-full h-full fixed top-0 left-0 flex items-center justify-center touch-none"
+          ? "w-full h-full fixed top-0 left-0 flex items-center justify-center touch-none bg-black/80 backdrop-blur-sm"
           : ""
       }
     >
