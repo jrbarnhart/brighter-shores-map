@@ -6,7 +6,7 @@ import {
   Infernae,
   Necromae,
   Tempestae,
-} from "src/components/gameIcons/gameIcons";
+} from "./gameIcons";
 
 // Util for getting an icon based on a passed damage type
 export function getDamageIcon(damageType: DamageType) {
