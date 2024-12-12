@@ -4,7 +4,8 @@ import { MapState } from "../map/useMapState";
 import useThingCardContext from "./useThingCardContext";
 import MonsterCardHeader from "./monsters/MonsterCardHeader";
 import MonsterCardContents from "./monsters/MonsterCardContents";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
+import { X } from "lucide-react";
 
 export default function ThingCard({
   thing,
@@ -16,17 +17,25 @@ export default function ThingCard({
   const { expandedCardId, setExpandedCardId } = useThingCardContext();
 
   const handleClick = useCallback(() => {
-    setExpandedCardId((prev) => {
-      // Probably should be a unique id of some kind but for now all thing names are unique so it works.
-      if (prev === thing.name) {
-        return null;
+    if (expandedCardId) {
+      setExpandedCardId(null);
+    } else {
+      setExpandedCardId(thing.name);
+    }
+  }, [expandedCardId, setExpandedCardId, thing.name]);
+
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (expandedCardId) {
+        e.stopPropagation();
       }
-      return thing.name;
-    });
-  }, [setExpandedCardId, thing.name]);
+    },
+    [expandedCardId]
+  );
 
   return (
     <div
+      onClick={handleClick}
       className={
         expandedCardId === thing.name
           ? "w-full h-full fixed top-0 left-0 flex items-center justify-center touch-none bg-black/80 backdrop-blur-sm"
@@ -34,13 +43,22 @@ export default function ThingCard({
       }
     >
       <Card
-        onClick={handleClick}
+        onClick={handleCardClick}
         className={`${
           expandedCardId === thing.name
             ? "w-screen max-w-[640px] h-screen max-h-[360px] m-5 scale-105"
             : "scale-100"
         } bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in flex flex-col`}
       >
+        {expandedCardId && (
+          <div
+            onClick={handleClick}
+            className="absolute -top-6 right-0 flex gap-2"
+          >
+            <p>Close</p>
+            <X />
+          </div>
+        )}
         <CardHeader className="px-3 py-2 md:p-6">
           {thing.type === "monster" && (
             <MonsterCardHeader
