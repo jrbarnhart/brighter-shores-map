@@ -4,7 +4,6 @@ import MapSidebar from "./components/sidebar/MapSidebar";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import mapConfig from "./lib/map/mapConfig";
 import ZoomButtons from "./components/zoomButtons/ZoomButtons";
-import Details from "./components/toolTips/Details";
 import MapCanvas from "./components/map/canvas/MapCanvas";
 import SearchBar from "./components/search/SearchBar";
 import { ThingCardProvider } from "./components/thingCards/ThingCardProvider";
@@ -25,7 +24,6 @@ function App() {
           <MapCanvas mapState={mapState} />
           <SearchBar mapState={mapState} />
           <ZoomButtons mapState={mapState} />
-          <Details mapState={mapState} />
         </main>
       </ThingCardProvider>
     </SidebarProvider>
