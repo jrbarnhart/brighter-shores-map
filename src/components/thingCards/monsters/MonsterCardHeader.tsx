@@ -19,8 +19,15 @@ export default function MonsterCardHeader({
 
   return (
     <>
-      <CardTitle>
-        {monster.name[0].toUpperCase() + monster.name.slice(1)}
+      <CardTitle className="flex flex-nowrap justify-between items-start">
+        <p className="text-nowrap overflow-hidden">
+          {monster.name[0].toUpperCase() + monster.name.slice(1)}
+        </p>
+        {monster.aggressive && (
+          <p className="text-red-600 text-base leading-none">
+            {isExpanded ? "Aggressive!" : "!"}
+          </p>
+        )}
       </CardTitle>
       <CardDescription className="flex flex-col">
         {isExpanded && <p className="text-sidebar-foreground">Locations:</p>}
