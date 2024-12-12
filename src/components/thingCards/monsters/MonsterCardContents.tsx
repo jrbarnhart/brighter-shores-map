@@ -25,22 +25,14 @@ export default function MonsterCardContents({ monster }: { monster: Monster }) {
         )}
       </div>
       {isExpanded && (
-        <div className="border-sidebar-border border rounded-md p-2 -mx-2 flex-grow overflow-y-auto overflow-x-hidden">
-          <div className="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-x-2 text-sm border-b-2 border-sidebar-border">
+        <div className="border-sidebar-border border rounded-md p-2 -mx-2 flex-grow overflow-y-auto overflow-x-hidden pointer-events-none">
+          <div className="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-x-2 border-b-2 border-sidebar-border">
             <p>Variant:</p> <p>Health</p> <p>XP</p> <p>Lvl</p> <p>🔒 Lvl</p>
           </div>
           <div className="grid grid-cols-[3fr_1fr_1fr_1fr_1fr] gap-x-2 text-sm">
             {monster.variants.map((variant) => (
               <>
                 <p>{variant.name[0].toUpperCase() + variant.name.slice(1)}</p>
-                <p>{variant.health}</p> <p>{variant.experience}</p>{" "}
-                <p>{variant.monsterLevel}</p>
-                <p>{variant.unlockLevel}</p>
-              </>
-            ))}
-            {monster.variants.map((variant) => (
-              <>
-                <p>{variant.name}</p>
                 <p>{variant.health}</p> <p>{variant.experience}</p>{" "}
                 <p>{variant.monsterLevel}</p>
                 <p>{variant.unlockLevel}</p>
