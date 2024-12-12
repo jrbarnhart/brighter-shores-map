@@ -86,3 +86,15 @@
     width: min-content;
   }
 }
+
+/* These rules stop the ever-annoying mobile browswer peek-a-boo address bar behavior. */
+html {
+  overflow: hidden;
+  width: 100%;
+}
+body {
+  height: 100%;
+  position: fixed;
+  /* prevent overscroll bounce*/
+  overflow-y: none;
+}
