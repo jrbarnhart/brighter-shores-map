@@ -12,11 +12,14 @@ import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
 import { Search } from "lucide-react";
 import ThingCard from "../thingCards/ThingCard";
+import useThingCardContext from "../thingCards/useThingCardContext";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
   const { search } = mapState;
   // Get just the setter to avoid value dep in use effect
   const setSearchResultsOpen = search.resultsOpen.set;
+
+  const { expandedCardId } = useThingCardContext();
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
@@ -62,10 +65,11 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   useEffect(() => {
     const closeOnClickHandler = (e: MouseEvent) => {
       if (
-        searchInputRef.current &&
-        !searchInputRef.current.contains(e.target as Node) &&
-        searchResultsRef.current &&
-        !searchResultsRef.current.contains(e.target as Node)
+        expandedCardId ||
+        (searchInputRef.current &&
+          !searchInputRef.current.contains(e.target as Node) &&
+          searchResultsRef.current &&
+          !searchResultsRef.current.contains(e.target as Node))
       ) {
         setSearchResultsOpen(false);
       }
@@ -75,7 +79,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     return () => {
       window.removeEventListener("click", closeOnClickHandler);
     };
-  }, [setSearchResultsOpen]);
+  }, [expandedCardId, search.results.value.length, setSearchResultsOpen]);
 
   return (
     <div className="absolute top-0 right-0 z-10 mt-3 w-full flex flex-col items-center justify-center gap-3">
