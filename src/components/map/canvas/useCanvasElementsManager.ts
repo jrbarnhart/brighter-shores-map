@@ -84,15 +84,15 @@ function createRoomPaths(currentCellSize: number, mapData: MapData) {
 
 function filterVisibleRooms(
   roomPaths: RoomDataWithPath[],
-  roomsCanvas: HTMLCanvasElement | null,
+  canvasSize: { height: number; width: number },
   currentCellSize: number,
   mapPos: { x: number; y: number },
   rTree: RBush<RoomTreeNode> | undefined
 ) {
-  if (!roomsCanvas || !rTree) return [];
+  if (!rTree) return [];
   // Convert canvas dimensions to normalized cell space
-  const canvasWidthInCells = roomsCanvas.width / currentCellSize;
-  const canvasHeightInCells = roomsCanvas.height / currentCellSize;
+  const canvasWidthInCells = canvasSize.width / currentCellSize;
+  const canvasHeightInCells = canvasSize.height / currentCellSize;
 
   const bbox: BBox = {
     minX: mapPos.x,
@@ -240,14 +240,15 @@ function createLabels(
 
 export default function useCanvasElementsManager({
   currentCellSize,
-  roomsCanvas,
   mapPos,
   rTree,
+  canvasSize,
 }: {
   roomsCanvas: HTMLCanvasElement | null;
   currentCellSize: number;
   mapPos: { x: number; y: number };
   rTree: RBush<RoomTreeNode> | undefined;
+  canvasSize: { height: number; width: number };
 }) {
   const { labelPadding, labelMaxLineWidth, labelTextSize } = mapConfig;
 
@@ -266,12 +267,12 @@ export default function useCanvasElementsManager({
   const visibleRoomPaths = useMemo(() => {
     return filterVisibleRooms(
       roomPaths,
-      roomsCanvas,
+      canvasSize,
       currentCellSize,
       mapPos,
       rTree
     );
-  }, [currentCellSize, roomPaths, mapPos, rTree, roomsCanvas]);
+  }, [currentCellSize, roomPaths, mapPos, rTree, canvasSize]);
 
   return { roomPaths, visibleRoomPaths, roomLabels };
 }

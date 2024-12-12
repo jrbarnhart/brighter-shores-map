@@ -126,6 +126,7 @@ export default function useMapState() {
     currentCellSize,
     mapPos,
     rTree,
+    canvasSize: roomsCanvasSize,
   });
 
   const mapState: MapState = {
