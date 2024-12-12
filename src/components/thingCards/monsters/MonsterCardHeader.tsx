@@ -20,7 +20,7 @@ export default function MonsterCardHeader({
   return (
     <>
       <CardTitle className="flex flex-nowrap justify-between items-start">
-        <p className="text-nowrap overflow-hidden">
+        <p className="text-nowrap overflow-hidden leading-8">
           {monster.name[0].toUpperCase() + monster.name.slice(1)}
         </p>
         {monster.aggressive && (
