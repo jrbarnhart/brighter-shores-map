@@ -27,6 +27,15 @@ export type Point = {
   y: NormalizedValue;
 };
 
+// Types of damage that can be dealt in the game
+export type DamageType =
+  | "impact"
+  | "arborae"
+  | "cryonae"
+  | "infernae"
+  | "necromae"
+  | "tempestae";
+
 /************************ *
   Rooms
  ************************ */
@@ -110,6 +119,9 @@ export type MonsterVariantData = {
 export type MonsterData = {
   name: string;
   locations: RoomId[];
+  attackDamage: DamageType;
+  vulnerableDamage?: DamageType;
+  immuneDamage?: DamageType;
   variants: MonsterVariantData[];
 };
 
