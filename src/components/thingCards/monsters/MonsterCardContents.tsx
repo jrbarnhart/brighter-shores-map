@@ -10,7 +10,11 @@ export default function MonsterCardContents({ monster }: { monster: Monster }) {
 
   return (
     <>
-      <div className="h-10 flex items-center gap-1 md:gap-3 text-sm max-w-md">
+      <div
+        className={`${
+          isExpanded ? "h-10" : "h-6"
+        } flex items-center gap-1 md:gap-3 text-sm max-w-md`}
+      >
         {monster.passive && (
           <>
             <p>Passive</p>
