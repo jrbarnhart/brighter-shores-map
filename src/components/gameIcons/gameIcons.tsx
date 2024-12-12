@@ -321,6 +321,45 @@ export function Impact({ ...props }: React.SVGProps<SVGSVGElement>) {
 // #endregion
 
 // #region Skill Icons
+export function Passive({ ...props }: React.SVGProps<SVGSVGElement>) {
+  const { height, width } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width ?? DEFAULT_ICON_SIZE}
+      height={height ?? DEFAULT_ICON_SIZE}
+      viewBox="0 0 33.867 33.867"
+      className="game-icon"
+    >
+      <g paintOrder="fill markers stroke">
+        <circle
+          cx="16.933"
+          cy="16.933"
+          r="16.177"
+          fill="#5098e4"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.369"
+        ></circle>
+        <path
+          fill="#284d72"
+          d="M28.722 13.519c0 8.524-6.876 15.434-15.36 15.434-8.482 0-12.697-4.39-12.697-12.914S7.542.605 16.025.605s12.697 4.39 12.697 12.914"
+        ></path>
+        <circle
+          cx="16.933"
+          cy="16.933"
+          r="16.177"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.369"
+        ></circle>
+      </g>
+    </svg>
+  );
+}
 
 export function Guard({ ...props }: React.SVGProps<SVGSVGElement>) {
   const { height, width } = props;
