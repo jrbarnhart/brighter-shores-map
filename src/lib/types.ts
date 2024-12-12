@@ -110,8 +110,6 @@ export type MonsterNameWithVariant = HopeportMonsterNameWithVariant;
 // Types for data entries in monster data arrays
 export type MonsterVariantData = {
   name: string;
-  health: number;
-  experience: number;
   monsterLevel: number;
   unlockLevel: number;
 };
