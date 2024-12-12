@@ -23,7 +23,7 @@ export default function MonsterCardHeader({
         {monster.name[0].toUpperCase() + monster.name.slice(1)}
       </CardTitle>
       <CardDescription className="flex flex-col">
-        {isExpanded && <p>Locations:</p>}
+        {isExpanded && <p className="text-sidebar-foreground">Locations:</p>}
         <div>
           {monster.locations.map((location, index) => {
             const room = findRoomById(mapState.roomPaths.value, location);
