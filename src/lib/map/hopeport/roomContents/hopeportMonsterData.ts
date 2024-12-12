@@ -53,7 +53,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "deathcrow",
     locations: ["town-gates", "old-street-east"],
-    attackDamage: "impact",
+    attackDamage: "necromae",
+    vulnerableDamage: "cryonae",
+    immuneDamage: "necromae",
     variants: [
       {
         name: "glinteye",
@@ -109,7 +111,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "thief",
     locations: ["tims-alley", "limpet-lane"],
-    attackDamage: "impact",
+    attackDamage: "cryonae",
+    vulnerableDamage: "arborae",
+    immuneDamage: "cryonae",
     variants: [
       {
         name: "common",
@@ -172,7 +176,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "goblin solider",
     locations: ["north-walls"],
-    attackDamage: "impact",
+    attackDamage: "infernae",
+    vulnerableDamage: "tempestae",
+    immuneDamage: "infernae",
     variants: [
       {
         name: "looter",
@@ -228,7 +234,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "goblin chief",
     locations: ["south-walls"],
-    attackDamage: "impact",
+    attackDamage: "infernae",
+    vulnerableDamage: "tempestae",
+    immuneDamage: "infernae",
     variants: [
       {
         name: "irritable",
@@ -277,7 +285,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "hairbeast",
     locations: ["overgrown-road", "rubble-road"],
-    attackDamage: "impact",
+    attackDamage: "tempestae",
+    vulnerableDamage: "necromae",
+    immuneDamage: "tempestae",
     variants: [
       {
         name: "feral",
@@ -333,7 +343,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "ghoul",
     locations: ["collapsed-hovels", "wasteland"],
-    attackDamage: "impact",
+    attackDamage: "necromae",
+    vulnerableDamage: "arborae",
+    immuneDamage: "necromae",
     variants: [
       {
         name: "shambling",
@@ -382,6 +394,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "street louse",
     locations: ["wilhope-passage"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -431,6 +444,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "thug",
     locations: ["murk-close"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -487,7 +501,9 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "carnivorous plant",
     locations: ["overgrown-field", "fallen-monument"],
-    attackDamage: "impact",
+    attackDamage: "arborae",
+    vulnerableDamage: "cryonae",
+    immuneDamage: "arborae",
     variants: [
       {
         name: "snap",
@@ -536,6 +552,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "crab",
     locations: ["east-beach"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -599,6 +616,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "bugman",
     locations: ["overgrown-pond"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -655,6 +673,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "jellyfish",
     locations: ["jellyfish-landing"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -711,6 +730,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "giant ant",
     locations: ["crater"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -760,6 +780,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "pirate",
     locations: ["pirate-hideout"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
@@ -823,6 +844,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "punkupine",
     locations: ["rocky-road"],
+    passive: true,
     attackDamage: "impact",
     variants: [
       {
