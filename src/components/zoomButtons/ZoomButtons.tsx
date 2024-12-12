@@ -45,7 +45,7 @@ export default function ZoomButtons({ ...props }: { mapState: MapState }) {
   );
 
   return (
-    <div className="absolute right-0 top-0 w-12 h-full mr-3 flex flex-col justify-center gap-10">
+    <div className="absolute right-0 top-0 w-12 h-full mr-3 flex flex-col justify-start mt-20 gap-3">
       <Button
         onClick={() => {
           onClick(true);
