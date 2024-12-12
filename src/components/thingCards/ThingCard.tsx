@@ -53,7 +53,7 @@ export default function ThingCard({
         {expandedCardId && (
           <div
             onClick={handleClick}
-            className="absolute -top-6 right-0 flex gap-2"
+            className="absolute -top-7 right-0 flex gap-2"
           >
             <p>Close</p>
             <X />
