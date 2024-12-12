@@ -120,6 +120,7 @@ export type MonsterData = {
   name: string;
   locations: RoomId[];
   passive?: boolean;
+  aggressive?: boolean;
   attackDamage: DamageType;
   vulnerableDamage?: DamageType;
   immuneDamage?: DamageType;
