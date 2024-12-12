@@ -4,6 +4,7 @@ import { MapState } from "../map/useMapState";
 import useThingCardContext from "./useThingCardContext";
 import MonsterCardHeader from "./monsters/MonsterCardHeader";
 import MonsterCardContents from "./monsters/MonsterCardContents";
+import { useCallback } from "react";
 
 export default function ThingCard({
   thing,
@@ -12,20 +13,17 @@ export default function ThingCard({
   thing: Thing;
   mapState: MapState;
 }) {
-  const { search } = mapState;
   const { expandedCardId, setExpandedCardId } = useThingCardContext();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setExpandedCardId((prev) => {
       // Probably should be a unique id of some kind but for now all thing names are unique so it works.
       if (prev === thing.name) {
-        search.resultsOpen.set(true);
         return null;
       }
-      search.resultsOpen.set(false);
       return thing.name;
     });
-  };
+  }, [setExpandedCardId, thing.name]);
 
   return (
     <div
