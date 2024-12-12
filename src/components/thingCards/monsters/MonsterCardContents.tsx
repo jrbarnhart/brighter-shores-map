@@ -2,6 +2,7 @@ import { Monster } from "@/lib/types";
 import useThingCardContext from "../useThingCardContext";
 import { getDamageIcon } from "@/components/gameIcons/gameIconUtils";
 import React from "react";
+import { Passive } from "@/components/gameIcons/gameIcons";
 
 export default function MonsterCardContents({ monster }: { monster: Monster }) {
   const { expandedCardId } = useThingCardContext();
@@ -10,18 +11,28 @@ export default function MonsterCardContents({ monster }: { monster: Monster }) {
   return (
     <>
       <div className="h-10 flex items-center gap-1 md:gap-3 text-sm max-w-md">
-        <p>Attack: </p>
-        {getDamageIcon(monster.attackDamage)}
-        {monster.vulnerableDamage && (
+        {monster.passive && (
           <>
-            <p>Weak:</p>
-            {getDamageIcon(monster.vulnerableDamage)}
+            <p>Passive</p>
+            <Passive />
           </>
         )}
-        {monster.immuneDamage && (
+        {!monster.passive && (
           <>
-            <p>Immune:</p>
-            {getDamageIcon(monster.immuneDamage)}
+            <p>Attack: </p>
+            {getDamageIcon(monster.attackDamage)}
+            {monster.vulnerableDamage && (
+              <>
+                <p>Weak:</p>
+                {getDamageIcon(monster.vulnerableDamage)}
+              </>
+            )}
+            {monster.immuneDamage && (
+              <>
+                <p>Immune:</p>
+                {getDamageIcon(monster.immuneDamage)}
+              </>
+            )}
           </>
         )}
       </div>
