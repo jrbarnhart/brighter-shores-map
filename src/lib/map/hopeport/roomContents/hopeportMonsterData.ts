@@ -111,6 +111,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "thief",
     locations: ["tims-alley", "limpet-lane"],
+    aggressive: true,
     attackDamage: "cryonae",
     vulnerableDamage: "arborae",
     immuneDamage: "cryonae",
@@ -176,6 +177,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "goblin solider",
     locations: ["north-walls"],
+    aggressive: true,
     attackDamage: "infernae",
     vulnerableDamage: "tempestae",
     immuneDamage: "infernae",
@@ -234,6 +236,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "goblin chief",
     locations: ["south-walls"],
+    aggressive: true,
     attackDamage: "infernae",
     vulnerableDamage: "tempestae",
     immuneDamage: "infernae",
@@ -343,6 +346,7 @@ const HOPEPORT_MONSTER_DATA = [
   {
     name: "ghoul",
     locations: ["collapsed-hovels", "wasteland"],
+    aggressive: true,
     attackDamage: "necromae",
     vulnerableDamage: "arborae",
     immuneDamage: "necromae",
