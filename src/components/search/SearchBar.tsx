@@ -63,12 +63,12 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   useEffect(() => {
     const closeOnClickHandler = (e: MouseEvent) => {
       if (
-        expandedCardThing.value ||
-        (searchInputRef.current &&
-          !searchInputRef.current.contains(e.target as Node) &&
-          searchResultsRef.current &&
-          !searchResultsRef.current.contains(e.target as Node))
+        searchInputRef.current &&
+        !searchInputRef.current.contains(e.target as Node) &&
+        searchResultsRef.current &&
+        !searchResultsRef.current.contains(e.target as Node)
       ) {
+        console.log("unset");
         setSearchResultsOpen(false);
       }
     };
@@ -77,11 +77,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     return () => {
       window.removeEventListener("click", closeOnClickHandler);
     };
-  }, [
-    expandedCardThing.value,
-    search.results.value.length,
-    setSearchResultsOpen,
-  ]);
+  }, [search.results.value.length, setSearchResultsOpen]);
 
   return (
     <div className="absolute top-0 right-0 z-10 mt-3 w-full flex flex-col items-center justify-center gap-3">
