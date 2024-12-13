@@ -11,15 +11,12 @@ import Fuse from "fuse.js";
 import { searchableData } from "@/lib/map/mapData";
 import { SearchResult } from "@/lib/types";
 import { Search } from "lucide-react";
-import ThingCard from "../thingCards/ThingCard";
-import useThingCardContext from "../thingCards/useThingCardContext";
+import SearchCard from "../searchCard/SearchCard";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
-  const { search } = mapState;
+  const { search, expandedCardThing } = mapState;
   // Get just the setter to avoid value dep in use effect
   const setSearchResultsOpen = search.resultsOpen.set;
-
-  const { expandedCardId } = useThingCardContext();
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
@@ -47,6 +44,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     300
   );
 
+  // Reopen search results if bar clicked and results exist
   const handleClickOnBar = useCallback(() => {
     if (search.results.value.length > 0) {
       setSearchResultsOpen(true);
@@ -65,7 +63,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   useEffect(() => {
     const closeOnClickHandler = (e: MouseEvent) => {
       if (
-        expandedCardId ||
+        expandedCardThing.value ||
         (searchInputRef.current &&
           !searchInputRef.current.contains(e.target as Node) &&
           searchResultsRef.current &&
@@ -79,7 +77,11 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
     return () => {
       window.removeEventListener("click", closeOnClickHandler);
     };
-  }, [expandedCardId, search.results.value.length, setSearchResultsOpen]);
+  }, [
+    expandedCardThing.value,
+    search.results.value.length,
+    setSearchResultsOpen,
+  ]);
 
   return (
     <div className="absolute top-0 right-0 z-10 mt-3 w-full flex flex-col items-center justify-center gap-3">
@@ -109,7 +111,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         {search.results.value.map((value) => {
           if (value.dataType === "monster") {
             return (
-              <ThingCard
+              <SearchCard
                 thing={{ type: "monster", ...value }}
                 mapState={mapState}
                 key={value.name}
