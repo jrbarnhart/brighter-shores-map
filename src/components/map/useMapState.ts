@@ -10,6 +10,7 @@ import {
   RoomId,
   RoomTreeNode,
   SearchResult,
+  ThingCardId,
 } from "@/lib/types";
 
 export type MapState = {
@@ -92,6 +93,10 @@ export type MapState = {
       set: React.Dispatch<SetStateAction<boolean>>;
     };
   };
+  expandedCardId: {
+    value: ThingCardId | null;
+    set: React.Dispatch<SetStateAction<ThingCardId | null>>;
+  };
 };
 
 export default function useMapState() {
@@ -120,6 +125,9 @@ export default function useMapState() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchResultsOpen, setSearchResultsOpen] = useState(false);
+  const [expandedCardId, setExpandedCardId] = useState<ThingCardId | null>(
+    null
+  );
 
   const { roomPaths, visibleRoomPaths, roomLabels } = useCanvasElementsManager({
     roomsCanvas: roomsCanvasRef.current,
@@ -166,6 +174,10 @@ export default function useMapState() {
         value: searchResultsOpen,
         set: setSearchResultsOpen,
       },
+    },
+    expandedCardId: {
+      value: expandedCardId,
+      set: setExpandedCardId,
     },
   };
 
