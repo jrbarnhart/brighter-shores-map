@@ -6,26 +6,23 @@ import mapConfig from "./lib/map/mapConfig";
 import ZoomButtons from "./components/zoomButtons/ZoomButtons";
 import MapCanvas from "./components/map/canvas/MapCanvas";
 import SearchBar from "./components/search/SearchBar";
-import { ThingCardProvider } from "./components/thingCards/ThingCardProvider";
 
 function App() {
   const mapState = useMapState();
 
   return (
     <SidebarProvider>
-      <ThingCardProvider>
-        <MapSidebar mapState={mapState} mapConfig={mapConfig} />
-        <main
-          className="h-screen w-screen relative overflow-hidden"
-          style={{ backgroundColor: mapConfig.bgColor }}
-        >
-          <SidebarTrigger className="absolute mt-3 ml-3 z-20 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-foreground hover:bg-sidebar-accent" />
-          <MoveButton mapState={mapState} />
-          <MapCanvas mapState={mapState} />
-          <SearchBar mapState={mapState} />
-          <ZoomButtons mapState={mapState} />
-        </main>
-      </ThingCardProvider>
+      <MapSidebar mapState={mapState} mapConfig={mapConfig} />
+      <main
+        className="h-screen w-screen relative overflow-hidden"
+        style={{ backgroundColor: mapConfig.bgColor }}
+      >
+        <SidebarTrigger className="absolute mt-3 ml-3 z-20 bg-sidebar h-12 w-12 border border-sidebar-accent text-sidebar-foreground hover:bg-sidebar-accent" />
+        <MoveButton mapState={mapState} />
+        <MapCanvas mapState={mapState} />
+        <SearchBar mapState={mapState} />
+        <ZoomButtons mapState={mapState} />
+      </main>
     </SidebarProvider>
   );
 }
