@@ -95,10 +95,12 @@ export default function SearchCard({
   thing: Thing;
 }) {
   const setExpandedCardThing = mapState.expandedCardThing.set;
+  const setSearchResultsOpen = mapState.search.resultsOpen.set;
 
   const handleClick = useCallback(() => {
     setExpandedCardThing(thing);
-  }, [setExpandedCardThing, thing]);
+    setSearchResultsOpen(false);
+  }, [setExpandedCardThing, setSearchResultsOpen, thing]);
 
   return (
     <Card
