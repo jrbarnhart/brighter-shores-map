@@ -6,6 +6,7 @@ import mapConfig from "./lib/map/mapConfig";
 import ZoomButtons from "./components/zoomButtons/ZoomButtons";
 import MapCanvas from "./components/map/canvas/MapCanvas";
 import SearchBar from "./components/search/SearchBar";
+import ExpandedCard from "./components/expandedCard/ExpandedCard";
 
 function App() {
   const mapState = useMapState();
@@ -22,6 +23,7 @@ function App() {
         <MapCanvas mapState={mapState} />
         <SearchBar mapState={mapState} />
         <ZoomButtons mapState={mapState} />
+        <ExpandedCard mapState={mapState} />
       </main>
     </SidebarProvider>
   );
