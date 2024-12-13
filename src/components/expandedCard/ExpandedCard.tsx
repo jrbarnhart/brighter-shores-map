@@ -1,9 +1,108 @@
-import { useCallback } from "react";
-import MonsterCardContents from "../thingCards/monsters/MonsterCardContents";
-import MonsterCardHeader from "../thingCards/monsters/MonsterCardHeader";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import React, { useCallback } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { MapState } from "../map/useMapState";
 import { X } from "lucide-react";
+import { Monster } from "@/lib/types";
+import { Passive } from "../gameIcons/gameIcons";
+import { getDamageIcon } from "../gameIcons/gameIconUtils";
+import RoomLink from "../roomLink/RoomLink";
+import { findRoomById } from "@/lib/utils";
+
+const MonsterCardContents = ({ monster }: { monster: Monster }) => {
+  return (
+    <>
+      <div className="h-10 flex items-center gap-1 md:gap-3 text-sm max-w-md">
+        {monster.passive && (
+          <>
+            <p>Passive</p>
+            <Passive />
+          </>
+        )}
+        {!monster.passive && (
+          <>
+            <p>Attack: </p>
+            {getDamageIcon(monster.attackDamage)}
+            {monster.vulnerableDamage && (
+              <>
+                <p>Weak:</p>
+                {getDamageIcon(monster.vulnerableDamage)}
+              </>
+            )}
+            {monster.immuneDamage && (
+              <>
+                <p>Immune:</p>
+                {getDamageIcon(monster.immuneDamage)}
+              </>
+            )}
+          </>
+        )}
+      </div>
+
+      <div className="border-sidebar-border border rounded-md p-2 -mx-2 flex-grow overflow-y-auto overflow-x-hidden">
+        <div className="grid grid-cols-[3fr_1fr_1fr] gap-x-2 border-b-2 border-sidebar-border">
+          <p>Variant:</p>
+          <p>Lvl</p>
+          <p className="text-nowrap">🔒 Lvl</p>
+        </div>
+        <div className="grid grid-cols-[3fr_1fr_1fr] gap-x-2 text-sm">
+          {monster.variants.map((variant) => (
+            <React.Fragment key={variant.name}>
+              <p>{variant.name[0].toUpperCase() + variant.name.slice(1)}</p>
+              <p>{variant.monsterLevel}</p>
+              <p>{variant.unlockLevel}</p>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const MonsterCardHeader = ({
+  mapState,
+  monster,
+}: {
+  mapState: MapState;
+  monster: Monster;
+}) => {
+  const { selectedRoomId } = mapState;
+  return (
+    <>
+      <CardTitle className="flex flex-nowrap justify-between items-start">
+        <p className="text-nowrap overflow-hidden leading-8">
+          {monster.name[0].toUpperCase() + monster.name.slice(1)}
+        </p>
+        {monster.aggressive && (
+          <p className="text-red-600 text-base leading-none">Aggressive!</p>
+        )}
+      </CardTitle>
+      <CardDescription className="flex flex-col">
+        <p className="text-sidebar-foreground">Locations:</p>
+        <div>
+          {monster.locations.map((location, index) => {
+            const room = findRoomById(mapState.roomPaths.value, location);
+            return (
+              <React.Fragment key={index}>
+                <RoomLink
+                  text={room ? room.label : location}
+                  roomId={location}
+                  setSelectedRoomId={selectedRoomId.set}
+                />
+                {monster.locations.length - 1 > index ? ", " : ""}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </CardDescription>
+    </>
+  );
+};
 
 export default function ExpandedCard({ mapState }: { mapState: MapState }) {
   const { expandedCardThing } = mapState;
