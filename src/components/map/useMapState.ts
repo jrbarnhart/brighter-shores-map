@@ -10,7 +10,7 @@ import {
   RoomId,
   RoomTreeNode,
   SearchResult,
-  ThingCardId,
+  Thing,
 } from "@/lib/types";
 
 export type MapState = {
@@ -93,9 +93,9 @@ export type MapState = {
       set: React.Dispatch<SetStateAction<boolean>>;
     };
   };
-  expandedCardId: {
-    value: ThingCardId | null;
-    set: React.Dispatch<SetStateAction<ThingCardId | null>>;
+  expandedCardThing: {
+    value: Thing | null;
+    set: React.Dispatch<SetStateAction<Thing | null>>;
   };
 };
 
@@ -125,7 +125,7 @@ export default function useMapState() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchResultsOpen, setSearchResultsOpen] = useState(false);
-  const [expandedCardId, setExpandedCardId] = useState<ThingCardId | null>(
+  const [expandedCardThing, setExpandedCardThing] = useState<Thing | null>(
     null
   );
 
@@ -175,9 +175,9 @@ export default function useMapState() {
         set: setSearchResultsOpen,
       },
     },
-    expandedCardId: {
-      value: expandedCardId,
-      set: setExpandedCardId,
+    expandedCardThing: {
+      value: expandedCardThing,
+      set: setExpandedCardThing,
     },
   };
 
