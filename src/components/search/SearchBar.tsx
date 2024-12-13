@@ -14,7 +14,7 @@ import { Search } from "lucide-react";
 import SearchCard from "../searchCard/SearchCard";
 
 export default function SearchBar({ mapState }: { mapState: MapState }) {
-  const { search, expandedCardThing } = mapState;
+  const { search } = mapState;
   // Get just the setter to avoid value dep in use effect
   const setSearchResultsOpen = search.resultsOpen.set;
 
