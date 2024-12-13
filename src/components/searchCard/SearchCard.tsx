@@ -3,7 +3,6 @@ import MonsterCardContents from "../thingCards/monsters/MonsterCardContents";
 import MonsterCardHeader from "../thingCards/monsters/MonsterCardHeader";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { MapState } from "../map/useMapState";
-import { X } from "lucide-react";
 import { Thing } from "@/lib/types";
 
 export default function ExpandedCard({
@@ -22,13 +21,8 @@ export default function ExpandedCard({
   return (
     <Card
       onClick={handleClick}
-      className="w-screen max-w-[640px] h-screen max-h-[360px] m-5 scale-105 bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in flex flex-col"
+      className="bg-sidebar border-sidebar-border text-sidebar-foreground flex flex-col"
     >
-      <div onClick={handleClick} className="absolute -top-7 right-0 flex gap-2">
-        <p>Close</p>
-        <X />
-      </div>
-
       <CardHeader className="px-3 py-2 md:p-4">
         {thing.type === "monster" && (
           <MonsterCardHeader
