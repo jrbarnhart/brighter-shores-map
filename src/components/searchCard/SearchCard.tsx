@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import { Thing } from "@/lib/types";
 
-export default function ExpandedCard({
+export default function SearchCard({
   mapState,
   thing,
 }: {
