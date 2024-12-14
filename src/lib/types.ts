@@ -169,7 +169,7 @@ export type Thing =
   | (NPC & { type: "npc" })
   | (Monster & { type: "monster" })
   | (ResourceNode & { type: "resource" })
-  | (RoomIdContentData & { dataType: "room" });
+  | (RoomIdContentData & { type: "room" });
 
 // Context for thing card provider
 export type ThingCardContextType = {
