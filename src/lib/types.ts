@@ -182,7 +182,7 @@ export type ThingCardContextType = {
 
 export type RegionData = {
   rooms: readonly Room[];
-  contents?: readonly RoomIdContentData[];
+  contents: readonly RoomIdContentData[];
 };
 
 /************************ *
