@@ -1,4 +1,10 @@
-import { MonsterBaseName, RoomDataWithPath, RoomId } from "../types";
+import {
+  Monster,
+  MonsterBaseName,
+  RegionName,
+  RoomDataWithPath,
+  RoomId,
+} from "../types";
 import hopeportRoomData from "./hopeport/hopeportRoomData";
 import HOPEPORT_MONSTER_DATA from "./hopeport/roomContents/hopeportMonsterData";
 import mapData from "./mapData";
@@ -24,7 +30,9 @@ export function getRoomLabel(searchId: RoomId | null) {
 }
 
 // Get a monster by a given monster name
-export function findMonsterByBaseName(monsterBaseName: MonsterBaseName) {
+export function findMonsterByBaseName(
+  monsterBaseName: MonsterBaseName
+): { result: Monster; region: RegionName } | { result: null; region: null } {
   const resultInHopeport = HOPEPORT_MONSTER_DATA.find(
     (monster) => monster.name === monsterBaseName
   );
