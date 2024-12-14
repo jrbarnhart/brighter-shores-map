@@ -75,10 +75,6 @@ export type MapState = {
   lastSelectedRoomId: {
     ref: React.MutableRefObject<RoomId | null>;
   };
-  detailsOpen: {
-    value: boolean;
-    set: React.Dispatch<SetStateAction<boolean>>;
-  };
   search: {
     query: {
       value: string;
@@ -121,7 +117,6 @@ export default function useMapState() {
   const [hoveredId, setHoveredId] = useState<RoomId | null>(null);
   const [selectedRoomId, setSelectedRoomId] = useState<RoomId | null>(null);
   const lastSelectedRoomId = useRef<RoomId | null>(null);
-  const [detailsOpen, setDetailsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchResultsOpen, setSearchResultsOpen] = useState(false);
@@ -160,7 +155,6 @@ export default function useMapState() {
     hoveredId: { value: hoveredId, set: setHoveredId },
     selectedRoomId: { value: selectedRoomId, set: setSelectedRoomId },
     lastSelectedRoomId: { ref: lastSelectedRoomId },
-    detailsOpen: { value: detailsOpen, set: setDetailsOpen },
     search: {
       query: {
         value: searchQuery,

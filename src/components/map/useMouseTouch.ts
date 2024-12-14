@@ -11,7 +11,6 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   const visibleRoomPaths = mapState.visibleRoomPaths.value;
   // Selected room state
   const setSelectedId = mapState.selectedRoomId.set;
-  const setDetailsOpen = mapState.detailsOpen.set;
   const { lastSelectedRoomId } = mapState;
   // Drag state
   const dragEnabled = mapState.drag.enabledRef;
@@ -115,12 +114,9 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       for (const room of visibleRoomPaths) {
         if (roomsCanvasCtx.isPointInPath(room.element, x, y)) {
           setSelectedId(room.id);
-          setDetailsOpen(true);
           return;
         }
       }
-
-      setDetailsOpen(false);
       setSelectedId(null);
     },
     [
@@ -128,7 +124,6 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       mapPos.x,
       mapPos.y,
       roomsCanvasCtx,
-      setDetailsOpen,
       setSelectedId,
       visibleRoomPaths,
     ]
