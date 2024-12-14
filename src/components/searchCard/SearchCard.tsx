@@ -8,11 +8,11 @@ import {
 } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import { Monster, Thing } from "@/lib/types";
-import { findRoomById } from "@/lib/utils";
 import React from "react";
 import RoomLink from "../roomLink/RoomLink";
 import { Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
+import { findRoomById } from "@/lib/map/mapDataUtils";
 
 const MonsterCardHeader = ({
   mapState,

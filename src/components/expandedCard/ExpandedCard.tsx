@@ -12,7 +12,7 @@ import { Monster, RoomContentAndData } from "@/lib/types";
 import { Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
-import { findRoomById } from "@/lib/utils";
+import { findRoomById } from "@/lib/map/mapDataUtils";
 
 const RoomCardHeader = ({
   roomContentAndData,

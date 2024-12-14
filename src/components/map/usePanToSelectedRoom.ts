@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { MapState } from "./useMapState";
-import { findRoomById, toNormalizedGridSpace } from "@/lib/utils";
+import { toNormalizedGridSpace } from "@/lib/utils";
+import { findRoomById } from "@/lib/map/mapDataUtils";
 
 export default function usePanToSelectedRoom({
   mapState,

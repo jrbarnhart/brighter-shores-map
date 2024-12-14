@@ -1,12 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import {
-  NormalizedValue,
-  PixelValue,
-  RoomDataWithPath,
-  RoomId,
-  Size,
-} from "./types";
+import { NormalizedValue, PixelValue, Size } from "./types";
 import { SetStateAction } from "react";
 
 // Tailwind class merging
@@ -53,9 +47,4 @@ export function adjustMapPosOnZoom(
 
     return { x: newX, y: newY };
   });
-}
-
-// Find the room data by a given room id
-export function findRoomById(rooms: RoomDataWithPath[], roomId: RoomId) {
-  return rooms.find((room) => room.id === roomId);
 }
