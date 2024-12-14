@@ -9,7 +9,7 @@ import {
 import { MapState } from "../map/useMapState";
 import { X } from "lucide-react";
 import { Monster, RoomContentAndData } from "@/lib/types";
-import { Passive } from "../gameIcons/gameIcons";
+import { Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
 import { findRoomById } from "@/lib/utils";
@@ -25,6 +25,30 @@ const RoomCardHeader = ({
     </>
   );
 };
+
+const RoomCardContent = ({
+  roomContentAndData,
+}: {
+  roomContentAndData: RoomContentAndData;
+}) => {
+  return (
+    <>
+      {roomContentAndData.content.monsters &&
+        roomContentAndData.content.monsters.map((monster) => {
+          return (
+            <div
+              key={monster}
+              className="h-10 flex items-center gap-1 md:gap-3"
+            >
+              <Guard />
+              {monster[0].toUpperCase() + monster.slice(1)}
+            </div>
+          );
+        })}
+    </>
+  );
+};
+
 const MonsterCardHeader = ({
   mapState,
   monster,
@@ -65,7 +89,7 @@ const MonsterCardHeader = ({
   );
 };
 
-const MonsterCardContents = ({ monster }: { monster: Monster }) => {
+const MonsterCardContent = ({ monster }: { monster: Monster }) => {
   return (
     <>
       <div className="h-10 flex items-center gap-1 md:gap-3 text-sm max-w-md">
@@ -164,7 +188,10 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
           </CardHeader>
           <CardContent className="px-3 pb-1 md:px-4 md:pb-2 flex flex-col gap-4 flex-grow overflow-hidden">
             {expandedCardThing.value.type === "monster" && (
-              <MonsterCardContents monster={expandedCardThing.value} />
+              <MonsterCardContent monster={expandedCardThing.value} />
+            )}
+            {expandedCardThing.value.type === "room" && (
+              <RoomCardContent roomContentAndData={expandedCardThing.value} />
             )}
           </CardContent>
         </Card>
