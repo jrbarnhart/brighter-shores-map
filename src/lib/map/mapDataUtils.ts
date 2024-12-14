@@ -1,5 +1,6 @@
-import { RoomDataWithPath, RoomId } from "../types";
+import { MonsterBaseName, RoomDataWithPath, RoomId } from "../types";
 import hopeportRoomData from "./hopeport/hopeportRoomData";
+import HOPEPORT_MONSTER_DATA from "./hopeport/roomContents/hopeportMonsterData";
 import mapData from "./mapData";
 
 // Get the room contents by id
@@ -22,8 +23,11 @@ export function getRoomLabel(searchId: RoomId | null) {
   return roomData?.label ?? "Not Selected";
 }
 
-// Get detailed contents with specific functions
-// get monsters
-// get resources
-// get npcs
-// etc
+// Get a monster by a given monster name
+export function findMonsterByBaseName(monsterBaseName: MonsterBaseName) {
+  const resultInHopeport = HOPEPORT_MONSTER_DATA.find(
+    (monster) => monster.name === monsterBaseName
+  );
+  if (resultInHopeport) return resultInHopeport;
+  return null;
+}
