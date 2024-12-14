@@ -8,11 +8,62 @@ import {
 } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import { X } from "lucide-react";
-import { Monster } from "@/lib/types";
+import { Monster, RoomContentAndData } from "@/lib/types";
 import { Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
 import { findRoomById } from "@/lib/utils";
+
+const RoomCardHeader = ({
+  roomContentAndData,
+}: {
+  roomContentAndData: RoomContentAndData;
+}) => {
+  return (
+    <>
+      <CardTitle>{roomContentAndData.data.label}</CardTitle>
+    </>
+  );
+};
+const MonsterCardHeader = ({
+  mapState,
+  monster,
+}: {
+  mapState: MapState;
+  monster: Monster;
+}) => {
+  const { selectedRoomId } = mapState;
+  return (
+    <>
+      <CardTitle className="flex flex-nowrap justify-between items-start">
+        <p className="text-nowrap overflow-hidden leading-8">
+          {monster.name[0].toUpperCase() + monster.name.slice(1)}
+        </p>
+        {monster.aggressive && (
+          <p className="text-red-600 text-base leading-none">Aggressive!</p>
+        )}
+      </CardTitle>
+      <CardDescription className="flex flex-col">
+        <p className="text-sidebar-foreground">Locations:</p>
+        <div>
+          {monster.locations.map((location, index) => {
+            const room = findRoomById(mapState.roomPaths.value, location);
+            return (
+              <React.Fragment key={index}>
+                <RoomLink
+                  text={room ? room.label : location}
+                  roomId={location}
+                  setSelectedRoomId={selectedRoomId.set}
+                />
+                {monster.locations.length - 1 > index ? ", " : ""}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </CardDescription>
+    </>
+  );
+};
 
 const MonsterCardContents = ({ monster }: { monster: Monster }) => {
   return (
@@ -64,46 +115,6 @@ const MonsterCardContents = ({ monster }: { monster: Monster }) => {
   );
 };
 
-const MonsterCardHeader = ({
-  mapState,
-  monster,
-}: {
-  mapState: MapState;
-  monster: Monster;
-}) => {
-  const { selectedRoomId } = mapState;
-  return (
-    <>
-      <CardTitle className="flex flex-nowrap justify-between items-start">
-        <p className="text-nowrap overflow-hidden leading-8">
-          {monster.name[0].toUpperCase() + monster.name.slice(1)}
-        </p>
-        {monster.aggressive && (
-          <p className="text-red-600 text-base leading-none">Aggressive!</p>
-        )}
-      </CardTitle>
-      <CardDescription className="flex flex-col">
-        <p className="text-sidebar-foreground">Locations:</p>
-        <div>
-          {monster.locations.map((location, index) => {
-            const room = findRoomById(mapState.roomPaths.value, location);
-            return (
-              <React.Fragment key={index}>
-                <RoomLink
-                  text={room ? room.label : location}
-                  roomId={location}
-                  setSelectedRoomId={selectedRoomId.set}
-                />
-                {monster.locations.length - 1 > index ? ", " : ""}
-              </React.Fragment>
-            );
-          })}
-        </div>
-      </CardDescription>
-    </>
-  );
-};
-
 export default function ExpandedCard({ mapState }: { mapState: MapState }) {
   const { expandedCardThing } = mapState;
   const handleClick = useCallback(() => {
@@ -146,6 +157,9 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
                 mapState={mapState}
                 key={expandedCardThing.value.name}
               />
+            )}
+            {expandedCardThing.value.type === "room" && (
+              <RoomCardHeader roomContentAndData={expandedCardThing.value} />
             )}
           </CardHeader>
           <CardContent className="px-3 pb-1 md:px-4 md:pb-2 flex flex-col gap-4 flex-grow overflow-hidden">

@@ -120,7 +120,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
           const selectedRoomContents = getRoomContent(room.id);
           setExpandedCardThing(
             selectedRoomContents
-              ? { type: "room", ...selectedRoomContents }
+              ? { type: "room", content: selectedRoomContents, data: room }
               : null
           );
           return;

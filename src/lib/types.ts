@@ -164,12 +164,18 @@ export type SearchResult =
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName | NPCName | ResourceNodeName;
 
+// Type for a room "thing" used by expanded and search cards
+export type RoomContentAndData = {
+  content: RoomIdContentData;
+  data: Room;
+};
+
 // Type for the object that can be represented by a thing card
 export type Thing =
   | (NPC & { type: "npc" })
   | (Monster & { type: "monster" })
   | (ResourceNode & { type: "resource" })
-  | { content: RoomIdContentData; roomData: Room; type: "room" };
+  | (RoomContentAndData & { type: "room" });
 
 // Context for thing card provider
 export type ThingCardContextType = {
