@@ -96,5 +96,5 @@ body {
   height: 100%;
   position: fixed;
   /* prevent overscroll bounce*/
-  overflow-y: none;
+  overflow-y: hidden;
 }
