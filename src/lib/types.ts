@@ -158,7 +158,8 @@ export type BankType =
 export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
-  | (ResourceNode & { dataType: "resource" });
+  | (ResourceNode & { dataType: "resource" })
+  | (RoomIdContentData & { dataType: "room" });
 
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName | NPCName | ResourceNodeName;
