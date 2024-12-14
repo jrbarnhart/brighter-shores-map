@@ -13,6 +13,7 @@ import { Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
 import { findRoomById } from "@/lib/map/mapDataUtils";
+import MonsterLink from "../monsterLink/MonsterLink";
 
 const RoomCardHeader = ({
   roomContentAndData,
@@ -28,8 +29,10 @@ const RoomCardHeader = ({
 
 const RoomCardContent = ({
   roomContentAndData,
+  mapState,
 }: {
   roomContentAndData: RoomContentAndData;
+  mapState: MapState;
 }) => {
   return (
     <>
@@ -41,7 +44,12 @@ const RoomCardContent = ({
               className="h-10 flex items-center gap-1 md:gap-3"
             >
               <Guard />
-              {monster[0].toUpperCase() + monster.slice(1)}
+              <MonsterLink
+                key={monster}
+                text={monster[0].toUpperCase() + monster.slice(1)}
+                monsterBaseName={monster}
+                setExpandedCardThing={mapState.expandedCardThing.set}
+              />
             </div>
           );
         })}
@@ -191,7 +199,10 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
               <MonsterCardContent monster={expandedCardThing.value} />
             )}
             {expandedCardThing.value.type === "room" && (
-              <RoomCardContent roomContentAndData={expandedCardThing.value} />
+              <RoomCardContent
+                roomContentAndData={expandedCardThing.value}
+                mapState={mapState}
+              />
             )}
           </CardContent>
         </Card>
