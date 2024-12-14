@@ -199,3 +199,5 @@ export type RegionData = {
 export type MapData = {
   regions: { hopeport: RegionData };
 };
+
+export type RegionName = keyof MapData["regions"];
