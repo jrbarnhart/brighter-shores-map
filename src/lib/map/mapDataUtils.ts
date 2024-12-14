@@ -28,6 +28,6 @@ export function findMonsterByBaseName(monsterBaseName: MonsterBaseName) {
   const resultInHopeport = HOPEPORT_MONSTER_DATA.find(
     (monster) => monster.name === monsterBaseName
   );
-  if (resultInHopeport) return resultInHopeport;
-  return null;
+  if (resultInHopeport) return { result: resultInHopeport, region: "hopeport" };
+  return { result: null, region: null };
 }
