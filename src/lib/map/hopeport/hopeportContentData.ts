@@ -1,5 +1,5 @@
 import { BankType, NPC } from "@/lib/types";
-import { HopeportRoomId } from "./hopeportRoomData";
+import hopeportRoomData, { HopeportRoomId } from "./hopeportRoomData";
 import HOPEPORT_MONSTER_DATA, {
   HopeportMonsterBaseName,
 } from "./roomContents/hopeportMonsterData";
@@ -15,8 +15,13 @@ export type HopeportRoomContentData = {
   banks?: BankType[];
 };
 
-// Create the monster content data
-const newHopeportContentData: HopeportRoomContentData[] = [];
+// Create the content data array with an entry for every room
+const newHopeportContentData: HopeportRoomContentData[] = hopeportRoomData.map(
+  (room) => {
+    return { roomId: room.id };
+  }
+);
+
 // Add all locations from all monsters
 for (const monster of HOPEPORT_MONSTER_DATA) {
   for (const location of monster.locations) {
@@ -24,13 +29,13 @@ for (const monster of HOPEPORT_MONSTER_DATA) {
     const existingRoomEntry = newHopeportContentData.find(
       (data) => data.roomId === location
     );
-    // If there is no entry yet add it
+    // If there is no entry for some reason just add it
     if (!existingRoomEntry) {
       newHopeportContentData.push({
         roomId: location,
         monsters: [monster.name],
       });
-      // Else if the room entry exists and somehow has no monsters array
+      // Else if the room entry exists and has no monsters array then add one
     } else if (!existingRoomEntry.monsters) {
       existingRoomEntry.monsters = [monster.name];
       // Else the room entry exists and has monsters array so add to it
