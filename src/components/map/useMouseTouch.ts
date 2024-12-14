@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
 import { adjustMapPosOnZoom, toPixels } from "@/lib/utils";
+import { getRoomContent } from "@/lib/map/mapDataUtils";
 
 export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   // Canvas info state
@@ -12,6 +13,8 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
   // Selected room state
   const setSelectedId = mapState.selectedRoomId.set;
   const { lastSelectedRoomId } = mapState;
+  // State for expanded card shown on room click
+  const setExpandedCardThing = mapState.expandedCardThing.set;
   // Drag state
   const dragEnabled = mapState.drag.enabledRef;
   const [isDragging, setIsDragging] = useState(false);
@@ -114,6 +117,12 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       for (const room of visibleRoomPaths) {
         if (roomsCanvasCtx.isPointInPath(room.element, x, y)) {
           setSelectedId(room.id);
+          const selectedRoomContents = getRoomContent(room.id);
+          setExpandedCardThing(
+            selectedRoomContents
+              ? { type: "room", ...selectedRoomContents }
+              : null
+          );
           return;
         }
       }
@@ -124,6 +133,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
       mapPos.x,
       mapPos.y,
       roomsCanvasCtx,
+      setExpandedCardThing,
       setSelectedId,
       visibleRoomPaths,
     ]
