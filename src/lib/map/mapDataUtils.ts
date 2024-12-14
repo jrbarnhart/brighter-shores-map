@@ -8,6 +8,7 @@ export function getRoomContent(searchId: RoomId | null) {
     (data) => data.roomId === searchId
   );
   if (resultInHopeport) return resultInHopeport;
+  return null;
 }
 
 // Get a room's styled title
