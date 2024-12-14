@@ -14,8 +14,10 @@ export default function MonsterLink({
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const monster = findMonsterByBaseName(monsterBaseName);
-    setExpandedCardThing(monster ? { type: "monster", ...monster } : null);
+    const monsterSearch = findMonsterByBaseName(monsterBaseName);
+    setExpandedCardThing(
+      monsterSearch.result ? { type: "monster", ...monsterSearch.result } : null
+    );
   };
 
   return (
