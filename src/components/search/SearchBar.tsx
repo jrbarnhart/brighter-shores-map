@@ -68,7 +68,6 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
         searchResultsRef.current &&
         !searchResultsRef.current.contains(e.target as Node)
       ) {
-        console.log("unset");
         setSearchResultsOpen(false);
       }
     };
