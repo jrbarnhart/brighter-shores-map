@@ -126,6 +126,7 @@ export default function useMouseTouch({ mapState }: { mapState: MapState }) {
           return;
         }
       }
+      setSelectedId(null);
     },
     [
       currentCellSize,
