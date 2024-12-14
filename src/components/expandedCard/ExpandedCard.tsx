@@ -12,7 +12,7 @@ import { Monster, RoomContentAndData } from "@/lib/types";
 import { Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
-import { findRoomById } from "@/lib/map/mapDataUtils";
+import { findMonsterByBaseName, findRoomById } from "@/lib/map/mapDataUtils";
 import MonsterLink from "../monsterLink/MonsterLink";
 
 const RoomCardHeader = ({
@@ -38,16 +38,17 @@ const RoomCardContent = ({
     <>
       {roomContentAndData.content.monsters &&
         roomContentAndData.content.monsters.map((monster) => {
+          const monsterSearch = findMonsterByBaseName(monster);
           return (
             <div
               key={monster}
               className="h-10 flex items-center gap-1 md:gap-3"
             >
-              <Guard />
+              {monsterSearch.region === "hopeport" ? <Guard /> : null}
               <MonsterLink
                 key={monster}
                 text={monster[0].toUpperCase() + monster.slice(1)}
-                monsterBaseName={monster}
+                monster={monsterSearch.result}
                 setExpandedCardThing={mapState.expandedCardThing.set}
               />
             </div>
