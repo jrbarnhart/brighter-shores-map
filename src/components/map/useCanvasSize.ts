@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { MapState } from "../useMapState";
+import { MapState } from "./useMapState";
 import useDebounce from "@/hooks/useDebounce";
 
 // Sets canvas size to window size, debounced

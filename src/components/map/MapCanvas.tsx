@@ -1,11 +1,12 @@
-import { MapState } from "../useMapState";
+import { MapState } from "./useMapState";
 import mapConfig from "@/lib/map/mapConfig";
-import useMouseTouch from "../useMouseTouch";
+import useMouseTouch from "./useMouseTouch";
 import useCanvasSize from "./useCanvasSize";
 import useCreateRTree from "./useCreateRTree";
-import useDrawMap from "./useDrawMap";
+
 import { useEffect } from "react";
-import usePanToSelectedRoom from "../usePanToSelectedRoom";
+import usePanToSelectedRoom from "./usePanToSelectedRoom";
+import useDrawMap from "./useDrawMap";
 
 export default function MapCanvas({ mapState }: { mapState: MapState }) {
   const { canvas, labelsHidden, currentCellSize, labelsWereVisible } = mapState;

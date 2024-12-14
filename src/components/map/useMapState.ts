@@ -1,7 +1,7 @@
 import mapConfig from "@/lib/map/mapConfig";
 import React, { SetStateAction, useRef, useState } from "react";
 import RBush from "rbush";
-import useCanvasElementsManager from "./canvas/useCanvasElementsManager";
+import useCanvasElementsManager from "./useCanvasElementsManager";
 import {
   LabelDataWithPath,
   NormalizedValue,

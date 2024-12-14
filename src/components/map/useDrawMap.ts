@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { MapState } from "../useMapState";
+import { MapState } from "./useMapState";
 import { MapConfig } from "@/lib/map/mapConfig";
 import {
   LabelDataWithPath,
