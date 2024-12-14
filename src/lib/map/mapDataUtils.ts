@@ -1,10 +1,13 @@
 import { RoomId } from "../types";
-import hopeportContentData from "./hopeport/hopeportContentData";
 import hopeportRoomData from "./hopeport/hopeportRoomData";
+import mapData from "./mapData";
 
 // Get the top level contents
 export function getRoomContent(searchId: RoomId | null) {
-  return hopeportContentData.find((data) => data.roomId === searchId);
+  const resultInHopeport = mapData.regions.hopeport.contents.find(
+    (data) => data.roomId === searchId
+  );
+  if (resultInHopeport) return resultInHopeport;
 }
 
 // Get a room's styled title
