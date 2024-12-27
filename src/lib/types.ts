@@ -7,7 +7,7 @@ import {
 } from "./map/hopeport/roomContents/hopeportMonsterData";
 import { SetStateAction } from "react";
 import { HopeportNPCName } from "./map/hopeport/roomContents/hopeportNPCData";
-import { HopeportResourceNodeName } from "./map/hopeport/roomContents/hopeportResourceData";
+import { HopeportResourceNodeBaseName } from "./map/hopeport/roomContents/hopeportResourceData";
 
 /************************ *
   General Types
@@ -130,13 +130,20 @@ export type Monster = MonsterData & {
   name: MonsterBaseName;
 };
 
-// Type for data entires in resource node data arrays
+// Types for data entires in resource node data arrays
+export type ResourceNodeVariantData = {
+  variantName: string;
+  unlockLevel: number;
+};
+
 export type ResourceNodeData = {
-  name: string;
+  baseName: string;
+  locations: RoomId[];
+  variants: ResourceNodeVariantData[];
 };
 
 // Union type for all resource node names
-export type ResourceNodeName = HopeportResourceNodeName;
+export type ResourceNodeName = HopeportResourceNodeBaseName;
 
 // Type used when using resource node data in code other than data files
 export type ResourceNode = ResourceNodeData & {
