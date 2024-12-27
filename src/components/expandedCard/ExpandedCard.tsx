@@ -134,15 +134,18 @@ const MonsterCardContent = ({ monster }: { monster: Monster }) => {
           <p>Lvl</p>
           <p className="text-nowrap">🔒 Lvl</p>
         </div>
-        <div className="grid grid-cols-[3fr_1fr_1fr] gap-x-2 text-sm">
+        <ul className="">
           {monster.variants.map((variant) => (
-            <React.Fragment key={variant.name}>
+            <li
+              key={variant.name}
+              className="list-none grid grid-cols-[3fr_1fr_1fr] gap-x-2 text-sm odd:bg-black/30 even:bg-black/10 py-1"
+            >
               <p>{variant.name[0].toUpperCase() + variant.name.slice(1)}</p>
               <p>{variant.monsterLevel}</p>
               <p>{variant.unlockLevel}</p>
-            </React.Fragment>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </>
   );
