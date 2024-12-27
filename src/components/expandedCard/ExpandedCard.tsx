@@ -169,11 +169,21 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
     return (
       <div
         onClick={handleClick}
-        className="w-full h-full fixed top-0 left-0 flex items-center justify-center touch-none bg-black/80 backdrop-blur-sm"
+        className={`w-full h-full fixed top-0 left-0 flex items-center justify-center touch-none ${
+          expandedCardThing.value.type === "monster"
+            ? "bg-black/80 backdrop-blur-sm"
+            : "bg-black/40"
+        }`}
       >
         <Card
           onClick={handleCardClick}
-          className="w-screen max-w-[640px] h-screen max-h-[360px] m-5 scale-105 bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in flex flex-col"
+          className={`w-screen h-screen m-5 scale-105 bg-sidebar border-sidebar-border text-sidebar-foreground transition-transform ease-in flex flex-col ${
+            expandedCardThing.value.type === "monster"
+              ? "max-w-2xl max-h-[360px]"
+              : expandedCardThing.value.type === "room"
+              ? "max-w-xl max-h-52 md:max-h-64 self-end"
+              : ""
+          }`}
         >
           <div
             onClick={handleClick}
