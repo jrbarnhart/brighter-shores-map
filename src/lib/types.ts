@@ -140,7 +140,7 @@ export type ResourceNodeVariantData = {
 
 export type ResourceNodeData = {
   baseName: string;
-  type: ResourceNodeType;
+  nodeType: ResourceNodeType;
   locations: RoomId[];
   variants: ResourceNodeVariantData[];
 };
