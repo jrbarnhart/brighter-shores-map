@@ -1,21 +1,22 @@
-import { BankType, NPC } from "@/lib/types";
+import { BankType, NPC, ResourceNode } from "@/lib/types";
 import hopeportRoomData, { HopeportRoomId } from "./hopeportRoomData";
 import HOPEPORT_MONSTER_DATA, {
   HopeportMonsterBaseName,
 } from "./roomContents/hopeportMonsterData";
+import HOPEPORT_RESOURCE_DATA from "./roomContents/hopeportResourceData";
 
 export type HopeportRoomContentData = {
   roomId: HopeportRoomId;
   obelisk?: boolean;
   storageRift?: boolean;
   portalStone?: boolean;
-  // Add Resources later
+  resources?: ResourceNode[];
   monsters?: HopeportMonsterBaseName[];
   npcs?: NPC[];
   banks?: BankType[];
 };
 
-// Create the content data array with an entry for every room
+// Initialize room content data for every room
 const newHopeportContentData: HopeportRoomContentData[] = hopeportRoomData.map(
   (room) => {
     return { roomId: room.id };
@@ -45,7 +46,21 @@ for (const monster of HOPEPORT_MONSTER_DATA) {
   }
 }
 
-// TODO: Add the resource and npc entries here later on
+// Add the resource entries
+for (const resource of HOPEPORT_RESOURCE_DATA) {
+  for (const location of resource.locations) {
+    const existingRoomEntry = newHopeportContentData.find(
+      (data) => data.roomId === location
+    );
+    if (!existingRoomEntry) {
+      newHopeportContentData.push({ roomId: location, resources: [resource] });
+    } else if (!existingRoomEntry.resources) {
+      existingRoomEntry.resources = [resource];
+    } else {
+      existingRoomEntry.resources.push(resource);
+    }
+  }
+}
 
 const hopeportContentData = [
   ...newHopeportContentData,

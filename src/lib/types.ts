@@ -150,7 +150,7 @@ export type ResourceNodeName = HopeportResourceNodeBaseName;
 
 // Type used when using resource node data in code other than data files
 export type ResourceNode = ResourceNodeData & {
-  name: ResourceNodeName;
+  baseName: ResourceNodeName;
 };
 
 export type BankType =
