@@ -9,11 +9,12 @@ import {
 import { MapState } from "../map/useMapState";
 import { X } from "lucide-react";
 import { Monster, RoomContentAndData } from "@/lib/types";
-import { Guard, Passive } from "../gameIcons/gameIcons";
+import { Fisher, Forager, Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
 import { findMonsterByBaseName, findRoomById } from "@/lib/map/mapDataUtils";
 import MonsterLink from "../monsterLink/MonsterLink";
+import ResourceLink from "../resourceLink/ResourceLink";
 
 const RoomCardHeader = ({
   roomContentAndData,
@@ -50,6 +51,28 @@ const RoomCardContent = ({
                 text={monster[0].toUpperCase() + monster.slice(1)}
                 monster={monsterSearch.result}
                 setExpandedCardThing={mapState.expandedCardThing.set}
+              />
+            </div>
+          );
+        })}
+      {roomContentAndData.content.resources &&
+        roomContentAndData.content.resources.map((resource) => {
+          return (
+            <div
+              key={resource.baseName}
+              className="h-10 flex items-center gap-1 md:gap-3"
+            >
+              {resource.nodeType === "fisher" ? (
+                <Fisher />
+              ) : // Disabled this rule b/c new nodeTypes could be added
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+              resource.nodeType === "forager" ? (
+                <Forager />
+              ) : null}
+              <ResourceLink
+                resource={resource}
+                setExpandedCardThing={mapState.expandedCardThing.set}
+                text={resource.baseName}
               />
             </div>
           );
