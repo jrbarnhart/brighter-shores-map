@@ -131,6 +131,8 @@ export type Monster = MonsterData & {
 };
 
 // Types for data entires in resource node data arrays
+export type ResourceNodeType = "fisher" | "forager";
+
 export type ResourceNodeVariantData = {
   variantName: string;
   unlockLevel: number;
@@ -138,6 +140,7 @@ export type ResourceNodeVariantData = {
 
 export type ResourceNodeData = {
   baseName: string;
+  type: ResourceNodeType;
   locations: RoomId[];
   variants: ResourceNodeVariantData[];
 };

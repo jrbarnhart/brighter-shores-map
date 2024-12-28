@@ -3,6 +3,7 @@ import { ResourceNodeData } from "@/lib/types";
 const HOPEPORT_RESOURCE_DATA = [
   {
     baseName: "Eel",
+    type: "fisher",
     locations: ["eel-street-bridge"],
     variants: [{ variantName: "Lesser", unlockLevel: 2 }],
   },
