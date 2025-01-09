@@ -25,7 +25,7 @@ const ResourceCardHeader = ({
 
   return (
     <>
-      <CardTitle className="flex flex-nowrap gap-3 h-8">
+      <CardTitle className="flex flex-nowrap items-center gap-3 h-8">
         {resource.nodeType === "fisher" && <Fisher />}
         <p className="text-nowrap overflow-hidden leading-8">
           {resource.baseName[0].toUpperCase() + resource.baseName.slice(1)}
@@ -76,7 +76,7 @@ const MonsterCardHeader = ({
 
   return (
     <>
-      <CardTitle className="flex flex-nowrap gap-3 h-8">
+      <CardTitle className="flex flex-nowrap items-center gap-3 h-8">
         {/* This icon needs to be conditional based on monsters region.
             This property doesn't exist yet so just using Guard as default for now. */}
         <Guard />
