@@ -180,7 +180,9 @@ export type RoomContentAndData = {
   data: Room;
 };
 
-// Type for the object that can be represented by a thing card
+// Types for the object that can be represented by a thing card
+export type ThingType = "npc" | "monster" | "resource" | "room";
+
 export type Thing =
   | (NPC & { type: "npc" })
   | (Monster & { type: "monster" })
