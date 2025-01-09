@@ -2,6 +2,7 @@ import hopeportRoomData from "./hopeport/hopeportRoomData";
 import hopeportContentData from "./hopeport/hopeportContentData";
 import { MapData, SearchResult } from "../types";
 import HOPEPORT_MONSTER_DATA from "./hopeport/roomContents/hopeportMonsterData";
+import HOPEPORT_RESOURCE_DATA from "./hopeport/roomContents/hopeportResourceData";
 
 /*
   Room Template:
@@ -22,6 +23,10 @@ const mapData: MapData = {
 };
 
 const searchableData: SearchResult[] = [
+  ...HOPEPORT_RESOURCE_DATA.map((data) => ({
+    ...data,
+    dataType: "resource" as const,
+  })),
   ...HOPEPORT_MONSTER_DATA.map((data) => ({
     ...data,
     dataType: "monster" as const,
