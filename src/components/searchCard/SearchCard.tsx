@@ -37,7 +37,7 @@ const RoomCardHeader = ({ room }: { room: RoomContentAndRoomData }) => {
 
 const RoomCardContents = ({ room }: { room: RoomContentAndRoomData }) => {
   return (
-    <>
+    <div className="h-8">
       {room.content.monsters && <Guard />}
       {room.content.resources &&
         room.content.resources.find(
@@ -47,7 +47,7 @@ const RoomCardContents = ({ room }: { room: RoomContentAndRoomData }) => {
         room.content.resources.find(
           (resource) => resource.nodeType === "forager"
         ) && <Forager />}
-    </>
+    </div>
   );
 };
 
@@ -187,11 +187,15 @@ export default function SearchCard({
 }) {
   const setExpandedCardThing = mapState.expandedCardThing.set;
   const setSearchResultsOpen = mapState.search.resultsOpen.set;
+  const setSelectedRoomId = mapState.selectedRoomId.set;
 
   const handleClick = useCallback(() => {
     setExpandedCardThing(thing);
     setSearchResultsOpen(false);
-  }, [setExpandedCardThing, setSearchResultsOpen, thing]);
+    if (thing.type === "room") {
+      setSelectedRoomId(thing.data.id);
+    }
+  }, [setExpandedCardThing, setSearchResultsOpen, setSelectedRoomId, thing]);
 
   return (
     <Card
