@@ -18,7 +18,7 @@ const hopeportRoomData = [
       [0, 6],
     ],
     color: "#734242",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "training-ground",
@@ -55,7 +55,7 @@ const hopeportRoomData = [
       [0, 9],
     ],
     color: "#949452",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "hopeport-portal-stone",
@@ -70,7 +70,7 @@ const hopeportRoomData = [
       [0, 9],
     ],
     color: "#949452",
-    type: "portal",
+    roomType: "portal",
   },
   {
     id: "sparring-area",
@@ -87,7 +87,7 @@ const hopeportRoomData = [
       [0, 9],
     ],
     color: "#949452",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "barracks",
@@ -106,7 +106,7 @@ const hopeportRoomData = [
       [0, 7],
     ],
     color: "#6b634a",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "infirmary",
@@ -127,7 +127,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#8c8c73",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "quartermaster",
@@ -148,7 +148,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#6b634a",
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "stone-street",
@@ -180,7 +180,7 @@ const hopeportRoomData = [
       [-3, 1],
       [0, 1],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "delectable-dab-restaurant",
@@ -201,7 +201,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#636352",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "delectable-dab-kitchen",
@@ -218,7 +218,7 @@ const hopeportRoomData = [
       [0, 14],
     ],
     color: "#636352",
-    type: "profession",
+    roomType: "profession",
   },
   {
     id: "apothecary",
@@ -237,7 +237,7 @@ const hopeportRoomData = [
       [0, 4],
     ],
     color: "#638452",
-    type: "profession",
+    roomType: "profession",
   },
   {
     id: "town-square",
@@ -271,7 +271,7 @@ const hopeportRoomData = [
       [-7, 1],
       [0, 1],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "melvs-fishing-supplies",
@@ -288,7 +288,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#735a4a",
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "brannof-boulevard",
@@ -308,7 +308,7 @@ const hopeportRoomData = [
       [-1, 2],
       [0, 2],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "brannof-halls-hallway",
@@ -329,7 +329,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#734242",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "brannofs-chamber",
@@ -346,7 +346,7 @@ const hopeportRoomData = [
       [0, 6],
     ],
     color: "#734242",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "brannofs-dining-room",
@@ -364,7 +364,7 @@ const hopeportRoomData = [
       [0, 6],
     ],
     color: "#735a4a",
-    type: "residence",
+    roomType: "residence",
   },
   {
     id: "hopeport-obelisk",
@@ -399,7 +399,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#8c944a",
-    type: "obelisk",
+    roomType: "obelisk",
   },
   {
     id: "old-street-west",
@@ -419,7 +419,7 @@ const hopeportRoomData = [
       [19, 7],
       [0, 7],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "hairdresser",
@@ -437,7 +437,7 @@ const hopeportRoomData = [
       [0, 5],
     ],
     color: "#adadad",
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "old-street-east",
@@ -462,7 +462,7 @@ const hopeportRoomData = [
       [9, 8],
       [0, 8],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "pipe-alley",
@@ -479,7 +479,7 @@ const hopeportRoomData = [
       [-1, 6],
       [0, 6],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "cloakroom",
@@ -497,7 +497,7 @@ const hopeportRoomData = [
       [0, 5],
     ],
     color: "#3a4a6b",
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "foragers-warehouse",
@@ -513,7 +513,7 @@ const hopeportRoomData = [
       [0, 7],
     ],
     color: "#6b634a",
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "town-gates",
@@ -543,7 +543,7 @@ const hopeportRoomData = [
       [6, 7],
       [0, 7],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "north-walls",
@@ -560,7 +560,7 @@ const hopeportRoomData = [
       [0, 8],
     ],
     color: "#949452",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "south-walls",
@@ -573,7 +573,7 @@ const hopeportRoomData = [
       [0, 19],
     ],
     color: "#949452",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "naybeths-house",
@@ -590,7 +590,7 @@ const hopeportRoomData = [
       [0, 5],
     ],
     color: "#6b634a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "enchantress-shop",
@@ -608,7 +608,7 @@ const hopeportRoomData = [
       [0, 7],
     ],
     color: "#736394",
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "tims-alley",
@@ -622,7 +622,7 @@ const hopeportRoomData = [
       [0, 11],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "eel-street-bridge",
@@ -659,7 +659,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "eel-street",
@@ -675,7 +675,7 @@ const hopeportRoomData = [
       [2, 15],
       [0, 15],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "wilhope-crossing",
@@ -693,7 +693,7 @@ const hopeportRoomData = [
       [1, 2],
       [0, 2],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "wilhope-passage",
@@ -714,7 +714,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "monob-row",
@@ -732,7 +732,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "thieves-den",
@@ -754,7 +754,7 @@ const hopeportRoomData = [
       [0, 9],
     ],
     color: "#526373",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "little-square",
@@ -783,7 +783,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "murk-close",
@@ -803,7 +803,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "limpet-lane",
@@ -821,7 +821,7 @@ const hopeportRoomData = [
       [0, 10],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "nook-alley",
@@ -835,7 +835,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#948463",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "east-waterfront",
@@ -858,7 +858,7 @@ const hopeportRoomData = [
       [0, 8],
     ],
     color: "#4a6b6b",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "vincible",
@@ -893,7 +893,7 @@ const hopeportRoomData = [
       [0, 16],
     ],
     color: "#425a63",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "vacant-pier",
@@ -914,7 +914,7 @@ const hopeportRoomData = [
       [0, 16],
     ],
     color: "#425a63",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "boardwalk",
@@ -935,7 +935,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#4a6b6b",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "central-waterfront",
@@ -964,7 +964,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#4a6b6b",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "salty-swine",
@@ -999,7 +999,7 @@ const hopeportRoomData = [
       [0, 16],
     ],
     color: "#425a63",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "hooked-hand",
@@ -1017,7 +1017,7 @@ const hopeportRoomData = [
       [0, 9],
     ],
     color: "#735a4a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "west-waterfront",
@@ -1042,7 +1042,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#4a6b6b",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "little-lucy",
@@ -1071,7 +1071,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#425a63",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "sea-road",
@@ -1103,7 +1103,7 @@ const hopeportRoomData = [
       [2, 7],
       [0, 7],
     ],
-    type: "world",
+    roomType: "world",
   },
   {
     id: "scrapyard",
@@ -1119,7 +1119,7 @@ const hopeportRoomData = [
       [-2, 4],
       [0, 4],
     ],
-    type: "shop",
+    roomType: "shop",
   },
   {
     id: "overgrown-pond",
@@ -1162,7 +1162,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "east-beach",
@@ -1193,7 +1193,7 @@ const hopeportRoomData = [
       [0, 4],
     ],
     color: "#5a7070",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "seashells-seashore",
@@ -1228,7 +1228,7 @@ const hopeportRoomData = [
       [0, 13],
     ],
     color: "#5a7070",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "jellyfish-landing",
@@ -1263,7 +1263,7 @@ const hopeportRoomData = [
       [0, 3],
     ],
     color: "#5a7070",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "starfish-point",
@@ -1298,7 +1298,7 @@ const hopeportRoomData = [
       [0, 4],
     ],
     color: "#5a7070",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "ray-bay",
@@ -1333,7 +1333,7 @@ const hopeportRoomData = [
       [0, 2],
     ],
     color: "#5a7070",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "pirate-hideout",
@@ -1374,7 +1374,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#5a7070",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "fallen-monument",
@@ -1423,7 +1423,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "overgrown-field",
@@ -1460,7 +1460,7 @@ const hopeportRoomData = [
       [0, 5],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "rubble-road",
@@ -1491,7 +1491,7 @@ const hopeportRoomData = [
       [0, 14],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "overgrown-road",
@@ -1520,7 +1520,7 @@ const hopeportRoomData = [
       [0, 3],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "wasteland",
@@ -1572,7 +1572,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#949452",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "crater",
@@ -1619,7 +1619,7 @@ const hopeportRoomData = [
       [0, 1],
     ],
     color: "#8c944a",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "collapsed-hovels",
@@ -1674,7 +1674,7 @@ const hopeportRoomData = [
       [0, 4],
     ],
     color: "#8b8345",
-    type: "world",
+    roomType: "world",
   },
   {
     id: "rocky-road",
@@ -1691,7 +1691,7 @@ const hopeportRoomData = [
       [0, 19],
     ],
     color: "#846b4a",
-    type: "world",
+    roomType: "world",
   },
 ] as const satisfies readonly RoomData[];
 

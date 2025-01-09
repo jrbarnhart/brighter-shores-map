@@ -48,7 +48,13 @@ export type RoomData = {
   origin: [number, number];
   path: Array<[number, number]>;
   color?: string;
-  type: "residence" | "shop" | "world" | "profession" | "obelisk" | "portal";
+  roomType:
+    | "residence"
+    | "shop"
+    | "world"
+    | "profession"
+    | "obelisk"
+    | "portal";
 };
 
 // Union type for all room ids
@@ -170,7 +176,8 @@ export type BankType =
 export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
-  | (ResourceNode & { dataType: "resource" });
+  | (ResourceNode & { dataType: "resource" })
+  | (Room & { dataType: "room" });
 
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName | NPCName | ResourceNodeName;
