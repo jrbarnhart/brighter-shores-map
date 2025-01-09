@@ -23,7 +23,10 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
 
   const fuse = useMemo(
     () =>
-      new Fuse(searchableData, { keys: ["name", "variants"], threshold: 0.3 }),
+      new Fuse(searchableData, {
+        keys: ["name", "variants", "baseName"],
+        threshold: 0.3,
+      }),
     []
   );
 
