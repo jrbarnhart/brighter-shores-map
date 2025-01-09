@@ -4,6 +4,7 @@ const HOPEPORT_RESOURCE_DATA = [
   {
     baseName: "Eel",
     nodeType: "fisher",
+    passive: false,
     locations: ["eel-street-bridge"],
     variants: [{ variantName: "Lesser", unlockLevel: 2 }],
   },
