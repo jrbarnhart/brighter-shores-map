@@ -177,13 +177,13 @@ export type SearchResult =
   | (NPC & { dataType: "npc" })
   | (Monster & { dataType: "monster" })
   | (ResourceNode & { dataType: "resource" })
-  | (Room & { dataType: "room" });
+  | (RoomContentAndRoomData & { dataType: "room" });
 
 // Type that is all the possible thing card ids
 export type ThingCardId = MonsterBaseName | NPCName | ResourceNodeName;
 
 // Type for a room "thing" used by expanded and search cards
-export type RoomContentAndData = {
+export type RoomContentAndRoomData = {
   content: RoomIdContentData;
   data: Room;
 };
@@ -195,7 +195,7 @@ export type Thing =
   | (NPC & { type: "npc" })
   | (Monster & { type: "monster" })
   | (ResourceNode & { type: "resource" })
-  | (RoomContentAndData & { type: "room" });
+  | (RoomContentAndRoomData & { type: "room" });
 
 // Context for thing card provider
 export type ThingCardContextType = {
