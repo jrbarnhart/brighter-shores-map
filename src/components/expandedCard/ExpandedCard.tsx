@@ -8,13 +8,79 @@ import {
 } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import { X } from "lucide-react";
-import { Monster, RoomContentAndData } from "@/lib/types";
+import { Monster, ResourceNode, RoomContentAndData } from "@/lib/types";
 import { Fisher, Forager, Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
 import { findMonsterByBaseName, findRoomById } from "@/lib/map/mapDataUtils";
 import MonsterLink from "../monsterLink/MonsterLink";
 import ResourceLink from "../resourceLink/ResourceLink";
+
+const ResourceCardContent = ({ resource }: { resource: ResourceNode }) => {
+  return (
+    <>
+      <div className="h-10 flex items-center gap-1 md:gap-3 text-sm max-w-md"></div>
+
+      <div className="border-sidebar-border border rounded-md p-2 -mx-2 flex-grow overflow-y-auto overflow-x-hidden">
+        <div className="grid grid-cols-[3fr_1fr] gap-x-2 border-b-2 border-sidebar-border">
+          <p>Variant:</p>
+          <p className="text-nowrap">🔒 Lvl</p>
+        </div>
+        <ul className="">
+          {resource.variants.map((variant) => (
+            <li
+              key={variant.variantName}
+              className="list-none grid grid-cols-[3fr_1fr] gap-x-2 text-sm odd:bg-black/30 even:bg-black/10 py-1"
+            >
+              <p>
+                {variant.variantName[0].toUpperCase() +
+                  variant.variantName.slice(1)}
+              </p>
+              <p>{variant.unlockLevel}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+};
+
+const ResourceCardHeader = ({
+  resource,
+  mapState,
+}: {
+  resource: ResourceNode;
+  mapState: MapState;
+}) => {
+  const { selectedRoomId } = mapState;
+  return (
+    <>
+      <CardTitle className="flex flex-nowrap justify-between items-start">
+        <p className="text-nowrap overflow-hidden leading-8">
+          {resource.baseName[0].toUpperCase() + resource.baseName.slice(1)}
+        </p>
+      </CardTitle>
+      <CardDescription className="flex flex-col">
+        <p className="text-sidebar-foreground">Locations:</p>
+        <div>
+          {resource.locations.map((location, index) => {
+            const room = findRoomById(mapState.roomPaths.value, location);
+            return (
+              <React.Fragment key={index}>
+                <RoomLink
+                  text={room ? room.label : location}
+                  roomId={location}
+                  setSelectedRoomId={selectedRoomId.set}
+                />
+                {resource.locations.length - 1 > index ? ", " : ""}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </CardDescription>
+    </>
+  );
+};
 
 const RoomCardHeader = ({
   roomContentAndData,
@@ -208,7 +274,7 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
               ? "max-w-2xl max-h-[360px]"
               : expandedCardThing.value.type === "room"
               ? "max-w-xl max-h-52 md:max-h-64 self-end"
-              : ""
+              : "max-w-2xl max-h-[360px]"
           }`}
         >
           <div
@@ -230,6 +296,12 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
             {expandedCardThing.value.type === "room" && (
               <RoomCardHeader roomContentAndData={expandedCardThing.value} />
             )}
+            {expandedCardThing.value.type === "resource" && (
+              <ResourceCardHeader
+                resource={expandedCardThing.value}
+                mapState={mapState}
+              />
+            )}
           </CardHeader>
           <CardContent className="px-3 pb-1 md:px-4 md:pb-2 flex flex-col gap-4 flex-grow overflow-hidden">
             {expandedCardThing.value.type === "monster" && (
@@ -240,6 +312,9 @@ export default function ExpandedCard({ mapState }: { mapState: MapState }) {
                 roomContentAndData={expandedCardThing.value}
                 mapState={mapState}
               />
+            )}
+            {expandedCardThing.value.type === "resource" && (
+              <ResourceCardContent resource={expandedCardThing.value} />
             )}
           </CardContent>
         </Card>
