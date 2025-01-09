@@ -52,7 +52,6 @@ const ResourceCardHeader = ({
   resource: ResourceNode;
   mapState: MapState;
 }) => {
-  const { selectedRoomId } = mapState;
   return (
     <>
       <CardTitle className="flex flex-nowrap justify-between items-start">
@@ -70,7 +69,7 @@ const ResourceCardHeader = ({
                 <RoomLink
                   text={room ? room.label : location}
                   roomId={location}
-                  setSelectedRoomId={selectedRoomId.set}
+                  mapState={mapState}
                 />
                 {resource.locations.length - 1 > index ? ", " : ""}
               </React.Fragment>
@@ -154,7 +153,6 @@ const MonsterCardHeader = ({
   mapState: MapState;
   monster: Monster;
 }) => {
-  const { selectedRoomId } = mapState;
   return (
     <>
       <CardTitle className="flex flex-nowrap justify-between items-start">
@@ -175,7 +173,7 @@ const MonsterCardHeader = ({
                 <RoomLink
                   text={room ? room.label : location}
                   roomId={location}
-                  setSelectedRoomId={selectedRoomId.set}
+                  mapState={mapState}
                 />
                 {monster.locations.length - 1 > index ? ", " : ""}
               </React.Fragment>

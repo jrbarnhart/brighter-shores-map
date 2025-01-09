@@ -1,20 +1,27 @@
 import { RoomId } from "@/lib/types";
-import React, { SetStateAction } from "react";
+import React, { useCallback } from "react";
+import { MapState } from "../map/useMapState";
 
 export default function RoomLink({
   ...props
 }: {
   text: string;
   roomId: RoomId;
-  setSelectedRoomId: React.Dispatch<SetStateAction<RoomId | null>>;
+  mapState: MapState;
 }) {
-  const { text, roomId, setSelectedRoomId } = props;
+  const { text, roomId, mapState } = props;
+  const setSelectedRoomId = mapState.selectedRoomId.set;
+  const setExpandedCardThing = mapState.expandedCardThing.set;
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setSelectedRoomId(roomId);
-  };
+  const handleClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setSelectedRoomId(roomId);
+      setExpandedCardThing(null);
+    },
+    [roomId, setExpandedCardThing, setSelectedRoomId]
+  );
 
   return (
     <a
