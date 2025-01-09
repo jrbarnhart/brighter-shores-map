@@ -55,14 +55,12 @@ const ResourceCardHeader = ({
 const ResourceCardContents = ({ resource }: { resource: ResourceNode }) => {
   return (
     <>
-      <div className="h-5 flex items-center gap-1 md:gap-3 text-sm max-w-md">
-        {resource.passive && (
-          <>
-            <p>Passive</p>
-            <Passive />
-          </>
-        )}
-      </div>
+      {resource.passive && (
+        <div className="h-5 flex items-center gap-1 md:gap-3 text-sm max-w-md">
+          <p>Passive</p>
+          <Passive />
+        </div>
+      )}
     </>
   );
 };
