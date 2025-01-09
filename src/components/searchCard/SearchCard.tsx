@@ -10,7 +10,7 @@ import { MapState } from "../map/useMapState";
 import { Monster, ResourceNode, Thing } from "@/lib/types";
 import React from "react";
 import RoomLink from "../roomLink/RoomLink";
-import { Passive } from "../gameIcons/gameIcons";
+import { Fisher, Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import { findRoomById } from "@/lib/map/mapDataUtils";
 
@@ -25,7 +25,8 @@ const ResourceCardHeader = ({
 
   return (
     <>
-      <CardTitle className="flex flex-nowrap justify-between items-start">
+      <CardTitle className="flex flex-nowrap gap-3 h-8">
+        {resource.nodeType === "fisher" && <Fisher />}
         <p className="text-nowrap overflow-hidden leading-8">
           {resource.baseName[0].toUpperCase() + resource.baseName.slice(1)}
         </p>
@@ -77,7 +78,10 @@ const MonsterCardHeader = ({
 
   return (
     <>
-      <CardTitle className="flex flex-nowrap justify-between items-start">
+      <CardTitle className="flex flex-nowrap gap-3 h-8">
+        {/* This icon needs to be conditional based on monsters region.
+            This property doesn't exist yet so just using Guard as default for now. */}
+        <Guard />
         <p className="text-nowrap overflow-hidden leading-8">
           {monster.name[0].toUpperCase() + monster.name.slice(1)}
         </p>
