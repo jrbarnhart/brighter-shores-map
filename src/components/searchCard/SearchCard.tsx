@@ -7,12 +7,49 @@ import {
   CardTitle,
 } from "../ui/card";
 import { MapState } from "../map/useMapState";
-import { Monster, ResourceNode, Thing } from "@/lib/types";
+import {
+  Monster,
+  ResourceNode,
+  RoomContentAndRoomData,
+  Thing,
+} from "@/lib/types";
 import React from "react";
 import RoomLink from "../roomLink/RoomLink";
-import { Fisher, Guard, Passive } from "../gameIcons/gameIcons";
+import { Fisher, Forager, Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import { findRoomById } from "@/lib/map/mapDataUtils";
+import { Fish } from "lucide-react";
+
+const RoomCardHeader = ({ room }: { room: RoomContentAndRoomData }) => {
+  return (
+    <>
+      <CardTitle className="flex flex-nowrap items-center gap-3 h-8">
+        <p className="text-nowrap overflow-hidden leading-8">
+          {room.data.label}
+        </p>
+      </CardTitle>
+      <CardDescription className="flex flex-col">
+        <div></div>
+      </CardDescription>
+    </>
+  );
+};
+
+const RoomCardContents = ({ room }: { room: RoomContentAndRoomData }) => {
+  return (
+    <>
+      {room.content.monsters && <Guard />}
+      {room.content.resources &&
+        room.content.resources.find(
+          (resource) => resource.nodeType === "fisher"
+        ) && <Fish />}
+      {room.content.resources &&
+        room.content.resources.find(
+          (resource) => resource.nodeType === "forager"
+        ) && <Forager />}
+    </>
+  );
+};
 
 const ResourceCardHeader = ({
   mapState,
@@ -168,10 +205,12 @@ export default function SearchCard({
         {thing.type === "resource" && (
           <ResourceCardHeader resource={thing} mapState={mapState} />
         )}
+        {thing.type === "room" && <RoomCardHeader room={thing} />}
       </CardHeader>
       <CardContent className="px-3 pb-1 md:px-4 md:pb-2 flex flex-col gap-4 flex-grow overflow-hidden">
         {thing.type === "monster" && <MonsterCardContents monster={thing} />}
         {thing.type === "resource" && <ResourceCardContents resource={thing} />}
+        {thing.type === "room" && <RoomCardContents room={thing} />}
       </CardContent>
     </Card>
   );

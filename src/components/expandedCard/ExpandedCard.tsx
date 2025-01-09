@@ -8,7 +8,7 @@ import {
 } from "../ui/card";
 import { MapState } from "../map/useMapState";
 import { X } from "lucide-react";
-import { Monster, ResourceNode, RoomContentAndData } from "@/lib/types";
+import { Monster, ResourceNode, RoomContentAndRoomData } from "@/lib/types";
 import { Fisher, Forager, Guard, Passive } from "../gameIcons/gameIcons";
 import { getDamageIcon } from "../gameIcons/gameIconUtils";
 import RoomLink from "../roomLink/RoomLink";
@@ -85,7 +85,7 @@ const ResourceCardHeader = ({
 const RoomCardHeader = ({
   roomContentAndData,
 }: {
-  roomContentAndData: RoomContentAndData;
+  roomContentAndData: RoomContentAndRoomData;
 }) => {
   return (
     <>
@@ -98,7 +98,7 @@ const RoomCardContent = ({
   roomContentAndData,
   mapState,
 }: {
-  roomContentAndData: RoomContentAndData;
+  roomContentAndData: RoomContentAndRoomData;
   mapState: MapState;
 }) => {
   return (

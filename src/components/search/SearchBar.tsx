@@ -24,7 +24,7 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
   const fuse = useMemo(
     () =>
       new Fuse(searchableData, {
-        keys: ["name", "variants", "baseName"],
+        keys: ["name", "variants", "baseName", "content.roomId", "data.id"],
         threshold: 0.3,
       }),
     []
@@ -123,12 +123,20 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
                 key={value.baseName}
               />
             );
-          } else {
+          } else if (value.dataType === "npc") {
             return (
               <SearchCard
                 thing={{ type: "npc", ...value }}
                 mapState={mapState}
                 key={value.name}
+              />
+            );
+          } else {
+            return (
+              <SearchCard
+                thing={{ type: "room", ...value }}
+                mapState={mapState}
+                key={value.data.id}
               />
             );
           }
