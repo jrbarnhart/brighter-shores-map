@@ -112,6 +112,22 @@ export default function SearchBar({ mapState }: { mapState: MapState }) {
                 key={value.name}
               />
             );
+          } else if (value.dataType === "resource") {
+            return (
+              <SearchCard
+                thing={{ type: "resource", ...value }}
+                mapState={mapState}
+                key={value.baseName}
+              />
+            );
+          } else {
+            return (
+              <SearchCard
+                thing={{ type: "npc", ...value }}
+                mapState={mapState}
+                key={value.name}
+              />
+            );
           }
         })}
       </div>
