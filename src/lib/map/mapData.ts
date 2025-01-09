@@ -1,6 +1,6 @@
 import hopeportRoomData from "./hopeport/hopeportRoomData";
 import hopeportContentData from "./hopeport/hopeportContentData";
-import { MapData, SearchResult } from "../types";
+import { MapData, RoomContentAndRoomData, SearchResult } from "../types";
 import HOPEPORT_MONSTER_DATA from "./hopeport/roomContents/hopeportMonsterData";
 import HOPEPORT_RESOURCE_DATA from "./hopeport/roomContents/hopeportResourceData";
 
@@ -22,6 +22,19 @@ const mapData: MapData = {
   },
 };
 
+const combinedRoomContentsAndData: RoomContentAndRoomData[] =
+  hopeportRoomData.map((roomData) => {
+    const content = hopeportContentData.find(
+      (contentData) => contentData.roomId === roomData.id
+    );
+
+    if (!content) {
+      return { data: roomData, content: { roomId: roomData.id } };
+    } else {
+      return { data: roomData, content };
+    }
+  });
+
 const searchableData: SearchResult[] = [
   ...HOPEPORT_RESOURCE_DATA.map((data) => ({
     ...data,
@@ -30,6 +43,10 @@ const searchableData: SearchResult[] = [
   ...HOPEPORT_MONSTER_DATA.map((data) => ({
     ...data,
     dataType: "monster" as const,
+  })),
+  ...combinedRoomContentsAndData.map((data) => ({
+    ...data,
+    dataType: "room" as const,
   })),
 ];
 
