@@ -141,6 +141,7 @@ export type ResourceNodeVariantData = {
 export type ResourceNodeData = {
   baseName: string;
   nodeType: ResourceNodeType;
+  passive: boolean;
   locations: RoomId[];
   variants: ResourceNodeVariantData[];
 };
